@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="author" content="Chris Haworth">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" href={{styles}}>
+
+	<title>RWC GUI - Home</title>
+</head>
+
+<body>
+<section name="centerContent">
+<div name="topBar">
+	<h1>Raspi Watering Co. Web GUI</h1>
+	<nav>
+		<a href={{navurl['index']}}>Home</a>
+		<a href={{navurl['init']}}>Initialize</a>
+		<a href={{navurl['waterLog']}}>Water Log</a> 
+	</nav>
+</div>
+
+<div name="left">
+	<h3>Weather Report</h3>
+	<p id="weather">
+		<table>
+		<tr><th>Date</th><th>Time</th><th>Status</th><th>Precip %</th><th>Temp F</th></tr>
+		{% for data in data['weather'] %}
+		<tr>
+		<td>{{ data['date'] }}</td>
+		<td>{{ data['time'] }}</td>
+		<td>{{ data['status'] }}</td>
+		<td>{{ data['pop'] }}%</td>
+		<td>{{ data['temp'] }} F</td>
+		</tr>	
+		{% endfor %}
+		</table>
+	</p>
+	{%if data['sectData']['use-api']%}
+	<p>Last rained <b>{{data['sectData']['last-rained']}}</b> days ago</p>
+	{%endif%}
+</div>
+
+<div name="right">
+	<h3>Sectors</h3>
+	<p id="sectorTable">
+		<table>
+		<tr><th>ID</th><th>Pin</th><th>Rain Inc.</th><th>Override</th>
+		{% for sector in data['sectData'].sector %}
+		<tr>
+			<td name="sectID">{{sector["id"]}}</td>
+			<td name="sectPin">{{sector["pin"]}}</td>
+			<td name="sectInc">{{sector["rain-inc"]}}</td>
+			<td>
+			<form method="POST">
+			<input name="waterNow_{{sector['id']}}"  type="submit" value="Water Now">
+			</form>
+			</td>
+		</tr>
+		{% endfor %}
+		</table>
+	</p>
+	<form method="POST">
+	<input name="waterAll" type="submit" value="Water All">
+	</form>
+</div>
+
+<div name="sysData">
+	<h3>System Data</h3>
+	<h4>Temperature</h4>
+	<table>
+	<tr>
+	{% for temp in data['sysData'].sysTemp %}
+		<th>{{temp['time'][:-3]}} {{temp['date'][:-5]}}</th>
+	{% endfor %}
+	<th>Current</th>
+	</tr>
+	<tr>
+	{% for temp in data['sysData'].sysTemp %}
+		<td>{{temp['temp']}}</td>
+	{% endfor %}
+	<td>{{data['cpuTemp'].temp}}</td>
+	</tr>
+	</table>
+</div>
+
+</section>
+</body>
+</html>

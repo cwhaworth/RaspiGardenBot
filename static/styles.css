@@ -1,0 +1,138 @@
+[name="centerContent"]{
+	max-width: 1080px;
+	margin: auto;
+}
+body{
+	font-family: Papyrus;
+}
+
+[class="sectForm"]{
+	max-width: 250px;
+}
+[class="sectForm"] [class="initForm"]{
+	float: right;
+	max-width: 50px;
+	text-align: right;
+}
+[class="sectForm"] p{
+	max-height: 0px;
+	margin-top: 3px;
+	margin-bottom: 3px;
+}
+[class="sectForm"] [class="mainForm"]{
+	float: right;
+	margin: 3px;
+	margin-top: 10px;
+}
+
+
+[name="topBar"]{
+	background-color: #98b574;
+}
+[name="topBar"] h1{
+	text-align: center;
+}
+[name="topBar"] nav{
+	text-align: center;
+}
+[name="topBar"] nav a{
+	padding-left: 10px;
+	padding-right: 10px;
+	background-color: #32593c;
+	text-decoration: none;
+	color: orange;
+}
+[name="topBar"] nav a:hover{
+	background-color: #32a8a6;
+	color: black;
+}
+[name="topBar"] nav a:active{
+	background-color: white;
+}
+
+table tbody tr th{
+	border-top-style: solid;
+	border-bottom-style: solid;
+	border-width: 1px;
+}
+table tbody tr td{
+	width: 300px;
+	border-left-style: solid;
+	border-right-style: solid;
+	border-width: 1px;
+	text-align: center; 
+}
+
+[name="left"]{
+	max-width: 580px;
+}
+[name="left"] h3{
+	text-align: center;
+}
+
+[name="right"]{
+	position: absolute;
+	width: 500px;
+	height: 240px;
+	max-width: 530px;
+	margin-left: 580px;
+	top: 103.5px;
+}
+[name="right"] h3{
+	text-align: center;
+}
+
+/*
+[name="sysData"]{
+	max-width: 530px;
+}
+*/
+[name="sysData"] h3{
+	margin-bottom: 5px;
+}
+
+[name="sysData"] h4{
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+
+[name="waterAll"]{
+	float: right;
+	margin-right: 35.5px;
+	width: 80px;
+}
+
+[name="waterLog"] ul li{
+	list-style-type: none;
+	margin-left: -40px;
+	font-family: Calibri;
+}
+
+@media only screen and (max-width: 1080px){
+[name="right"]{
+	position: relative;
+	top: 10px;
+	margin-left: 0px;
+	border-top-style: solid;
+}
+}
+
+@media only screen and (max-width: 360px){
+[name="left"] h3{
+	text-align: left;
+}
+[name="right"]{
+	position: relative;
+	top: 10px;
+	margin-left: 0px;
+	width: 345px;
+	border-top-style: solid;
+}
+[name="right"] h3{
+	text-align: left;
+}
+[name="waterAll"]{
+	margin-right: 15px;
+	width: 81px;
+}
+}

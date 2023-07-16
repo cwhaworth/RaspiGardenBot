@@ -1,0 +1,244 @@
+{
+  "log": [
+    {
+      "date": "11/15/2021",
+      "message": "Watered sector 4 by manual override.",
+      "time": "20:07:58"
+    },
+    {
+      "date": "11/15/2021",
+      "message": "Watered all sectors by manual override.",
+      "time": "20:18:17"
+    },
+    {
+      "date": "11/15/2021",
+      "message": "Watered sector 4 by manual override.",
+      "time": "20:18:30"
+    },
+    {
+      "date": "11/15/2021",
+      "message": "Watered sector(s): 1, 2",
+      "time": "20:47:21"
+    },
+    {
+      "date": "11/15/2021",
+      "message": "Watered all sectors by manual override.",
+      "time": "22:08:17"
+    },
+    {
+      "date": "11/15/2021",
+      "message": "Watered sector 4 by manual override.",
+      "time": "22:32:14"
+    },
+    {
+      "date": "11/16/2021",
+      "message": "Watered sector(s): 1, 3",
+      "time": "11:00:01"
+    },
+    {
+      "date": "11/16/2021",
+      "message": "Watered all sectors by manual override.",
+      "time": "15:34:27"
+    },
+    {
+      "date": "11/16/2021",
+      "message": "Watered all sectors by manual override.",
+      "time": "19:04:00"
+    },
+    {
+      "date": "11/17/2021",
+      "message": "Watered sector(s): 1",
+      "time": "11:00:01"
+    },
+    {
+      "date": "11/18/2021",
+      "message": "Watered sector(s): 1, 2",
+      "time": "11:00:01"
+    },
+    {
+      "date": "11/19/2021",
+      "message": "Did not water, because it rained today.",
+      "time": "11:00:01"
+    },
+    {
+      "date": "11/20/2021",
+      "message": "Watered sector(s): 1",
+      "time": "11:00:01"
+    },
+    {
+      "date": "11/21/2021",
+      "message": "Watered sector(s): 1",
+      "time": "11:00:01"
+    },
+    {
+      "date": "11/22/2021",
+      "message": "Did not water, because it rained today.",
+      "time": "11:00:02"
+    },
+    {
+      "date": "11/23/2021",
+      "message": "Watered sector(s): 1",
+      "time": "11:00:01"
+    },
+    {
+      "date": "11/24/2021",
+      "message": "Watered sector(s): 1",
+      "time": "11:00:01"
+    },
+    {
+      "date": "11/25/2021",
+      "message": "Watered sector(s): 1, 2",
+      "time": "11:00:01"
+    },
+    {
+      "date": "11/26/2021",
+      "message": "Did not water, because it rained today.",
+      "time": "11:00:01"
+    },
+    {
+      "date": "11/27/2021",
+      "message": "Watered sector(s): 1",
+      "time": "11:00:01"
+    },
+    {
+      "date": "11/28/2021",
+      "message": "Watered sector(s): 1",
+      "time": "11:00:01"
+    },
+    {
+      "date": "11/28/2021",
+      "message": "Watered sector 4 by manual override.",
+      "time": "13:32:54"
+    },
+    {
+      "date": "11/28/2021",
+      "message": "Watered all sectors by manual override.",
+      "time": "13:33:23"
+    },
+    {
+      "date": "11/29/2021",
+      "message": "Watered sector(s): 1, 2",
+      "time": "11:00:01"
+    },
+    {
+      "date": "11/30/2021",
+      "message": "Watered sector(s): 1",
+      "time": "11:00:01"
+    },
+    {
+      "date": "12/01/2021",
+      "message": "Watered sector(s): 1",
+      "time": "11:00:01"
+    },
+    {
+      "date": "12/02/2021",
+      "message": "Watered sector(s): 1, 2",
+      "time": "11:00:01"
+    },
+    {
+      "date": "12/03/2021",
+      "message": "Watered sector(s): 1",
+      "time": "11:00:01"
+    },
+    {
+      "date": "12/04/2021",
+      "message": "Watered sector(s): 1",
+      "time": "11:00:01"
+    },
+    {
+      "date": "12/05/2021",
+      "message": "Watered sector(s): 1, 2",
+      "time": "11:00:01"
+    },
+    {
+      "date": "12/06/2021",
+      "message": "Watered sector(s): 1, 3",
+      "time": "11:00:01"
+    },
+    {
+      "date": "12/07/2021",
+      "message": "Did not water, because it rained today.",
+      "time": "11:00:01"
+    },
+    {
+      "date": "12/08/2021",
+      "message": "Did not water, because it rained today.",
+      "time": "11:00:01"
+    },
+    {
+      "date": "12/09/2021",
+      "message": "Watered sector(s): 1",
+      "time": "11:00:01"
+    },
+    {
+      "date": "12/10/2021",
+      "message": "Watered sector(s): 1",
+      "time": "11:00:01"
+    },
+    {
+      "date": "12/11/2021",
+      "message": "Watered sector(s): 1, 2",
+      "time": "11:00:01"
+    },
+    {
+      "date": "12/12/2021",
+      "message": "Did not water, because it rained today.",
+      "time": "11:00:01"
+    },
+    {
+      "date": "12/13/2021",
+      "message": "Watered sector(s): 1",
+      "time": "11:00:01"
+    },
+    {
+      "date": "12/14/2021",
+      "message": "Watered sector(s): 1",
+      "time": "11:00:01"
+    },
+    {
+      "date": "12/14/2021",
+      "message": "Watered sector(s): 1, 2",
+      "time": "16:48:00"
+    },
+    {
+      "date": "12/14/2021",
+      "message": "Watered all sectors by manual override.",
+      "time": "17:08:55"
+    },
+    {
+      "date": "12/14/2021",
+      "time": "18:01:29",
+      "message": "Watered sector(s): 1"
+    },
+    {
+      "date": "12/14/2021",
+      "time": "18:04:09",
+      "message": "Watered sector(s): 1"
+    },
+    {
+      "date": "12/15/2021",
+      "time": "08:41:21",
+      "message": "Watered sector(s): 1, 2"
+    },
+    {
+      "date": "12/15/2021",
+      "time": "11:00:01",
+      "message": "Watered sector(s): 1"
+    },
+    {
+      "date": "12/16/2021",
+      "time": "11:00:01",
+      "message": "Watered sector(s): 1"
+    },
+    {
+      "date": "12/16/2021",
+      "time": "17:14:10",
+      "message": "Forecast data was not initialized correctly. Check for errors in 'forecast.txt'."
+    },
+    {
+      "date": "12/17/2021",
+      "time": "11:00:02",
+      "message": "Watered sector(s): 1, 3"
+    }
+  ]
+}
