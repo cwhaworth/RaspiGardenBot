@@ -1,0 +1,36 @@
+{
+  "delay-after": 1,
+  "delay-before": 1,
+  "last-rained": 28,
+  "max-sectors": 4,
+  "pump-pin": 27,
+  "sector": [
+    {
+      "enabled": true,
+      "id": "Pablano",
+      "pin": 21,
+      "rain-inc": 3
+    },
+    {
+      "enabled": true,
+      "id": "Cayenne",
+      "pin": 19,
+      "rain-inc": 3
+    },
+    {
+      "enabled": false,
+      "id": "Habanero",
+      "pin": 16,
+      "rain-inc": 3
+    },
+    {
+      "enabled": false,
+      "id": "Jalapenos",
+      "pin": 13,
+      "rain-inc": 3
+    }
+  ],
+  "sysEnable": false,
+  "use-api": false,
+  "water-time": 10
+}

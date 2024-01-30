@@ -7,10 +7,11 @@ now = datetime.now()
 sysData = None
 with open('/var/www/FlaskServer/static/system-data.json', 'r') as f:
 	sysData = json.load(f)
+temp = round((cpu.temperature * 1.8) + 32, 1)
 temperature = {
 	'date': f'{now.strftime("%m/%d/%Y")}',
 	'time': f'{now.strftime("%H:%M:%S")}',
-	'temp': f'{round(cpu.temperature, 1)} C'
+	'temp': f'{temp} F'
 }
 sysData['sysTemp'].append(temperature)
 

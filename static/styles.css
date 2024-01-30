@@ -64,7 +64,7 @@ table tbody tr td{
 }
 
 [name="left"]{
-	max-width: 530px;
+	max-width: 580px;
 }
 [name="left"] h3{
 	text-align: center;
@@ -72,10 +72,10 @@ table tbody tr td{
 
 [name="right"]{
 	position: absolute;
-	width: 530px;
+	width: 500px;
 	height: 240px;
 	max-width: 530px;
-	margin-left: 550px;
+	margin-left: 580px;
 	top: 103.5px;
 }
 [name="right"] h3{
@@ -98,8 +98,8 @@ table tbody tr td{
 
 [name="waterAll"]{
 	float: right;
-	margin-right: 40.5px;
-	width: 82px;
+	margin-right: 35.5px;
+	width: 80px;
 }
 
 [name="waterLog"] ul li{

@@ -1,41 +1,26 @@
 {
-  "delay-after": 1,
-  "delay-before": 1,
-  "last-rained": 28,
-  "max-sectors": 4,
-  "pump-pin": 27,
+  "last-rained": 0,
+  "pump-pin": 17,
   "sector": [
     {
-      "enabled": true,
-      "id": "Pablano",
-      "pin": 21,
+      "id": 1,
+      "pin": 23,
+      "rain-inc": 1
+    },
+    {
+      "id": 2,
+      "pin": 27,
       "rain-inc": 3
     },
     {
-      "enabled": true,
-      "id": "Cayenne",
-      "pin": 19,
-      "rain-inc": 3
+      "id": 3,
+      "pin": 22,
+      "rain-inc": 10
     },
     {
-      "enabled": false,
-      "id": "Habanero",
-      "pin": 16,
-      "rain-inc": 3
-    },
-    {
-      "enabled": false,
-      "id": "Jalapenos",
-      "pin": 13,
-      "rain-inc": 3
+      "id": 4,
+      "pin": 24,
+      "rain-inc": 20
     }
-  ],
-  "sysEnable": false,
-  "use-api": false,
-<<<<<<< HEAD:static/watering-sectors.json
-  "water-time": 10
+  ]
 }
-=======
-  "water-time": 5
-}
->>>>>>> ef1c1b07849296f55cbc953bb08d051bfeb2834b:FlaskServer/static/watering-sectors.json

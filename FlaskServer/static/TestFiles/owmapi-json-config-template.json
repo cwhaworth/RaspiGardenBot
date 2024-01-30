@@ -1,0 +1,13 @@
+_type": free|startup|developer|professional|enterprise
+    "language": en|ru|ar|zh_cn|ja|es|it|fr|de|pt|... (check https://openweathermap.org/current) 
+    "connection": {
+        "use_ssl": true|false,
+        "verify_ssl_certs": true|false,
+        "use_proxy": true|false,
+        "timeout_secs": N
+    },
+    "proxies": {
+        "http": HTTP_URL,
+        "https": SOCKS5_URL
+    }
+}

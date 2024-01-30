@@ -1,8 +1,9 @@
-import json
+import json, os
 from pyowm.owm import OWM
 
 #api key
-owm = OWM('1c29d386be313a4c1bc91710a3ff6d01')
+key = os.environ.get('WEATHER_API_KEY')
+owm = OWM(f'{key}')
 
 #api call
 mgr = owm.weather_manager()

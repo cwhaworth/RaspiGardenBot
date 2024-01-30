@@ -1,284 +1,204 @@
 {
   "forecast": [
     {
-      "date": "2024-01-30",
+      "date": "2021-12-18",
       "time": "00:00:00",
-      "status": "few clouds",
-      "pop": 0,
-      "temp": 50.6
+      "status": "clouds"
     },
     {
-      "date": "2024-01-30",
+      "date": "2021-12-18",
       "time": "03:00:00",
-      "status": "clear sky",
-      "pop": 0,
-      "temp": 44.9
+      "status": "clouds"
     },
     {
-      "date": "2024-01-30",
+      "date": "2021-12-18",
       "time": "06:00:00",
-      "status": "clear sky",
-      "pop": 0,
-      "temp": 37.8
+      "status": "clouds"
     },
     {
-      "date": "2024-01-30",
+      "date": "2021-12-18",
       "time": "09:00:00",
-      "status": "clear sky",
-      "pop": 0,
-      "temp": 36.6
+      "status": "clouds"
     },
     {
-      "date": "2024-01-30",
+      "date": "2021-12-18",
       "time": "12:00:00",
-      "status": "clear sky",
-      "pop": 0,
-      "temp": 35.0
+      "status": "clouds"
     },
     {
-      "date": "2024-01-30",
+      "date": "2021-12-18",
       "time": "15:00:00",
-      "status": "few clouds",
-      "pop": 0,
-      "temp": 42.1
+      "status": "clouds"
     },
     {
-      "date": "2024-01-30",
+      "date": "2021-12-18",
       "time": "18:00:00",
-      "status": "broken clouds",
-      "pop": 0,
-      "temp": 47.6
+      "status": "rain"
     },
     {
-      "date": "2024-01-30",
+      "date": "2021-12-18",
       "time": "21:00:00",
-      "status": "overcast clouds",
-      "pop": 0,
-      "temp": 48.9
+      "status": "rain"
     },
     {
-      "date": "2024-01-31",
+      "date": "2021-12-19",
       "time": "00:00:00",
-      "status": "overcast clouds",
-      "pop": 0,
-      "temp": 43.3
+      "status": "clouds"
     },
     {
-      "date": "2024-01-31",
+      "date": "2021-12-19",
       "time": "03:00:00",
-      "status": "broken clouds",
-      "pop": 0,
-      "temp": 44.1
+      "status": "rain"
     },
     {
-      "date": "2024-01-31",
+      "date": "2021-12-19",
       "time": "06:00:00",
-      "status": "light rain",
-      "pop": 31,
-      "temp": 43.1
+      "status": "rain"
     },
     {
-      "date": "2024-01-31",
+      "date": "2021-12-19",
       "time": "09:00:00",
-      "status": "light rain",
-      "pop": 100,
-      "temp": 42.8
+      "status": "rain"
     },
     {
-      "date": "2024-01-31",
+      "date": "2021-12-19",
       "time": "12:00:00",
-      "status": "light rain",
-      "pop": 98,
-      "temp": 43.0
+      "status": "rain"
     },
     {
-      "date": "2024-01-31",
+      "date": "2021-12-19",
       "time": "15:00:00",
-      "status": "light rain",
-      "pop": 42,
-      "temp": 43.1
+      "status": "rain"
     },
     {
-      "date": "2024-01-31",
+      "date": "2021-12-19",
       "time": "18:00:00",
-      "status": "overcast clouds",
-      "pop": 21,
-      "temp": 43.9
+      "status": "rain"
     },
     {
-      "date": "2024-01-31",
+      "date": "2021-12-19",
       "time": "21:00:00",
-      "status": "overcast clouds",
-      "pop": 0,
-      "temp": 44.5
+      "status": "rain"
     },
     {
-      "date": "2024-02-01",
+      "date": "2021-12-20",
       "time": "00:00:00",
-      "status": "broken clouds",
-      "pop": 0,
-      "temp": 41.3
+      "status": "clouds"
     },
     {
-      "date": "2024-02-01",
+      "date": "2021-12-20",
       "time": "03:00:00",
-      "status": "scattered clouds",
-      "pop": 0,
-      "temp": 42.1
+      "status": "clear"
     },
     {
-      "date": "2024-02-01",
+      "date": "2021-12-20",
       "time": "06:00:00",
-      "status": "scattered clouds",
-      "pop": 0,
-      "temp": 39.5
+      "status": "clear"
     },
     {
-      "date": "2024-02-01",
+      "date": "2021-12-20",
       "time": "09:00:00",
-      "status": "clear sky",
-      "pop": 0,
-      "temp": 37.1
+      "status": "clear"
     },
     {
-      "date": "2024-02-01",
+      "date": "2021-12-20",
       "time": "12:00:00",
-      "status": "clear sky",
-      "pop": 0,
-      "temp": 35.9
+      "status": "clear"
     },
     {
-      "date": "2024-02-01",
+      "date": "2021-12-20",
       "time": "15:00:00",
-      "status": "clear sky",
-      "pop": 0,
-      "temp": 45.2
+      "status": "clear"
     },
     {
-      "date": "2024-02-01",
+      "date": "2021-12-20",
       "time": "18:00:00",
-      "status": "clear sky",
-      "pop": 0,
-      "temp": 53.9
+      "status": "clear"
     },
     {
-      "date": "2024-02-01",
+      "date": "2021-12-20",
       "time": "21:00:00",
-      "status": "clear sky",
-      "pop": 0,
-      "temp": 56.1
+      "status": "clouds"
     },
     {
-      "date": "2024-02-02",
+      "date": "2021-12-21",
       "time": "00:00:00",
-      "status": "clear sky",
-      "pop": 0,
-      "temp": 47.6
+      "status": "clouds"
     },
     {
-      "date": "2024-02-02",
+      "date": "2021-12-21",
       "time": "03:00:00",
-      "status": "scattered clouds",
-      "pop": 0,
-      "temp": 44.9
+      "status": "clouds"
     },
     {
-      "date": "2024-02-02",
+      "date": "2021-12-21",
       "time": "06:00:00",
-      "status": "broken clouds",
-      "pop": 0,
-      "temp": 43.8
+      "status": "clouds"
     },
     {
-      "date": "2024-02-02",
+      "date": "2021-12-21",
       "time": "09:00:00",
-      "status": "overcast clouds",
-      "pop": 0,
-      "temp": 42.9
+      "status": "clouds"
     },
     {
-      "date": "2024-02-02",
+      "date": "2021-12-21",
       "time": "12:00:00",
-      "status": "overcast clouds",
-      "pop": 0,
-      "temp": 42.1
+      "status": "clouds"
     },
     {
-      "date": "2024-02-02",
+      "date": "2021-12-21",
       "time": "15:00:00",
-      "status": "overcast clouds",
-      "pop": 0,
-      "temp": 51.2
+      "status": "clouds"
     },
     {
-      "date": "2024-02-02",
+      "date": "2021-12-21",
       "time": "18:00:00",
-      "status": "broken clouds",
-      "pop": 0,
-      "temp": 60.4
+      "status": "clouds"
     },
     {
-      "date": "2024-02-02",
+      "date": "2021-12-21",
       "time": "21:00:00",
-      "status": "scattered clouds",
-      "pop": 0,
-      "temp": 60.3
+      "status": "clouds"
     },
     {
-      "date": "2024-02-03",
+      "date": "2021-12-22",
       "time": "00:00:00",
-      "status": "scattered clouds",
-      "pop": 0,
-      "temp": 51.5
+      "status": "clouds"
     },
     {
-      "date": "2024-02-03",
+      "date": "2021-12-22",
       "time": "03:00:00",
-      "status": "clear sky",
-      "pop": 0,
-      "temp": 48.3
+      "status": "clouds"
     },
     {
-      "date": "2024-02-03",
+      "date": "2021-12-22",
       "time": "06:00:00",
-      "status": "few clouds",
-      "pop": 0,
-      "temp": 47.3
+      "status": "clouds"
     },
     {
-      "date": "2024-02-03",
+      "date": "2021-12-22",
       "time": "09:00:00",
-      "status": "few clouds",
-      "pop": 0,
-      "temp": 42.5
+      "status": "clouds"
     },
     {
-      "date": "2024-02-03",
+      "date": "2021-12-22",
       "time": "12:00:00",
-      "status": "few clouds",
-      "pop": 0,
-      "temp": 38.2
+      "status": "rain"
     },
     {
-      "date": "2024-02-03",
+      "date": "2021-12-22",
       "time": "15:00:00",
-      "status": "clear sky",
-      "pop": 0,
-      "temp": 43.8
+      "status": "rain"
     },
     {
-      "date": "2024-02-03",
+      "date": "2021-12-22",
       "time": "18:00:00",
-      "status": "clear sky",
-      "pop": 0,
-      "temp": 50.1
+      "status": "rain"
     },
     {
-      "date": "2024-02-03",
+      "date": "2021-12-22",
       "time": "21:00:00",
-      "status": "clear sky",
-      "pop": 0,
-      "temp": 51.4
+      "status": "clouds"
     }
   ]
 }

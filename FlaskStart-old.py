@@ -131,7 +131,9 @@ def stripOldLog(log, td, inc):
 
 @app.route("/initialize", methods=['GET', 'POST'])
 def initialize():
-	sectData = getJsonData('watering-sectors') navURL = getNavURL() styles = getStyles()
+	sectData = getJsonData('watering-sectors')
+	navURL = getNavURL()
+	styles = getStyles()
 
 	if request.method == 'POST':
 		tempData = {'last-rained': sectData['last-rained'],

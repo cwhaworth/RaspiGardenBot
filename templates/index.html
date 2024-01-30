@@ -25,17 +25,21 @@
 	<h3>Weather Report</h3>
 	<p id="weather">
 		<table>
-		<tr><th>Date</th><th>Time (GMT)</th><th>Status</th></tr>
+		<tr><th>Date</th><th>Time</th><th>Status</th><th>Precip %</th><th>Temp F</th></tr>
 		{% for data in data['weather'] %}
 		<tr>
 		<td>{{ data['date'] }}</td>
 		<td>{{ data['time'] }}</td>
 		<td>{{ data['status'] }}</td>
+		<td>{{ data['pop'] }}%</td>
+		<td>{{ data['temp'] }} F</td>
 		</tr>	
 		{% endfor %}
 		</table>
 	</p>
+	{%if data['sectData']['use-api']%}
 	<p>Last rained <b>{{data['sectData']['last-rained']}}</b> days ago</p>
+	{%endif%}
 </div>
 
 <div name="right">
