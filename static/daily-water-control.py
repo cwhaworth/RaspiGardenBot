@@ -70,7 +70,7 @@ files = ['water-log', 'water-log-60-day', 'watering-sectors']
 log, log60, sectData = readJson(files)
 
 #if it rains: reset last-rained, and write to log
-if sectData['use-api'] == True and len(fcastToday) > 0 and avg >= 50:
+if sectData['sysEnable'] == True and sectData['use-api'] == True and len(fcastToday) > 0 and avg >= 50:
 	newLog = {'date': f'{now.strftime("%m/%d/%Y")}',
 		'time': f'{now.strftime("%H:%M:%S")}',
 		'message': f'Did not water, because it rained today.'
@@ -87,7 +87,7 @@ if sectData['use-api'] == True and len(fcastToday) > 0 and avg >= 50:
 	finalize(log, log60, sectData, files)
 
 #if it does not rain: water sectors based on interval
-elif sectData['use-api'] == False or len(fcastToday) > 0:
+elif sectData ['sysEnable'] and sectData['use-api'] == False or len(fcastToday) > 0:
 	sectData["last-rained"] += 1
 	line = "Watered sector(s): "
 
@@ -126,6 +126,13 @@ elif sectData['use-api'] == False or len(fcastToday) > 0:
 	finalize(log, log60, sectData, files)
 
 #if get forecast operation returned erroneous
+elif sectData['sysEnable'] == False:
+	newLog = {'date': f'{now.strftime("%m/%d/%Y")}',
+		'time': f'{now.strftime("%H:%M:%S")}',
+		'message': "Did not perform water operation. Water system not enabled."
+	}
+	log['log'].append(newLog)
+	log60['log'].append(newLog)
 else:
 	sectData['last-rained'] += 1
 	newLog = {'date': f'{now.strftime("%m/%d/%Y")}',

@@ -25,6 +25,11 @@
 	<h3>Initialize Sectors</h3>
 	<p id="sectorList">
 	<form name="sector" class="sectForm" method="POST">
+	{%if sectData['sysEnable']%}
+	<p>Enable System: <input type="checkbox" class="initForm" name="sysEnable" value="True" checked></p></br>
+	{%else%}
+	<p>Enable System: <input type="checkbox" class="initForm" name="sysEnable" value="False"></p></br>
+	{%endif%}
 	{%if sectData['use-api']%}
 	<p>Use Weather API: <input type="checkbox" class="initForm" name="useAPI" value="True" checked></p></br>
 	{%else%}

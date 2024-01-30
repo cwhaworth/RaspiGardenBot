@@ -1,7 +1,7 @@
 {
   "delay-after": 1,
   "delay-before": 1,
-  "last-rained": 11,
+  "last-rained": 28,
   "max-sectors": 4,
   "pump-pin": 27,
   "sector": [
@@ -30,6 +30,7 @@
       "rain-inc": 3
     }
   ],
+  "sysEnable": false,
   "use-api": false,
-  "water-time": 5
+  "water-time": 10
 }

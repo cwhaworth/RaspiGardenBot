@@ -42,72 +42,83 @@ def index():
 def waterAll():
 	sectData = getJsonData('watering-sectors')
 	pump = sectData['pump-pin']
+	if sectData['sysEnable'] == False:
+		newLog = {'date': f'{now.strftime("%m/%d/%Y")}',
+			'time': f'{now.strftime("%H:%M:%S")}',
+			'message': 'Did not perform water operation. Water system not enabled.'
+		}
+	else:
+		GPIO.setup(pump, GPIO.OUT)
+		GPIO.output(pump, GPIO.HIGH)
+		time.sleep(sectData['delay-before'])
+		for sector in sectData['sector']:
+			GPIO.setup(sector['pin'], GPIO.OUT)
+			GPIO.output(sector['pin'], GPIO.LOW)
+		time.sleep(sectData['water-time'])
+		GPIO.cleanup(pump)
+		time.sleep(sectData['delay-after'])
+		for sector in sectData['sector']:
+			GPIO.cleanup(sector['pin'])
 
-	GPIO.setup(pump, GPIO.OUT)
-	GPIO.output(pump, GPIO.LOW)
-	time.sleep(sectData['delay-before'])
-	for sector in sectData['sector']:
-		GPIO.setup(sector['pin'], GPIO.OUT)
-		GPIO.output(sector['pin'], GPIO.LOW)
-	time.sleep(sectData['water-time'])
-	GPIO.cleanup(pump)
-	time.sleep(sectData['delay-after'])
-	for sector in sectData['sector']:
-		GPIO.cleanup(sector['pin'])
+		log = getJsonData('water-log')
+		log60 = getJsonData('water-log-60-day')
+		now = datetime.now()
+		newLog = {'date': f'{now.strftime("%m/%d/%Y")}',
+			'time': f'{now.strftime("%H:%M:%S")}',
+			'message': 'Watered all sectors by manual override.'
+		}
+		log['log'].append(newLog)
+		log60['log'].append(newLog)
 
-	log = getJsonData('water-log')
-	log60 = getJsonData('water-log-60-day')
-	now = datetime.now()
-	newLog = {'date': f'{now.strftime("%m/%d/%Y")}',
-		'time': f'{now.strftime("%H:%M:%S")}',
-		'message': 'Watered all sectors by manual override.'
-	}
-	log['log'].append(newLog)
-	log60['log'].append(newLog)
+		today = getToday()
+		log = stripOldLog(log, today, 30)
+		log60 = stripOldLog(log60, today, 60)
 
-	today = getToday()
-	log = stripOldLog(log, today, 30)
-	log60 = stripOldLog(log60, today, 60)
-
-	setJsonData('water-log', log)
-	setJsonData('water-log-60-day', log60)
+		setJsonData('water-log', log)
+		setJsonData('water-log-60-day', log60)
 
 def waterNow(sectID):
 	sectData = getJsonData('watering-sectors')
 	pump = sectData['pump-pin']
-	sectorTemp = {}
-	for sector in sectData['sector']:
-		if sector['id'] == sectID:
-			sectorTemp = sector
-			break
 
-	GPIO.setup(pump, GPIO.OUT)
-	GPIO.output(pump, GPIO.LOW)
-	time.sleep(sectData['delay-before'])
-	GPIO.setup(sectorTemp['pin'], GPIO.OUT)
-	GPIO.output(sectorTemp['pin'], GPIO.LOW)
-	time.sleep(sectData['water-time'])
-	GPIO.cleanup(pump)
-	time.sleep(sectData['delay-after'])
-	GPIO.cleanup(sectorTemp['pin'])
+	if sectData['sysEnable'] == False:
+		newLog = {'date': f'{now.strftime("%m/%d/%Y")}',
+			'time': f'{now.strftime("%H:%M:%S")}',
+			'message': 'Did not perform water operation. Water system not enabled.'
+		}
+	else:
+		sectorTemp = {}
+		for sector in sectData['sector']:
+			if sector['id'] == sectID:
+				sectorTemp = sector
+				break
 
-	log = getJsonData('water-log')
-	log60 = getJsonData('water-log-60-day')
-	now = datetime.now()
-	newLog = {'date': f'{now.strftime("%m/%d/%Y")}',
-		'time': f'{now.strftime("%H:%M:%S")}',
-		'message': f'Watered sector "{sectID}" by manual override.'
+		GPIO.setup(pump, GPIO.OUT)
+		GPIO.output(pump, GPIO.HIGH)
+		time.sleep(sectData['delay-before'])
+		GPIO.setup(sectorTemp['pin'], GPIO.OUT)
+		GPIO.output(sectorTemp['pin'], GPIO.LOW)
+		time.sleep(sectData['water-time'])
+		GPIO.cleanup(pump)
+		time.sleep(sectData['delay-after'])
+		GPIO.cleanup(sectorTemp['pin'])
 
-	}
-	log['log'].append(newLog)
-	log60['log'].append(newLog)
+		log = getJsonData('water-log')
+		log60 = getJsonData('water-log-60-day')
+		now = datetime.now()
+		newLog = {'date': f'{now.strftime("%m/%d/%Y")}',
+			'time': f'{now.strftime("%H:%M:%S")}',
+			'message': f'Watered sector "{sectID}" by manual override.'
+		}
+		log['log'].append(newLog)
+		log60['log'].append(newLog)
 
-	today = getToday()
-	log = stripOldLog(log, today, 30)
-	log60 = stripOldLog(log60, today, 60)
+		today = getToday()
+		log = stripOldLog(log, today, 30)
+		log60 = stripOldLog(log60, today, 60)
 
-	setJsonData('water-log', log)
-	setJsonData('water-log-60-day', log60)
+		setJsonData('water-log', log)
+		setJsonData('water-log-60-day', log60)
 
 def getForecast(forecast_json):
 	counter = 0
@@ -138,6 +149,7 @@ def initialize():
 
 	if request.method == 'POST':
 		tempData = {'last-rained': sectData['last-rained'],
+			'sysEnable': bool(request.form.get('sysEnable', False)),
 			'use-api': bool(request.form.get('useAPI', False)),
 			'pump-pin': int(request.form['pumpPin']),
 			'max-sectors': int(request.form['maxSectors']),
@@ -250,13 +262,13 @@ def getStyles():
 def getJsonData(filename):
 	data = None
 
-	with open(f'static/{filename}.json', 'r') as file:
+	with open(f'/var/www/FlaskServer/static/{filename}.json', 'r') as file:
 		data = json.load(file)
 
 	return data
 
 def setJsonData(filename, data):
-	with open(f'static/{filename}.json', 'w') as file:
+	with open(f'/var/www/FlaskServer/static/{filename}.json', 'w') as file:
 		json.dump(data, file, indent=2, sort_keys=True)
 
 if __name__ == '__main__':
