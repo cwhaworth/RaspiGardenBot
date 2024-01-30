@@ -32,5 +32,10 @@
   ],
   "sysEnable": false,
   "use-api": false,
+<<<<<<< HEAD:static/watering-sectors.json
   "water-time": 10
 }
+=======
+  "water-time": 5
+}
+>>>>>>> ef1c1b07849296f55cbc953bb08d051bfeb2834b:FlaskServer/static/watering-sectors.json
