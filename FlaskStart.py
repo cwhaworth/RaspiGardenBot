@@ -352,7 +352,7 @@ def getJsonData(filename):
 	'''
 	data = None
 
-	with open(f'/var/www/FlaskServer/static/{filename}.json', 'r') as file:
+	with open(f'/var/www/RaspiGardenBot/static/{filename}.json', 'r') as file:
 		data = json.load(file)
 
 	return data
@@ -361,7 +361,7 @@ def setJsonData(filename, data):
 	'''
 	Writes to the specified JSON file
 	'''
-	with open(f'/var/www/FlaskServer/static/{filename}.json', 'w') as file:
+	with open(f'/var/www/RaspiGardenBot/static/{filename}.json', 'w') as file:
 		json.dump(data, file, indent=2, sort_keys=True)
 
 if __name__ == '__main__':

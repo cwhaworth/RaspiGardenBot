@@ -32,14 +32,14 @@ def readJson(files):
 	#reads a list of files given the names in a list of strings
 	fList = []
 	for file in files:
-		with open(f'/var/www/FlaskServer/static/{file}.json', 'r') as f:
+		with open(f'/var/www/RaspiGardenBot/static/{file}.json', 'r') as f:
 			fList.append(json.load(f))
 	return fList[0], fList[1], fList[2]
 
 def writeJson(data):
 	#give a list of data sets writes to multiple files where the filename is stored in data['file']
 	for d in data['allData']:
-		with open(f'/var/www/FlaskServer/static/{d["file"]}.json', 'w') as f:
+		with open(f'/var/www/RaspiGardenBot/static/{d["file"]}.json', 'w') as f:
 			json.dump(d['data'], f, indent=2)
 
 def stripOldLog(log, td, inc):
@@ -78,7 +78,7 @@ def finalize(l, l60, sd, files):
 def main():
 	fcast = None
 	#log file to read forecast from
-	with open('/var/www/FlaskServer/static/forecast.json') as f:
+	with open('/var/www/RaspiGardenBot/static/forecast.json') as f:
 		fcast = json.load(f)
 	fcastToday = []
 	for fc in fcast['forecast']:

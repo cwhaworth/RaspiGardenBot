@@ -23,17 +23,17 @@ def getJsonData(filename):
 	'''
 	data = None
 
-	with open(f'/var/www/FlaskServer/static/{filename}.json', 'r') as file:
+	with open(f'/var/www/RaspiGardenBot/static/{filename}.json', 'r') as file:
 		data = json.load(file)
 
 	return data
 
-def setJsonData(filename, data):
+def setJsonData(filename, data, sort:bool=True):
 	'''
 	Writes to the specified JSON file
 	'''
-	with open(f'/var/www/FlaskServer/static/{filename}.json', 'w') as file:
-		json.dump(data, file, indent=2, sort_keys=True)
+	with open(f'/var/www/RaspiGardenBot/static/{filename}.json', 'w') as file:
+		json.dump(data, file, indent=2, sort_keys=sort)
 
 def main():
 	#Set Variables
@@ -49,11 +49,10 @@ def main():
 	city = ''
 	state = ''
 	country = ''
-	with open('/var/www/FlaskServer/static/watering-sectors.json') as f:
-		data = json.load(f)
-		city = data['api-city']
-		state = data['api-state']
-		country = data['api-country']
+	data = getJsonData('watering-sectors')
+	city = data['api-city']
+	state = data['api-state']
+	country = data['api-country']
 
 	#Lists to store important data from the API response.
 	fcastdate = [] #date of forecasted weather 
@@ -99,8 +98,9 @@ def main():
 				})
 
 			#log file to save forcast to
-			with open("/var/www/FlaskServer/static/forecast.json", "w") as f:
-				json.dump(fcastlist, f, indent=2)
+			setJsonData('forecast', fcastlist, False)
+			#with open("/var/www/RaspiGardenBot/static/forecast.json", "w") as file:
+				#json.dump(fcastlist, file, indent=2)
 	else:
 			#generate logs
 			log = getJsonData('water-log')
