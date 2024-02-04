@@ -98,12 +98,9 @@ if percentRain != 0 and count != 0:
 files = ['water-log', 'water-log-60-day', 'watering-sectors']
 log, log60, sectData = readJson(files)
 
-print(f"sysEnable: {sectData['sysEnable']}")
 #perform, and log actions
 if sectData['sysEnable'] == False:
-	print('got here')
 	newLog = createLogMessage("Did not perform water operation. Water system not enabled.")
-	print(f'{json.dumps(newLog,indent=2)}')
 	log['log'].append(newLog)
 	log60['log'].append(newLog)
 	finalize(log, log60, sectData, files)
