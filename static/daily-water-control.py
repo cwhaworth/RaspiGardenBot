@@ -111,18 +111,11 @@ def main():
 			del log[0]
 		while len(log60) > 60:
 			del log[0]
-
 		sectData['last-rained'] = 0
-
 		finalize(log, log60, sectData, files)
 
-	'''
-	If system is enabled, and API data is not in use
-	OR
-	if it does not rain: 
-		
-	water sectors based on interval
-	'''
+	#If system is enabled, and API data is not in use OR if it does not rain: 
+	#water sectors based on interval
 	elif sectData['use-api'] == False or len(fcastToday) > 0:
 		sectData["last-rained"] += 1
 		line = "Watered sector(s): "
