@@ -39,15 +39,21 @@ def main():
 	#Set Variables
 	#get api key
 	key = ''
+	
 	#key = os.environ.get('WEATHER_API_KEY')
 	with open('/var/www/env-var/weather-api-key.json', 'r') as f:
 		data = json.load(f)
 		key = data['weather-api-key']
-	#Set base URL, and location
+	#Set base URL, and location information from file
 	url = 'api.openweathermap.org'
-	city = 'Raleigh'
-	state = 'NC'
-	country = 'US'
+	city = ''
+	state = ''
+	country = ''
+	with open('/var/www/FlaskServer/static/watering-sectors.json') as f:
+		data = json.load(f)
+		city = data['api-city']
+		state = data['api-state']
+		country = data['api-country']
 
 	#Lists to store important data from the API response.
 	fcastdate = [] #date of forecasted weather 
