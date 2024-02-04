@@ -75,89 +75,93 @@ def finalize(l, l60, sd, files):
 #######################################
 #MAIN EXECUTION
 #######################################
-fcast = None
-#log file to read forecast from
-with open('/var/www/FlaskServer/static/forecast.json') as f:
-	fcast = json.load(f)
-fcastToday = []
-for fc in fcast['forecast']:
-	day = fc['date'][-2 : ]
-	if day == today:
-		fcastToday.append(fc['pop'])
-percentRain = 0
-count = 0
-avg = 0
-for per in fcastToday:
-	percentRain += per
-	count += 1
-if percentRain != 0 and count != 0:
-	avg = percentRain / count
-#print(f'forecast:\n{fcastToday}')
+def main():
+	fcast = None
+	#log file to read forecast from
+	with open('/var/www/FlaskServer/static/forecast.json') as f:
+		fcast = json.load(f)
+	fcastToday = []
+	for fc in fcast['forecast']:
+		day = fc['date'][-2 : ]
+		if day == today:
+			fcastToday.append(fc['pop'])
+	percentRain = 0
+	count = 0
+	avg = 0
+	for per in fcastToday:
+		percentRain += per
+		count += 1
+	if percentRain != 0 and count != 0:
+		avg = percentRain / count
+	#print(f'forecast:\n{fcastToday}')
 
-#get log data, and sector data from JSON files
-files = ['water-log', 'water-log-60-day', 'watering-sectors']
-log, log60, sectData = readJson(files)
+	#get log data, and sector data from JSON files
+	files = ['water-log', 'water-log-60-day', 'watering-sectors']
+	log, log60, sectData = readJson(files)
 
-#perform, and log actions
-if sectData['sysEnable'] == False:
-	newLog = createLogMessage("Did not perform water operation. Water system not enabled.")
-	log['log'].append(newLog)
-	log60['log'].append(newLog)
-	finalize(log, log60, sectData, files)
+	#perform, and log actions
+	if sectData['sysEnable'] == False:
+		newLog = createLogMessage("Did not perform water operation. Water system not enabled.")
+		log['log'].append(newLog)
+		log60['log'].append(newLog)
+		finalize(log, log60, sectData, files)
 
-#if it rains: reset last-rained, and write to log
-elif sectData['use-api'] == True and len(fcastToday) > 0 and avg >= 50:
-	newLog = createLogMessage('Did not water, because it rained today.')
-	log['log'].append(newLog)
-	log60['log'].append(newLog)
-	while len(log) > 30:
-		del log[0]
-	while len(log60) > 60:
-		del log[0]
-	sectData['last-rained'] = 0
-	finalize(log, log60, sectData, files)
-
-#If system is enabled, and API data is not in use OR if it does not rain: 
-#water sectors based on interval
-elif sectData['use-api'] == False or len(fcastToday) > 0:
-	sectData["last-rained"] += 1
-	line = "Watered sector(s): "
-
-	pump = sectData['pump-pin']
-
-	#start watering
-	GPIO.setup(pump, GPIO.OUT)
-	GPIO.output(pump, GPIO.LOW)
-	time.sleep(sectData['delay-before'])
-	for sector in sectData["sector"]:
-		if sector["rain-inc"] <= sectData["last-rained"] and sectData["last-rained"] % sector["rain-inc"] == 0 and sector['enabled']:
-			GPIO.setup(sector['pin'], GPIO.OUT)
-			GPIO.output(sector['pin'], GPIO.LOW)
-			line += f"\"{sector['id']}\", "
-	time.sleep(sectData['water-time'])
-
-	#end watering
-	GPIO.cleanup(pump)
-	time.sleep(sectData['delay-after'])
-	for sector in sectData['sector']:
-		if sector['rain-inc'] <= sectData['last-rained'] and sectData['last-rained'] % sector['rain-inc'] == 0 and sector['enabled']:
-			GPIO.cleanup(sector['pin'])
-
-	#if API not in use and 30 days have passed, reset last rained
-	if sectData['use-api'] == False and sectData['last-rained'] == 30:
+	#if it rains: reset last-rained, and write to log
+	elif sectData['use-api'] == True and len(fcastToday) > 0 and avg >= 50:
+		newLog = createLogMessage('Did not water, because it rained today.')
+		log['log'].append(newLog)
+		log60['log'].append(newLog)
+		while len(log) > 30:
+			del log[0]
+		while len(log60) > 60:
+			del log[0]
 		sectData['last-rained'] = 0
+		finalize(log, log60, sectData, files)
 
-	#prepare to write log message to 30 day, and 60 day log files
-	line = line[ : -2]
-	newLog = createLogMessage(line)
-	log['log'].append(newLog)
-	log60['log'].append(newLog)
-	finalize(log, log60, sectData, files)
+	#If system is enabled, and API data is not in use OR if it does not rain: 
+	#water sectors based on interval
+	elif sectData['use-api'] == False or len(fcastToday) > 0:
+		sectData["last-rained"] += 1
+		line = "Watered sector(s): "
 
-#if get forecast operation returned erroneous
-else:
-	sectData['last-rained'] += 1
-	newLog = createLogMessage("Forecast data was not initialized correctly. Check for errors in 'forecast.json'.")
-	log['log'].append(newLog)
-	log60['log'].append(newLog)
-	finalize(log, log60, sectData, files)
+		pump = sectData['pump-pin']
+
+		#start watering
+		GPIO.setup(pump, GPIO.OUT)
+		GPIO.output(pump, GPIO.LOW)
+		time.sleep(sectData['delay-before'])
+		for sector in sectData["sector"]:
+			if sector["rain-inc"] <= sectData["last-rained"] and sectData["last-rained"] % sector["rain-inc"] == 0 and sector['enabled']:
+				GPIO.setup(sector['pin'], GPIO.OUT)
+				GPIO.output(sector['pin'], GPIO.LOW)
+				line += f"\"{sector['id']}\", "
+		time.sleep(sectData['water-time'])
+
+		#end watering
+		GPIO.cleanup(pump)
+		time.sleep(sectData['delay-after'])
+		for sector in sectData['sector']:
+			if sector['rain-inc'] <= sectData['last-rained'] and sectData['last-rained'] % sector['rain-inc'] == 0 and sector['enabled']:
+				GPIO.cleanup(sector['pin'])
+
+		#if API not in use and 30 days have passed, reset last rained
+		if sectData['use-api'] == False and sectData['last-rained'] == 30:
+			sectData['last-rained'] = 0
+
+		#prepare to write log message to 30 day, and 60 day log files
+		line = line[ : -2]
+		newLog = createLogMessage(line)
+		log['log'].append(newLog)
+		log60['log'].append(newLog)
+		finalize(log, log60, sectData, files)
+
+	#if get forecast operation returned erroneous
+	else:
+		sectData['last-rained'] += 1
+		newLog = createLogMessage("Forecast data was not initialized correctly. Check for errors in 'forecast.json'.")
+		log['log'].append(newLog)
+		log60['log'].append(newLog)
+		finalize(log, log60, sectData, files)
+
+if __name__ == "__main__":
+	main()
