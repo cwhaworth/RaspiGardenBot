@@ -92,7 +92,6 @@ def waterAll():
 		#generate logs
 		log = getJsonData('water-log')
 		log60 = getJsonData('water-log-60-day')
-		now = datetime.now()
 		newLog = createLogMessage('Watered all sectors by manual override.')
 		log['log'].append(newLog)
 		log60['log'].append(newLog)
@@ -141,7 +140,6 @@ def waterNow(sectID):
 		#generate logs
 		log = getJsonData('water-log')
 		log60 = getJsonData('water-log-60-day')
-		now = datetime.now()
 		newLog = createLogMessage(f'Watered sector "{sectID}" by manual override.')
 		log['log'].append(newLog)
 		log60['log'].append(newLog)
@@ -156,6 +154,7 @@ def waterNow(sectID):
 
 def createLogMessage(message):
 	#template for log message to be written to JSON log files
+	now = datetime.now()
 	newLog = {'date': f'{now.strftime("%m/%d/%Y")}',
 			'time': f'{now.strftime("%H:%M:%S")}',
 			'message': f'{message}'
@@ -211,6 +210,9 @@ def initialize():
 		tempData = {'last-rained': sectData['last-rained'],
 			'sysEnable': bool(request.form.get('sysEnable', False)),
 			'use-api': bool(request.form.get('useAPI', False)),
+			'api-city': str(request.form['apiCity']),
+			'api-country': str(request.form['apiCountry']),
+			'api-state': str(request.form['apiState']),
 			'pump-pin': int(request.form['pumpPin']),
 			'max-sectors': int(request.form['maxSectors']),
 			'water-time': int(request.form['waterTime']),

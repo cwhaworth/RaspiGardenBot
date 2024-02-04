@@ -1,4 +1,7 @@
 {
+  "api-city": "Raleigh",
+  "api-country": "US",
+  "api-state": "NC",
   "delay-after": 1,
   "delay-before": 1,
   "last-rained": 28,
