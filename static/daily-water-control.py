@@ -106,6 +106,7 @@ if sectData['sysEnable'] == False:
 	print(f'{json.dumps(newLog,indent=2)}')
 	log['log'].append(newLog)
 	log60['log'].append(newLog)
+	finalize(log, log60, sectData, files)
 
 #if it rains: reset last-rained, and write to log
 elif sectData['use-api'] == True and len(fcastToday) > 0 and avg >= 50:
