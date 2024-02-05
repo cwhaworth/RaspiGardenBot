@@ -70,6 +70,8 @@ def waterAll():
 	pump = sectData['pump-pin']
 	if sectData['sysEnable'] == False:
 		#If watering sytem is not enabled for watering
+		log = getJsonData('water-log')
+		log60 = getJsonData('water-log-60-day')
 		newLog = createLogMessage('Did not perform water operation. Water system not enabled.')
 		log['log'].append(newLog)
 		log60['log'].append(newLog)
@@ -127,6 +129,8 @@ def waterNow(sectID):
 	pump = sectData['pump-pin']
 	if sectData['sysEnable'] == False:
 		#If watering sytem is not enabled for watering
+		log = getJsonData('water-log')
+		log60 = getJsonData('water-log-60-day')
 		newLog = createLogMessage('Did not perform water operation. Water system not enabled.')
 		log['log'].append(newLog)
 		log60['log'].append(newLog)
