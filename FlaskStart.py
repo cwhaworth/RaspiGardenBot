@@ -69,7 +69,18 @@ def waterAll():
 	sectData = getJsonData('watering-sectors')
 	pump = sectData['pump-pin']
 	if sectData['sysEnable'] == False:
+		#If watering sytem is not enabled for watering
 		newLog = createLogMessage('Did not perform water operation. Water system not enabled.')
+		log['log'].append(newLog)
+		log60['log'].append(newLog)
+
+		today = getToday()
+		log = stripOldLog(log, today, 30)
+		log60 = stripOldLog(log60, today, 60)
+
+		#write to log files
+		setJsonData('water-log', log)
+		setJsonData('water-log-60-day', log60)
 	else:
 		#turn on pump
 		GPIO.setup(pump, GPIO.OUT)
