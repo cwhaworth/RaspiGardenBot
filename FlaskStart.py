@@ -209,7 +209,7 @@ def stripOldLog(log, today, inc):
 	subDate = today.date() - logDate.date()
 	if subDate.days > inc:
 		del log['log'][0]
-		return stripOldLog(log, td, inc)
+		return stripOldLog(log, today, inc)
 	else:
 		return log
 
