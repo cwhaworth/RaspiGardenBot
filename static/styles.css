@@ -7,25 +7,37 @@ body{
 }
 
 [class="sectForm"]{
-	max-width: 250px;
+	float: left;
+	max-width: px;
 }
 [class="sectForm"] [class="initForm"]{
-	float: right;
-	max-width: 50px;
-	text-align: right;
+	max-width: px;
+	text-align: left;
+}
+[class="sectForm"] [name="initTop"] section{
+	float: left;
+	max-width: px;
+	max-height: px;
+	text-align: left;
+	padding-right: 75px;
 }
 [class="sectForm"] p{
+	float: left;
 	max-height: 0px;
 	margin-top: 3px;
 	margin-bottom: 3px;
+	text-align: left;
+}
+[class="initForm"] input{
+	float: right;
+	max-width: 50px;
+	
 }
 [class="sectForm"] [class="mainForm"]{
-	float: right;
+	float: left;
 	margin: 3px;
 	margin-top: 10px;
 }
-
-
 
 [name="topBar"]{
 	background-color: #98b574;
