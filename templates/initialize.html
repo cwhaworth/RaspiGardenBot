@@ -32,7 +32,7 @@
 		{%else%}
 		<p>Enable System: </p><input type="checkbox" class="initForm" name="sysEnable" value="False"></br>
 		{%endif%}
-		</section>
+		</section></br>
 		<section>
 		<h3>Weather API Parameters:</h3>
 		{%if sectData['use-api']%}
@@ -69,6 +69,7 @@
 			<input type="submit" class="initForm" id="btnDelete" name="sectDel_{{sector['id']}}" value="Delete">
 		</div>
 		{%endfor%}
+		</br>
 		<div>
 			{%if addButton == True%}
 			</br></br><input type="submit" class="mainForm" id="btnAdd" name="sectAdd" value="Add New">
