@@ -16,10 +16,16 @@ body{
 }
 [class="sectForm"] [name="initTop"] section{
 	float: left;
-	max-width: px;
+	min-width: 300px;
 	max-height: px;
 	text-align: left;
 	padding-right: 75px;
+}
+
+[class="sectForm"] [name="initSectList"] div {
+	float: left;
+	max-width: 250px;
+	text-align: left;
 }
 [class="sectForm"] p{
 	float: left;
@@ -30,7 +36,7 @@ body{
 }
 [class="initForm"] input{
 	float: right;
-	max-width: 50px;
+	max-width: 75px;
 	
 }
 [class="sectForm"] [class="mainForm"]{
