@@ -24,8 +24,9 @@ body{
 
 [class="sectForm"] [name="initSectList"] div {
 	float: left;
-	max-width: 250px;
+	min-width: 250px;
 	text-align: left;
+	margin-right: 50px;
 }
 [class="sectForm"] p{
 	float: left;
