@@ -26,14 +26,14 @@
 	<p id="initContent">
 	<form name="sector" class="sectForm" method="POST">
 	<section class="initForm" name="initTop">
-		<section>
+		<div>
 		{%if sectData['sysEnable']%}
 		<p>Enable System: </p><input type="checkbox" class="initForm" name="sysEnable" value="True" checked></br>
 		{%else%}
 		<p>Enable System: </p><input type="checkbox" class="initForm" name="sysEnable" value="False"></br>
 		{%endif%}
-		</section></br>
-		<section>
+		</div></br>
+		<div>
 		<h3>Weather API Parameters:</h3>
 		{%if sectData['use-api']%}
 		<p>Use Weather API: </p><input type="checkbox" class="initForm" name="useAPI" value="True" checked></br>
@@ -43,16 +43,16 @@
 		<p>City: </p><input type="text" class="initForm" name="apiCity" placeholder="city name" value={{sectData['api-city']}}></br>
 		<p>State: </p><input type="text" class="initForm" name="apiState" placeholder="ex: NC, AZ" value={{sectData['api-state']}}></br>
 		<p>Country: </p><input type="text" class="initForm" name="apiCountry" placeholder="ex: US, UK" value={{sectData['api-country']}}>
-		</section>
-		<section>
+		</div>
+		<div>
 		<h3>System Parameters:</h3>
 		<p>Pump Pin: </p><input type="text" class="initForm" name="pumpPin" placeholder="GPIO Pin #" value={{sectData['pump-pin']}}></br>
 		<p>Delay Before (Seconds): </p><input type="text" class="initForm" name="delayBefore" placeholder="Seconds" value={{sectData['delay-before']}}></br>
 		<p>Delay After (Seconds): </p><input type="text" class="initForm" name="delayAfter" placeholder="Seconds" value={{sectData['delay-after']}}></br>
 		<p>Water Time (Seconds): </p><input type="text" class="initForm" name="waterTime" placeholder="Seconds" value={{sectData['water-time']}}></br>
 		<p>Max Sectors: </p><input type="text" class="initForm" name="maxSectors" placeholder="# of Relays" value={{sectData['max-sectors']}}>
-		</section>
-	</section></br></br>
+		</div>
+	</section></br>
 	<section class="initForm" name="initSectList">
 		<h3>Sectors:</h3>
 		{%for sector in sectData['sector']%}

@@ -21,7 +21,13 @@ body{
 	text-align: left;
 	padding-right: 75px;
 }
-
+[class="sectForm"] [name="initSectList"]{
+	float: left;
+	min-width: 300px;
+	max-height: px;
+	text-align: left;
+	padding-right: 75px;
+}
 [class="sectForm"] [name="initSectList"] div {
 	float: left;
 	min-width: 250px;
