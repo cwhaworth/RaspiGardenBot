@@ -54,7 +54,7 @@
 			<td name="sectInc">{{sector["rain-inc"]}}</td>
 			<td>
 			<form method="POST">
-				{%if not data['sectData']['sysEnabled'] or not sector['enabled']%}
+				{%if not data['sectData']['sysEnable'] or not sector['enabled']%}
 				<input name="waterNow_{{sector['id']}}"  type="submit" value="Water Now" disabled>
 				{%else%}
 				<input name="waterNow_{{sector['id']}}"  type="submit" value="Water Now">
@@ -66,7 +66,7 @@
 		</table>
 	</p>
 	<form method="POST">	
-		{%if not data['sectData']['sysEnabled']%}
+		{%if not data['sectData']['sysEnable']%}
 		<input name="waterAll" type="submit" value="Water All" disabled>
 		{%else%}
 		<input name="waterAll" type="submit" value="Water All">
