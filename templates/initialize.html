@@ -26,21 +26,21 @@
 	<p id="initContent">
 	<form name="sector" class="sectForm" method="POST">
 	{%if sectData['sysEnable']%}
-	<p>Enable System: <input type="checkbox" class="initForm" name="sysEnable" value="True" checked></p></br>
+	<p>Enable System: </p><input type="checkbox" class="initForm" name="sysEnable" value="True" checked></br>
 	{%else%}
-	<p>Enable System: <input type="checkbox" class="initForm" name="sysEnable" value="False"></p></br>
+	<p>Enable System: </p><input type="checkbox" class="initForm" name="sysEnable" value="False"></br>
 	{%endif%}
 	<section class="initForm" name="initTop">
 		<section>
 		<h3>Weather API Parameters:</h3>
 		{%if sectData['use-api']%}
-		<p>Use Weather API: <input type="checkbox" class="initForm" name="useAPI" value="True" checked></p></br>
+		<p>Use Weather API: </p><input type="checkbox" class="initForm" name="useAPI" value="True" checked></br>
 		{%else%}
-		<p>Use Weather API: <input type="checkbox" class="initForm" name="useAPI" value="False"></p></br>
+		<p>Use Weather API: </p><input type="checkbox" class="initForm" name="useAPI" value="False"></br>
 		{%endif%}
-		<p>City: <input type="text" class="initForm" name="apiCity" placeholder="city name" value={{sectData['api-city']}}></p></br>
-		<p>State: <input type="text" class="initForm" name="apiState" placeholder="ex: NC, AZ" value={{sectData['api-state']}}></p></br>
-		<p>Country: <input type="text" class="initForm" name="apiCountry" placeholder="ex: US, UK" value={{sectData['api-country']}}></p>
+		<p>City: </p><input type="text" class="initForm" name="apiCity" placeholder="city name" value={{sectData['api-city']}}></br>
+		<p>State: </p><input type="text" class="initForm" name="apiState" placeholder="ex: NC, AZ" value={{sectData['api-state']}}></br>
+		<p>Country: </p><input type="text" class="initForm" name="apiCountry" placeholder="ex: US, UK" value={{sectData['api-country']}}>
 		</section>
 		<section>
 		<h3>System Parameters:</h3>
