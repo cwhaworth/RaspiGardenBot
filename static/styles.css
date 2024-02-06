@@ -14,7 +14,7 @@ body{
 	max-width: px;
 	text-align: left;
 }
-[class="sectForm"] [name="initTop"] section{
+[class="sectForm"] [name="initTop"] div{
 	float: left;
 	min-width: 300px;
 	max-height: px;
