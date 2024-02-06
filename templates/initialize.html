@@ -54,21 +54,23 @@
 	<section class="initForm" name="initSectList">
 		<h3>Sectors:</h3>
 		{%for sector in sectData['sector']%}
-		<h4>Sector {{sector['id']}}</h4>
-		<p>ID: </p><input type="text" class="initForm" name="sectorID" placeholder="Sector ID" value={{sector['id']}}></br>
-		<p>Pin: </p><input type="text" class="initForm" name="sectorPin" placeholder="GPIO Pin #" value={{sector['pin']}}></br>
-		<p>Incriment: </p><input type="text" class="initForm" name="sectorInc" placeholder="Rain Incriment" value={{sector['rain-inc']}}></br>
-		{%if sector['enabled']%}
-		<p>Enabled: </p><input type="checkbox" class="initForm" name="sectorEn_{{sector['id']}}" value="True" checked></br>
-		{%else%}
-		<p>Enabled: </p><input type="checkbox" class="initForm" name="sectorEn_{{sector['id']}}" value="False"></br>
-		{%endif%}
-		<input type="submit" class="initForm" id="btnDelete" name="sectDel_{{sector['id']}}" value="Delete">
-		{%endfor%}
-		{%if addButton == True%}
-		</br></br><input type="submit" class="mainForm" id="btnAdd" name="sectAdd" value="Add New">
-		{%endif%}
-		</br></br><input type="submit" class="mainForm" id="btnInit" name="sectInit" value="Initialize">
+		<div>
+			<h4>Sector {{sector['id']}}</h4>
+			<p>ID: </p><input type="text" class="initForm" name="sectorID" placeholder="Sector ID" value={{sector['id']}}></br>
+			<p>Pin: </p><input type="text" class="initForm" name="sectorPin" placeholder="GPIO Pin #" value={{sector['pin']}}></br>
+			<p>Incriment: </p><input type="text" class="initForm" name="sectorInc" placeholder="Rain Incriment" value={{sector['rain-inc']}}></br>
+			{%if sector['enabled']%}
+			<p>Enabled: </p><input type="checkbox" class="initForm" name="sectorEn_{{sector['id']}}" value="True" checked></br>
+			{%else%}
+			<p>Enabled: </p><input type="checkbox" class="initForm" name="sectorEn_{{sector['id']}}" value="False"></br>
+			{%endif%}
+			<input type="submit" class="initForm" id="btnDelete" name="sectDel_{{sector['id']}}" value="Delete">
+			{%endfor%}
+			{%if addButton == True%}
+			</br></br><input type="submit" class="mainForm" id="btnAdd" name="sectAdd" value="Add New">
+			{%endif%}
+			</br></br><input type="submit" class="mainForm" id="btnInit" name="sectInit" value="Initialize">
+		</div>
 	</section>
 	</form>
 	</p>
