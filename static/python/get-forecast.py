@@ -23,7 +23,7 @@ def getJsonData(filename):
 	'''
 	data = None
 
-	with open(f'/var/www/RaspiGardenBot/static/{filename}.json', 'r') as file:
+	with open(f'/var/www/RaspiGardenBot/static/json/{filename}.json', 'r') as file:
 		data = json.load(file)
 
 	return data
@@ -32,7 +32,7 @@ def setJsonData(filename, data, sort:bool=True):
 	'''
 	Writes to the specified JSON file
 	'''
-	with open(f'/var/www/RaspiGardenBot/static/{filename}.json', 'w') as file:
+	with open(f'/var/www/RaspiGardenBot/static/json/{filename}.json', 'w') as file:
 		json.dump(data, file, indent=2, sort_keys=sort)
 
 def main():
@@ -99,7 +99,7 @@ def main():
 
 			#log file to save forcast to
 			setJsonData('forecast', fcastlist, False)
-			#with open("/var/www/RaspiGardenBot/static/forecast.json", "w") as file:
+			#with open("/var/www/RaspiGardenBot/static/json/forecast.json", "w") as file:
 				#json.dump(fcastlist, file, indent=2)
 	else:
 			#generate logs

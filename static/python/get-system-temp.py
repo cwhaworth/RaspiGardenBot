@@ -12,10 +12,11 @@ from gpiozero import CPUTemperature
 #Get CPU Temp, and current time
 cpu = CPUTemperature()
 now = datetime.now()
+sysDataFilePath = '/var/www/RaspiGardenBot/static/json/system-data.json'
 
 #Open system data storage JSON file
 sysData = None
-with open('/var/www/RaspiGardenBot/static/system-data.json', 'r') as f:
+with open(sysDataFilePath, 'r') as f:
 	sysData = json.load(f)
 temp = round((cpu.temperature * 1.8) + 32, 1) #convert CPU temperature from celsius to fahrenheit
 #Create JSON object for temperature at the timestamp this script was ran.
@@ -31,5 +32,5 @@ while len(sysData['sysTemp']) > 12:
 	del sysData['sysTemp'][0]
 
 #Write list of CPU temp readings to file
-with open('/var/www/RaspiGardenBot/static/system-data.json', 'w') as f:
+with open(sysDataFilePath, 'w') as f:
 	json.dump(sysData, f, indent=2, sort_keys=True)
