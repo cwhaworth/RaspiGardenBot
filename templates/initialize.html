@@ -44,24 +44,24 @@
 		</section>
 		<section>
 		<h3>System Parameters:</h3>
-		<p>Pump Pin: <input type="text" class="initForm" name="pumpPin" placeholder="GPIO Pin #" value={{sectData['pump-pin']}}></p></br>
-		<p>Delay Before (Seconds): <input type="text" class="initForm" name="delayBefore" placeholder="Seconds" value={{sectData['delay-before']}}></p></br>
-		<p>Delay After (Seconds): <input type="text" class="initForm" name="delayAfter" placeholder="Seconds" value={{sectData['delay-after']}}></p></br>
-		<p>Water Time (Seconds): <input type="text" class="initForm" name="waterTime" placeholder="Seconds" value={{sectData['water-time']}}></p></br>
-		<p>Max Sectors: <input type="text" class="initForm" name="maxSectors" placeholder="# of Relays" value={{sectData['max-sectors']}}></p>
+		<p>Pump Pin: </p><input type="text" class="initForm" name="pumpPin" placeholder="GPIO Pin #" value={{sectData['pump-pin']}}></br>
+		<p>Delay Before (Seconds): </p><input type="text" class="initForm" name="delayBefore" placeholder="Seconds" value={{sectData['delay-before']}}></br>
+		<p>Delay After (Seconds): </p><input type="text" class="initForm" name="delayAfter" placeholder="Seconds" value={{sectData['delay-after']}}></br>
+		<p>Water Time (Seconds): </p><input type="text" class="initForm" name="waterTime" placeholder="Seconds" value={{sectData['water-time']}}></br>
+		<p>Max Sectors: </p><input type="text" class="initForm" name="maxSectors" placeholder="# of Relays" value={{sectData['max-sectors']}}>
 		</section>
 	</section></br>
 	<section class="initForm" name="initSectList">
 		<h3>Sectors:</h3>
 		{%for sector in sectData['sector']%}
 		<h4>Sector {{sector['id']}}</h4>
-		<p>ID: <input type="text" class="initForm" name="sectorID" placeholder="Sector ID" value={{sector['id']}}></p></br>
-		<p>Pin: <input type="text" class="initForm" name="sectorPin" placeholder="GPIO Pin #" value={{sector['pin']}}></p></br>
-		<p>Incriment: <input type="text" class="initForm" name="sectorInc" placeholder="Rain Incriment" value={{sector['rain-inc']}}></p></br>
+		<p>ID: </p><input type="text" class="initForm" name="sectorID" placeholder="Sector ID" value={{sector['id']}}></br>
+		<p>Pin: </p><input type="text" class="initForm" name="sectorPin" placeholder="GPIO Pin #" value={{sector['pin']}}></br>
+		<p>Incriment: </p><input type="text" class="initForm" name="sectorInc" placeholder="Rain Incriment" value={{sector['rain-inc']}}></br>
 		{%if sector['enabled']%}
-		<p>Enabled: <input type="checkbox" class="initForm" name="sectorEn_{{sector['id']}}" value="True" checked></p></br>
+		<p>Enabled: </p><input type="checkbox" class="initForm" name="sectorEn_{{sector['id']}}" value="True" checked></br>
 		{%else%}
-		<p>Enabled: <input type="checkbox" class="initForm" name="sectorEn_{{sector['id']}}" value="False"></p></br>
+		<p>Enabled: </p><input type="checkbox" class="initForm" name="sectorEn_{{sector['id']}}" value="False"></br>
 		{%endif%}
 		<input type="submit" class="initForm" id="btnDelete" name="sectDel_{{sector['id']}}" value="Delete">
 		{%endfor%}
