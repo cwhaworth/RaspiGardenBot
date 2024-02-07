@@ -43,6 +43,7 @@ body{
 [class="sectForm"] [name="initSectList"] div {
 	float: left;
 	min-width: 275px;
+	min-height: 192.5px;
 	text-align: left;
 	margin-top: 12px;
 	margin-right: 24px;
