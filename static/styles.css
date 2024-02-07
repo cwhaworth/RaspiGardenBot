@@ -6,9 +6,21 @@ body{
 	font-family: Papyrus;
 }
 
+[class="initForm"] input{
+	float: right;
+	margin-right: 5px;
+	max-width: 75px;	
+}
 [class="sectForm"]{
 	float: left;
 	max-width: px;
+}
+[class="sectForm"] p{
+	float: left;
+	max-height: 0px;
+	margin-top: 3px;
+	margin-bottom: 3px;
+	text-align: left;
 }
 [class="sectForm"] [class="initForm"]{
 	max-width: px;
@@ -30,33 +42,42 @@ body{
 }
 [class="sectForm"] [name="initSectList"] div {
 	float: left;
-	min-width: 250px;
+	min-width: 275px;
 	text-align: left;
-	margin-right: 50px;
+	margin-top: 12px;
+	margin-right: 24px;
+	margin-bottom:12px;
+	border-style:double;
+	border-color:orange
 }
-[class="sectForm"] [name="initSectList"] [name="initEnd"] {
-	align-content: center;
-	min-width: 250px;
-	text-align: left;
-	margin-right: 50px;
+[class="sectForm"] [name="initSectList"] h4{
+	margin-left: 5px;
 }
-[class="sectForm"] p{
-	float: left;
-	max-height: 0px;
-	margin-top: 3px;
-	margin-bottom: 3px;
-	text-align: left;
+[class="sectForm"] [name="initSectList"] p{
+	margin-left: 5px;
 }
-[class="initForm"] input{
-	float: right;
-	max-width: 75px;
-	
+[class="sectForm"] [name="initSectList"] [id="btnDelete"]{
+	margin-bottom:5px;
+	min-width: 50px;
 }
+[class="sectForm"] [name="initSectList"] [name="initEnd"]{
+	min-height: 192.5px;
+}
+[class="sectForm"] [name="initSectList"] [name="initEnd"] input{
+	margin-top: 15%;
+	margin-left: 37%;
+	min-width: 50px;
+}
+
+
+
 [class="sectForm"] [class="mainForm"]{
 	float: left;
 	margin: 3px;
 	margin-top: 10px;
 }
+
+
 
 [name="topBar"]{
 	background-color: #98b574;
