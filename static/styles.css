@@ -34,6 +34,12 @@ body{
 	text-align: left;
 	margin-right: 50px;
 }
+[class="sectForm"] [name="initSectList"] [name="initEnd"] {
+	align-content: center;
+	min-width: 250px;
+	text-align: left;
+	margin-right: 50px;
+}
 [class="sectForm"] p{
 	float: left;
 	max-height: 0px;
