@@ -136,11 +136,6 @@ table tbody tr td{
 	text-align: center;
 }
 
-/*
-[name="sysData"]{
-	max-width: 530px;
-}
-*/
 [name="sysData"] h3{
 	margin-bottom: 5px;
 }
@@ -173,12 +168,12 @@ table tbody tr td{
 
 @media only screen and (max-width: 360px){
 [class="initForm"] input{
-	margin-top: 1px;
-	margin-bottom: 1px;	
+	margin-top: -1px;
+	margin-bottom: -1px;	
 }
 [class="sectForm"] p{
-	margin-top: 1px;
-	margin-bottom: 1px;
+	margin-top: -1px;
+	margin-bottom: -1px;
 }
 [class="sectForm"] [name="initSectList"] div{
 	margin-left: 7%;
