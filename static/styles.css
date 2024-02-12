@@ -172,6 +172,17 @@ table tbody tr td{
 }
 
 @media only screen and (max-width: 360px){
+[class="initForm"] input{
+	margin-top: 1px;
+	margin-bottom: 1px;	
+}
+[class="sectForm"] p{
+	margin-top: 1px;
+	margin-bottom: 1px;
+}
+[class="sectForm"] [name="initSectList"] div{
+	margin-left: 7%;
+}
 [name="left"] h3{
 	text-align: left;
 }
