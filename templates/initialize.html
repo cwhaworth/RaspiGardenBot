@@ -28,17 +28,33 @@
 	<section class="initForm" name="initTop">
 		<div>
 		{%if sectData['sysEnable']%}
-		<p>Enable System: </p><input type="checkbox" class="initForm" id="toggle" name="sysEnable" value="True" checked><label for="toggle"></label></br>
+		<p>Enable System: </p>
+		<span>
+			<input type="checkbox" class="initForm" id="toggle" name="sysEnable" value="True" checked>
+			<label for="toggle"></label>
+		</span></br>
 		{%else%}
-		<p>Enable System: </p><input type="checkbox" class="initForm" id="toggle" name="sysEnable" value="False"><label for="toggle"></label></br>
+		<p>Enable System: </p>
+		<span>
+			<input type="checkbox" class="initForm" id="toggle" name="sysEnable" value="False">
+			<label for="toggle"></label>
+		</span></br>
 		{%endif%}
 		</div></br>
 		<div>
 		<h3>Weather API Parameters:</h3>
 		{%if sectData['use-api']%}
-		<p>Use Weather API: </p><input type="checkbox" class="initForm" id="toggle" name="useAPI" value="True" checked><label for="toggle"></label></br>
+		<p>Use Weather API: </p>
+		<span>
+			<input type="checkbox" class="initForm" id="toggle" name="useAPI" value="True" checked>
+			<label for="toggle"></label>
+		</span></br>
 		{%else%}
-		<p>Use Weather API: </p><input type="checkbox" class="initForm" id="toggle" name="useAPI" value="False"><label for="toggle"></label></br>
+		<p>Use Weather API: </p>
+		<span>
+			<input type="checkbox" class="initForm" id="toggle" name="useAPI" value="False">
+			<label for="toggle"></label>
+		</span></br>
 		{%endif%}
 		<p>City: </p><input type="text" class="initForm" name="apiCity" placeholder="city name" value={{sectData['api-city']}}></br>
 		<p>State: </p><input type="text" class="initForm" name="apiState" placeholder="ex: NC, AZ" value={{sectData['api-state']}}></br>
@@ -62,9 +78,17 @@
 			<p>Pin: </p><input type="text" class="initForm" name="sectorPin" placeholder="GPIO Pin #" value={{sector['pin']}}></br>
 			<p>Incriment: </p><input type="text" class="initForm" name="sectorInc" placeholder="Rain Incriment" value={{sector['rain-inc']}}></br>
 			{%if sector['enabled']%}
-			<p>Enabled: </p><input type="checkbox" class="initForm" id="toggle" name="sectorEn_{{sector['id']}}" value="True" checked><label for="toggle"></label></br>
+			<p>Enabled: </p>
+			<span>
+				<input type="checkbox" class="initForm" id="toggle" name="sectorEn_{{sector['id']}}" value="True" checked>
+				<label for="toggle"></label>
+			</span></br>
 			{%else%}
-			<p>Enabled: </p><input type="checkbox" class="initForm" id="toggle" name="sectorEn_{{sector['id']}}" value="False"><label for="toggle"></label></br>
+			<p>Enabled: </p>
+			<span>
+				<input type="checkbox" class="initForm" id="toggle" name="sectorEn_{{sector['id']}}" value="False">
+				<label for="toggle"></label>
+			</span></br>
 			{%endif%}
 			<input type="submit" class="initForm" id="btnDelete" name="sectDel_{{sector['id']}}" value="Delete">
 		</div>
