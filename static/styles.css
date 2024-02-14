@@ -11,6 +11,63 @@ body{
 	margin-right: 5px;
 	max-width: 75px;	
 }
+
+.switch {
+	position: relative;
+	float: right;
+	display: inline-block;
+	width: 30px;
+	height: 24px;
+	margin-right: 5px;
+}
+
+.switch input { 
+	float: default;
+	opacity: 0;
+	width: 0;
+	height: 0;
+}
+
+.slider {
+	position: absolute;
+	cursor: pointer;
+	top: 2px;
+	left: 0;
+	right: 0;
+	bottom: 6px;
+	background-color: #ccc;
+	-webkit-transition: .4s;
+	transition: .4s;
+	border-radius: 12px;
+}
+
+.slider:before {
+	position: absolute;
+	content: "";
+	height: 14px;
+	width: 14px;
+	left: 1px;
+	bottom: 1px;
+	background-color: white;
+	-webkit-transition: .4s;
+	transition: .4s;
+	border-radius: 50%;
+}
+
+input:checked + .slider {
+	background-color: #2196F3;
+}
+
+input:focus + .slider {
+	box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+	-webkit-transform: translateX(14px);
+	-ms-transform: translateX(14px);
+	transform: translateX(14px);
+}
+
 [class="sectForm"]{
 	float: left;
 	max-width: px;
