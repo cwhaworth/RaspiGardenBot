@@ -109,12 +109,13 @@ input:checked + .slider:before {
 	border-color:orange;
 }
 [class="sectForm"] [name="initSectList"] div:hover {
-	min-width: 275px;
+	min-width: 280px;
 	min-height: 192.5px;
 	margin-top: 10px;
 	margin-right: 24px;
 	margin-bottom: 12px;
 	background-color:#c3d4c7;
+	box-shadow: 3px 3px 3px 3px rgb(0 0 0 / 20%);
 }
 [class="sectForm"] [name="initSectList"] h4{
 	margin-left: 5px;
