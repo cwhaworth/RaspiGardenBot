@@ -5,7 +5,9 @@
 body{
 	font-family: Papyrus;
 }
-
+[name="Sectors"]{
+	margin-left:7%;
+}
 [class="initForm"] input{
 	float: right;
 	margin-right: 5px;
