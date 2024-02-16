@@ -60,11 +60,11 @@ body{
 }
 
 input:checked + .slider {
-	background-color: #2196F3;
+	background-color: rgb(50 168 166);
 }
 
 input:focus + .slider {
-	box-shadow: 0 0 1px rgb(33 150 243);
+	box-shadow: 0 0 1px rgb(50 168 166);
 }
 
 input:checked + .slider:before {
@@ -140,7 +140,7 @@ input:hover + .slider:before{
 	border-color: rgb(0 0 0 / 30%);
 }
 [class="sectForm"] [name="initSectList"] [id="btnDelete"]:hover{
-	background-color: rgb(28 205 225);
+	background-color: rgb(50 168 166);
 	border-color: rgb(0 0 0 / 0%);
 	box-shadow: 0px 0px 2px 2px  rgb(255 165 0 / 80%);
 }
@@ -156,7 +156,7 @@ input:hover + .slider:before{
 	border-color: rgb(0 0 0 / 30%);
 }
 [class="sectForm"] [name="initSectList"] [name="initEnd"] input:hover{
-	background-color: rgb(28 205 225);
+	background-color: rgb(50 168 166);
 	border-color: rgb(0 0 0 / 0%);
 	box-shadow: 0px 0px 2px 2px  rgb(255 165 0 / 80%);
 }
@@ -168,7 +168,7 @@ input:hover + .slider:before{
 	border-color: rgb(0 0 0 / 30%);
 }
 [class="sectForm"] [id="btnInit"]:hover{
-	background-color: rgb(28 205 225);
+	background-color: rgb(50 168 166);
 	border-color: rgb(0 0 0 / 0%);
 	box-shadow: 0px 0px 2px 2px  rgb(255 165 0 / 80%);
 }
@@ -197,7 +197,7 @@ input:hover + .slider:before{
 	color: orange;
 }
 [name="topBar"] nav a:hover{
-	background-color: #32a8a6;
+	background-color: rgb(50 168 166);
 	color: black;
 }
 [name="topBar"] nav a:active{
