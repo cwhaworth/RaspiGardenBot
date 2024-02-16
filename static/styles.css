@@ -11,6 +11,10 @@ body{
 	margin-right: 5px;
 	max-width: 75px;	
 }
+[class="sectForm"] input:hover{
+	border-color: rgb(0 0 0 / 0%);
+	box-shadow: 0px 0px 2px 2px  rgb(255 165 0 / 80%);
+}
 
 .switch {
 	position: relative;
@@ -18,7 +22,7 @@ body{
 	display: inline-block;
 	width: 30px;
 	height: 24px;
-	margin-right: 5px;
+	margin-right: 8px;
 }
 
 .switch input { 
@@ -34,7 +38,7 @@ body{
 	top: 2px;
 	left: 0;
 	right: 0;
-	bottom: 6px;
+	bottom: 4px;
 	background-color: #ccc;
 	-webkit-transition: .4s;
 	transition: .4s;
@@ -44,14 +48,15 @@ body{
 .slider:before {
 	position: absolute;
 	content: "";
-	height: 14px;
-	width: 14px;
-	left: 1px;
-	bottom: 1px;
+	height: 18px;
+	width: 18px;
+	left: 0px;
+	bottom: 0px;
 	background-color: white;
 	-webkit-transition: .4s;
 	transition: .4s;
 	border-radius: 50%;
+	box-shadow: 0px 0px 1px 1px  rgb(0 0 0 / 80%);
 }
 
 input:checked + .slider {
@@ -59,13 +64,17 @@ input:checked + .slider {
 }
 
 input:focus + .slider {
-	box-shadow: 0 0 1px #2196F3;
+	box-shadow: 0 0 1px rgb(33 150 243);
 }
 
 input:checked + .slider:before {
 	-webkit-transform: translateX(14px);
 	-ms-transform: translateX(14px);
 	transform: translateX(14px);
+}
+
+input:hover + .slider:before{
+	box-shadow: 0px 0px 2px 2px  rgb(255 165 0 / 80%);
 }
 
 [class="sectForm"]{
@@ -106,7 +115,8 @@ input:checked + .slider:before {
 	margin-right: 24px;
 	margin-bottom:12px;
 	border-style:double;
-	border-color:orange;
+	border-color:rgb(255 165 0);
+	border-radius: 10px;
 }
 [class="sectForm"] [name="initSectList"] div:hover {
 	min-width: 280px;
@@ -115,7 +125,7 @@ input:checked + .slider:before {
 	margin-right: 24px;
 	margin-bottom: 12px;
 	background-color:#c3d4c7;
-	box-shadow: 3px 3px 3px 3px rgb(0 0 0 / 20%);
+	box-shadow: 3px 1px 3px 1px rgb(0 0 0 / 20%);
 }
 [class="sectForm"] [name="initSectList"] h4{
 	margin-left: 5px;
@@ -126,7 +136,15 @@ input:checked + .slider:before {
 [class="sectForm"] [name="initSectList"] [id="btnDelete"]{
 	margin-bottom:5px;
 	min-width: 50px;
+	border-radius:5px;
+	border-color: rgb(0 0 0 / 30%);
 }
+[class="sectForm"] [name="initSectList"] [id="btnDelete"]:hover{
+	background-color: rgb(28 205 225);
+	border-color: rgb(0 0 0 / 0%);
+	box-shadow: 0px 0px 2px 2px  rgb(255 165 0 / 80%);
+}
+
 [class="sectForm"] [name="initSectList"] [name="initEnd"]{
 	min-height: 192.5px;
 }
@@ -134,8 +152,26 @@ input:checked + .slider:before {
 	margin-top: 15%;
 	margin-left: 37%;
 	min-width: 50px;
+	border-radius:5px;
+	border-color: rgb(0 0 0 / 30%);
 }
-
+[class="sectForm"] [name="initSectList"] [name="initEnd"] input:hover{
+	background-color: rgb(28 205 225);
+	border-color: rgb(0 0 0 / 0%);
+	box-shadow: 0px 0px 2px 2px  rgb(255 165 0 / 80%);
+}
+[class="sectForm"] [id="btnInit"]{
+	margin-top: 15%;
+	margin-left: 37%;
+	min-width: 50px;
+	border-radius:5px;
+	border-color: rgb(0 0 0 / 30%);
+}
+[class="sectForm"] [id="btnInit"]:hover{
+	background-color: rgb(28 205 225);
+	border-color: rgb(0 0 0 / 0%);
+	box-shadow: 0px 0px 2px 2px  rgb(255 165 0 / 80%);
+}
 
 
 [class="sectForm"] [class="mainForm"]{
@@ -143,8 +179,6 @@ input:checked + .slider:before {
 	margin: 3px;
 	margin-top: 10px;
 }
-
-
 
 [name="topBar"]{
 	background-color: #98b574;
