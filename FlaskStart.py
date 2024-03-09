@@ -68,6 +68,7 @@ def waterAll():
 	'''
 	sectData = getJsonData('watering-sectors')
 	pump = sectData['pump-pin']
+	soleniod = sectData['sol-pwr-pin']
 	if sectData['sysEnable'] == False:
 		#If watering sytem is not enabled for watering
 		log = getJsonData('water-log')
@@ -87,6 +88,8 @@ def waterAll():
 		#turn on pump
 		GPIO.setup(pump, GPIO.OUT)
 		GPIO.output(pump, GPIO.HIGH)
+		GPIO.setup(soleniod, GPIO.OUT)
+		GPIO.output(soleniod, GPIO.HIGH)
 		#open solenoids
 		time.sleep(sectData['delay-before'])
 		for sector in sectData['sector']:
@@ -96,6 +99,7 @@ def waterAll():
 		time.sleep(sectData['water-time'])
 		#turn off pump
 		GPIO.cleanup(pump)
+		GPIO.cleanup(soleniod)
 		#close solenoids
 		time.sleep(sectData['delay-after'])
 		for sector in sectData['sector']:
@@ -127,6 +131,7 @@ def waterNow(sectID):
 	'''
 	sectData = getJsonData('watering-sectors')
 	pump = sectData['pump-pin']
+	soleniod = sectData['sol-pwr-pin']
 	if sectData['sysEnable'] == False:
 		#If watering sytem is not enabled for watering
 		log = getJsonData('water-log')
@@ -152,6 +157,8 @@ def waterNow(sectID):
 		#turn on pump
 		GPIO.setup(pump, GPIO.OUT)
 		GPIO.output(pump, GPIO.HIGH)
+		GPIO.setup(soleniod, GPIO.OUT)
+		GPIO.output(soleniod, GPIO.HIGH)
 		#open solenoid
 		time.sleep(sectData['delay-before'])
 		GPIO.setup(sectorTemp['pin'], GPIO.OUT)
@@ -159,6 +166,7 @@ def waterNow(sectID):
 		time.sleep(sectData['water-time'])
 		#turn off pump
 		GPIO.cleanup(pump)
+		GPIO.cleanup(soleniod)
 		#close solenoid
 		time.sleep(sectData['delay-after'])
 		GPIO.cleanup(sectorTemp['pin'])

@@ -30,13 +30,13 @@
 		{%if sectData['sysEnable']%}
 		<p>Enable System: </p>
 		<label class="switch">
-			<input type="checkbox" class="initForm" id="toggle" name="sysEnable" value="True" checked>
+			<input type="checkbox" class="initForm" name="sysEnable" value="True" checked>
 			<span class="slider"></span>
 		</label></br>
 		{%else%}
 		<p>Enable System: </p>
 		<label class="switch">
-			<input type="checkbox" class="initForm" id="toggle" name="sysEnable" value="False">
+			<input type="checkbox" class="initForm" name="sysEnable" value="False">
 			<span class="slider"></span>
 		</label></br>
 		{%endif%}
@@ -46,13 +46,13 @@
 		{%if sectData['use-api']%}
 		<p>Use Weather API: </p>
 		<label class="switch">
-			<input type="checkbox" class="initForm" id="toggle" name="useAPI" value="True" checked>
+			<input type="checkbox" class="initForm" name="useAPI" value="True" checked>
 			<span class="slider"></span>
 		</label></br>
 		{%else%}
 		<p>Use Weather API: </p>
 		<label class="switch">
-			<input type="checkbox" class="initForm" id="toggle" name="useAPI" value="False">
+			<input type="checkbox" class="initForm" name="useAPI" value="False">
 			<span class="slider"></span>
 		</label></br>
 		{%endif%}
@@ -63,6 +63,7 @@
 		<div>
 		<h3>System Parameters:</h3>
 		<p>Pump Pin: </p><input type="text" class="initForm" name="pumpPin" placeholder="GPIO Pin #" value={{sectData['pump-pin']}}></br>
+		<p>Soleniod Power Pin: </p><input type="text" class="initForm" name="solPwrPin" placeholder="GPIO Pin #" value={{sectData['sol-pwr-pin']}}></br>
 		<p>Delay Before (Seconds): </p><input type="text" class="initForm" name="delayBefore" placeholder="Seconds" value={{sectData['delay-before']}}></br>
 		<p>Delay After (Seconds): </p><input type="text" class="initForm" name="delayAfter" placeholder="Seconds" value={{sectData['delay-after']}}></br>
 		<p>Water Time (Seconds): </p><input type="text" class="initForm" name="waterTime" placeholder="Seconds" value={{sectData['water-time']}}></br>
@@ -80,13 +81,13 @@
 			{%if sector['enabled']%}
 			<p>Enabled: </p>
 			<label class="switch">
-				<input type="checkbox" class="initForm" id="toggle" name="sectorEn_{{sector['id']}}" value="True" checked>
+				<input type="checkbox" class="initForm" name="sectorEn_{{sector['id']}}" value="True" checked>
 				<span class="slider"></span>
 			</label></br>
 			{%else%}
 			<p>Enabled: </p>
 			<label class="switch">
-				<input type="checkbox" class="initForm" id="toggle" name="sectorEn_{{sector['id']}}" value="False">
+				<input type="checkbox" class="initForm" name="sectorEn_{{sector['id']}}" value="False">
 				<span class="slider"></span>
 			</label></br>
 			{%endif%}
