@@ -125,13 +125,13 @@ def main():
 		line = "Watered sector(s): "
 
 		pump = sectData['pump-pin']
-		soleniod = sectData['sol-pwr-pin']
+		solenoid = sectData['sol-pwr-pin']
 
 		#start watering
 		GPIO.setup(pump, GPIO.OUT)
 		GPIO.output(pump, GPIO.HIGH)
-		GPIO.setup(soleniod, GPIO.OUT)
-		GPIO.output(soleniod, GPIO.HIGH)
+		GPIO.setup(solenoid, GPIO.OUT)
+		GPIO.output(solenoid, GPIO.HIGH)
 		time.sleep(sectData['delay-before'])
 		for sector in sectData["sector"]:
 			if sector["rain-inc"] <= sectData["last-rained"] and sectData["last-rained"] % sector["rain-inc"] == 0 and sector['enabled']:
@@ -142,7 +142,7 @@ def main():
 
 		#end watering
 		GPIO.cleanup(pump)
-		GPIO.cleanup(soleniod)
+		GPIO.cleanup(solenoid)
 		time.sleep(sectData['delay-after'])
 		for sector in sectData['sector']:
 			if sector['rain-inc'] <= sectData['last-rained'] and sectData['last-rained'] % sector['rain-inc'] == 0 and sector['enabled']:
