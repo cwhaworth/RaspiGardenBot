@@ -248,6 +248,7 @@ def initialize():
 			'api-country': str(request.form['apiCountry']),
 			'api-state': str(request.form['apiState']),
 			'pump-pin': int(request.form['pumpPin']),
+			'sol-pwr-pin': int(request.form['soPwrPin']),
 			'max-sectors': int(request.form['maxSectors']),
 			'water-time': int(request.form['waterTime']),
 			'delay-before': int(request.form['delayBefore']),
