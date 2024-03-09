@@ -95,7 +95,7 @@ def waterAll():
 		for sector in sectData['sector']:
 			if sector['enabled'] == True:
 				GPIO.setup(sector['pin'], GPIO.OUT)
-				GPIO.output(sector['pin'], GPIO.LOW)
+				GPIO.output(sector['pin'], GPIO.HIGH)
 		time.sleep(sectData['water-time'])
 		#turn off pump
 		GPIO.cleanup(pump)
@@ -162,7 +162,7 @@ def waterNow(sectID):
 		#open solenoid
 		time.sleep(sectData['delay-before'])
 		GPIO.setup(sectorTemp['pin'], GPIO.OUT)
-		GPIO.output(sectorTemp['pin'], GPIO.LOW)
+		GPIO.output(sectorTemp['pin'], GPIO.HIGH)
 		time.sleep(sectData['water-time'])
 		#turn off pump
 		GPIO.cleanup(pump)
