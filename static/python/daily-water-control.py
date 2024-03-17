@@ -125,25 +125,42 @@ def main():
 		line = "Watered sector(s): "
 
 		pump = sectData['pump-pin']
-		solenoid = sectData['sol-pwr-pin']
+		solenoidEnable = sectData['sol-en-pin']
+		solenoidOpen = sectData['sol-open-pin']
+		solenoidClose = sectData['sol-close-pin']
 
 		#start watering
+		#setup pins for pump and solenoid controller power
 		GPIO.setup(pump, GPIO.OUT)
+		GPIO.setup(solenoidEnable, GPIO.OUT)
+		GPIO.setup(solenoidOpen, GPIO.OUT)
+		GPIO.setup(solenoidClose, GPIO.OUT)
+		solenoid = GPIO.PWM(solenoidEnable, 100) #pin, and Hz
+
+		#turn on pump
 		GPIO.output(pump, GPIO.HIGH)
-		GPIO.setup(solenoid, GPIO.OUT)
-		GPIO.output(solenoid, GPIO.HIGH)
 		time.sleep(sectData['delay-before'])
 		for sector in sectData["sector"]:
 			if sector["rain-inc"] <= sectData["last-rained"] and sectData["last-rained"] % sector["rain-inc"] == 0 and sector['enabled']:
 				GPIO.setup(sector['pin'], GPIO.OUT)
 				GPIO.output(sector['pin'], GPIO.LOW)
 				line += f"\"{sector['id']}\", "
+		solenoid.start(100) #duty cycle
+		GPIO.output(solenoidOpen, GPIO.HIGH)
+		GPIO.output(solenoidClose, GPIO.LOW)
 		time.sleep(sectData['water-time'])
 
-		#end watering
+		'''
+		end watering
+		1. clean up pump output
+		2. wait for configured after water operation delay
+		3. clean up solenoid and relay output 
+		'''
 		GPIO.cleanup(pump)
-		GPIO.cleanup(solenoid)
 		time.sleep(sectData['delay-after'])
+		GPIO.cleanup(solenoidEnable)
+		GPIO.cleanup(solenoidOpen)
+		GPIO.cleanup(solenoidClose)
 		for sector in sectData['sector']:
 			if sector['rain-inc'] <= sectData['last-rained'] and sectData['last-rained'] % sector['rain-inc'] == 0 and sector['enabled']:
 				GPIO.cleanup(sector['pin'])

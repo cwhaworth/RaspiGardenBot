@@ -68,7 +68,9 @@ def waterAll():
 	'''
 	sectData = getJsonData('watering-sectors')
 	pump = sectData['pump-pin']
-	solenoid = sectData['sol-pwr-pin']
+	solenoidEnable = sectData['sol-en-pin']
+	solenoidOpen = sectData['sol-open-pin']
+	solenoidClose = sectData['sol-close-pin']
 	if sectData['sysEnable'] == False:
 		#If watering sytem is not enabled for watering
 		log = getJsonData('water-log')
@@ -85,27 +87,45 @@ def waterAll():
 		setJsonData('water-log', log)
 		setJsonData('water-log-60-day', log60)
 	else:
-		#turn on pump
+		#start watering
+		#setup pins for pump and solenoid controller power
 		GPIO.setup(pump, GPIO.OUT)
+		GPIO.setup(solenoidEnable, GPIO.OUT)
+		GPIO.setup(solenoidOpen, GPIO.OUT)
+		GPIO.setup(solenoidClose, GPIO.OUT)
+		solenoid = GPIO.PWM(solenoidEnable, 100) #pin, and Hz
+
+		#turn on pump
 		GPIO.output(pump, GPIO.HIGH)
-		GPIO.setup(solenoid, GPIO.OUT)
-		GPIO.output(solenoid, GPIO.HIGH)
+
 		#open solenoids
 		time.sleep(sectData['delay-before'])
 		for sector in sectData['sector']:
 			if sector['enabled'] == True:
 				GPIO.setup(sector['pin'], GPIO.OUT)
 				GPIO.output(sector['pin'], GPIO.HIGH)
+		solenoid.start(100) #duty cycle
+		GPIO.output(solenoidOpen, GPIO.HIGH)
+		GPIO.output(solenoidClose, GPIO.LOW)
+
 		time.sleep(sectData['water-time'])
-		#turn off pump
+		
+
+		'''
+		end watering
+		1. clean up pump output
+		2. wait for configured after water operation delay
+		3. clean up solenoid and relay output 
+		'''
 		GPIO.cleanup(pump)
-		GPIO.cleanup(solenoid)
-		#close solenoids
 		time.sleep(sectData['delay-after'])
+		GPIO.cleanup(solenoidEnable)
+		GPIO.cleanup(solenoidOpen)
+		GPIO.cleanup(solenoidClose)
 		for sector in sectData['sector']:
 			if sector['enabled'] == True:
 				GPIO.cleanup(sector['pin'])
-
+		
 		#generate logs
 		log = getJsonData('water-log')
 		log60 = getJsonData('water-log-60-day')
@@ -131,7 +151,9 @@ def waterNow(sectID):
 	'''
 	sectData = getJsonData('watering-sectors')
 	pump = sectData['pump-pin']
-	solenoid = sectData['sol-pwr-pin']
+	solenoidEnable = sectData['sol-en-pin']
+	solenoidOpen = sectData['sol-open-pin']
+	solenoidClose = sectData['sol-close-pin']
 	if sectData['sysEnable'] == False:
 		#If watering sytem is not enabled for watering
 		log = getJsonData('water-log')
@@ -154,21 +176,38 @@ def waterNow(sectID):
 			if sector['id'] == sectID:
 				sectorTemp = sector
 				break
-		#turn on pump
+
+		#start watering
+		#setup pins for pump and solenoid controller power
 		GPIO.setup(pump, GPIO.OUT)
+		GPIO.setup(solenoidEnable, GPIO.OUT)
+		GPIO.setup(solenoidOpen, GPIO.OUT)
+		GPIO.setup(solenoidClose, GPIO.OUT)
+		solenoid = GPIO.PWM(solenoidEnable, 100) #pin, and Hz
+
+		#turn on pump
 		GPIO.output(pump, GPIO.HIGH)
-		GPIO.setup(solenoid, GPIO.OUT)
-		GPIO.output(solenoid, GPIO.HIGH)
-		#open solenoid
+		#open and power solenoid
 		time.sleep(sectData['delay-before'])
 		GPIO.setup(sectorTemp['pin'], GPIO.OUT)
-		GPIO.output(sectorTemp['pin'], GPIO.HIGH)
+		GPIO.output(sectorTemp['pin'], GPIO.LOW)
+		solenoid.start(100) #duty cycle
+		GPIO.output(solenoidOpen, GPIO.HIGH)
+		GPIO.output(solenoidClose, GPIO.LOW)
+
 		time.sleep(sectData['water-time'])
-		#turn off pump
+
+		'''
+		end watering
+		1. clean up pump output
+		2. wait for configured after water operation delay
+		3. clean up solenoid and relay output 
+		'''
 		GPIO.cleanup(pump)
-		GPIO.cleanup(solenoid)
-		#close solenoid
 		time.sleep(sectData['delay-after'])
+		GPIO.cleanup(solenoidEnable)
+		GPIO.cleanup(solenoidOpen)
+		GPIO.cleanup(solenoidClose)
 		GPIO.cleanup(sectorTemp['pin'])
 
 		#generate logs
@@ -248,7 +287,9 @@ def initialize():
 			'api-country': str(request.form['apiCountry']),
 			'api-state': str(request.form['apiState']),
 			'pump-pin': int(request.form['pumpPin']),
-			'sol-pwr-pin': int(request.form['solPwrPin']),
+			'sol-en-pin': int(request.form['solEnPin']),
+			'sol-open-pin': int(request.form['solOpenPin']),
+			'sol-close-pin': int(request.form['solClosePin']),
 			'max-sectors': int(request.form['maxSectors']),
 			'water-time': int(request.form['waterTime']),
 			'delay-before': int(request.form['delayBefore']),

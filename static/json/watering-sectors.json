@@ -7,7 +7,9 @@
   "last-rained": 28,
   "max-sectors": 4,
   "pump-pin": 27,
-  "sol-pwr-pin": 23,
+  "sol-en-pin": 13,
+  "sol-open-pin": 19,
+  "sol-close-pin": 16,
   "sector": [
     {
       "enabled": true,
