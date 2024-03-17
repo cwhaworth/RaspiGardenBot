@@ -20,9 +20,9 @@ System components:
 Data flow:
 1. 'get-forecast.py' retreives 3-hour/5-day forecast, saves all to to 'forecast.json'
 2. 'daily-water-control.py' takes the next day forecast, and determines if it will water any sectors
-\t- 'daily-water-control.py' gets the logic for which sectors it waters from 'watering-sectors.json'
-\t- 'watering-sectors.json' keeps count of how many days have passed since the last rain as well as the day incriment for each sector
-\t- new sectors can be added to 'watering-sectors.json' by editing the file or navigating to the "Initialize" page of the flask app
+- 'daily-water-control.py' gets the logic for which sectors it waters from 'watering-sectors.json'
+- 'watering-sectors.json' keeps count of how many days have passed since the last rain as well as the day incriment for each sector
+- new sectors can be added to 'watering-sectors.json' by editing the file or navigating to the "Initialize" page of the flask app
 3. 'daily-water-control.py' modifies 'watering-sectors.json' to update/reset the days since the last rain
 4. This can also operate without the weather API, and just water based on rain increment
 
