@@ -7,35 +7,35 @@
   "last-rained": 28,
   "max-sectors": 4,
   "pump-pin": 27,
-  "sol-en-pin": 13,
-  "sol-open-pin": 19,
-  "sol-close-pin": 16,
   "sector": [
     {
       "enabled": true,
       "id": "Pablano",
-      "pin": 21,
+      "pin": 17,
       "rain-inc": 3
     },
     {
       "enabled": true,
       "id": "Cayenne",
-      "pin": 19,
+      "pin": 18,
       "rain-inc": 3
     },
     {
       "enabled": false,
       "id": "Habanero",
-      "pin": 16,
+      "pin": 22,
       "rain-inc": 3
     },
     {
       "enabled": false,
       "id": "Jalapenos",
-      "pin": 13,
+      "pin": 23,
       "rain-inc": 3
     }
   ],
+  "sol-close-pin": 16,
+  "sol-en-pin": 13,
+  "sol-open-pin": 19,
   "sysEnable": false,
   "use-api": false,
   "water-time": 10

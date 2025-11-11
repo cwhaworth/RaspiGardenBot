@@ -1,284 +1,284 @@
 {
   "forecast": [
     {
-      "date": "2024-02-10",
+      "date": "2024-06-29",
       "time": "00:00:00",
       "status": "overcast clouds",
       "pop": 0,
-      "temp": 55.0
+      "temp": 88.6
     },
     {
-      "date": "2024-02-10",
+      "date": "2024-06-29",
       "time": "03:00:00",
-      "status": "light rain",
-      "pop": 40,
-      "temp": 52.5
+      "status": "scattered clouds",
+      "pop": 0,
+      "temp": 82.7
     },
     {
-      "date": "2024-02-10",
+      "date": "2024-06-29",
       "time": "06:00:00",
-      "status": "light rain",
-      "pop": 36,
-      "temp": 49.4
+      "status": "few clouds",
+      "pop": 0,
+      "temp": 73.9
     },
     {
-      "date": "2024-02-10",
+      "date": "2024-06-29",
+      "time": "09:00:00",
+      "status": "clear sky",
+      "pop": 0,
+      "temp": 72.1
+    },
+    {
+      "date": "2024-06-29",
+      "time": "12:00:00",
+      "status": "few clouds",
+      "pop": 0,
+      "temp": 77.2
+    },
+    {
+      "date": "2024-06-29",
+      "time": "15:00:00",
+      "status": "few clouds",
+      "pop": 0,
+      "temp": 88.7
+    },
+    {
+      "date": "2024-06-29",
+      "time": "18:00:00",
+      "status": "broken clouds",
+      "pop": 0,
+      "temp": 95.5
+    },
+    {
+      "date": "2024-06-29",
+      "time": "21:00:00",
+      "status": "overcast clouds",
+      "pop": 0,
+      "temp": 97.7
+    },
+    {
+      "date": "2024-06-30",
+      "time": "00:00:00",
+      "status": "overcast clouds",
+      "pop": 0,
+      "temp": 86.0
+    },
+    {
+      "date": "2024-06-30",
+      "time": "03:00:00",
+      "status": "broken clouds",
+      "pop": 0,
+      "temp": 82
+    },
+    {
+      "date": "2024-06-30",
+      "time": "06:00:00",
+      "status": "broken clouds",
+      "pop": 0,
+      "temp": 78.7
+    },
+    {
+      "date": "2024-06-30",
+      "time": "09:00:00",
+      "status": "light rain",
+      "pop": 79,
+      "temp": 78.6
+    },
+    {
+      "date": "2024-06-30",
+      "time": "12:00:00",
+      "status": "light rain",
+      "pop": 59,
+      "temp": 80.4
+    },
+    {
+      "date": "2024-06-30",
+      "time": "15:00:00",
+      "status": "overcast clouds",
+      "pop": 0,
+      "temp": 92.3
+    },
+    {
+      "date": "2024-06-30",
+      "time": "18:00:00",
+      "status": "light rain",
+      "pop": 20,
+      "temp": 88.8
+    },
+    {
+      "date": "2024-06-30",
+      "time": "21:00:00",
+      "status": "overcast clouds",
+      "pop": 12,
+      "temp": 94.6
+    },
+    {
+      "date": "2024-07-01",
+      "time": "00:00:00",
+      "status": "light rain",
+      "pop": 56,
+      "temp": 82.8
+    },
+    {
+      "date": "2024-07-01",
+      "time": "03:00:00",
+      "status": "moderate rain",
+      "pop": 100,
+      "temp": 75.9
+    },
+    {
+      "date": "2024-07-01",
+      "time": "06:00:00",
+      "status": "moderate rain",
+      "pop": 100,
+      "temp": 75.2
+    },
+    {
+      "date": "2024-07-01",
+      "time": "09:00:00",
+      "status": "moderate rain",
+      "pop": 100,
+      "temp": 72.8
+    },
+    {
+      "date": "2024-07-01",
+      "time": "12:00:00",
+      "status": "light rain",
+      "pop": 100,
+      "temp": 68.4
+    },
+    {
+      "date": "2024-07-01",
+      "time": "15:00:00",
+      "status": "overcast clouds",
+      "pop": 0,
+      "temp": 73.4
+    },
+    {
+      "date": "2024-07-01",
+      "time": "18:00:00",
+      "status": "broken clouds",
+      "pop": 0,
+      "temp": 81.0
+    },
+    {
+      "date": "2024-07-01",
+      "time": "21:00:00",
+      "status": "clear sky",
+      "pop": 0,
+      "temp": 83.7
+    },
+    {
+      "date": "2024-07-02",
+      "time": "00:00:00",
+      "status": "clear sky",
+      "pop": 0,
+      "temp": 76.0
+    },
+    {
+      "date": "2024-07-02",
+      "time": "03:00:00",
+      "status": "clear sky",
+      "pop": 0,
+      "temp": 69.3
+    },
+    {
+      "date": "2024-07-02",
+      "time": "06:00:00",
+      "status": "clear sky",
+      "pop": 0,
+      "temp": 65.5
+    },
+    {
+      "date": "2024-07-02",
+      "time": "09:00:00",
+      "status": "clear sky",
+      "pop": 0,
+      "temp": 63.5
+    },
+    {
+      "date": "2024-07-02",
+      "time": "12:00:00",
+      "status": "clear sky",
+      "pop": 0,
+      "temp": 67.7
+    },
+    {
+      "date": "2024-07-02",
+      "time": "15:00:00",
+      "status": "clear sky",
+      "pop": 0,
+      "temp": 77.8
+    },
+    {
+      "date": "2024-07-02",
+      "time": "18:00:00",
+      "status": "clear sky",
+      "pop": 0,
+      "temp": 83.8
+    },
+    {
+      "date": "2024-07-02",
+      "time": "21:00:00",
+      "status": "broken clouds",
+      "pop": 0,
+      "temp": 84.6
+    },
+    {
+      "date": "2024-07-03",
+      "time": "00:00:00",
+      "status": "broken clouds",
+      "pop": 0,
+      "temp": 78.5
+    },
+    {
+      "date": "2024-07-03",
+      "time": "03:00:00",
+      "status": "overcast clouds",
+      "pop": 0,
+      "temp": 72.2
+    },
+    {
+      "date": "2024-07-03",
+      "time": "06:00:00",
+      "status": "broken clouds",
+      "pop": 0,
+      "temp": 67.6
+    },
+    {
+      "date": "2024-07-03",
       "time": "09:00:00",
       "status": "overcast clouds",
       "pop": 0,
-      "temp": 48.3
+      "temp": 66.2
     },
     {
-      "date": "2024-02-10",
+      "date": "2024-07-03",
       "time": "12:00:00",
-      "status": "overcast clouds",
+      "status": "broken clouds",
       "pop": 0,
-      "temp": 50.4
+      "temp": 71.4
     },
     {
-      "date": "2024-02-10",
+      "date": "2024-07-03",
       "time": "15:00:00",
-      "status": "light rain",
-      "pop": 36,
-      "temp": 54.8
+      "status": "scattered clouds",
+      "pop": 0,
+      "temp": 82
     },
     {
-      "date": "2024-02-10",
-      "time": "18:00:00",
-      "status": "overcast clouds",
-      "pop": 12,
-      "temp": 68.8
-    },
-    {
-      "date": "2024-02-10",
-      "time": "21:00:00",
-      "status": "light rain",
-      "pop": 72,
-      "temp": 66.7
-    },
-    {
-      "date": "2024-02-11",
-      "time": "00:00:00",
-      "status": "light rain",
-      "pop": 64,
-      "temp": 59.9
-    },
-    {
-      "date": "2024-02-11",
-      "time": "03:00:00",
-      "status": "overcast clouds",
-      "pop": 20,
-      "temp": 60.2
-    },
-    {
-      "date": "2024-02-11",
-      "time": "06:00:00",
-      "status": "overcast clouds",
-      "pop": 20,
-      "temp": 59.1
-    },
-    {
-      "date": "2024-02-11",
-      "time": "09:00:00",
-      "status": "overcast clouds",
-      "pop": 12,
-      "temp": 58.1
-    },
-    {
-      "date": "2024-02-11",
-      "time": "12:00:00",
-      "status": "overcast clouds",
-      "pop": 20,
-      "temp": 58.7
-    },
-    {
-      "date": "2024-02-11",
-      "time": "15:00:00",
-      "status": "light rain",
-      "pop": 44,
-      "temp": 62.6
-    },
-    {
-      "date": "2024-02-11",
-      "time": "18:00:00",
-      "status": "light rain",
-      "pop": 60,
-      "temp": 62.8
-    },
-    {
-      "date": "2024-02-11",
-      "time": "21:00:00",
-      "status": "light rain",
-      "pop": 24,
-      "temp": 56.9
-    },
-    {
-      "date": "2024-02-12",
-      "time": "00:00:00",
-      "status": "light rain",
-      "pop": 36,
-      "temp": 49.5
-    },
-    {
-      "date": "2024-02-12",
-      "time": "03:00:00",
-      "status": "light rain",
-      "pop": 40,
-      "temp": 48.9
-    },
-    {
-      "date": "2024-02-12",
-      "time": "06:00:00",
-      "status": "overcast clouds",
-      "pop": 44,
-      "temp": 48.8
-    },
-    {
-      "date": "2024-02-12",
-      "time": "09:00:00",
-      "status": "overcast clouds",
-      "pop": 12,
-      "temp": 48.9
-    },
-    {
-      "date": "2024-02-12",
-      "time": "12:00:00",
-      "status": "light rain",
-      "pop": 80,
-      "temp": 48.9
-    },
-    {
-      "date": "2024-02-12",
-      "time": "15:00:00",
-      "status": "light rain",
-      "pop": 100,
-      "temp": 48.8
-    },
-    {
-      "date": "2024-02-12",
-      "time": "18:00:00",
-      "status": "moderate rain",
-      "pop": 100,
-      "temp": 50.1
-    },
-    {
-      "date": "2024-02-12",
-      "time": "21:00:00",
-      "status": "moderate rain",
-      "pop": 100,
-      "temp": 51.3
-    },
-    {
-      "date": "2024-02-13",
-      "time": "00:00:00",
-      "status": "light rain",
-      "pop": 100,
-      "temp": 52.1
-    },
-    {
-      "date": "2024-02-13",
-      "time": "03:00:00",
-      "status": "moderate rain",
-      "pop": 100,
-      "temp": 52.2
-    },
-    {
-      "date": "2024-02-13",
-      "time": "06:00:00",
-      "status": "moderate rain",
-      "pop": 100,
-      "temp": 54.2
-    },
-    {
-      "date": "2024-02-13",
-      "time": "09:00:00",
-      "status": "light rain",
-      "pop": 100,
-      "temp": 60.2
-    },
-    {
-      "date": "2024-02-13",
-      "time": "12:00:00",
-      "status": "light rain",
-      "pop": 100,
-      "temp": 53.6
-    },
-    {
-      "date": "2024-02-13",
-      "time": "15:00:00",
-      "status": "light rain",
-      "pop": 20,
-      "temp": 50.3
-    },
-    {
-      "date": "2024-02-13",
+      "date": "2024-07-03",
       "time": "18:00:00",
       "status": "scattered clouds",
       "pop": 0,
-      "temp": 53.4
+      "temp": 88.2
     },
     {
-      "date": "2024-02-13",
+      "date": "2024-07-03",
       "time": "21:00:00",
-      "status": "clear sky",
+      "status": "scattered clouds",
       "pop": 0,
-      "temp": 52.1
-    },
-    {
-      "date": "2024-02-14",
-      "time": "00:00:00",
-      "status": "clear sky",
-      "pop": 0,
-      "temp": 46.4
-    },
-    {
-      "date": "2024-02-14",
-      "time": "03:00:00",
-      "status": "clear sky",
-      "pop": 0,
-      "temp": 41.6
-    },
-    {
-      "date": "2024-02-14",
-      "time": "06:00:00",
-      "status": "clear sky",
-      "pop": 0,
-      "temp": 38.9
-    },
-    {
-      "date": "2024-02-14",
-      "time": "09:00:00",
-      "status": "clear sky",
-      "pop": 0,
-      "temp": 35.6
-    },
-    {
-      "date": "2024-02-14",
-      "time": "12:00:00",
-      "status": "clear sky",
-      "pop": 0,
-      "temp": 32.9
-    },
-    {
-      "date": "2024-02-14",
-      "time": "15:00:00",
-      "status": "clear sky",
-      "pop": 0,
-      "temp": 41.7
-    },
-    {
-      "date": "2024-02-14",
-      "time": "18:00:00",
-      "status": "clear sky",
-      "pop": 0,
-      "temp": 47.7
-    },
-    {
-      "date": "2024-02-14",
-      "time": "21:00:00",
-      "status": "clear sky",
-      "pop": 0,
-      "temp": 49.1
+      "temp": 89.1
     }
   ]
 }
