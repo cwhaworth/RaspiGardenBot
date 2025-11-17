@@ -10,14 +10,53 @@ Initialize - allows user to initialize the parameters the irriagtion system oper
 Water Log - Displays logs for data on what was watered, and when, as well as errors.
 '''
 
-import json, re, time
+import bcrypt, json, os, re, sqlite3, time
 import RPi.GPIO as GPIO
 from datetime import date, datetime
 from gpiozero import CPUTemperature
-from flask import Flask, jsonify, redirect, render_template, request, url_for
+from flask import flash, Flask, jsonify, redirect, render_template, request, session, url_for
 
 app = Flask(__name__)
+app.secret_key = os.urandom(24)
+
+dbPath = '/var/www/RaspiGardenBot/database/app_data.db'
 GPIO.setmode(GPIO.BCM)
+
+def getUser(username):
+	conn = sqlite3.connect(dbPath)
+	cur = conn.cursor()
+	cur.execute('select id, username, password_hash, priv_level from users where username = ?',
+		(username,))
+	user = cur.fetchone()
+
+	conn.close()
+	return user
+
+
+@app.route("/login", methods=['GET', 'POST'])
+def login():
+	if request.method == 'POST':
+		username = request.form['username']
+		password = request.form['password']
+
+		user = getUser(username)
+		if user:
+			stored_hash = user[2].encode('utf-8')
+			if bcrypt.checkpw(password.encode('utf-8'), stored_hash):
+				session['user'] = user[1]
+				flash('Login successful!', 'success')
+				return redirect(url_for('index'))
+		else:
+			flash('User not found.', 'danger')
+	else:
+		styles = getStyles()
+		return render_template('login.html', styles=styles)
+
+@app.route("/logout")
+def logout():
+	session.pop('user', None)
+	flash('You have been logged out.', 'info')
+	return redirect(url_for('login'))
 
 @app.route("/")
 @app.route("/index", methods=['GET', 'POST'])
@@ -29,6 +68,9 @@ def index():
 
 	Page contents: Weather data, system data, watering sector data, and manual override buttons for watering.
 	'''
+	if 'user' not in session:
+		return redirect(url_for('login'))
+
 	if request.method == 'POST':
 		for key in request.form.keys():
 			if key == 'waterAll':
@@ -109,7 +151,7 @@ def waterAll():
 		GPIO.output(solenoidClose, GPIO.LOW)
 
 		time.sleep(sectData['water-time'])
-		
+
 
 		'''
 		end watering
@@ -125,7 +167,7 @@ def waterAll():
 		for sector in sectData['sector']:
 			if sector['enabled'] == True:
 				GPIO.cleanup(sector['pin'])
-		
+
 		#generate logs
 		log = getJsonData('water-log')
 		log60 = getJsonData('water-log-60-day')
@@ -143,11 +185,11 @@ def waterAll():
 
 def waterNow(sectID):
 	'''
-	Function to water selected sector based on 'water-time' defined in the parameters. 
-	'sysEnable', and sector 'enabled' parameters must be set to 'true' for any watering action to take place. 
+	Function to water selected sector based on 'water-time' defined in the parameters.
+	'sysEnable', and sector 'enabled' parameters must be set to 'true' for any watering action to take place.
 	Waits for 'delay-before' seconds before opening the solenoids to each sector to be watered.
 	Waits for 'delay-after' seconds before closing the solenoids to each sector watered.
-	Writes log when finished. 
+	Writes log when finished.
 	'''
 	sectData = getJsonData('watering-sectors')
 	pump = sectData['pump-pin']
@@ -272,6 +314,9 @@ def initialize():
 
 	Page contents: various toggles and text boxes for irrigation system, and individual watering sector parameters.
 	'''
+	if 'user' not in session:
+		return redirect(url_for('login'))
+
 	#get stored parameters
 	sectData = getJsonData('watering-sectors')
 	navURL = getNavURL()
@@ -373,6 +418,9 @@ def waterLog():
 
 	Page contents: Log messages collected over both 30, and 60 day periods.
 	'''
+	if 'user' not in session:
+		return redirect(url_for('login'))
+
 	formButtons = True
 	if request.method == 'POST':
 		if 'clear' in request.form.keys():
@@ -398,7 +446,9 @@ def waterLog():
 
 def getToday():
 	'''
-	returns today's date.
+	returns today's date.        if 'user' not in session:
+                return redirect(url_for('login'))
+
 	'''
 	today = datetime.now()
 	return today

@@ -49,7 +49,7 @@ create table if not exists water_log_60(
 
 insert into users (username, password_hash, priv_level)
 values
-	("groot", "IamGr00t!", 1);
+	("groot", "$2b$12$cxHaWKvc9qpVNLbjjGD3zueLAHX2AlntXjaNQaqUGbRg/G6/lpr0a", 1);
 
 insert into system_params(param, val_string, val_num, val_bool)
 values
