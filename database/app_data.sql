@@ -33,6 +33,15 @@ create table if not exists crops(
 	unique(crop, pin)
 	);
 
+create table if not exists forecast(
+	id smallint primary key default (abs(random()) % 8999 + 1000),
+	"date" date not null,
+	"time" time not null,
+	status text,
+	pop tinyint not null default 0 check (pop >= 0 and pop <= 100),
+	temp real 
+	);
+
 create table if not exists water_log(
 	id smallint primary key default (abs(random()) % 8999 + 1000),
 	"date" date not null,
