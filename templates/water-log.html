@@ -36,9 +36,14 @@
 	</form>
 	{%endif%}
 	<ul>
+	{#
 	{%for line in waterLog['log']%}
 	<li>{{line['date']}} {{line['time']}} {{line['message']}}</li>
 	{%endfor%}
+	#}
+	{%for line in waterLog%}
+        <li>{{line[1]}} {{line[2]}} {{line[3]}}</li>
+        {%endfor%}
 	</ul>
 </div>
 </section>

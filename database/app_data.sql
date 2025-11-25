@@ -39,7 +39,7 @@ create table if not exists forecast(
 	"time" time not null,
 	status text,
 	pop tinyint not null default 0 check (pop >= 0 and pop <= 100),
-	temp real 
+	temp real
 	);
 
 create table if not exists water_log(
@@ -67,7 +67,7 @@ values
 	("api_state", "NC", null, null),
 	("delay_after", null, 1, null),
 	("delay_before", null, 1, null),
-	("last-rain", null, 28, null),
+	("last_rain", null, 28, null),
 	("max_crops", null, 4, null),
 	("pump_pin", null, 27, null),
 	("valve_close_pin", null, 16, null),

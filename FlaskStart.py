@@ -47,9 +47,13 @@ def login():
 			if bcrypt.checkpw(password.encode('utf-8'), stored_hash):
 				session['user'] = user[1]
 				flash('Login successful!', 'success')
-				return redirect(url_for('index'))
+				return redirect(url_for('.index'))
+			else:
+		                flash('Incorrect password.', 'danger')
+               			return redirect(url_for('.login'))
 		else:
 			flash('User not found.', 'danger')
+			return redirect(url_for('.login'))
 	else:
 		styles = getStyles()
 		return render_template('login.html', styles=styles)
@@ -71,7 +75,7 @@ def index():
 	Page contents: Weather data, system data, watering sector data, and manual override buttons for watering.
 	'''
 	if 'user' not in session:
-		return redirect(url_for('login'))
+		return redirect(url_for('.login'))
 
 	if request.method == 'POST':
 		for key in request.form.keys():
@@ -101,11 +105,11 @@ def index():
 			'api-state': sqlSelectQuery('select val_string from system_params where param = ?', ('api_state',))[0],
 			'api-country': sqlSelectQuery('select val_string from system_params where param = ?', ('api_country',))[0],
 			'use-api': bool(sqlSelectQuery('select val_string from system_params where param = ?', ('use_api',))[0]),
-			'last-rain': sqlSelectQuery('select val_string from system_params where param = ?', ('last_rain',))[0],
-			'system-enable': bool(sqlSelectQuery('select val_string from system_params where param = ?', ('system_enable',))[0]),
-			'cropData': sqlSelectQuery('select id, enabled, crop, pin, rain_inc from crops'),
-			'weather': sqlSelectQuery('select * from forecast'),
-			'sysData': sqlSelectQuery('select * from system_temp'),
+			'last-rain': sqlSelectQuery('select val_num from system_params where param = ?', ('last_rain',))[0],
+			'system-enable': bool(sqlSelectQuery('select val_bool from system_params where param = ?', ('system_enable',))[0]),
+			'cropData': sqlSelectQuery('select id, enabled, crop, pin, rain_inc from crops', fetchall=True),
+			'weather': sqlSelectQuery('select * from forecast', fetchall=True),
+			'sysData': sqlSelectQuery('select * from system_temp', fetchall=True),
 			'cpuTemp': {
 				'time': f'{now.strftime("%H:%M")}',
 				'temp': f'{temp} F'
@@ -161,10 +165,10 @@ def waterAll():
 		#timers
 		delay_before = sqlSelectQuery('select val_num from system_params where param = ?', ('delay_before',))[0]
 		delay_after = sqlSelectQuery('select val_num from system_params where param = ?', ('delay_after',))[0]
-		water_time = sqlSelectQuery('select val_num from system_params where param = ?', ('water_time',))[0]		
+		water_time = sqlSelectQuery('select val_num from system_params where param = ?', ('water_time',))[0]
 
-		#crops 
-		cropData = sqlSelectQuery('select id, enabled, crop, pin, rain_inc from crops')
+		#crops
+		cropData = sqlSelectQuery('select id, enabled, crop, pin, rain_inc from crops', fetchall=True)
 
 		#start watering
 		#setup pins for pump and solenoid controller power
@@ -227,7 +231,7 @@ def waterAll():
 
 		#generate logs
 		insertLogMessage('Watered all sectors by manual override.')
-		
+
 		# log = getJsonData('water-log')
 		# log60 = getJsonData('water-log-60-day')
 		# newLog = createLogMessage('Watered all sectors by manual override.')
@@ -432,9 +436,9 @@ def initialize():
 		'system_enable' : bool(sqlSelectQuery('select val_num from system_params where param = ?', ('system_enable',))[0]),
 		'use_api' : bool(sqlSelectQuery('select val_num from system_params where param = ?', ('use_api',))[0]),
 		'water_time' : sqlSelectQuery('select val_num from system_params where param = ?', ('water_time',))[0],
-		'crop_data': sqlSelectQuery('select id, enabled, crop, pin, rain_inc from crops')
+		'crop_data': sqlSelectQuery('select id, enabled, crop, pin, rain_inc from crops', fetchall=True)
 	}
-	
+
 
 	navURL = getNavURL()
 	styles = getStyles()
@@ -473,7 +477,7 @@ def initialize():
 			'system_enable': bool(request.form.get('system_enable', False)),
 			'use_api': bool(request.form.get('use_api', False)),
 			'water_time': int(request.form['water_time']),
-			'cropData': []
+			'crop_data': []
 		}
 		#consolidate sector data to respective sectors
 		# sectID = request.form.getlist('sectorID')
@@ -484,7 +488,7 @@ def initialize():
 		crop_pins = request.form.getlist('crop_pin')
 		crop_rain_incs = request.form.getlist('crop_rain_inc')
 		crop_enabled_list = []
-		
+
 
 		# for id in sectID:
 		# 	sectEn.append(request.form.get(f'sectorEn_{id}', False))
@@ -492,7 +496,7 @@ def initialize():
 			crop_enabled_list.append(request.form.get(f'crop_enable_{crop}', False))
 		for key in request.form.keys():
 			# if key.startswith('sectDel_'):
-			if key.startswith('cropDel_'):	
+			if key.startswith('cropDel_'):
 				#if sector has been deleted
 				del_crop_name = key.split('_')[1]
 				for i in range(len(crop_names)):
@@ -505,7 +509,7 @@ def initialize():
 						crop_names[i], int(crop_pins[i]), int(crop_rain_incs[i]), bool(crop_enabled_list[i]))
 					if crop_temp[0] != del_crop_name:
 						tempData['cropData'].append(crop_temp)
-				if len(tempData['cropData']) < tempData['max_crops']:
+				if len(tempData['crop_data']) < tempData['max_crops']:
 					addButton = True
 
 				# delSectID = key.split('_')[1]
@@ -533,7 +537,7 @@ def initialize():
 					crop_temp = (sqlSelectQuery('select id from crops where crop = ?', (crop_names[i],))[0], 
 						crop_names[i], int(crop_pins[i]), int(crop_rain_incs[i]), bool(crop_enabled_list[i]))
 					counter = i + 1
-					tempData['cropData'].append(crop_temp)
+					tempData['crop_data'].append(crop_temp)
 
 				# empty = {'crop': counter + 1,
 				# 	'pin': 0,
@@ -541,8 +545,8 @@ def initialize():
 				# 	'enabled': False
 				# }
 				empty = (counter + 1, 0, 0, False)
-				tempData['cropData'].append(empty)
-				if len(tempData['cropData']) < tempData['max_crops']:
+				tempData['crop_data'].append(empty)
+				if len(tempData['crop_data']) < tempData['max_crops']:
 					addButton = True
 
 				# counter = 0
@@ -586,9 +590,9 @@ def initialize():
 
 					crop_temp = (sqlSelectQuery('select id from crops where crop = ?', (crop_names[i],))[0],
 						crop_names[i], int(crop_pins[i]), int(crop_rain_incs[i]), bool(crop_enabled_list[i]))
-					tempData['cropData'].append(crop_temp)
+					tempData['crop_data'].append(crop_temp)
 
-				if len(tempData['cropData']) < tempData['max_crops']:
+				if len(tempData['crop_data']) < tempData['max_crops']:
 					addButton = True
 
 				# for i in range(len(sectID)):
@@ -604,13 +608,13 @@ def initialize():
 				# 	addButton = True
 				return redirect(url_for('.initialize'))
 		# if len(sectData['sector']) < sectData['max-sectors']:
-		if len(data['cropData']) < sectData['max_crops']:
+		if len(data['crop_data']) < sectData['max_crops']:
 			#toggle to show 'add' button to end of sector list
 			addButton = True
 		return render_template('initialize.html', navurl=navURL, styles=styles, data=data, addButton=addButton)
 	else:
 		# if len(sectData['sector']) < sectData['max-sectors']:
-		if len(data['cropData']) < data['max_crops']:
+		if len(data['crop_data']) < data['max_crops']:
 			addButton = True
 		return render_template('initialize.html', navurl=navURL, styles=styles, data=data, addButton=addButton)
 
@@ -648,12 +652,13 @@ def waterLog():
 		if 'clear' in request.form.keys():
 			#clear 30 day log
 			sqlModifyQuery('delete from water_log')
+			return redirect(url_for('.waterLog'))
 		if '60daylog' in request.form.keys():
 			#display 60 day log
 			formButtons = False
 			navURL = getNavURL()
 			styles = getStyles()
-			waterLog = sqlSelectQuery('select * from water_log_60')
+			waterLog = sqlSelectQuery('select * from water_log_60', fetchall=True)
 			return render_template('water-log.html', navurl=navURL, styles=styles, waterLog=waterLog, formButtons=formButtons)
 		if 'back' in request.form.keys():
 			return redirect(url_for('.waterLog'))
@@ -661,7 +666,7 @@ def waterLog():
 		navURL = getNavURL()
 		styles = getStyles()
 		# waterLog = getJsonData('water-log')
-		waterLog = sqlSelectQuery('select * from water_log')
+		waterLog = sqlSelectQuery('select * from water_log', fetchall=True)
 		return render_template('water-log.html', navurl=navURL, styles=styles, waterLog=waterLog, formButtons=formButtons)
 
 def getToday():
@@ -701,7 +706,7 @@ def getJsonData(filename):
 
 	return data
 
-def sqlSelectQuery(query, query_params = None):
+def sqlSelectQuery(query, query_params = None, fetchall = False):
 	'''
 	Gets result of an SQL select query from the SQLite DB
 	'''
@@ -711,7 +716,11 @@ def sqlSelectQuery(query, query_params = None):
 		cur.execute(query, query_params)
 	else:
 		cur.execute(query)
-	result = cur.fetchone()
+	result = None
+	if fetchall:
+		result = cur.fetchall()
+	else:
+		result = cur.fetchone()
 	conn.close()
 	return result
 
@@ -725,7 +734,7 @@ def sqlModifyQuery(query, query_params = None):
 		cur.execute(query, query_params)
 	else:
 		cur.execute(query)
-	result = cur.fetchone()
+	conn.commit()
 	conn.close()
 
 def setJsonData(filename, data):

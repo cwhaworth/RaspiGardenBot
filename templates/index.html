@@ -22,20 +22,20 @@
 </div>
 
 <div name="left">
-	<!--<h3>Weather Report for {{data['sectData']['api-city']}}, {{data['sectData']['api-state']}}, {{data['sectData']['api-country']}}</h3>-->
+	{#<h3>Weather Report for {{data['sectData']['api-city']}}, {{data['sectData']['api-state']}}, {{data['sectData']['api-country']}}</h3>#}
 	<h3>Weather Report for {{data['api-city']}}, {{data['api-state']}}, {{data['api-country']}}</h3>
 	<p id="weather">
 		<table>
 		<tr><th>Date</th><th>Time</th><th>Status</th><th>Precip %</th><th>Temp F</th></tr>
 		{% for data in data['weather'] %}
 		<tr>
-		<!--
+		{#
 		<td>{{ data['date'] }}</td>
 		<td>{{ data['time'] }}</td>
 		<td>{{ data['status'] }}</td>
 		<td>{{ data['pop'] }}%</td>
 		<td>{{ data['temp'] }} F</td>
-		-->
+		#}
 		<td>{{ data[1] }}</td>
 		<td>{{ data[2] }}</td>
 		<td>{{ data[3] }}</td>
@@ -45,10 +45,11 @@
 		{% endfor %}
 		</table>
 	</p>
-	<!--
+	{#
 	{%if data['sectData']['use-api']%}
 	<p>Last rained <b>{{data['sectData']['last-rained']}}</b> days ago</p>
-	-->
+	{%endif%}
+	#}
 	{%if data['use-api']%}
 	<p>Last rained <b>{{data['last-rain']}}</b> days ago</p>
 	{%endif%}
@@ -58,7 +59,7 @@
 	<h3>Sectors</h3>
 	<p id="sectorTable">
 		<table>
-		<!--
+		{#
 		<tr><th>ID</th><th>Pin</th><th>Rain Inc.</th><th>Override</th>
 		{% for sector in data['sectData']['sector'] %}
 		<tr>
@@ -76,7 +77,7 @@
 			</td>
 		</tr>
 		{% endfor %}
-		-->
+		#}
 		<tr><th>Crop</th><th>Pin</th><th>Rain Inc.</th><th>Override</th>
 		{% for crop in data['cropData'] %}
 		<tr>
@@ -97,13 +98,13 @@
 		</table>
 	</p>
 	<form method="POST">
-		<!--	
+		{#	
 		{%if not data['sectData']['sysEnable']%}
 		<input name="waterAll" type="submit" value="Water All" disabled>
 		{%else%}
 		<input name="waterAll" type="submit" value="Water All">
 		{%endif%}
-		-->
+		#}
 		{%if not data['system-enable']%}
 		<input name="waterAll" type="submit" value="Water All" disabled>
 		{%else%}
@@ -117,22 +118,22 @@
 	<h4>Temperature</h4>
 	<table>
 	<tr>
-	<!--
+	{#
 	{% for temp in data['sysData'].sysTemp %}
 		<th>{{temp['time'][:-3]}} {{temp['date'][:-5]}}</th>
 	{% endfor %}
-	-->
+	#}
 	{% for temp in data['sysData'] %}
 		<th>{{temp[2][:-3]}} {{temp[1][:-5]}}</th>
 	{% endfor %}
 	<th>Current<br>{{data['cpuTemp'].time}}</th>
 	</tr>
 	<tr>
-	<!--
+	{#
 	{% for temp in data['sysData'].sysTemp %}
 		<td>{{temp['temp']}}</td>
 	{% endfor %}
-	-->
+	#}
 	{% for temp in data['sysData'] %}
 		<td>{{temp[3]}}</td>
 	{% endfor %}
