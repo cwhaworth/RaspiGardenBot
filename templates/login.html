@@ -11,14 +11,14 @@
 	<title>RGB GUI - Home</title>
 </head>
 
-<body>
+<body class="align-content-center">
 <!--<section name="centerContent">-->
-<div class="container position-absolute top-50 text-center">
+<div class="container top-50 text-center">
     <div name="topBar">
         <h1>Raspi Garden Bot Web GUI</h1>
     </div>
     <form method="POST">
-        <h2>Login</h2>
+        <h3>Login:</h3>
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
                 {% for category, msg in messages %}
