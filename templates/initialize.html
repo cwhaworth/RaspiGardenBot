@@ -5,7 +5,10 @@
 	<meta name="author" content="Chris Haworth">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<link rel="stylesheet" href={{styles}}>
+	<!--<link rel="stylesheet" href={{styles}}>-->
+	{{bootstrap['stylesheet']}}
+	{{bootstrap['popper']}}
+	{{bootstrap['javascript']}}
 
 	<title>RGB GUI - Home</title>
 </head>
@@ -26,96 +29,99 @@
 	<p id="initContent">
 	<form name="sector" class="sectForm" method="POST">
 	<section class="initForm" name="initTop">
-		<div>
-		{#
-		{%if sectData['sysEnable']%}
-		<p>Enable System: </p>
-		<label class="switch">
-			<input type="checkbox" class="initForm" name="sysEnable" value="True" checked>
-			<span class="slider"></span>
-		</label></br>
-		{%else%}
-		<p>Enable System: </p>
-		<label class="switch">
-			<input type="checkbox" class="initForm" name="sysEnable" value="False">
-			<span class="slider"></span>
-		</label></br>
-		{%endif%}
-		#}
-		{%if data['system_enable']%}
-		<p>Enable System: </p>
-		<label class="switch">
-			<input type="checkbox" class="initForm" name="system_enable" value="True" checked>
-			<span class="slider"></span>
-		</label></br>
-		{%else%}
-		<p>Enable System: </p>
-		<label class="switch">
-			<input type="checkbox" class="initForm" name="system_enable" value="False">
-			<span class="slider"></span>
-		</label></br>
-		{%endif%}
-		</div></br>
-		<div>
-		<h3>Weather API Parameters:</h3>
-		{#
-		{%if sectData['use-api']%}
-		<p>Use Weather API: </p>
-		<label class="switch">
-			<input type="checkbox" class="initForm" name="useAPI" value="True" checked>
-			<span class="slider"></span>
-		</label></br>
-		{%else%}
-		<p>Use Weather API: </p>
-		<label class="switch">
-			<input type="checkbox" class="initForm" name="useAPI" value="False">
-			<span class="slider"></span>
-		</label></br>
-		{%endif%}
-		#}
-		{%if data['use_api']%}
-		<p>Use Weather API: </p>
-		<label class="switch">
-			<input type="checkbox" class="initForm" name="use_api" value="True" checked>
-			<span class="slider"></span>
-		</label></br>
-		{%else%}
-		<p>Use Weather API: </p>
-		<label class="switch">
-			<input type="checkbox" class="initForm" name="use_api" value="False">
-			<span class="slider"></span>
-		</label></br>
-		{%endif%}
-		{#
-		<p>City: </p><input type="text" class="initForm" name="apiCity" placeholder="city name" value={{sectData['api-city']}}></br>
-		<p>State: </p><input type="text" class="initForm" name="apiState" placeholder="ex: NC, AZ" value={{sectData['api-state']}}></br>
-		<p>Country: </p><input type="text" class="initForm" name="apiCountry" placeholder="ex: US, UK" value={{sectData['api-country']}}>
-		#}
-		<p>City: </p><input type="text" class="initForm" name="api_city" placeholder="city name" value={{data['api_city']}}></br>
-		<p>State: </p><input type="text" class="initForm" name="api_state" placeholder="ex: NC, AZ" value={{data['api_state']}}></br>
-		<p>Country: </p><input type="text" class="initForm" name="api_country" placeholder="ex: US, UK" value={{data['api_country']}}>		
-		
+		<div class="initLeftSide">
+			<div>
+			{#
+			{%if sectData['sysEnable']%}
+			<p>Enable System: </p>
+			<label class="switch">
+				<input type="checkbox" class="initForm" name="sysEnable" value="True" checked>
+				<span class="slider"></span>
+			</label></br>
+			{%else%}
+			<p>Enable System: </p>
+			<label class="switch">
+				<input type="checkbox" class="initForm" name="sysEnable" value="False">
+				<span class="slider"></span>
+			</label></br>
+			{%endif%}
+			#}
+			{%if data['system_enable']%}
+			<p>Enable System: </p>
+			<label class="switch">
+				<input type="checkbox" class="initForm" name="system_enable" value="True" checked>
+				<span class="slider"></span>
+			</label></br>
+			{%else%}
+			<p>Enable System: </p>
+			<label class="switch">
+				<input type="checkbox" class="initForm" name="system_enable" value="False">
+				<span class="slider"></span>
+			</label></br>
+			{%endif%}
+			</div></br>
+
+			<div>
+			<h3>Weather API Parameters:</h3>
+			{#
+			{%if sectData['use-api']%}
+			<p>Use Weather API: </p>
+			<label class="switch">
+				<input type="checkbox" class="initForm" name="useAPI" value="True" checked>
+				<span class="slider"></span>
+			</label></br>
+			{%else%}
+			<p>Use Weather API: </p>
+			<label class="switch">
+				<input type="checkbox" class="initForm" name="useAPI" value="False">
+				<span class="slider"></span>
+			</label></br>
+			{%endif%}
+			#}
+			{%if data['use_api']%}
+			<p>Use Weather API: </p>
+			<label class="switch">
+				<input type="checkbox" class="initForm" name="use_api" value="True" checked>
+				<span class="slider"></span>
+			</label></br>
+			{%else%}
+			<p>Use Weather API: </p>
+			<label class="switch">
+				<input type="checkbox" class="initForm" name="use_api" value="False">
+				<span class="slider"></span>
+			</label></br>
+			{%endif%}
+			{#
+			<p>City: </p><input type="text" class="initForm" name="apiCity" placeholder="city name" value={{sectData['api-city']}}></br>
+			<p>State: </p><input type="text" class="initForm" name="apiState" placeholder="ex: NC, AZ" value={{sectData['api-state']}}></br>
+			<p>Country: </p><input type="text" class="initForm" name="apiCountry" placeholder="ex: US, UK" value={{sectData['api-country']}}>
+			#}
+			<p>City: </p><input type="text" class="initForm" name="api_city" placeholder="city name" value={{data['api_city']}}></br>
+			<p>State: </p><input type="text" class="initForm" name="api_state" placeholder="ex: NC, AZ" value={{data['api_state']}}></br>
+			<p>Country: </p><input type="text" class="initForm" name="api_country" placeholder="ex: US, UK" value={{data['api_country']}}>		
+			</div>
 		</div>
+
 		<div>
-		<h3>System Parameters:</h3>
-		{#
-		<p>Pump Pin: </p><input type="text" class="initForm" name="pumpPin" placeholder="GPIO Pin #" value={{sectData['pump-pin']}}></br>
-		<p>Solenoid Enable Pin: </p><input type="text" class="initForm" name="solEnPin" placeholder="GPIO Pin #" value={{sectData['sol-en-pin']}}></br>
-		<p>Solenoid Open Pin: </p><input type="text" class="initForm" name="solOpenPin" placeholder="GPIO Pin #" value={{sectData['sol-open-pin']}}></br>
-		<p>Solenoid Close Pin: </p><input type="text" class="initForm" name="solClosePin" placeholder="GPIO Pin #" value={{sectData['sol-close-pin']}}></br>
-		<p>Delay Before (Seconds): </p><input type="text" class="initForm" name="delayBefore" placeholder="Seconds" value={{sectData['delay-before']}}></br>
-		<p>Delay After (Seconds): </p><input type="text" class="initForm" name="delayAfter" placeholder="Seconds" value={{sectData['delay-after']}}></br>
-		<p>Water Time (Seconds): </p><input type="text" class="initForm" name="waterTime" placeholder="Seconds" value={{sectData['water-time']}}></br>
-		<p>Max Sectors: </p><input type="text" class="initForm" name="maxSectors" placeholder="# of Relays" value={{sectData['max-sectors']}}>
-		#}
-		<p>Pump Pin: </p><input type="text" class="initForm" name="pump_pin" placeholder="GPIO Pin #" value={{data['pump_pin']}}></br>
-		<p>Valve Enable Pin: </p><input type="text" class="initForm" name="valve_enable_pin" placeholder="GPIO Pin #" value={{data['valve_enable_pin']}}></br>
-		<p>Valve Open Pin: </p><input type="text" class="initForm" name="valve_open_pin" placeholder="GPIO Pin #" value={{data['valve_open_pin']}}></br>
-		<p>Valve Close Pin: </p><input type="text" class="initForm" name="valve_close_pin" placeholder="GPIO Pin #" value={{data['valve_close_pin']}}></br>
-		<p>Delay Before (Seconds): </p><input type="text" class="initForm" name="delay_before" placeholder="Seconds" value={{data['delay_before']}}></br>
-		<p>Delay After (Seconds): </p><input type="text" class="initForm" name="delay_after" placeholder="Seconds" value={{data['delay_after']}}></br>
-		<p>Water Time (Seconds): </p><input type="text" class="initForm" name="water_time" placeholder="Seconds" value={{data['water_time']}}></br>
-		<p>Max Crops: </p><input type="text" class="initForm" name="max_crops" placeholder="# of Relays" value={{data['max_sectors']}}>		
+			<h3>System Parameters:</h3>
+			{#
+			<p>Pump Pin: </p><input type="text" class="initForm" name="pumpPin" placeholder="GPIO Pin #" value={{sectData['pump-pin']}}></br>
+			<p>Solenoid Enable Pin: </p><input type="text" class="initForm" name="solEnPin" placeholder="GPIO Pin #" value={{sectData['sol-en-pin']}}></br>
+			<p>Solenoid Open Pin: </p><input type="text" class="initForm" name="solOpenPin" placeholder="GPIO Pin #" value={{sectData['sol-open-pin']}}></br>
+			<p>Solenoid Close Pin: </p><input type="text" class="initForm" name="solClosePin" placeholder="GPIO Pin #" value={{sectData['sol-close-pin']}}></br>
+			<p>Delay Before (Seconds): </p><input type="text" class="initForm" name="delayBefore" placeholder="Seconds" value={{sectData['delay-before']}}></br>
+			<p>Delay After (Seconds): </p><input type="text" class="initForm" name="delayAfter" placeholder="Seconds" value={{sectData['delay-after']}}></br>
+			<p>Water Time (Seconds): </p><input type="text" class="initForm" name="waterTime" placeholder="Seconds" value={{sectData['water-time']}}></br>
+			<p>Max Sectors: </p><input type="text" class="initForm" name="maxSectors" placeholder="# of Relays" value={{sectData['max-sectors']}}>
+			#}
+			<p>Pump Pin: </p><input type="text" class="initForm" name="pump_pin" placeholder="GPIO Pin #" value={{data['pump_pin']}}></br>
+			<p>Valve Enable Pin: </p><input type="text" class="initForm" name="valve_enable_pin" placeholder="GPIO Pin #" value={{data['valve_enable_pin']}}></br>
+			<p>Valve Open Pin: </p><input type="text" class="initForm" name="valve_open_pin" placeholder="GPIO Pin #" value={{data['valve_open_pin']}}></br>
+			<p>Valve Close Pin: </p><input type="text" class="initForm" name="valve_close_pin" placeholder="GPIO Pin #" value={{data['valve_close_pin']}}></br>
+			<p>Delay Before (Seconds): </p><input type="text" class="initForm" name="delay_before" placeholder="Seconds" value={{data['delay_before']}}></br>
+			<p>Delay After (Seconds): </p><input type="text" class="initForm" name="delay_after" placeholder="Seconds" value={{data['delay_after']}}></br>
+			<p>Water Time (Seconds): </p><input type="text" class="initForm" name="water_time" placeholder="Seconds" value={{data['water_time']}}></br>
+			<p>Max Crops: </p><input type="text" class="initForm" name="max_crops" placeholder="# of Relays" value={{data['max_sectors']}}>		
 		</div>
 	</section></br>
 	<section class="initForm" name="initSectList">
