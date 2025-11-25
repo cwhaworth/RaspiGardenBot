@@ -22,9 +22,17 @@ app.secret_key = os.urandom(24)
 dbPath = '/var/www/RaspiGardenBot/database/app_data.db'
 
 bootstrap = {
-	"stylesheet": '<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">',
-	"popper": '<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>',
-	"javascript": '<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js" integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y" crossorigin="anonymous"></script>'
+	"stylesheet": '{
+		"href": "https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css",
+		"integrity": "sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+	},	
+	"popper": {
+		"src": "https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js",
+		"integrity": "sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+	},
+	"javascript": {
+		"src": "https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js", 
+		"integrity": "sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y"
 }
 
 GPIO.setmode(GPIO.BCM)
@@ -52,8 +60,8 @@ def login():
 			return redirect(url_for('.login'))
 	else:
 		styles = getStyles()
-		# return render_template('login.html', styles=styles)
-		return render_template('login.html', styles=bootstrap)
+		return render_template('login.html', styles=styles)
+		# return render_template('login.html', styles=bootstrap)
 
 @app.route("/logout")
 def logout():
@@ -116,8 +124,8 @@ def index():
 		# data['weather'] = getForecast(getJsonData('forecast'))
 		# data['sysData'] = getJsonData('system-data')
 
-		# return render_template('index.html', navurl=navURL, styles=styles, data=data)
-		return render_template('index.html', navurl=navURL, styles=bootstrap, data=data)
+		return render_template('index.html', navurl=navURL, styles=styles, data=data)
+		# return render_template('index.html', navurl=navURL, styles=bootstrap, data=data)
 
 def waterAll():
 	'''
@@ -521,8 +529,8 @@ def initialize():
 				# 		tempData['sector'].append(sectTemp)
 				# if len(tempData['sector']) < tempData['max-sectors']:
 				# 	addButton = True
-				# return render_template('initialize.html', navurl=navURL, styles=styles, data=tempData, addButton=addButton)
-				return render_template('initialize.html', navurl=navURL, styles=bootstrap, data=tempData, addButton=addButton)
+				return render_template('initialize.html', navurl=navURL, styles=styles, data=tempData, addButton=addButton)
+				# return render_template('initialize.html', navurl=navURL, styles=bootstrap, data=tempData, addButton=addButton)
 			# elif key == 'sectAdd':
 			elif key == 'cropAdd':
 				#if adding a new sector
@@ -566,8 +574,8 @@ def initialize():
 				# tempData['sector'].append(empty)
 				# if len(tempData['sector']) < tempData['max-sectors']:
 				# 	addButton = True
-				# return render_template('initialize.html', navurl=navURL, styles=styles, sectData=tempData, addButton=addButton)
-				return render_template('initialize.html', navurl=navURL, styles=bootstrap, sectData=tempData, addButton=addButton)
+				return render_template('initialize.html', navurl=navURL, styles=styles, sectData=tempData, addButton=addButton)
+				# return render_template('initialize.html', navurl=navURL, styles=bootstrap, sectData=tempData, addButton=addButton)
 			elif key == 'cropInit':
 				#if writing parameters
 
@@ -611,14 +619,14 @@ def initialize():
 		if len(data['crop_data']) < sectData['max_crops']:
 			#toggle to show 'add' button to end of sector list
 			addButton = True
-		# return render_template('initialize.html', navurl=navURL, styles=styles, data=data, addButton=addButton)
-		return render_template('initialize.html', navurl=navURL, styles=bootstrap, data=data, addButton=addButton)
+		return render_template('initialize.html', navurl=navURL, styles=styles, data=data, addButton=addButton)
+		# return render_template('initialize.html', navurl=navURL, styles=bootstrap, data=data, addButton=addButton)
 	else:
 		# if len(sectData['sector']) < sectData['max-sectors']:
 		if len(data['crop_data']) < data['max_crops']:
 			addButton = True
-		# return render_template('initialize.html', navurl=navURL, styles=styles, data=data, addButton=addButton)
-		return render_template('initialize.html', navurl=navURL, styles=bootstrap, data=data, addButton=addButton)
+		return render_template('initialize.html', navurl=navURL, styles=styles, data=data, addButton=addButton)
+		# return render_template('initialize.html', navurl=navURL, styles=bootstrap, data=data, addButton=addButton)
 
 @app.route("/water-log", methods=['GET', 'POST'])
 def waterLog():
@@ -661,8 +669,8 @@ def waterLog():
 			navURL = getNavURL()
 			styles = getStyles()
 			waterLog = sqlSelectQuery('select * from water_log_60', fetchall=True)
-			# return render_template('water-log.html', navurl=navURL, styles=styles, waterLog=waterLog, formButtons=formButtons)
-			return render_template('water-log.html', navurl=navURL, styles=bootstrap, waterLog=waterLog, formButtons=formButtons)
+			return render_template('water-log.html', navurl=navURL, styles=styles, waterLog=waterLog, formButtons=formButtons)
+			# return render_template('water-log.html', navurl=navURL, styles=bootstrap, waterLog=waterLog, formButtons=formButtons)
 		if 'back' in request.form.keys():
 			return redirect(url_for('.waterLog'))
 	else:
@@ -670,8 +678,8 @@ def waterLog():
 		styles = getStyles()
 		# waterLog = getJsonData('water-log')
 		waterLog = sqlSelectQuery('select * from water_log', fetchall=True)
-		# return render_template('water-log.html', navurl=navURL, styles=styles, waterLog=waterLog, formButtons=formButtons)
-		return render_template('water-log.html', navurl=navURL, styles=bootstrap, waterLog=waterLog, formButtons=formButtons)
+		return render_template('water-log.html', navurl=navURL, styles=styles, waterLog=waterLog, formButtons=formButtons)
+		# return render_template('water-log.html', navurl=navURL, styles=bootstrap, waterLog=waterLog, formButtons=formButtons)
 
 def getToday():
 	'''
@@ -695,7 +703,8 @@ def getStyles():
 	'''
 	Gets the file for the CSS styles.
 	'''
-	styles = url_for('static', filename='styles.css')
+	# styles = url_for('static', filename='styles.css')
+	styles = url_for('static', filename='bootstrap.css')
 
 	return styles
 
