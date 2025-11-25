@@ -33,6 +33,7 @@ bootstrap = {
 	"javascript": {
 		"src": "https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js", 
 		"integrity": "sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y"
+	}
 }
 
 GPIO.setmode(GPIO.BCM)
