@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<!--<link rel="stylesheet" href={{styles}}>-->
-	{{styles['stylesheet']}}
+	<link href="{{styles['stylesheet']['href']}}" rel="stylesheet" integrity="{{styles['stylesheet']['integrity']}}" crossorigin="anonymous">
 
 	<title>RGB GUI - Home</title>
 </head>
@@ -144,7 +144,7 @@
 </div>
 
 </section>
-{{styles['popper']}}
-{{styles['javascript']}}
+<script src="{{styles['popper']['src']}}" integrity="{{styles['popper']['src']}}" crossorigin="anonymous"></script>
+<script src="{{styles['javascript']['src']}}" integrity="{{styles['javascript']['src']}}" crossorigin="anonymous"></script>
 </body>
 </html>
