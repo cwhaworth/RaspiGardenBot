@@ -12,11 +12,11 @@
 </head>
 
 <body>
-<section name="centerContent">
-<div name="topBar">
-	<h1>Raspi Garden Bot Web GUI</h1>
-</div>
-
+<!--<section name="centerContent">-->
+<div class="container">
+    <div name="topBar">
+        <h1>Raspi Garden Bot Web GUI</h1>
+    </div>
     <form method="POST">
         <h2>Login</h2>
         {% with messages = get_flashed_messages(with_categories=true) %}
@@ -30,7 +30,7 @@
         <input type="password" name="password" placeholder="Password" required />
         <button type="submit">Login</button>
     </form>
-</section>
+</div>
 <script src="{{styles['popper']['src']}}" integrity="{{styles['popper']['integrity']}}" crossorigin="anonymous"></script>
 <script src="{{styles['javascript']['src']}}" integrity="{{styles['javascript']['integrity']}}" crossorigin="anonymous"></script>
 </body>
