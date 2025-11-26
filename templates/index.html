@@ -11,17 +11,16 @@
 </head>
 
 <body class="container align-self-center">
-<section name="centerContent">
-<div name="topBar">
-	<h1>Raspi Garden Bot Web GUI</h1>
-	<nav>
-		<a href={{navurl['index']}}>Home</a>
-		<a href={{navurl['init']}}>Initialize</a>
-		<a href={{navurl['waterLog']}}>Water Log</a> 
-	</nav>
-</div>
+	<div class="align-self-center align-content-center">
+		<h1>Raspi Garden Bot Web GUI</h1>
+		<nav>
+			<a href={{navurl['index']}}>Home</a>
+			<a href={{navurl['init']}}>Initialize</a>
+			<a href={{navurl['waterLog']}}>Water Log</a> 
+		</nav>
+	</div>
 
-<div class="align-self-start">
+<div class="position-relative align-self-start">
 	{#<h3>Weather Report for {{data['sectData']['api-city']}}, {{data['sectData']['api-state']}}, {{data['sectData']['api-country']}}</h3>#}
 	<h3>Weather Report for {{data['api-city']}}, {{data['api-state']}}, {{data['api-country']}}</h3>
 	<p id="weather">
@@ -55,7 +54,7 @@
 	{%endif%}
 </div>
 
-<div class="align-self-end">
+<div class="position-relative align-self-end">
 	<h3>Sectors</h3>
 	<p id="sectorTable">
 		<table>
@@ -142,6 +141,6 @@
 	</table>
 </div>
 
-</section>
+
 </body>
 </html>
