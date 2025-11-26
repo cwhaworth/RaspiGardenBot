@@ -20,168 +20,121 @@
 		</nav>
 	</div>
 
-	<div name="Sectors">
+	<div>
 		<h3>Irrigation System Initialization</h3>
-		<p id="initContent">
-		<form name="sector" class="sectForm" method="POST">
-		<section class="initForm" name="initTop">
-			<div class="initLeftSide">
-				<div>
-				{#
-				{%if sectData['sysEnable']%}
-				<p>Enable System: </p>
-				<label class="switch">
-					<input type="checkbox" class="initForm" name="sysEnable" value="True" checked>
-					<span class="slider"></span>
-				</label></br>
-				{%else%}
-				<p>Enable System: </p>
-				<label class="switch">
-					<input type="checkbox" class="initForm" name="sysEnable" value="False">
-					<span class="slider"></span>
-				</label></br>
-				{%endif%}
-				#}
-				{%if data['system_enable']%}
-				<p>Enable System: </p>
-				<label class="switch">
-					<input type="checkbox" class="initForm" name="system_enable" value="True" checked>
-					<span class="slider"></span>
-				</label></br>
-				{%else%}
-				<p>Enable System: </p>
-				<label class="switch">
-					<input type="checkbox" class="initForm" name="system_enable" value="False">
-					<span class="slider"></span>
-				</label></br>
-				{%endif%}
+		<form method="POST">
+			<div class="row">
+				<div class="col"></div>
+					<div class="row">
+						{%if data['system_enable']%}
+						<p>Enable System: </p>
+						<label class="switch">
+							<input type="checkbox" name="system_enable" value="True" checked>
+							<span class="slider"></span>
+						</label></br>
+						{%else%}
+						<p>Enable System: </p>
+						<label class="switch">
+							<input type="checkbox" name="system_enable" value="False">
+							<span class="slider"></span>
+						</label></br>
+						{%endif%}
+					</div>
+					<div class="row">
+						<h3>Weather API Parameters:</h3>
+						{%if data['use_api']%}
+						<p>Use Weather API: </p>
+						<label class="switch">
+							<input type="checkbox" name="use_api" value="True" checked>
+							<span class="slider"></span>
+						</label></br>
+						{%else%}
+						<p>Use Weather API: </p>
+						<label class="switch">
+							<input type="checkbox" name="use_api" value="False">
+							<span class="slider"></span>
+						</label></br>
+						{%endif%}
+						<p>City: </p><input type="text" class="initForm" name="api_city" placeholder="city name" value={{data['api_city']}}></br>
+						<p>State: </p><input type="text" class="initForm" name="api_state" placeholder="ex: NC, AZ" value={{data['api_state']}}></br>
+						<p>Country: </p><input type="text" class="initForm" name="api_country" placeholder="ex: US, UK" value={{data['api_country']}}>		
+					</div>
+				</div>
+				<div class="col">
+					<div class="row">
+						<h3>System Parameters:</h3>
+						<p>Pump Pin: </p><input type="text" class="initForm" name="pump_pin" placeholder="GPIO Pin #" value={{data['pump_pin']}}></br>
+						<p>Valve Enable Pin: </p><input type="text" class="initForm" name="valve_enable_pin" placeholder="GPIO Pin #" value={{data['valve_enable_pin']}}></br>
+						<p>Valve Open Pin: </p><input type="text" class="initForm" name="valve_open_pin" placeholder="GPIO Pin #" value={{data['valve_open_pin']}}></br>
+						<p>Valve Close Pin: </p><input type="text" class="initForm" name="valve_close_pin" placeholder="GPIO Pin #" value={{data['valve_close_pin']}}></br>
+						<p>Delay Before (Seconds): </p><input type="text" class="initForm" name="delay_before" placeholder="Seconds" value={{data['delay_before']}}></br>
+						<p>Delay After (Seconds): </p><input type="text" class="initForm" name="delay_after" placeholder="Seconds" value={{data['delay_after']}}></br>
+						<p>Water Time (Seconds): </p><input type="text" class="initForm" name="water_time" placeholder="Seconds" value={{data['water_time']}}></br>
+						<p>Max Crops: </p><input type="text" class="initForm" name="max_crops" placeholder="# of Relays" value={{data['max_sectors']}}>		
+					</div>
 				</div></br>
 
+			<section class="initForm" name="initSectList">
+				{#
+				<h3>Sectors:</h3>
+				{%for sector in sectData['sector']%}
 				<div>
-				<h3>Weather API Parameters:</h3>
-				{#
-				{%if sectData['use-api']%}
-				<p>Use Weather API: </p>
-				<label class="switch">
-					<input type="checkbox" class="initForm" name="useAPI" value="True" checked>
-					<span class="slider"></span>
-				</label></br>
-				{%else%}
-				<p>Use Weather API: </p>
-				<label class="switch">
-					<input type="checkbox" class="initForm" name="useAPI" value="False">
-					<span class="slider"></span>
-				</label></br>
-				{%endif%}
-				#}
-				{%if data['use_api']%}
-				<p>Use Weather API: </p>
-				<label class="switch">
-					<input type="checkbox" class="initForm" name="use_api" value="True" checked>
-					<span class="slider"></span>
-				</label></br>
-				{%else%}
-				<p>Use Weather API: </p>
-				<label class="switch">
-					<input type="checkbox" class="initForm" name="use_api" value="False">
-					<span class="slider"></span>
-				</label></br>
-				{%endif%}
-				{#
-				<p>City: </p><input type="text" class="initForm" name="apiCity" placeholder="city name" value={{sectData['api-city']}}></br>
-				<p>State: </p><input type="text" class="initForm" name="apiState" placeholder="ex: NC, AZ" value={{sectData['api-state']}}></br>
-				<p>Country: </p><input type="text" class="initForm" name="apiCountry" placeholder="ex: US, UK" value={{sectData['api-country']}}>
-				#}
-				<p>City: </p><input type="text" class="initForm" name="api_city" placeholder="city name" value={{data['api_city']}}></br>
-				<p>State: </p><input type="text" class="initForm" name="api_state" placeholder="ex: NC, AZ" value={{data['api_state']}}></br>
-				<p>Country: </p><input type="text" class="initForm" name="api_country" placeholder="ex: US, UK" value={{data['api_country']}}>		
+					<h4>Sector {{sector['id']}}</h4>
+					<p>ID: </p><input type="text" class="initForm" name="sectorID" placeholder="Sector ID" value={{sector['id']}}></br>
+					<p>Pin: </p><input type="text" class="initForm" name="sectorPin" placeholder="GPIO Pin #" value={{sector['pin']}}></br>
+					<p>Incriment: </p><input type="text" class="initForm" name="sectorInc" placeholder="Rain Incriment" value={{sector['rain-inc']}}></br>
+					{%if sector['enabled']%}
+					<p>Enabled: </p>
+					<label class="switch">
+						<input type="checkbox" class="initForm" name="sectorEn_{{sector['id']}}" value="True" checked>
+						<span class="slider"></span>
+					</label></br>
+					{%else%}
+					<p>Enabled: </p>
+					<label class="switch">
+						<input type="checkbox" class="initForm" name="sectorEn_{{sector['id']}}" value="False">
+						<span class="slider"></span>
+					</label></br>
+					{%endif%}
+					<input type="submit" class="initForm" id="btnDelete" name="sectDel_{{sector['id']}}" value="Delete">
 				</div>
-			</div>
-
-			<div>
-				<h3>System Parameters:</h3>
-				{#
-				<p>Pump Pin: </p><input type="text" class="initForm" name="pumpPin" placeholder="GPIO Pin #" value={{sectData['pump-pin']}}></br>
-				<p>Solenoid Enable Pin: </p><input type="text" class="initForm" name="solEnPin" placeholder="GPIO Pin #" value={{sectData['sol-en-pin']}}></br>
-				<p>Solenoid Open Pin: </p><input type="text" class="initForm" name="solOpenPin" placeholder="GPIO Pin #" value={{sectData['sol-open-pin']}}></br>
-				<p>Solenoid Close Pin: </p><input type="text" class="initForm" name="solClosePin" placeholder="GPIO Pin #" value={{sectData['sol-close-pin']}}></br>
-				<p>Delay Before (Seconds): </p><input type="text" class="initForm" name="delayBefore" placeholder="Seconds" value={{sectData['delay-before']}}></br>
-				<p>Delay After (Seconds): </p><input type="text" class="initForm" name="delayAfter" placeholder="Seconds" value={{sectData['delay-after']}}></br>
-				<p>Water Time (Seconds): </p><input type="text" class="initForm" name="waterTime" placeholder="Seconds" value={{sectData['water-time']}}></br>
-				<p>Max Sectors: </p><input type="text" class="initForm" name="maxSectors" placeholder="# of Relays" value={{sectData['max-sectors']}}>
+				{%endfor%}
 				#}
-				<p>Pump Pin: </p><input type="text" class="initForm" name="pump_pin" placeholder="GPIO Pin #" value={{data['pump_pin']}}></br>
-				<p>Valve Enable Pin: </p><input type="text" class="initForm" name="valve_enable_pin" placeholder="GPIO Pin #" value={{data['valve_enable_pin']}}></br>
-				<p>Valve Open Pin: </p><input type="text" class="initForm" name="valve_open_pin" placeholder="GPIO Pin #" value={{data['valve_open_pin']}}></br>
-				<p>Valve Close Pin: </p><input type="text" class="initForm" name="valve_close_pin" placeholder="GPIO Pin #" value={{data['valve_close_pin']}}></br>
-				<p>Delay Before (Seconds): </p><input type="text" class="initForm" name="delay_before" placeholder="Seconds" value={{data['delay_before']}}></br>
-				<p>Delay After (Seconds): </p><input type="text" class="initForm" name="delay_after" placeholder="Seconds" value={{data['delay_after']}}></br>
-				<p>Water Time (Seconds): </p><input type="text" class="initForm" name="water_time" placeholder="Seconds" value={{data['water_time']}}></br>
-				<p>Max Crops: </p><input type="text" class="initForm" name="max_crops" placeholder="# of Relays" value={{data['max_sectors']}}>		
-			</div>
-		</section></br>
-		<section class="initForm" name="initSectList">
-			{#
-			<h3>Sectors:</h3>
-			{%for sector in sectData['sector']%}
-			<div>
-				<h4>Sector {{sector['id']}}</h4>
-				<p>ID: </p><input type="text" class="initForm" name="sectorID" placeholder="Sector ID" value={{sector['id']}}></br>
-				<p>Pin: </p><input type="text" class="initForm" name="sectorPin" placeholder="GPIO Pin #" value={{sector['pin']}}></br>
-				<p>Incriment: </p><input type="text" class="initForm" name="sectorInc" placeholder="Rain Incriment" value={{sector['rain-inc']}}></br>
-				{%if sector['enabled']%}
-				<p>Enabled: </p>
-				<label class="switch">
-					<input type="checkbox" class="initForm" name="sectorEn_{{sector['id']}}" value="True" checked>
-					<span class="slider"></span>
-				</label></br>
-				{%else%}
-				<p>Enabled: </p>
-				<label class="switch">
-					<input type="checkbox" class="initForm" name="sectorEn_{{sector['id']}}" value="False">
-					<span class="slider"></span>
-				</label></br>
+				<h3>Crops:</h3>
+				{%for crop in data['crop_data']%}
+				<div>
+					<h4>{{crop[2]}}</h4>
+					<p>Name: </p><input type="text" class="initForm" name="crop" placeholder="Sector ID" value={{crop[2]}}></br>
+					<p>Pin: </p><input type="text" class="initForm" name="crop_pin" placeholder="GPIO Pin #" value={{crop[3]}}></br>
+					<p>Incriment: </p><input type="text" class="initForm" name="crop_rain_inc" placeholder="Rain Incriment" value={{crop[4]}}></br>
+					{%if crop[1]%}
+					<p>Enabled: </p>
+					<label class="switch">
+						<input type="checkbox" class="initForm" name="crop_enable_{{crop[1]}}" value="True" checked>
+						<span class="slider"></span>
+					</label></br>
+					{%else%}
+					<p>Enabled: </p>
+					<label class="switch">
+						<input type="checkbox" class="initForm" name="crop_enable_{{crop[1]}}" value="False">
+						<span class="slider"></span>
+					</label></br>
+					{%endif%}
+					<input type="submit" class="initForm" id="btnDelete" name="cropDel_{{crop[1]}}" value="Delete">
+				</div>
+				{%endfor%}
+				</br>
+				{%if addButton == True%}
+				<div name="initEnd">
+					
+					{#</br></br><input type="submit" class="mainForm" id="btnAdd" name="sectAdd" value="Add New">#}
+					</br></br><input type="submit" class="mainForm" id="btnAdd" name="cropAdd" value="Add New">
+				</div>
 				{%endif%}
-				<input type="submit" class="initForm" id="btnDelete" name="sectDel_{{sector['id']}}" value="Delete">
-			</div>
-			{%endfor%}
-			#}
-			<h3>Crops:</h3>
-			{%for crop in data['crop_data']%}
-			<div>
-				<h4>{{crop[2]}}</h4>
-				<p>Name: </p><input type="text" class="initForm" name="crop" placeholder="Sector ID" value={{crop[2]}}></br>
-				<p>Pin: </p><input type="text" class="initForm" name="crop_pin" placeholder="GPIO Pin #" value={{crop[3]}}></br>
-				<p>Incriment: </p><input type="text" class="initForm" name="crop_rain_inc" placeholder="Rain Incriment" value={{crop[4]}}></br>
-				{%if crop[1]%}
-				<p>Enabled: </p>
-				<label class="switch">
-					<input type="checkbox" class="initForm" name="crop_enable_{{crop[1]}}" value="True" checked>
-					<span class="slider"></span>
-				</label></br>
-				{%else%}
-				<p>Enabled: </p>
-				<label class="switch">
-					<input type="checkbox" class="initForm" name="crop_enable_{{crop[1]}}" value="False">
-					<span class="slider"></span>
-				</label></br>
-				{%endif%}
-				<input type="submit" class="initForm" id="btnDelete" name="cropDel_{{crop[1]}}" value="Delete">
-			</div>
-			{%endfor%}
-			</br>
-			{%if addButton == True%}
-			<div name="initEnd">
-				
-				{#</br></br><input type="submit" class="mainForm" id="btnAdd" name="sectAdd" value="Add New">#}
-				</br></br><input type="submit" class="mainForm" id="btnAdd" name="cropAdd" value="Add New">
-			</div>
-			{%endif%}
-		</section>
-		{#</br></br><input type="submit" class="mainForm" id="btnInit" name="sectInit" value="Initialize">#}
-		</br></br><input type="submit" class="mainForm" id="btnInit" name="cropInit" value="Initialize">
+			</section>
+			{#</br></br><input type="submit" class="mainForm" id="btnInit" name="sectInit" value="Initialize">#}
+			</br></br><input type="submit" class="mainForm" id="btnInit" name="cropInit" value="Initialize">
 		</form>
-		</p>
 	</div>
 </body>
 </html>
