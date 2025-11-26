@@ -5,13 +5,12 @@
 	<meta name="author" content="Chris Haworth">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<!--<link rel="stylesheet" href={{styles}}>-->
-	<link href="{{styles['stylesheet']['href']}}" rel="stylesheet" integrity="{{styles['stylesheet']['integrity']}}" crossorigin="anonymous">
+	<link rel="stylesheet" href={{styles}}>
 
 	<title>RGB GUI - Home</title>
 </head>
 
-<body>
+<body class="container align-self-center">
 <section name="centerContent">
 <div name="topBar">
 	<h1>Raspi Garden Bot Web GUI</h1>
@@ -22,7 +21,7 @@
 	</nav>
 </div>
 
-<div name="left">
+<div class="align-self-start">
 	{#<h3>Weather Report for {{data['sectData']['api-city']}}, {{data['sectData']['api-state']}}, {{data['sectData']['api-country']}}</h3>#}
 	<h3>Weather Report for {{data['api-city']}}, {{data['api-state']}}, {{data['api-country']}}</h3>
 	<p id="weather">
@@ -56,7 +55,7 @@
 	{%endif%}
 </div>
 
-<div name="right">
+<div class="align-self-end">
 	<h3>Sectors</h3>
 	<p id="sectorTable">
 		<table>
@@ -144,7 +143,5 @@
 </div>
 
 </section>
-<script src="{{styles['popper']['src']}}" integrity="{{styles['popper']['integrity']}}" crossorigin="anonymous"></script>
-<script src="{{styles['javascript']['src']}}" integrity="{{styles['javascript']['integrity']}}" crossorigin="anonymous"></script>
 </body>
 </html>
