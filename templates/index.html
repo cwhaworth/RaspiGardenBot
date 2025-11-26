@@ -96,7 +96,7 @@
 	<table>
 		<tr class="row-cols-{{data['sysData']}}">
 			{% for temp in data['sysData'] %}
-			<th class="col-2">{{temp[2][:-3]}} {{temp[1][:-5]}}</th>
+			<th class="col-2">{{temp[1][:-5]}}<br>{{temp[2][:-3]}}</th>
 			{% endfor %}
 			<th class="col-2">Current<br>{{data['cpuTemp'].time}}</th>
 		</tr>
