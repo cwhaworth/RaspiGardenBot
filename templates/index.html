@@ -10,7 +10,7 @@
 	<title>RGB GUI - Home</title>
 </head>
 
-<body class="container align-self-center">
+<body class="container-fluid align-self-center">
 	<div class="container align-self-center text-center">
 		<h1>Raspi Garden Bot Web GUI</h1><br>
 		<nav>
@@ -76,7 +76,7 @@
 					{% endfor %}
 				</table>
 			</p>
-			<form class="container justify-content-end" method="POST">
+			<form class="row justify-content-end" method="POST">
 				{%if not data['system-enable']%}
 				<input name="waterAll" type="submit" value="Water All" disabled>
 				{%else%}

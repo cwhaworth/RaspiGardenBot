@@ -6,33 +6,28 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<link rel="stylesheet" href={{styles}}>
-	{#<!-- <link href="{{styles['stylesheet']['href']}}" rel="stylesheet" integrity="{{styles['stylesheet']['integrity']}}" crossorigin="anonymous"> -->#}
-
+    
 	<title>RGB GUI - Home</title>
 </head>
 
 <body class="container align-self-center align-content-center">
-<!--<section name="centerContent">-->
-<div class="container w-100 align-self-center text-center" style="margin-top: 25%;">
-    <div name="topBar">
-        <h1>Raspi Garden Bot Web GUI</h1>
+    <div class="container w-100 align-self-center text-center" style="margin-top: 25%;">
+        <div>
+            <h1>Raspi Garden Bot Web GUI</h1>
+        </div>
+        <form method="POST">
+            <h3>Login:</h3>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, msg in messages %}
+                        <div class="flash">{{ msg }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <input style="margin-bottom: 5px;" type="text" name="username" placeholder="Username" required /><br>
+            <input style="margin-bottom: 5px;" type="password" name="password" placeholder="Password" required /><br>
+            <button type="submit">Login</button>
+        </form>
     </div>
-    <form method="POST">
-        <h3>Login:</h3>
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                {% for category, msg in messages %}
-                    <div class="flash">{{ msg }}</div>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
-        <input style="margin-bottom: 5px;" type="text" name="username" placeholder="Username" required /><br>
-        <input style="margin-bottom: 5px;" type="password" name="password" placeholder="Password" required /><br>
-        <button type="submit">Login</button>
-    </form>
-</div>
-<!-- </section> -->
-{#<!-- <script src="{{styles['popper']['src']}}" integrity="{{styles['popper']['integrity']}}" crossorigin="anonymous"></script> -->#}
-{#<!-- <script src="{{styles['javascript']['src']}}" integrity="{{styles['javascript']['integrity']}}" crossorigin="anonymous"></script> -->#}
 </body>
 </html>
