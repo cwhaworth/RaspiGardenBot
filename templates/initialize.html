@@ -104,23 +104,23 @@
 					<div class="col">
 						<h4>{{crop[2]}}</h4>
 						<div class="row">
-							<p>Name: </p>
-							<input type="text" class="initForm" name="crop" placeholder="Sector ID" value={{crop[2]}}></br>
+							<p class="col">Name: </p>
+							<input class="col" type="text" class="initForm" name="crop" placeholder="Sector ID" value={{crop[2]}}></br>
 						</div>
 						<div class="row">
-							<p>Pin: </p>
-							<input type="text" class="initForm" name="crop_pin" placeholder="GPIO Pin #" value={{crop[3]}}></br>
+							<p class="col">Pin: </p>
+							<input class="col" type="text" class="initForm" name="crop_pin" placeholder="GPIO Pin #" value={{crop[3]}}></br>
 						</div>
 						<div class="row">
-							<p>Incriment: </p>
-							<input type="text" class="initForm" name="crop_rain_inc" placeholder="Rain Incriment" value={{crop[4]}}></br>
+							<p class="col">Incriment: </p>
+							<input class="col" type="text" class="initForm" name="crop_rain_inc" placeholder="Rain Incriment" value={{crop[4]}}></br>
 						</div>
 						<div class="row">
-							<p>Enabled: </p>
+							<p class="col">Enabled: </p>
 							{%if crop[1]%}
-							<input type="checkbox" class="initForm" name="crop_enable_{{crop[1]}}" value="True" checked>
+							<input class="col" type="checkbox" class="initForm" name="crop_enable_{{crop[1]}}" value="True" checked>
 							{%else%}
-							<input type="checkbox" class="initForm" name="crop_enable_{{crop[1]}}" value="False">
+							<input class="col" type="checkbox" class="initForm" name="crop_enable_{{crop[1]}}" value="False">
 							{%endif%}
 						</div>
 						<input type="submit" class="initForm" id="btnDelete" name="cropDel_{{crop[1]}}" value="Delete">
