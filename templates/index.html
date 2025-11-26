@@ -26,23 +26,28 @@
 			<h3>Weather Report for {{data['api-city']}}, {{data['api-state']}}, {{data['api-country']}}</h3>
 			<p id="weather">
 				<table>
-				<tr class="row"><th class="col">Date</th><th class="col">Time</th><th class="col">Status</th><th class="col">Precip %</th><th class="col">Temp F</th></tr>
-				{% for data in data['weather'] %}
-				<tr>
-				{#
-				<td>{{ data['date'] }}</td>
-				<td>{{ data['time'] }}</td>
-				<td>{{ data['status'] }}</td>
-				<td>{{ data['pop'] }}%</td>
-				<td>{{ data['temp'] }} F</td>
-				#}
-				<td>{{ data[1] }}</td>
-				<td>{{ data[2] }}</td>
-				<td>{{ data[3] }}</td>
-				<td>{{ data[4] }}%</td>
-				<td>{{ data[5] }} F</td>
-				</tr>	
-				{% endfor %}
+					<tr class="row">
+					<th class="col-3">Date</th>
+					<th class="col-3">Time</th>
+					<th class="col-3">Status</th>
+					<th class="col-3">Precip %</th>
+					<th class="col-3">Temp F</th></tr>
+					{% for data in data['weather'] %}
+					<tr>
+					{#
+					<td>{{ data['date'] }}</td>
+					<td>{{ data['time'] }}</td>
+					<td>{{ data['status'] }}</td>
+					<td>{{ data['pop'] }}%</td>
+					<td>{{ data['temp'] }} F</td>
+					#}
+					<td>{{ data[1] }}</td>
+					<td>{{ data[2] }}</td>
+					<td>{{ data[3] }}</td>
+					<td>{{ data[4] }}%</td>
+					<td>{{ data[5] }} F</td>
+					</tr>	
+					{% endfor %}
 				</table>
 			</p>
 			{#
