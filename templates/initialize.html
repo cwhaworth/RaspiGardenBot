@@ -30,34 +30,26 @@
 						<p>Enable System: </p>
 						<label class="switch">
 							<input type="checkbox" name="system_enable" value="True" checked>
-							<span class="slider"></span>
 						</label></br>
 						{%else%}
 						<p>Enable System: </p>
 						<label class="switch">
 							<input type="checkbox" name="system_enable" value="False">
-							<span class="slider"></span>
 						</label></br>
 						{%endif%}
 					</div>
 					<div class="row">
 						<h3>Weather API Parameters:</h3>
 						{%if data['use_api']%}
-						<p>Use Weather API: </p>
-						<label class="switch">
-							<input type="checkbox" name="use_api" value="True" checked>
-							<span class="slider"></span>
-						</label></br>
+						<p class="col">Use Weather API: </p>
+						<input class="col" type="checkbox" name="use_api" value="True" checked></br>
 						{%else%}
-						<p>Use Weather API: </p>
-						<label class="switch">
-							<input type="checkbox" name="use_api" value="False">
-							<span class="slider"></span>
-						</label></br>
+						<p class="col" >Use Weather API: </p>
+						<input class="col" type="checkbox" name="use_api" value="False"></br>
 						{%endif%}
-						<p>City: </p><input type="text" class="initForm" name="api_city" placeholder="city name" value={{data['api_city']}}></br>
-						<p>State: </p><input type="text" class="initForm" name="api_state" placeholder="ex: NC, AZ" value={{data['api_state']}}></br>
-						<p>Country: </p><input type="text" class="initForm" name="api_country" placeholder="ex: US, UK" value={{data['api_country']}}>		
+						<p class="col" >City: </p><input class="col" type="text" name="api_city" placeholder="city name" value={{data['api_city']}}></br>
+						<p class="col" >State: </p><input class="col" type="text" name="api_state" placeholder="ex: NC, AZ" value={{data['api_state']}}></br>
+						<p class="col" >Country: </p><input class="col" type="text" name="api_country" placeholder="ex: US, UK" value={{data['api_country']}}>		
 					</div>
 				</div>
 				<div class="col">
