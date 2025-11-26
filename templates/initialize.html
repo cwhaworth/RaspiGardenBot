@@ -97,65 +97,41 @@
 					</div>
 				</div></br>
 
-			<section class="initForm" name="initSectList">
-				{#
-				<h3>Sectors:</h3>
-				{%for sector in sectData['sector']%}
-				<div>
-					<h4>Sector {{sector['id']}}</h4>
-					<p>ID: </p><input type="text" class="initForm" name="sectorID" placeholder="Sector ID" value={{sector['id']}}></br>
-					<p>Pin: </p><input type="text" class="initForm" name="sectorPin" placeholder="GPIO Pin #" value={{sector['pin']}}></br>
-					<p>Incriment: </p><input type="text" class="initForm" name="sectorInc" placeholder="Rain Incriment" value={{sector['rain-inc']}}></br>
-					{%if sector['enabled']%}
-					<p>Enabled: </p>
-					<label class="switch">
-						<input type="checkbox" class="initForm" name="sectorEn_{{sector['id']}}" value="True" checked>
-						<span class="slider"></span>
-					</label></br>
-					{%else%}
-					<p>Enabled: </p>
-					<label class="switch">
-						<input type="checkbox" class="initForm" name="sectorEn_{{sector['id']}}" value="False">
-						<span class="slider"></span>
-					</label></br>
-					{%endif%}
-					<input type="submit" class="initForm" id="btnDelete" name="sectDel_{{sector['id']}}" value="Delete">
-				</div>
-				{%endfor%}
-				#}
+			<div class="row" name="initSectList">
 				<h3>Crops:</h3>
 				{%for crop in data['crop_data']%}
-				<div>
+				<div class="col">
 					<h4>{{crop[2]}}</h4>
-					<p>Name: </p><input type="text" class="initForm" name="crop" placeholder="Sector ID" value={{crop[2]}}></br>
-					<p>Pin: </p><input type="text" class="initForm" name="crop_pin" placeholder="GPIO Pin #" value={{crop[3]}}></br>
-					<p>Incriment: </p><input type="text" class="initForm" name="crop_rain_inc" placeholder="Rain Incriment" value={{crop[4]}}></br>
-					{%if crop[1]%}
-					<p>Enabled: </p>
-					<label class="switch">
+					<div class="row">
+						<p>Name: </p>
+						<input type="text" class="initForm" name="crop" placeholder="Sector ID" value={{crop[2]}}></br>
+					</div>
+					<div class="row">
+						<p>Pin: </p>
+						<input type="text" class="initForm" name="crop_pin" placeholder="GPIO Pin #" value={{crop[3]}}></br>
+					</div>
+					<div class="row">
+						<p>Incriment: </p>
+						<input type="text" class="initForm" name="crop_rain_inc" placeholder="Rain Incriment" value={{crop[4]}}></br>
+					</div>
+					<div class="row">
+						<p>Enabled: </p>
+						{%if crop[1]%}
 						<input type="checkbox" class="initForm" name="crop_enable_{{crop[1]}}" value="True" checked>
-						<span class="slider"></span>
-					</label></br>
-					{%else%}
-					<p>Enabled: </p>
-					<label class="switch">
+						{%else%}
 						<input type="checkbox" class="initForm" name="crop_enable_{{crop[1]}}" value="False">
-						<span class="slider"></span>
-					</label></br>
-					{%endif%}
+						{%endif%}
+					</div>
 					<input type="submit" class="initForm" id="btnDelete" name="cropDel_{{crop[1]}}" value="Delete">
 				</div>
 				{%endfor%}
 				</br>
 				{%if addButton == True%}
 				<div name="initEnd">
-					
-					{#</br></br><input type="submit" class="mainForm" id="btnAdd" name="sectAdd" value="Add New">#}
 					</br></br><input type="submit" class="mainForm" id="btnAdd" name="cropAdd" value="Add New">
 				</div>
 				{%endif%}
-			</section>
-			{#</br></br><input type="submit" class="mainForm" id="btnInit" name="sectInit" value="Initialize">#}
+			</div>
 			</br></br><input type="submit" class="mainForm" id="btnInit" name="cropInit" value="Initialize">
 		</form>
 	</div>
