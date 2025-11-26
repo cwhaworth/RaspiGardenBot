@@ -63,9 +63,9 @@
 					<td>
 					<form method="POST">
 						{%if not data['system-enable'] or not bool(crop[1])%}
-						<input name="waterNow_{{crop[2]}}"  type="submit" value="Water Now" disabled>
+						<input style="width: 95.2333px;" name="waterNow_{{crop[2]}}" type="submit" value="Water Now" disabled>
 						{%else%}
-						<input name="waterNow_{{crop[2]}}"  type="submit" value="Water Now">
+						<input style="width: 95.2333px;" name="waterNow_{{crop[2]}}" type="submit" value="Water Now">
 						{%endif%}
 					</form>
 					</td>
@@ -94,28 +94,18 @@
 	<h3>System Data</h3>
 	<h4>Temperature</h4>
 	<table>
-	<tr>
-	{#
-	{% for temp in data['sysData'].sysTemp %}
-		<th>{{temp['time'][:-3]}} {{temp['date'][:-5]}}</th>
-	{% endfor %}
-	#}
-	{% for temp in data['sysData'] %}
-		<th>{{temp[2][:-3]}} {{temp[1][:-5]}}</th>
-	{% endfor %}
-	<th>Current<br>{{data['cpuTemp'].time}}</th>
-	</tr>
-	<tr>
-	{#
-	{% for temp in data['sysData'].sysTemp %}
-		<td>{{temp['temp']}}</td>
-	{% endfor %}
-	#}
-	{% for temp in data['sysData'] %}
-		<td>{{temp[3]}}</td>
-	{% endfor %}
-	<td>{{data['cpuTemp'].temp}}</td>
-	</tr>
+		<tr class="row-cols-{{data['sysData']}}">
+			{% for temp in data['sysData'] %}
+			<th class="col-2">{{temp[2][:-3]}} {{temp[1][:-5]}}</th>
+			{% endfor %}
+			<th class="col-2">Current<br>{{data['cpuTemp'].time}}</th>
+		</tr>
+		<tr>
+			{% for temp in data['sysData'] %}
+			<td>{{temp[3]}}</td>
+			{% endfor %}
+			<td>{{data['cpuTemp'].temp}}</td>
+		</tr>
 	</table>
 </div>
 
