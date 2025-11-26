@@ -24,7 +24,7 @@
 		<div class="col">
 			<h3>Weather Report for {{data['api-city']}}, {{data['api-state']}}, {{data['api-country']}}</h3>
 			<table>
-				<tr class="row-cols-5">
+				<tr class="row row-cols-5">
 					<th class="col-1">Date</th>
 					<th class="col-1">Time</th>
 					<th class="col-1">Status</th>
@@ -49,7 +49,7 @@
 		<div class="col">
 			<h3>Crops</h3>
 			<table>
-				<tr class="row-cols-4">
+				<tr class="row row-cols-4">
 					<th class="col-1">Crop</th>
 					<th class="col-1">Pin</th>
 					<th class="col-1">Rain Inc.</th>
@@ -90,25 +90,23 @@
 			</table>
 		</div>
 	</div>
-<div name="sysData">
-	<h3>System Data</h3>
-	<h4>Temperature</h4>
-	<table>
-		<tr class="row-cols-{{data['sysData']}}">
-			{% for temp in data['sysData'] %}
-			<th class="col-2">{{temp[1][:-5]}}<br>{{temp[2][:-3]}}</th>
-			{% endfor %}
-			<th class="col-2">Current<br>{{data['cpuTemp'].time}}</th>
-		</tr>
-		<tr>
-			{% for temp in data['sysData'] %}
-			<td>{{temp[3]}}</td>
-			{% endfor %}
-			<td>{{data['cpuTemp'].temp}}</td>
-		</tr>
-	</table>
-</div>
-
-
+	<div name="sysData">
+		<h3>System Data</h3>
+		<h4>Temperature</h4>
+		<table>
+			<tr class="row row-cols-{{data['sysData']}}">
+				{% for temp in data['sysData'] %}
+				<th class="col-2">{{temp[1][:-5]}}<br>{{temp[2][:-3]}}</th>
+				{% endfor %}
+				<th class="col-2">Current<br>{{data['cpuTemp'].time}}</th>
+			</tr>
+			<tr>
+				{% for temp in data['sysData'] %}
+				<td>{{temp[3]}}</td>
+				{% endfor %}
+				<td>{{data['cpuTemp'].temp}}</td>
+			</tr>
+		</table>
+	</div>
 </body>
 </html>
