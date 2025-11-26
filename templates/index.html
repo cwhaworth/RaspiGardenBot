@@ -28,16 +28,16 @@
 					<th class="col-1">Date</th>
 					<th class="col-1">Time</th>
 					<th class="col-1">Status</th>
-					<th class="col">Precip %</th>
-					<th class="col">Temp (F)</th>
+					<th class="col-1">Precip %</th>
+					<th class="col-1">Temp (F)</th>
 				</tr>
 				{% for data in data['weather'] %}
 				<tr>
 					<td>{{ data[1] }}</td>
 					<td>{{ data[2] }}</td>
 					<td>{{ data[3] }}</td>
-					<td class="text-end">{{ data[4] }}%</td>
-					<td class="text-end">{{ data[5] }} F</td>
+					<td class="text-center">{{ data[4] }}%</td>
+					<td class="text-center">{{ data[5] }} F</td>
 				</tr>	
 				{% endfor %}
 			</table>
