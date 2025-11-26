@@ -26,7 +26,7 @@
 			<h3>Weather Report for {{data['api-city']}}, {{data['api-state']}}, {{data['api-country']}}</h3>
 			<p id="weather">
 				<table>
-				<tr><th>Date</th><th>Time</th><th>Status</th><th>Precip %</th><th>Temp F</th></tr>
+				<tr class="row"><th class="col">Date</th><th class="col">Time</th><th class="col">Status</th><th class="col">Precip %</th><th class="col">Temp F</th></tr>
 				{% for data in data['weather'] %}
 				<tr>
 				{#
