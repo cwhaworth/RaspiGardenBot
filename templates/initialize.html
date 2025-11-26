@@ -27,32 +27,35 @@
 					<div class="row">
 						<h3>Irrigation System Initialization</h3>
 						<div class="row">
-							<p class="col">Enable System: </p>
+							<p class="col-1">Enable System: </p>
 							{%if data['system_enable']%}
-							<input class="col" type="checkbox" name="system_enable" value="True" checked></br>
+							<input class="col-1" type="checkbox" name="system_enable" value="True" checked></br>
 							{%else%}
-							<input class="col" type="checkbox" name="system_enable" value="False"></br>
+							<input class="col-1" type="checkbox" name="system_enable" value="False"></br>
 							{%endif%}
 						</div>
 					</div>
 					<div class="row">
 						<h3>Weather API Parameters:</h3>
 						<div class="row">
-							<p class="col">Use Weather API: </p>
+							<p class="col-1" >Use Weather API: </p>
 							{%if data['use_api']%}
-							<input class="col" type="checkbox" name="use_api" value="True" checked></br>
+							<input class="col-1"  type="checkbox" name="use_api" value="True" checked></br>
 							{%else%}
-							<input class="col" type="checkbox" name="use_api" value="False"></br>
+							<input class="col-1"  type="checkbox" name="use_api" value="False"></br>
 							{%endif%}
 						</div>
 						<div class="row">
-							<p class="col" >City: </p><input class="col" type="text" name="api_city" placeholder="city name" value={{data['api_city']}}></br>
+							<p class="col-1">City: </p>
+							<input class="col-1" type="text" name="api_city" placeholder="city name" value={{data['api_city']}}></br>
 						</div>
 						<div class="row">
-							<p class="col" >State: </p><input class="col" type="text" name="api_state" placeholder="ex: NC, AZ" value={{data['api_state']}}></br>
+							<p class="col-1">State: </p>
+							<input class="col-1" type="text" name="api_state" placeholder="ex: NC, AZ" value={{data['api_state']}}></br>
 						</div>
 						<div class="row">
-							<p class="col" >Country: </p><input class="col" type="text" name="api_country" placeholder="ex: US, UK" value={{data['api_country']}}>		
+							<p class="col-1">Country: </p>
+							<input class="col-1" type="text" name="api_country" placeholder="ex: US, UK" value={{data['api_country']}}>		
 						</div>
 					</div>
 				</div>
