@@ -23,26 +23,24 @@
 	<div class="container align-content-center row">
 		<div class="col">
 			<h3>Weather Report for {{data['api-city']}}, {{data['api-state']}}, {{data['api-country']}}</h3>
-			<p id="weather">
-				<table>
-					<tr class="row-cols-5">
-						<th class="col-2">Date</th>
-						<th class="col-2">Time</th>
-						<th class="col-2">Status</th>
-						<th class="col-2">Precip %</th>
-						<th class="col-2">Temp F</th>
-					</tr>
-					{% for data in data['weather'] %}
-					<tr>
-						<td>{{ data[1] }}</td>
-						<td>{{ data[2] }}</td>
-						<td>{{ data[3] }}</td>
-						<td>{{ data[4] }}%</td>
-						<td>{{ data[5] }} F</td>
-					</tr>	
-					{% endfor %}
-				</table>
-			</p>
+			<table>
+				<tr class="row-cols-5">
+					<th class="col-2">Date</th>
+					<th class="col-2">Time</th>
+					<th class="col-2">Status</th>
+					<th class="col-2">Precip %</th>
+					<th class="col-2">Temp F</th>
+				</tr>
+				{% for data in data['weather'] %}
+				<tr>
+					<td>{{ data[1] }}</td>
+					<td>{{ data[2] }}</td>
+					<td>{{ data[3] }}</td>
+					<td>{{ data[4] }}%</td>
+					<td>{{ data[5] }} F</td>
+				</tr>	
+				{% endfor %}
+			</table>
 			{%if data['use-api']%}
 			<p>Last rained <b>{{data['last-rain']}}</b> days ago</p>
 			{%endif%}
@@ -50,41 +48,46 @@
 
 		<div class="col">
 			<h3>Sectors</h3>
-			<p id="sectorTable">
-				<table>
-					<tr class="row-cols-4">
-						<th class="col-2">Crop</th>
-						<th class="col-2">Pin</th>
-						<th class="col-2">Rain Inc.</th>
-						<th class="col-2">Override</th>
-					</tr>
-					{% for crop in data['cropData'] %}
-					<tr>
-						<td name="cropName">{{crop[2]}}</td>
-						<td name="cropPin">{{crop[3]}}</td>
-						<td name="cropInc">{{crop[4]}}</td>
-						<td>
+			<table>
+				<tr class="row-cols-4">
+					<th class="col-2">Crop</th>
+					<th class="col-2">Pin</th>
+					<th class="col-2">Rain Inc.</th>
+					<th class="col-2">Override</th>
+				</tr>
+				{% for crop in data['cropData'] %}
+				<tr>
+					<td name="cropName">{{crop[2]}}</td>
+					<td name="cropPin">{{crop[3]}}</td>
+					<td name="cropInc">{{crop[4]}}</td>
+					<td>
+					<form method="POST">
+						{%if not data['system-enable'] or not bool(crop[1])%}
+						<input name="waterNow_{{crop[2]}}"  type="submit" value="Water Now" disabled>
+						{%else%}
+						<input name="waterNow_{{crop[2]}}"  type="submit" value="Water Now">
+						{%endif%}
+					</form>
+					</td>
+				</tr>
+				{% endfor %}
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>
 						<form method="POST">
-							{%if not data['system-enable'] or not bool(crop[1])%}
-							<input name="waterNow_{{crop[2]}}"  type="submit" value="Water Now" disabled>
-							{%else%}
-							<input name="waterNow_{{crop[2]}}"  type="submit" value="Water Now">
-							{%endif%}
+							<div>
+								{%if not data['system-enable']%}
+								<input name="waterAll" type="submit" value="Water All" disabled>
+								{%else%}
+								<input name="waterAll" type="submit" value="Water All">
+								{%endif%}
+							</div>
 						</form>
-						</td>
-					</tr>
-					{% endfor %}
-				</table>
-			</p>
-			<form class="row justify-content-end" method="POST">
-				<div class="col-2">
-					{%if not data['system-enable']%}
-					<input name="waterAll" type="submit" value="Water All" disabled>
-					{%else%}
-					<input name="waterAll" type="submit" value="Water All">
-					{%endif%}
-				</div>
-			</form>
+					</td>
+				</tr>
+			</table>
 		</div>
 	</div>
 <div name="sysData">
