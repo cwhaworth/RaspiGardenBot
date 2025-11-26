@@ -62,14 +62,38 @@
 				<div class="col">
 					<div class="row">
 						<h3>System Parameters:</h3>
-						<p>Pump Pin: </p><input type="text" class="initForm" name="pump_pin" placeholder="GPIO Pin #" value={{data['pump_pin']}}></br>
-						<p>Valve Enable Pin: </p><input type="text" class="initForm" name="valve_enable_pin" placeholder="GPIO Pin #" value={{data['valve_enable_pin']}}></br>
-						<p>Valve Open Pin: </p><input type="text" class="initForm" name="valve_open_pin" placeholder="GPIO Pin #" value={{data['valve_open_pin']}}></br>
-						<p>Valve Close Pin: </p><input type="text" class="initForm" name="valve_close_pin" placeholder="GPIO Pin #" value={{data['valve_close_pin']}}></br>
-						<p>Delay Before (Seconds): </p><input type="text" class="initForm" name="delay_before" placeholder="Seconds" value={{data['delay_before']}}></br>
-						<p>Delay After (Seconds): </p><input type="text" class="initForm" name="delay_after" placeholder="Seconds" value={{data['delay_after']}}></br>
-						<p>Water Time (Seconds): </p><input type="text" class="initForm" name="water_time" placeholder="Seconds" value={{data['water_time']}}></br>
-						<p>Max Crops: </p><input type="text" class="initForm" name="max_crops" placeholder="# of Relays" value={{data['max_sectors']}}>		
+						<div class="row">
+							<p class="col">Pump Pin: </p>
+							<input class="col" type="text" class="initForm" name="pump_pin" placeholder="GPIO Pin #" value={{data['pump_pin']}}></br>
+						</div>
+						<div class="row">
+							<p class="col">Valve Enable Pin: </p>
+							<input class="col" type="text" class="initForm" name="valve_enable_pin" placeholder="GPIO Pin #" value={{data['valve_enable_pin']}}></br>
+						</div>
+						<div class="row">
+							<p class="col">Valve Open Pin: </p>
+							<input class="col" type="text" class="initForm" name="valve_open_pin" placeholder="GPIO Pin #" value={{data['valve_open_pin']}}></br>
+						</div>
+						<div class="row">
+							<p class="col">Valve Close Pin: </p>
+							<input class="col" type="text" class="initForm" name="valve_close_pin" placeholder="GPIO Pin #" value={{data['valve_close_pin']}}></br>
+						</div>
+						<div class="row">
+							<p class="col">Delay Before (Seconds): </p>
+							<input class="col" type="text" class="initForm" name="delay_before" placeholder="Seconds" value={{data['delay_before']}}></br>
+						</div>
+						<div class="row">
+							<p class="col">Delay After (Seconds): </p>
+							<input class="col" type="text" class="initForm" name="delay_after" placeholder="Seconds" value={{data['delay_after']}}></br>
+						</div>
+						<div class="row">
+							<p class="col">Water Time (Seconds): </p>
+							<input class="col" type="text" class="initForm" name="water_time" placeholder="Seconds" value={{data['water_time']}}></br>
+						</div>
+						<div class="row">
+							<p class="col">Max Crops: </p>
+							<input class="col" type="text" class="initForm" name="max_crops" placeholder="# of Relays" value={{data['max_sectors']}}>	
+						</div>	
 					</div>
 				</div></br>
 
