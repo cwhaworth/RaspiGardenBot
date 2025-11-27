@@ -522,6 +522,8 @@ def initialize():
 				# 	addButton = True
 				return render_template('initialize.html', navurl=navURL, styles=styles, data=tempData, addButton=addButton)
 				# return render_template('initialize.html', navurl=navURL, styles=bootstrap, data=tempData, addButton=addButton)
+			elif key == 'logout':
+				return logout()
 			# elif key == 'sectAdd':
 			elif key == 'cropAdd':
 				#if adding a new sector
@@ -650,11 +652,13 @@ def waterLog():
 		# 	return render_template('water-log.html', navurl=navURL, styles=styles, waterLog=waterLog, formButtons=formButtons)
 		# if 'back' in request.form.keys():
 		# 	return redirect(url_for('.waterLog'))
-		if 'clear' in request.form.keys():
+		if 'logout' in request.form.keys():
+			return logout()
+		elif 'clear' in request.form.keys():
 			#clear 30 day log
 			sqlModifyQuery('delete from water_log')
 			return redirect(url_for('.waterLog'))
-		if '60daylog' in request.form.keys():
+		elif '60daylog' in request.form.keys():
 			#display 60 day log
 			formButtons = False
 			navURL = getNavURL()
@@ -662,7 +666,7 @@ def waterLog():
 			waterLog = sqlSelectQuery('select * from water_log_60', fetchall=True)
 			return render_template('water-log.html', navurl=navURL, styles=styles, waterLog=waterLog, formButtons=formButtons)
 			# return render_template('water-log.html', navurl=navURL, styles=bootstrap, waterLog=waterLog, formButtons=formButtons)
-		if 'back' in request.form.keys():
+		elif 'back' in request.form.keys():
 			return redirect(url_for('.waterLog'))
 	else:
 		navURL = getNavURL()
