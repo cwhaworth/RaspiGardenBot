@@ -64,11 +64,10 @@ def login():
 		return render_template('login.html', styles=styles)
 		# return render_template('login.html', styles=bootstrap)
 
-@app.route("/logout")
 def logout():
 	session.pop('user', None)
 	flash('You have been logged out.', 'info')
-	return redirect(url_for('login'))
+	return redirect(url_for('.login'))
 
 @app.route("/")
 @app.route("/index", methods=['GET', 'POST'])
@@ -87,6 +86,8 @@ def index():
 		for key in request.form.keys():
 			if key == 'waterAll':
 				waterAll()
+			elif key == 'logout':
+				return logout()
 			elif key.startswith('waterNow_'):
 				cropName = key.split('_')[1]
 				waterNow(cropName)
@@ -98,14 +99,7 @@ def index():
 		now = datetime.now()
 		cpu = CPUTemperature()
 		temp = round((cpu.temperature * 1.8) + 32, 1) #display temperature in fahrenheit
-		# data = {'sectData': None,
-		# 	'weather': None,
-		# 	'sysData': None,
-		# 	'cpuTemp': {
-		# 		'time': f'{now.strftime("%H:%M")}',
-		# 		'temp': f'{temp} F'
-		# 	}
-		# }
+
 		data = {
 			'api-city': sqlSelectQuery('select val_string from system_params where param = ?', ('api_city',))[0],
 			'api-state': sqlSelectQuery('select val_string from system_params where param = ?', ('api_state',))[0],
@@ -121,12 +115,8 @@ def index():
 				'temp': f'{temp} F'
 			}
 		}
-		# data['cropData'] = getJsonData('watering-sectors')
-		# data['weather'] = getForecast(getJsonData('forecast'))
-		# data['sysData'] = getJsonData('system-data')
 
 		return render_template('index.html', navurl=navURL, styles=styles, data=data)
-		# return render_template('index.html', navurl=navURL, styles=bootstrap, data=data)
 
 def waterAll():
 	'''
