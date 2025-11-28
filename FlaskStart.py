@@ -548,7 +548,7 @@ def initialize():
 				if len(tempData['crop_data']) < tempData['max_crops']:
 					addButton = True
 
-				print(f'{tempData['crop_data']}')
+				print(f'{tempData["crop_data"]}')
 				# counter = 0
 				# for i in range(len(sectID)):
 				# 	sectTemp = {'id': sectID[i],
