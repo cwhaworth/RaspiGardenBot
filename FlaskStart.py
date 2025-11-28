@@ -571,7 +571,7 @@ def initialize():
 				# return render_template('initialize.html', navurl=navURL, styles=bootstrap, sectData=tempData, addButton=addButton)
 			elif key == 'cropInit':
 				#if writing parameters
-				for key, value in tempData.keys():
+				for key, value in tempData.items():
 					if key is not "crop_data":
 						val = None
 						if isinstance(tempData[key], bool):
