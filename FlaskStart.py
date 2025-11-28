@@ -590,7 +590,7 @@ def initialize():
 						sqlModifyQuery(f'insert into crops (enabled, crop, pin, rain_inc, "date", "time") values {insert_crop}')
 					else:
 						crop_tuple = (crop_enabled_list[i], crop_names[i], crop_pins[i], crop_rain_incs[i], crop_names[i])
-						sqlModifyQuery(f'update crops set enabled = ?, crop = ?, pin = ?, rain_inc = ? where crop = ?')
+						sqlModifyQuery(f'update crops set enabled = ?, crop = ?, pin = ?, rain_inc = ? where crop = ?', crop_tuple)
 
 					crop_temp = (sqlSelectQuery('select id from crops where crop = ?', (crop_names[i],))[0],
 						crop_names[i], int(crop_pins[i]), int(crop_rain_incs[i]), bool(crop_enabled_list[i]))
