@@ -529,11 +529,11 @@ def initialize():
 				counter = 0
 				for i in range(len(crop_names)):
 					crop_temp = (sqlSelectQuery('select id from crops where crop = ?', (crop_names[i],))[0], 
-						crop_names[i], int(crop_pins[i]), int(crop_rain_incs[i]), bool(crop_enabled_list[i]))
+						bool(crop_enabled_list[i]), crop_names[i], int(crop_pins[i]), int(crop_rain_incs[i]))
 					counter = i + 1
 					tempData['crop_data'].append(crop_temp)
 
-				empty = (9999, counter + 1, 0, 0, False)
+				empty = (9999, False, counter + 1, 0, 0)
 				tempData['crop_data'].append(empty)
 				if len(tempData['crop_data']) < tempData['max_crops']:
 					addButton = True
