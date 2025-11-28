@@ -74,7 +74,7 @@
 					<td name="cropInc">{{crop[4]}}</td>
 					<td>
 					<form method="POST">
-						{%if not data['system_enable'] or not (crop[1] | bool)%}
+						{%if not data['system_enable'] or not (crop[1] | as_bool)%}
 						<input style="width: 95.2333px;" name="waterNow_{{crop[2]}}" type="submit" value="Water Now" disabled>
 						{%else%}
 						<input style="width: 95.2333px;" name="waterNow_{{crop[2]}}" type="submit" value="Water Now">
