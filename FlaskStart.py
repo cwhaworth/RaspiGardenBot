@@ -505,7 +505,7 @@ def waterLog():
 	Page contents: Log messages collected over both 30, and 60 day periods.
 	'''
 	if 'user' not in session:
-		return redirect(url_for('login'))
+		return redirect(url_for('.login'))
 
 	formButtons = True
 	if request.method == 'POST':
@@ -532,10 +532,13 @@ def waterLog():
 
 @app.route("/admin", methods=['GET', 'POST'])
 def admin():
+	if 'user' not in session:
+		return redirect(url_for('.login'))
+
 	navURL = getNavURL()
 	styles = getStyles()
 	user_data = sqlSelectQuery('select id, username, password_hash, priv_level from users', fetchall=True)
-	return render_template('admin.html', navurl=navURL, styles=styles, session=session, user_data=user_data, data=data) 
+	return render_template('admin.html', navurl=navURL, styles=styles, session=session, user_data=user_data) 
 
 def getNavURL():
 	'''
