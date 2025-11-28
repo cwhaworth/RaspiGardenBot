@@ -596,7 +596,7 @@ def initialize():
 					# 	'enabled': bool(crop_enabled_list[i])
 					# }
 
-					if not sqlSelectQuery('select count(*) from crops where crop = ?', (crop_names[i],)):
+					if sqlSelectQuery('select count(*) from crops where crop = ?', (crop_names[i],))[0] == 0:
 						insert_crop = (crop_enabled_list[i], crop_names[i], crop_pins[i], crop_rain_incs[i], str(date.today()), str(datetime.now().time()))
 						sqlModifyQuery(f'insert into crops (enabled, crop, pin, rain_inc, "date", "time") values {insert_crop}')
 					else:
