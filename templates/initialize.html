@@ -40,7 +40,7 @@
 						<h3>Irrigation System Initialization</h3>
 						<div class="row">
 							<p class="col">Enable System: </p>
-							{%if data['system_enable'] == True%}
+							{%if data['system_enable']%}
 							<input class="col" type="checkbox" name="system_enable" value="True" checked></br>
 							{%else%}
 							<input class="col" type="checkbox" name="system_enable" value="False"></br>
@@ -51,7 +51,7 @@
 						<h3>Weather API Parameters:</h3>
 						<div class="row">
 							<p class="col">Use Weather API: </p>
-							{%if data['use_api'] == True%}
+							{%if data['use_api']%}
 							<input class="col"  type="checkbox" name="use_api" value="True" checked></br>
 							{%else%}
 							<input class="col"  type="checkbox" name="use_api" value="False"></br>
@@ -129,9 +129,9 @@
 					<div class="row">
 						<p class="col">Enabled: </p>
 						{%if crop[1]%}
-						<input class="col" type="checkbox" class="initForm" name="crop_enable_{{crop[1]}}" value="True" checked>
+						<input class="col" type="checkbox" class="initForm" name="crop_enable_{{crop[2]}}" value="True" checked>
 						{%else%}
-						<input class="col" type="checkbox" class="initForm" name="crop_enable_{{crop[1]}}" value="False">
+						<input class="col" type="checkbox" class="initForm" name="crop_enable_{{crop[2]}}" value="False">
 						{%endif%}
 					</div>
 					<div class="row">
