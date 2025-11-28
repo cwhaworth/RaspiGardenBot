@@ -486,7 +486,6 @@ def initialize():
 		crop_rain_incs = request.form.getlist('crop_rain_inc')
 		crop_enabled_list = []
 
-		print(f'{crop_names}\n{crop_pins}\n{crop_rain_incs}')
 		# for id in sectID:
 		# 	sectEn.append(request.form.get(f'sectorEn_{id}', False))
 		for crop in crop_names:
@@ -549,6 +548,7 @@ def initialize():
 				if len(tempData['crop_data']) < tempData['max_crops']:
 					addButton = True
 
+				print(f'{tempData['crop_data']}')
 				# counter = 0
 				# for i in range(len(sectID)):
 				# 	sectTemp = {'id': sectID[i],
