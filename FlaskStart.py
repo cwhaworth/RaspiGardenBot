@@ -574,7 +574,10 @@ def initialize():
 
 				if crop_names:
 					crop_names_join = ','.join(crop_names)
-					sqlModifyQuery(f'delete from crops where crop not in ({crop_names_join})')
+					crop_names_db = sqlSelectQuery('select id, crop from crops')
+					for crop in crop_names_db:
+						if crop[1] not in crop_names_join:
+							sqlModifyQuery(f'delete from crops where crop = ?', (crop[1],))
 				for i in range(len(crop_names)):
 					# crop_temp = {'crop': crop_names[i],
 					# 	'pin': int(crop_pins[i]),
