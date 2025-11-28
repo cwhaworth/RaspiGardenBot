@@ -549,7 +549,7 @@ def initialize():
 					# }
 
 					if sqlSelectQuery('select count(*) from crops where crop = ?', (crop_names[i],))[0] == 0:
-						insert_crop = (crop_enabled_list[i], crop_names[i], crop_pins[i], crop_rain_incs[i], str(date.today()), str(datetime.now().time()))
+						insert_crop = (crop_enabled_list[i], crop_names[i], crop_pins[i], crop_rain_incs[i], str(date.today()), str(datetime.now().time().strftime('%H:%M:%S')))
 						sqlModifyQuery(f'insert into crops (enabled, crop, pin, rain_inc, "date", "time") values {insert_crop}')
 					else:
 						crop_tuple = (crop_enabled_list[i], crop_names[i], crop_pins[i], crop_rain_incs[i], crop_names[i])
