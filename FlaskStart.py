@@ -496,31 +496,14 @@ def initialize():
 				#if sector has been deleted
 				del_crop_name = key.split('_')[1]
 				for i in range(len(crop_names)):
-					# crop_temp = {'crop': crop_names[i],
-					# 	'pin': int(crop_pins[i]),
-					# 	'rain_inc': int(crop_rain_incs[i]),
-					# 	'enabled': bool(crop_enabled_list[i])
-					# }
 					crop_temp = (sqlSelectQuery('select id from crops where crop = ?', (crop_names[i],))[0],
-						crop_names[i], int(crop_pins[i]), int(crop_rain_incs[i]), bool(crop_enabled_list[i]))
+						bool(crop_enabled_list[i]), crop_names[i], int(crop_pins[i]), int(crop_rain_incs[i]))
 					if crop_temp[0] != del_crop_name:
 						tempData['crop_data'].append(crop_temp)
 				if len(tempData['crop_data']) < tempData['max_crops']:
 					addButton = True
 
-				# delSectID = key.split('_')[1]
-				# for i in range(len(sectID)):
-				# 	sectTemp = {'id': sectID[i],
-				# 		'pin': int(sectPin[i]),
-				# 		'rain-inc': int(sectInc[i]),
-				# 		'enabled': bool(sectEn[i])
-				# 	}
-				# 	if sectTemp['id'] != delSectID:
-				# 		tempData['sector'].append(sectTemp)
-				# if len(tempData['sector']) < tempData['max-sectors']:
-				# 	addButton = True
 				return render_template('initialize.html', navurl=navURL, styles=styles, data=tempData, addButton=addButton)
-				# return render_template('initialize.html', navurl=navURL, styles=bootstrap, data=tempData, addButton=addButton)
 			elif key == 'logout':
 				return logout()
 			elif key == 'cropAdd':
