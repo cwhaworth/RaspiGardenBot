@@ -528,45 +528,17 @@ def initialize():
 				#if adding a new sector
 				counter = 0
 				for i in range(len(crop_names)):
-					# crop_temp = {'crop': crop_names[i],
-					# 	'pin': int(crop_pins[i]),
-					# 	'rain-inc': int(crop_rain_incs[i]),
-					# 	'enabled': bool(crop_enabled_list[i])
-					# }
 					crop_temp = (sqlSelectQuery('select id from crops where crop = ?', (crop_names[i],))[0], 
 						crop_names[i], int(crop_pins[i]), int(crop_rain_incs[i]), bool(crop_enabled_list[i]))
 					counter = i + 1
 					tempData['crop_data'].append(crop_temp)
 
-				# empty = {'crop': counter + 1,
-				# 	'pin': 0,
-				# 	'rain-inc': 0,
-				# 	'enabled': False
-				# }
 				empty = (9999, counter + 1, 0, 0, False)
 				tempData['crop_data'].append(empty)
 				if len(tempData['crop_data']) < tempData['max_crops']:
 					addButton = True
 
 				print(f'{tempData["crop_data"]}')
-				# counter = 0
-				# for i in range(len(sectID)):
-				# 	sectTemp = {'id': sectID[i],
-				# 		'pin': int(sectPin[i]),
-				# 		'rain-inc': int(sectInc[i]),
-				# 		'enabled': bool(sectEn[i])
-				# 	}
-				# 	counter = i + 1
-				# 	tempData['sector'].append(sectTemp)
-
-				# empty = {'id': counter + 1,
-				# 	'pin': 0,
-				# 	'rain-inc': 0,
-				# 	'enabled': False
-				# }
-				# tempData['sector'].append(empty)
-				# if len(tempData['sector']) < tempData['max-sectors']:
-				# 	addButton = True
 				return render_template('initialize.html', navurl=navURL, styles=styles, data=tempData, addButton=addButton)
 				# return render_template('initialize.html', navurl=navURL, styles=bootstrap, sectData=tempData, addButton=addButton)
 			elif key == 'cropInit':
@@ -632,6 +604,7 @@ def initialize():
 		# if len(sectData['sector']) < sectData['max-sectors']:
 		if len(data['crop_data']) < data['max_crops']:
 			addButton = True
+		print(f'{data["crop_data"]}')
 		return render_template('initialize.html', navurl=navURL, styles=styles, data=data, addButton=addButton)
 		# return render_template('initialize.html', navurl=navURL, styles=bootstrap, data=data, addButton=addButton)
 
