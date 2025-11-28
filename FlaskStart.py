@@ -534,7 +534,7 @@ def initialize():
 					# 	'rain-inc': int(crop_rain_incs[i]),
 					# 	'enabled': bool(crop_enabled_list[i])
 					# }
-					crop_temp = (sqlSelectQuery('select id from crops where crop = ?', (crop_names[i],))[0], 
+					crop_temp = (sqlSelectQuery('select id from crops where crop = ?', (crop_names[i], fetchall=True))[0], 
 						crop_names[i], int(crop_pins[i]), int(crop_rain_incs[i]), bool(crop_enabled_list[i]))
 					counter = i + 1
 					tempData['crop_data'].append(crop_temp)
@@ -544,7 +544,7 @@ def initialize():
 				# 	'rain-inc': 0,
 				# 	'enabled': False
 				# }
-				empty = (counter + 1, 0, 0, False)
+				empty = (9999, counter + 1, 0, 0, False)
 				tempData['crop_data'].append(empty)
 				if len(tempData['crop_data']) < tempData['max_crops']:
 					addButton = True
