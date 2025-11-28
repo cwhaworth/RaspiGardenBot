@@ -21,21 +21,6 @@ app.secret_key = os.urandom(24)
 
 dbPath = '/var/www/RaspiGardenBot/database/app_data.db'
 
-bootstrap = {
-	"stylesheet": {
-		"href": "https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css",
-		"integrity": "sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
-	},	
-	"popper": {
-		"src": "https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js",
-		"integrity": "sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-	},
-	"javascript": {
-		"src": "https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js", 
-		"integrity": "sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y"
-	}
-}
-
 GPIO.setmode(GPIO.BCM)
 
 @app.route("/login", methods=['GET', 'POST'])
@@ -44,13 +29,13 @@ def login():
 		username = request.form['username']
 		password = request.form['password']
 
-		#user = getUser(username)
 		user = sqlSelectQuery('select id, username, password_hash, priv_level from users where username = ?',
 		(username,))
 		if user:
 			stored_hash = user[2].encode('utf-8')
 			if bcrypt.checkpw(password.encode('utf-8'), stored_hash):
 				session['user'] = user[1]
+				session['priv_level'] = user[3]
 				flash('Login successful!', 'success')
 				return redirect(url_for('.index'))
 			else:
@@ -62,7 +47,6 @@ def login():
 	else:
 		styles = getStyles()
 		return render_template('login.html', styles=styles)
-		# return render_template('login.html', styles=bootstrap)
 
 def logout():
 	session.pop('user', None)
@@ -116,7 +100,7 @@ def index():
 			}
 		}
 
-		return render_template('index.html', navurl=navURL, styles=styles, data=data)
+		return render_template('index.html', navurl=navURL, styles=styles, session=session, data=data)
 
 def waterAll():
 	'''
@@ -361,45 +345,11 @@ def waterNow(cropName):
 		# setJsonData('water-log', log)
 		# setJsonData('water-log-60-day', log60)
 
-def createLogMessage(message):
-	#template for log message to be written to JSON log files
-	now = datetime.now()
-	newLog = {'date': f'{now.strftime("%m/%d/%Y")}',
-			'time': f'{now.strftime("%H:%M:%S")}',
-			'message': f'{message}'
-		}
-	return newLog
-
 def insertLogMessage(message):
 	log = (str(date.today()), str(datetime.now().time()), message)
 	sqlModifyQuery(f'insert into water_log ("date", "time", message) values {log}')
 	sqlModifyQuery(f'insert into water_log_60 ("date", "time", message) values {log}')
 
-def getForecast(forecast_json):
-	'''
-	Returns first 8 entries in the stored forecast data.
-	'''
-	counter = 0
-	weather = []
-	for fcast in forecast_json['forecast']:
-		if counter == 8:
-			break
-		else:
-			weather.append(fcast)
-			counter +=1
-	return weather
-
-def stripOldLog(log, today, inc):
-	'''
-	Removes the oldest log (in days) in the 'log' list based on the 'inc' (increment).
-	'''
-	logDate = datetime.strptime(log['log'][0]['date'], '%m/%d/%Y')
-	subDate = today.date() - logDate.date()
-	if subDate.days > inc:
-		del log['log'][0]
-		return stripOldLog(log, today, inc)
-	else:
-		return log
 
 @app.route("/initialize", methods=['GET', 'POST'])
 def initialize():
@@ -417,7 +367,6 @@ def initialize():
 		return redirect(url_for('login'))
 
 	#get stored parameters
-	# sectData = getJsonData('watering-sectors')
 	data = {
 		'api_city' : sqlSelectQuery('select val_string from system_params where param = ?', ('api_city',))[0],
 		'api_country' : sqlSelectQuery('select val_string from system_params where param = ?', ('api_country',))[0],
@@ -436,29 +385,12 @@ def initialize():
 		'crop_data': sqlSelectQuery('select id, enabled, crop, pin, rain_inc from crops', fetchall=True)
 	}
 
-
 	navURL = getNavURL()
 	styles = getStyles()
 	addButton = False
 
 	if request.method == 'POST':
 		#populate data on page based on stored parameters
-		# tempData = {'last-rained': sectData['last-rained'],
-		# 	'sysEnable': bool(request.form.get('sysEnable', False)),
-		# 	'use-api': bool(request.form.get('useAPI', False)),
-		# 	'api-city': str(request.form['apiCity']),
-		# 	'api-country': str(request.form['apiCountry']),
-		# 	'api-state': str(request.form['apiState']),
-		# 	'pump-pin': int(request.form['pumpPin']),
-		# 	'sol-en-pin': int(request.form['solEnPin']),
-		# 	'sol-open-pin': int(request.form['solOpenPin']),
-		# 	'sol-close-pin': int(request.form['solClosePin']),
-		# 	'max-sectors': int(request.form['maxSectors']),
-		# 	'water-time': int(request.form['waterTime']),
-		# 	'delay-before': int(request.form['delayBefore']),
-		# 	'delay-after': int(request.form['delayAfter']),
-		# 	'sector': []
-		# }
 		tempData = {
 			'api_city': str(request.form['api_city']),
 			'api_country': str(request.form['api_country']),
@@ -476,22 +408,15 @@ def initialize():
 			'water_time': int(request.form['water_time']),
 			'crop_data': []
 		}
-		#consolidate sector data to respective sectors
-		# sectID = request.form.getlist('sectorID')
-		# sectPin = request.form.getlist('sectorPin')
-		# sectInc = request.form.getlist('sectorInc')
-		# sectEn = []
+		#consolidate crop data to respective crop data values
 		crop_names = request.form.getlist('crop_name')
 		crop_pins = request.form.getlist('crop_pin')
 		crop_rain_incs = request.form.getlist('crop_rain_inc')
 		crop_enabled_list = []
 
-		# for id in sectID:
-		# 	sectEn.append(request.form.get(f'sectorEn_{id}', False))
 		for crop in crop_names:
 			crop_enabled_list.append(request.form.get(f'crop_enable_{crop}', False))
 		for key in request.form.keys():
-			# if key.startswith('sectDel_'):
 			if key.startswith('cropDel_'):
 				#if sector has been deleted
 				del_crop_name = key.split('_')[1]
@@ -542,11 +467,6 @@ def initialize():
 						if crop[1] not in crop_names_join:
 							sqlModifyQuery(f'delete from crops where crop = ?', (crop[1],))
 				for i in range(len(crop_names)):
-					# crop_temp = {'crop': crop_names[i],
-					# 	'pin': int(crop_pins[i]),
-					# 	'rain-inc': int(crop_rain_incs[i]),
-					# 	'enabled': bool(crop_enabled_list[i])
-					# }
 
 					if sqlSelectQuery('select count(*) from crops where crop = ?', (crop_names[i],))[0] == 0:
 						insert_crop = (crop_enabled_list[i], crop_names[i], crop_pins[i], crop_rain_incs[i], str(date.today()), str(datetime.now().time().strftime('%H:%M:%S')))
@@ -562,30 +482,16 @@ def initialize():
 				if len(tempData['crop_data']) < tempData['max_crops']:
 					addButton = True
 
-				# for i in range(len(sectID)):
-				# 	sectTemp = {'id': sectID[i],
-				# 		'pin': int(sectPin[i]),
-				# 		'rain-inc': int(sectInc[i]),
-				# 		'enabled': bool(sectEn[i])
-				# 	}
-				# 	tempData['sector'].append(sectTemp)
-
-				# setJsonData('watering-sectors', tempData)
-				# if len(tempData['sector']) < tempData['max-sectors']:
-				# 	addButton = True
 				return redirect(url_for('.initialize'))
-		# if len(sectData['sector']) < sectData['max-sectors']:
+
 		if len(data['crop_data']) < sectData['max_crops']:
 			#toggle to show 'add' button to end of sector list
 			addButton = True
 		return render_template('initialize.html', navurl=navURL, styles=styles, data=data, addButton=addButton)
-		# return render_template('initialize.html', navurl=navURL, styles=bootstrap, data=data, addButton=addButton)
 	else:
-		# if len(sectData['sector']) < sectData['max-sectors']:
 		if len(data['crop_data']) < data['max_crops']:
 			addButton = True
 		return render_template('initialize.html', navurl=navURL, styles=styles, data=data, addButton=addButton)
-		# return render_template('initialize.html', navurl=navURL, styles=bootstrap, data=data, addButton=addButton)
 
 @app.route("/water-log", methods=['GET', 'POST'])
 def waterLog():
@@ -603,21 +509,6 @@ def waterLog():
 
 	formButtons = True
 	if request.method == 'POST':
-		# if 'clear' in request.form.keys():
-		# 	#clear 30 day log
-		# 	data = {'log': []
-		# 	}
-		# 	setJsonData('water-log', data)
-		# 	return redirect(url_for('.waterLog'))
-		# if '60daylog' in request.form.keys():
-		# 	#display 60 day log
-		# 	formButtons = False
-		# 	navURL = getNavURL()
-		# 	styles = getStyles()
-		# 	waterLog = getJsonData('water-log-60-day')
-		# 	return render_template('water-log.html', navurl=navURL, styles=styles, waterLog=waterLog, formButtons=formButtons)
-		# if 'back' in request.form.keys():
-		# 	return redirect(url_for('.waterLog'))
 		if 'logout' in request.form.keys():
 			return logout()
 		elif 'clear' in request.form.keys():
@@ -631,23 +522,18 @@ def waterLog():
 			styles = getStyles()
 			waterLog = sqlSelectQuery('select * from water_log_60', fetchall=True)
 			return render_template('water-log.html', navurl=navURL, styles=styles, waterLog=waterLog, formButtons=formButtons)
-			# return render_template('water-log.html', navurl=navURL, styles=bootstrap, waterLog=waterLog, formButtons=formButtons)
 		elif 'back' in request.form.keys():
 			return redirect(url_for('.waterLog'))
 	else:
 		navURL = getNavURL()
 		styles = getStyles()
-		# waterLog = getJsonData('water-log')
 		waterLog = sqlSelectQuery('select * from water_log', fetchall=True)
 		return render_template('water-log.html', navurl=navURL, styles=styles, waterLog=waterLog, formButtons=formButtons)
-		# return render_template('water-log.html', navurl=navURL, styles=bootstrap, waterLog=waterLog, formButtons=formButtons)
 
-def getToday():
-	'''
-	returns today's date.
-	'''
-	today = datetime.now()
-	return today
+@app.route("/admin", methods=['GET', 'POST'])
+def admin():
+	user_data = sqlSelectQuery('select id, username, password_hash, priv_level from users', fetchall=True)
+	return render_template('admin.html', navurl=navURL, styles=styles, user_data = user_data, data=data) 
 
 def getNavURL():
 	'''
@@ -655,7 +541,8 @@ def getNavURL():
 	'''
 	navURL = {'index': url_for('.index'),
 		'init': url_for('.initialize'),
-		'waterLog': url_for('.waterLog')
+		'waterLog': url_for('.waterLog'),
+		'admin': url_for('.admin')
 	}
 
 	return navURL
@@ -664,21 +551,9 @@ def getStyles():
 	'''
 	Gets the file for the CSS styles.
 	'''
-	# styles = url_for('static', filename='styles.css')
 	styles = url_for('static', filename='bootstrap.css')
 
 	return styles
-
-def getJsonData(filename):
-	'''
-	Gets the specified JSON file
-	'''
-	data = None
-
-	with open(f'/var/www/RaspiGardenBot/static/json/{filename}.json', 'r') as file:
-		data = json.load(file)
-
-	return data
 
 def sqlSelectQuery(query, query_params = None, fetchall = False):
 	'''
@@ -710,13 +585,6 @@ def sqlModifyQuery(query, query_params = None):
 		cur.execute(query)
 	conn.commit()
 	conn.close()
-
-def setJsonData(filename, data):
-	'''
-	Writes to the specified JSON file
-	'''
-	with open(f'/var/www/RaspiGardenBot/static/json/{filename}.json', 'w') as file:
-		json.dump(data, file, indent=2, sort_keys=True)
 
 if __name__ == '__main__':
 	app.run(debug=True)
