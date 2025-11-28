@@ -567,7 +567,7 @@ def initialize():
 				# tempData['sector'].append(empty)
 				# if len(tempData['sector']) < tempData['max-sectors']:
 				# 	addButton = True
-				return render_template('initialize.html', navurl=navURL, styles=styles, sectData=tempData, addButton=addButton)
+				return render_template('initialize.html', navurl=navURL, styles=styles, data=tempData, addButton=addButton)
 				# return render_template('initialize.html', navurl=navURL, styles=bootstrap, sectData=tempData, addButton=addButton)
 			elif key == 'cropInit':
 				#if writing parameters
