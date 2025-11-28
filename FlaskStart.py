@@ -101,12 +101,12 @@ def index():
 		temp = round((cpu.temperature * 1.8) + 32, 1) #display temperature in fahrenheit
 
 		data = {
-			'api-city': sqlSelectQuery('select val_string from system_params where param = ?', ('api_city',))[0],
-			'api-state': sqlSelectQuery('select val_string from system_params where param = ?', ('api_state',))[0],
-			'api-country': sqlSelectQuery('select val_string from system_params where param = ?', ('api_country',))[0],
-			'use-api': bool(sqlSelectQuery('select val_string from system_params where param = ?', ('use_api',))[0]),
-			'last-rain': sqlSelectQuery('select val_num from system_params where param = ?', ('last_rain',))[0],
-			'system-enable': bool(sqlSelectQuery('select val_bool from system_params where param = ?', ('system_enable',))[0]),
+			'api_city': sqlSelectQuery('select val_string from system_params where param = ?', ('api_city',))[0],
+			'api_state': sqlSelectQuery('select val_string from system_params where param = ?', ('api_state',))[0],
+			'api_country': sqlSelectQuery('select val_string from system_params where param = ?', ('api_country',))[0],
+			'use_api': bool(sqlSelectQuery('select val_string from system_params where param = ?', ('use_api',))[0]),
+			'last_rain': sqlSelectQuery('select val_num from system_params where param = ?', ('last_rain',))[0],
+			'system_enable': bool(sqlSelectQuery('select val_bool from system_params where param = ?', ('system_enable',))[0]),
 			'cropData': sqlSelectQuery('select id, enabled, crop, pin, rain_inc from crops', fetchall=True),
 			'weather': sqlSelectQuery('select * from forecast', fetchall=True),
 			'sysData': sqlSelectQuery('select * from system_temp', fetchall=True),
@@ -430,8 +430,8 @@ def initialize():
 		'valve_close_pin' : sqlSelectQuery('select val_num from system_params where param = ?', ('valve_close_pin',))[0],
 		'valve_enable_pin' : sqlSelectQuery('select val_num from system_params where param = ?', ('valve_enable_pin',))[0],
 		'valve_open_pin' : sqlSelectQuery('select val_num from system_params where param = ?', ('valve_open_pin',))[0],
-		'system_enable' : bool(sqlSelectQuery('select val_num from system_params where param = ?', ('system_enable',))[0]),
-		'use_api' : bool(sqlSelectQuery('select val_num from system_params where param = ?', ('use_api',))[0]),
+		'system_enable' : bool(sqlSelectQuery('select val_bool from system_params where param = ?', ('system_enable',))[0]),
+		'use_api' : bool(sqlSelectQuery('select val_bool from system_params where param = ?', ('use_api',))[0]),
 		'water_time' : sqlSelectQuery('select val_num from system_params where param = ?', ('water_time',))[0],
 		'crop_data': sqlSelectQuery('select id, enabled, crop, pin, rain_inc from crops', fetchall=True)
 	}

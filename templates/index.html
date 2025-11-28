@@ -34,7 +34,7 @@
 
 	<div class="container align-content-center row">
 		<div class="col">
-			<h3>Weather Report for {{data['api-city']}}, {{data['api-state']}}, {{data['api-country']}}</h3>
+			<h3>Weather Report for {{data['api_city']}}, {{data['api_state']}}, {{data['api_country']}}</h3>
 			<table>
 				<tr class="row-cols-5">
 					<th class="col-1">Date</th>
@@ -53,8 +53,8 @@
 				</tr>	
 				{% endfor %}
 			</table>
-			{%if data['use-api']%}
-			<p>Last rained <b>{{data['last-rain']}}</b> days ago</p>
+			{%if data['use_api']%}
+			<p>Last rained <b>{{data['last_rain']}}</b> days ago</p>
 			{%endif%}
 		</div>
 
@@ -74,7 +74,7 @@
 					<td name="cropInc">{{crop[4]}}</td>
 					<td>
 					<form method="POST">
-						{%if not data['system-enable'] or not bool(crop[1])%}
+						{%if not data['system_enable'] or not bool(crop[1])%}
 						<input style="width: 95.2333px;" name="waterNow_{{crop[2]}}" type="submit" value="Water Now" disabled>
 						{%else%}
 						<input style="width: 95.2333px;" name="waterNow_{{crop[2]}}" type="submit" value="Water Now">
@@ -90,7 +90,7 @@
 					<td>
 						<form method="POST">
 							<div>
-								{%if not data['system-enable']%}
+								{%if not data['system_enable']%}
 								<input name="waterAll" type="submit" value="Water All" disabled>
 								{%else%}
 								<input name="waterAll" type="submit" value="Water All">
