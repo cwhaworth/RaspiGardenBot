@@ -533,7 +533,7 @@ def initialize():
 					# 	'rain-inc': int(crop_rain_incs[i]),
 					# 	'enabled': bool(crop_enabled_list[i])
 					# }
-					crop_temp = (sqlSelectQuery('select id from crops where crop = ?', (crop_names[i],), fetchall=True)[0], 
+					crop_temp = (sqlSelectQuery('select id from crops where crop = ?', (crop_names[i],))[0], 
 						crop_names[i], int(crop_pins[i]), int(crop_rain_incs[i]), bool(crop_enabled_list[i]))
 					counter = i + 1
 					tempData['crop_data'].append(crop_temp)
