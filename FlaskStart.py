@@ -504,7 +504,7 @@ def initialize():
 					crop_temp = (sqlSelectQuery('select id from crops where crop = ?', (crop_names[i],))[0],
 						crop_names[i], int(crop_pins[i]), int(crop_rain_incs[i]), bool(crop_enabled_list[i]))
 					if crop_temp[0] != del_crop_name:
-						tempData['cropData'].append(crop_temp)
+						tempData['crop_data'].append(crop_temp)
 				if len(tempData['crop_data']) < tempData['max_crops']:
 					addButton = True
 
@@ -523,9 +523,8 @@ def initialize():
 				# return render_template('initialize.html', navurl=navURL, styles=bootstrap, data=tempData, addButton=addButton)
 			elif key == 'logout':
 				return logout()
-			# elif key == 'sectAdd':
 			elif key == 'cropAdd':
-				#if adding a new sector
+				#if adding a new crop
 				counter = 0
 				for i in range(len(crop_names)):
 					crop_temp = (sqlSelectQuery('select id from crops where crop = ?', (crop_names[i],))[0], 
@@ -533,14 +532,12 @@ def initialize():
 					counter = i + 1
 					tempData['crop_data'].append(crop_temp)
 
-				empty = (9999, False, counter + 1, 0, 0)
+				empty = (9999, False, "Plant!", 0, 0)
 				tempData['crop_data'].append(empty)
 				if len(tempData['crop_data']) < tempData['max_crops']:
 					addButton = True
 
-				print(f'{tempData["crop_data"]}')
 				return render_template('initialize.html', navurl=navURL, styles=styles, data=tempData, addButton=addButton)
-				# return render_template('initialize.html', navurl=navURL, styles=bootstrap, sectData=tempData, addButton=addButton)
 			elif key == 'cropInit':
 				#if writing parameters
 				for key, value in tempData.items():
@@ -604,7 +601,6 @@ def initialize():
 		# if len(sectData['sector']) < sectData['max-sectors']:
 		if len(data['crop_data']) < data['max_crops']:
 			addButton = True
-		print(f'{data["crop_data"]}')
 		return render_template('initialize.html', navurl=navURL, styles=styles, data=data, addButton=addButton)
 		# return render_template('initialize.html', navurl=navURL, styles=bootstrap, data=data, addButton=addButton)
 
