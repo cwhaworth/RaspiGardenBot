@@ -580,8 +580,8 @@ def initialize():
 							val = "val_num"
 						elif isinstance(tempData[key], str):
 							val = "val_string"
-						param_tuple = (val, value, key)
-						sqlModifyQuery('update system_params set ? = ? where param = ?', param_tuple)
+						param_tuple = (value, key)
+						sqlModifyQuery(f'update system_params set {val} = ? where param = ?', param_tuple)
 
 				if crop_names:
 					crop_names_join = ','.join(crop_names)
