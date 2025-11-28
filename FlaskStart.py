@@ -104,7 +104,7 @@ def index():
 			'api_city': sqlSelectQuery('select val_string from system_params where param = ?', ('api_city',))[0],
 			'api_state': sqlSelectQuery('select val_string from system_params where param = ?', ('api_state',))[0],
 			'api_country': sqlSelectQuery('select val_string from system_params where param = ?', ('api_country',))[0],
-			'use_api': bool(sqlSelectQuery('select val_string from system_params where param = ?', ('use_api',))[0]),
+			'use_api': bool(sqlSelectQuery('select val_bool from system_params where param = ?', ('use_api',))[0]),
 			'last_rain': sqlSelectQuery('select val_num from system_params where param = ?', ('last_rain',))[0],
 			'system_enable': bool(sqlSelectQuery('select val_bool from system_params where param = ?', ('system_enable',))[0]),
 			'cropData': sqlSelectQuery('select id, enabled, crop, pin, rain_inc from crops', fetchall=True),
