@@ -532,8 +532,10 @@ def waterLog():
 
 @app.route("/admin", methods=['GET', 'POST'])
 def admin():
+	navURL = getNavURL()
+	styles = getStyles()
 	user_data = sqlSelectQuery('select id, username, password_hash, priv_level from users', fetchall=True)
-	return render_template('admin.html', navurl=navURL, styles=styles, user_data = user_data, data=data) 
+	return render_template('admin.html', navurl=navURL, styles=styles, session=session, user_data=user_data, data=data) 
 
 def getNavURL():
 	'''
