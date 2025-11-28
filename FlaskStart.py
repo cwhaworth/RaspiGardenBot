@@ -481,7 +481,7 @@ def initialize():
 		# sectPin = request.form.getlist('sectorPin')
 		# sectInc = request.form.getlist('sectorInc')
 		# sectEn = []
-		crop_names = request.form.getlist('crop')
+		crop_names = request.form.getlist('crop_name')
 		crop_pins = request.form.getlist('crop_pin')
 		crop_rain_incs = request.form.getlist('crop_rain_inc')
 		crop_enabled_list = []
