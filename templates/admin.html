@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="author" content="Chris Haworth">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" href={{styles}}>
+
+	<title>RGB GUI - Home</title>
+</head>
+
+<body class="container align-self-center">
+	<div class="container align-self-center text-center">
+		<div class="row">
+			<div class="col"></div>
+			<div class="col">
+				<h1>Raspi Garden Bot Web GUI</h1>
+			</div>
+			<div class="col">
+				<form method="POST">
+					<div>
+						<input name="logout" type="submit" value="Logout">
+					</div>
+				</form>
+			</div>
+		</div>
+		<nav>
+			<a href={{navurl['index']}}>Home</a>
+			<a href={{navurl['init']}}>Initialize</a>
+			<a href={{navurl['waterLog']}}>Water Log</a> 
+			{%if session['priv_level'] == 1%}
+			<a href={{navurl['admin']}}>Admin</a>
+			{%endif%}
+		</nav>
+	</div>
+
+	<div>
+		<form method="POST">
+			<div class="row">
+				<div class="col">
+					<div class="row">
+						<h3>Admin Settings</h3>
+						<div class="row">
+							<p class="col">User Accounts:</p>
+							{%for user in user_data%}
+							<li class="list-group-item">{{user[1]}} {{user[2]}} {{user[3]}}</li>
+							{%endfor%}
+						</div>
+					</div>
+					</div>
+				</div>
+				{%for crop in data['crop_data']%}
+				<div class="col">
+					<h4>{{crop[2]}}</h4>
+					<div class="row">
+						<p class="col">Name: </p>
+						<input class="col" type="text" class="initForm" name="crop_name" placeholder="Sector ID" value={{crop[2]}}></br>
+					</div>
+					<div class="row">
+						<p class="col">Pin: </p>
+						<input class="col" type="text" class="initForm" name="crop_pin" placeholder="GPIO Pin #" value={{crop[3]}}></br>
+					</div>
+					<div class="row">
+						<p class="col">Incriment: </p>
+						<input class="col" type="text" class="initForm" name="crop_rain_inc" placeholder="Rain Incriment" value={{crop[4]}}></br>
+					</div>
+					<div class="row">
+						<p class="col">Enabled: </p>
+						{%if crop[1]%}
+						<input class="col" type="checkbox" class="initForm" name="crop_enable_{{crop[2]}}" value="True" checked>
+						{%else%}
+						<input class="col" type="checkbox" class="initForm" name="crop_enable_{{crop[2]}}" value="False">
+						{%endif%}
+					</div>
+					<div class="row">
+						<p class="col"></p>
+						<input class="col" type="submit" class="initForm" id="btnDelete" name="cropDel_{{crop[2]}}" value="Delete">
+					</div>
+				</div>
+				{%endfor%}
+				</br>
+				{%if addButton == True%}
+				<div name="initEnd">
+					</br></br><input type="submit" class="mainForm" id="btnAdd" name="cropAdd" value="Add New">
+				</div>
+				{%endif%}
+			</div>
+			</br></br><input type="submit" class="mainForm" id="btnInit" name="cropInit" value="Initialize">
+		</form>
+	</div>
+</body>
+</html>
