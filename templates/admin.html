@@ -58,20 +58,42 @@
 								{%for user in user_data%}
 								<li class="list-group-item">
 									<div class="row">
-										<div class="col-2">
-											{{user['username']}} 
-										</div>
-										<div class="col-3">
-											{{user['password_hash']}} 
-										</div>
-										<div class="col-2 text-end">
-											{{user['priv_level']}}
-										</div>
+										<form method="POST">
+											<div class="col-2">
+												{{user['username']}} 
+											</div>
+											<div class="col-3">
+												{{user['password_hash']}} 
+											</div>
+											{%if not edit%}
+											<div class="col-2 text-end">
+												{{user['priv_level']}}
+											</div>
+											<div class="col-2">
+												<input class="col-2" type="submit" name="editUser" value="Edit">
+											</div>
+											{%else%}
+											<div class="col-2 text-end">
+												<select name="priv_level">
+													<option name="priv1">1</option>
+													<option name="priv2">2</option>
+													<option name="priv3">3</option>
+													<option name="priv4">4</option>
+													<option name="priv5">5</option>
+												</select>
+											</div>
+											<div class="col-2">
+												<input class="col-2" type="submit" name="saveUser" value="Save">
+											</div>
+											{%endif%}
+										</form>
 									</div>
 								</li>
 								{%endfor%}
 							</ul>
 						</div>	
+
+						<!--Add User-->
 						<div class="row">
 							<form method="POST">
 								<input class="col-2" type="text" name="username" placeholder="Username">
@@ -82,15 +104,10 @@
 									<option name="priv3">3</option>
 									<option name="priv4">4</option>
 									<option name="priv5">5</option>
-								</select><br>
+								</select>
 								<input class="col-2" type="submit" name="addUser" placeholder="Username" value="Add User">
 							</form>
 						</div>
-					</div>
-					
-					<!--<div class="row">
-						<h3 class="col">Add User</h3>
-					-->
 					</div>
 				</div>
 			</div>
