@@ -557,7 +557,7 @@ def admin():
 				password_hash = make_hashbrowns(new_password)
 
 				if password_hash:
-					user_tuple = (new_user, password_hash, new_priv_level)
+					user_tuple = (new_user, password_hash.decode('utf-8'), new_priv_level)
 					sqlModifyQuery(f'insert into users (username, password_hash, priv_level) values {user_tuple}')
 					user_sql_resp = sqlSelectQuery('select id, username, password_hash, priv_level from users', fetchall=True)
 				return render_template('admin.html', navurl=navURL, styles=styles, session=session, user_data=user_data, edit=edit) 
