@@ -537,9 +537,14 @@ def admin():
 
 	navURL = getNavURL()
 	styles = getStyles()
-	user_data = sqlSelectQuery('select id, username, password_hash, priv_level from users', fetchall=True)
-	for user in user_data:
-		user[2] = f'**********{user[2][:-5]}'
+	user_sql_resp = sqlSelectQuery('select id, username, password_hash, priv_level from users', fetchall=True)
+	user_data = []
+	for user in user_sql_resp:
+		user_data.append({
+			'username': user_sql_resp[1],
+			'password': f'**********{user_sql_resp[2][:-5]}',
+			'priv_level': user_sql_resp[3]
+		})
 	return render_template('admin.html', navurl=navURL, styles=styles, session=session, user_data=user_data) 
 
 def getNavURL():
