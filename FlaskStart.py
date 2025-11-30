@@ -549,14 +549,13 @@ def admin():
 	
 	if request.method == "POST":
 		for key in request.form.keys():
-			match key:
-				if key == "addUser":
-					return render_template('admin.html', navurl=navURL, styles=styles, session=session, user_data=user_data, edit=edit) 
-				elif key.startswith("editUser_"):
-					edit = True
-					return render_template('admin.html', navurl=navURL, styles=styles, session=session, user_data=user_data, edit=edit)
-				elif key.startswith("saveUser_"):
-					return render_template('admin.html', navurl=navURL, styles=styles, session=session, user_data=user_data, edit=edit)
+			if key == "addUser":
+				return render_template('admin.html', navurl=navURL, styles=styles, session=session, user_data=user_data, edit=edit) 
+			elif key.startswith("editUser_"):
+				edit = True
+				return render_template('admin.html', navurl=navURL, styles=styles, session=session, user_data=user_data, edit=edit)
+			elif key.startswith("saveUser_"):
+				return render_template('admin.html', navurl=navURL, styles=styles, session=session, user_data=user_data, edit=edit)
 	else:
 		return render_template('admin.html', navurl=navURL, styles=styles, session=session, user_data=user_data, edit=edit) 
 
