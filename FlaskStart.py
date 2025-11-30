@@ -549,6 +549,8 @@ def admin():
 	
 	if request.method == "POST":
 		for key in request.form.keys():
+			if 'logout' in request.form.keys():
+				return logout()
 			if key == "addUser":
 				new_user = request.form.get('username')
 				new_password = request.form.get('password')
