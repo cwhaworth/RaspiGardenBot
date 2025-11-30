@@ -56,8 +56,8 @@
 							</div>
 							<ul>
 								{%for user in user_data%}
-								<li class="list-group-item">
-									<div class="row">
+								<div class="row">
+									<li class="list-group-item">								
 										<form method="POST">
 											<div class="col-2" name="username">
 												{{user['username']}} 
@@ -90,8 +90,8 @@
 												<input type="submit" name="delUser_{{user['username']}}" value="Delete">
 											</div>
 										</form>
-									</div>
-								</li>
+									</li>
+								</div>
 								{%endfor%}
 							</ul>
 						</div>	
