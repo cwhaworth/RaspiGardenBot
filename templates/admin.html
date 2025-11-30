@@ -54,21 +54,23 @@
 									Privilage Level
 								</div>
 							</div>
-							{%for user in user_data%}
-							<li class="list-group-item">
-								<div class="row">
-									<div class="col-2">
-										{{user['username']}} 
+							<ul>
+								{%for user in user_data%}
+								<li class="list-group-item">
+									<div class="row">
+										<div class="col-2">
+											{{user['username']}} 
+										</div>
+										<div class="col-4">
+											{{user['password_hash']}} 
+										</div>
+										<div class="col-2">
+											{{user['priv_level']}}
+										</div>
 									</div>
-									<div class="col-4">
-										{{user['password_hash']}} 
-									</div>
-									<div class="col-2">
-										{{user['priv_level']}}
-									</div>
-								</div>
-							</li>
-							{%endfor%}
+								</li>
+								{%endfor%}
+							</ul>
 						</div>
 					</div>
 				</div>
