@@ -550,12 +550,12 @@ def admin():
 	if request.method == "POST":
 		for key in request.form.keys():
 			match key:
-				case "addUser":
+				if key == "addUser":
 					return render_template('admin.html', navurl=navURL, styles=styles, session=session, user_data=user_data, edit=edit) 
-				case str(key.startswith("editUser_")):
+				elif key.startswith("editUser_"):
 					edit = True
 					return render_template('admin.html', navurl=navURL, styles=styles, session=session, user_data=user_data, edit=edit)
-				case str(key.startswith("saveUser_")):
+				elif key.startswith("saveUser_"):
 					return render_template('admin.html', navurl=navURL, styles=styles, session=session, user_data=user_data, edit=edit)
 	else:
 		return render_template('admin.html', navurl=navURL, styles=styles, session=session, user_data=user_data, edit=edit) 
