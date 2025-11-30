@@ -550,12 +550,28 @@ def admin():
 	if request.method == "POST":
 		for key in request.form.keys():
 			if key == "addUser":
+				new_user = request.form.get('username')
+				new_password = request.form.get('password')
+				new_priv_level = request.form.get('priv_level')
+
+				password_hash = make_hashbrowns(new_password)
+
+				if password_hash:
+					user_tuple = (new_user, password_hash, new_priv_level)
+					sqlModifyQuery(f'insert into users (username, password_hash, priv_level) values {user_tuple}')
+					user_sql_resp = sqlSelectQuery('select id, username, password_hash, priv_level from users', fetchall=True)
 				return render_template('admin.html', navurl=navURL, styles=styles, session=session, user_data=user_data, edit=edit) 
 			elif key.startswith("editUser_"):
 				edit = True
 				return render_template('admin.html', navurl=navURL, styles=styles, session=session, user_data=user_data, edit=edit)
 			elif key.startswith("saveUser_"):
+				username = request.form.get('username')
+				new_priv = request.form.get(f'privLevel_{request.form.get('username')}')
+				user_tuple = (new_priv, username)
+				sqlModifyQuery(f'update users set priv_level = ? where username = ?', user_tuple)
 				return render_template('admin.html', navurl=navURL, styles=styles, session=session, user_data=user_data, edit=edit)
+			elif key.startswith("delUser_"):
+				return render_template('admin.html', navurl=navURL, styles=styles, session=session, user_data=user_data, edit=edit) 
 	else:
 		return render_template('admin.html', navurl=navURL, styles=styles, session=session, user_data=user_data, edit=edit) 
 
@@ -609,6 +625,16 @@ def sqlModifyQuery(query, query_params = None):
 		cur.execute(query)
 	conn.commit()
 	conn.close()
+
+def make_hashbrowns(password):
+	bytes = password.encode('utf-8')
+	salt = bcrypt.gensalt()
+	password_hash = bcrypt.hashpw(bytes, salt)
+
+	if bcrypt.checkpw(password.encode('utf-8'), password_hash):
+		return password_hash
+	else:
+		return None
 
 if __name__ == '__main__':
 	app.run(debug=True)

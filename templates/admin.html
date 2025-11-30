@@ -59,7 +59,7 @@
 								<li class="list-group-item">
 									<div class="row">
 										<form method="POST">
-											<div class="col-2">
+											<div class="col-2" name="username">
 												{{user['username']}} 
 											</div>
 											<div class="col-3">
@@ -86,6 +86,9 @@
 												<input type="submit" name="saveUser_{{user['username']}}" value="Save">
 											</div>
 											{%endif%}
+											<div class="col-2">
+												<input type="submit" name="delUser_{{user['username']}}" value="Delete">
+											</div>
 										</form>
 									</div>
 								</li>
