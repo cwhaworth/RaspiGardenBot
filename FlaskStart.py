@@ -541,9 +541,9 @@ def admin():
 	user_data = []
 	for user in user_sql_resp:
 		user_data.append({
-			'username': user_sql_resp[1],
-			'password': f'**********{user_sql_resp[2][:-5]}',
-			'priv_level': user_sql_resp[3]
+			'username': user[1],
+			'password': f'**********{user[2][:-5]}',
+			'priv_level': user[3]
 		})
 	return render_template('admin.html', navurl=navURL, styles=styles, session=session, user_data=user_data) 
 
