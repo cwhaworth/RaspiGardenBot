@@ -535,6 +535,7 @@ def admin():
 	if 'user' not in session:
 		return redirect(url_for('.login'))
 
+	edit = False
 	navURL = getNavURL()
 	styles = getStyles()
 	user_sql_resp = sqlSelectQuery('select id, username, password_hash, priv_level from users', fetchall=True)
@@ -545,7 +546,19 @@ def admin():
 			'password_hash': f'**********{user[2][-5:]}',
 			'priv_level': user[3]
 		})
-	return render_template('admin.html', navurl=navURL, styles=styles, session=session, user_data=user_data) 
+	
+	if request.method == "POST":
+		for key in request.form.keys():
+			match key:
+				case "addUser":
+					return render_template('admin.html', navurl=navURL, styles=styles, session=session, user_data=user_data, edit=edit) 
+				case key.startswith("editUser_"):
+					edit = True
+					return render_template('admin.html', navurl=navURL, styles=styles, session=session, user_data=user_data, edit=edit)
+				case key.startswith("saveUser_"):
+					return render_template('admin.html', navurl=navURL, styles=styles, session=session, user_data=user_data, edit=edit)
+	else:
+		return render_template('admin.html', navurl=navURL, styles=styles, session=session, user_data=user_data, edit=edit) 
 
 def getNavURL():
 	'''
