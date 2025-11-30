@@ -566,9 +566,9 @@ def admin():
 				return render_template('admin.html', navurl=navURL, styles=styles, session=session, user_data=user_data, edit=edit)
 			elif key.startswith("saveUser_"):
 				username = request.form.get('username')
-				new_priv = request.form.get(f'privLevel_{request.form.get('username')}')
+				new_priv = request.form.get(f'privLevel_{request.form.get("username")}')
 				user_tuple = (new_priv, username)
-				sqlModifyQuery(f'update users set priv_level = ? where username = ?', user_tuple)
+				sqlModifyQuery('update users set priv_level = ? where username = ?', user_tuple)
 				return render_template('admin.html', navurl=navURL, styles=styles, session=session, user_data=user_data, edit=edit)
 			elif key.startswith("delUser_"):
 				return render_template('admin.html', navurl=navURL, styles=styles, session=session, user_data=user_data, edit=edit) 
