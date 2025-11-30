@@ -551,18 +551,6 @@ def admin():
 		for key in request.form.keys():
 			if 'logout' in request.form.keys():
 				return logout()
-			if key == "addUser":
-				new_user = request.form.get('username')
-				new_password = request.form.get('password')
-				new_priv_level = request.form.get('priv_level')
-
-				password_hash = make_hashbrowns(new_password)
-
-				if password_hash:
-					user_tuple = (new_user, password_hash.decode('utf-8'), new_priv_level)
-					sqlModifyQuery(f'insert into users (username, password_hash, priv_level) values {user_tuple}')
-					user_sql_resp = sqlSelectQuery('select id, username, password_hash, priv_level from users', fetchall=True)
-				return render_template('admin.html', navurl=navURL, styles=styles, session=session, user_data=user_data, edit=edit) 
 			elif key.startswith("editUser_"):
 				edit = True
 				return render_template('admin.html', navurl=navURL, styles=styles, session=session, user_data=user_data, edit=edit)
@@ -571,9 +559,18 @@ def admin():
 				new_priv = request.form.get(f'privLevel_{request.form.get("username")}')
 				user_tuple = (new_priv, username)
 				sqlModifyQuery('update users set priv_level = ? where username = ?', user_tuple)
-				return render_template('admin.html', navurl=navURL, styles=styles, session=session, user_data=user_data, edit=edit)
+				return redirect(url_for('.admin'))
 			elif key.startswith("delUser_"):
 				return render_template('admin.html', navurl=navURL, styles=styles, session=session, user_data=user_data, edit=edit) 
+			elif key == "addUser":
+				new_user = request.form.get('username')
+				new_password = request.form.get('password')
+				new_priv_level = request.form.get('priv_level')
+				password_hash = make_hashbrowns(new_password)
+				if password_hash:
+					user_tuple = (new_user, password_hash.decode('utf-8'), new_priv_level)
+					sqlModifyQuery(f'insert into users (username, password_hash, priv_level) values {user_tuple}')
+				return redirect(url_for('.admin')) 
 	else:
 		return render_template('admin.html', navurl=navURL, styles=styles, session=session, user_data=user_data, edit=edit) 
 
