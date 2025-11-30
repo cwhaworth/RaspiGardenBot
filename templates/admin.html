@@ -42,9 +42,21 @@
 					<div class="row">
 						<h3>Admin Settings</h3>
 						<div class="row">
-							<p class="col">User Accounts:</p>
+							<p class="col align-items-start">User Accounts:</p>
 							{%for user in user_data%}
-							<li class="list-group-item">{{user[1]}} {{user[2]}} {{user[3]}}</li>
+							<li class="list-group-item">
+								<div class="row">
+									<div class="col">
+										{{user[1]}} 
+									</div>
+									<div class="col">
+										{{user[2]}} 
+									</div>
+									<div class="col">
+										{{user[3]}}
+									</div>
+								</div>
+							</li>
 							{%endfor%}
 						</div>
 					</div>
