@@ -552,10 +552,10 @@ def admin():
 			match key:
 				case "addUser":
 					return render_template('admin.html', navurl=navURL, styles=styles, session=session, user_data=user_data, edit=edit) 
-				case key.startswith("editUser_"):
+				case str(key.startswith("editUser_")):
 					edit = True
 					return render_template('admin.html', navurl=navURL, styles=styles, session=session, user_data=user_data, edit=edit)
-				case key.startswith("saveUser_"):
+				case str(key.startswith("saveUser_")):
 					return render_template('admin.html', navurl=navURL, styles=styles, session=session, user_data=user_data, edit=edit)
 	else:
 		return render_template('admin.html', navurl=navURL, styles=styles, session=session, user_data=user_data, edit=edit) 
