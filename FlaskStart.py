@@ -591,6 +591,7 @@ def userSettings():
 	if 'user' not in session:
 		return redirect(url_for('.login'))
 
+	print(session)
 	navURL = getNavURL()
 	styles = getStyles()
 	user_sql_resp = sqlSelectQuery('select id, username, password_hash, priv_level from users where username = ?', (session['user'],), fetchall=True)
@@ -609,7 +610,7 @@ def userSettings():
 
 					oldPass_hash = make_hashbrowns(oldPass)
 
-					if oldPass_hash.decode('utf-8') == user_sql_resp[2]:
+					if oldPass_hash == user_sql_resp[2].encode('utf-8'):
 						newPass_hash = make_hashbrowns(newPass)
 						user_tuple = (newPass_hash.decode('utf-8'), user_sql_resp[1])
 						sqlModifyQuery('update users set password_hash = ? where username = ?', user_tuple)
