@@ -535,7 +535,10 @@ def admin():
 	if 'user' not in session:
 		return redirect(url_for('.login'))
 
-	edit = False
+	edit = {
+		'edit': False,
+		'username': ''
+		}
 	navURL = getNavURL()
 	styles = getStyles()
 	user_sql_resp = sqlSelectQuery('select id, username, password_hash, priv_level from users', fetchall=True)

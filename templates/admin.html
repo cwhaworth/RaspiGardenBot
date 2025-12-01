@@ -59,22 +59,22 @@
 								<li class="list-group-item">								
 									<form method="POST">
 										<div class="row">
+											<input class="col-2" type="text" name="username" value="{{user['username']}}" disabled>
+											<input class="col-3" type="text" name="password_hash" value="{{user['password_hash']}}" disabled>
 											{%if not edit%}
-											<div class="col-2" name="username">
+											<!-- <div class="col-2" name="username">
 												{{user['username']}} 
 											</div>
 											<div class="col-3">
 												{{user['password_hash']}} 
-											</div>
+											</div> -->
 											<div class="col-2 text-end">
 												{{user['priv_level']}}
 											</div>
 											<div class="col-2">
 												<input type="submit" name="editUser" value="Edit">
 											</div>
-											{%else%}
-											<input class="col-2" type="text" name="username" value="{{user['username']}}" disabled>
-											<input class="col-3" type="text" name="password_hash" value="{{user['password_hash']}}" disabled>
+											{%if edit['edit'] and user['username'] == edit['username']%}
 											<div class="col-2 text-end">
 												<select name="privLevel" value="{{user['priv_level']}}">
 													<option name="priv1" value="1">1</option>
