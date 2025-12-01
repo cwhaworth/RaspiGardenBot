@@ -549,28 +549,51 @@ def admin():
 	
 	if request.method == "POST":
 		for key in request.form.keys():
-			if 'logout' in request.form.keys():
-				return logout()
-			elif key.startswith("editUser_"):
-				edit = True
-				return render_template('admin.html', navurl=navURL, styles=styles, session=session, user_data=user_data, edit=edit)
-			elif key.startswith("saveUser_"):
-				username = request.form.get('username')
-				new_priv = request.form.get(f'privLevel_{request.form.get("username")}')
-				user_tuple = (int(new_priv), username)
-				sqlModifyQuery('update users set priv_level = ? where username = ?', user_tuple)
-				return redirect(url_for('.admin'))
-			elif key.startswith("delUser_"):
-				return render_template('admin.html', navurl=navURL, styles=styles, session=session, user_data=user_data, edit=edit) 
-			elif key == "addUser":
-				new_user = request.form.get('username')
-				new_password = request.form.get('password')
-				new_priv_level = request.form.get('priv_level')
-				password_hash = make_hashbrowns(new_password)
-				if password_hash:
-					user_tuple = (new_user, password_hash.decode('utf-8'), new_priv_level)
-					sqlModifyQuery(f'insert into users (username, password_hash, priv_level) values {user_tuple}')
-				return redirect(url_for('.admin')) 
+			match key:
+				case 'logout':
+					return logout()
+				case "editUser":
+					edit = True
+					return render_template('admin.html', navurl=navURL, styles=styles, session=session, user_data=user_data, edit=edit)
+				case "saveUser":
+					username = request.form.get('username')
+					new_priv = request.form.get(f'privLevel_{request.form.get("username")}')
+					user_tuple = (int(new_priv), username)
+					sqlModifyQuery('update users set priv_level = ? where username = ?', user_tuple)
+					return redirect(url_for('.admin'))
+				case "delUser":
+					return render_template('admin.html', navurl=navURL, styles=styles, session=session, user_data=user_data, edit=edit) 
+				case "addUser":
+					new_user = request.form.get('username')
+					new_password = request.form.get('password')
+					new_priv_level = request.form.get('priv_level')
+					password_hash = make_hashbrowns(new_password)
+					if password_hash:
+						user_tuple = (new_user, password_hash.decode('utf-8'), new_priv_level)
+						sqlModifyQuery(f'insert into users (username, password_hash, priv_level) values {user_tuple}')
+					return redirect(url_for('.admin')) 
+			# if 'logout' in request.form.keys():
+			# 	return logout()
+			# elif key.startswith("editUser_"):
+			# 	edit = True
+			# 	return render_template('admin.html', navurl=navURL, styles=styles, session=session, user_data=user_data, edit=edit)
+			# elif key.startswith("saveUser_"):
+			# 	username = request.form.get('username')
+			# 	new_priv = request.form.get(f'privLevel_{request.form.get("username")}')
+			# 	user_tuple = (int(new_priv), username)
+			# 	sqlModifyQuery('update users set priv_level = ? where username = ?', user_tuple)
+			# 	return redirect(url_for('.admin'))
+			# elif key.startswith("delUser_"):
+			# 	return render_template('admin.html', navurl=navURL, styles=styles, session=session, user_data=user_data, edit=edit) 
+			# elif key == "addUser":
+			# 	new_user = request.form.get('username')
+			# 	new_password = request.form.get('password')
+			# 	new_priv_level = request.form.get('priv_level')
+			# 	password_hash = make_hashbrowns(new_password)
+			# 	if password_hash:
+			# 		user_tuple = (new_user, password_hash.decode('utf-8'), new_priv_level)
+			# 		sqlModifyQuery(f'insert into users (username, password_hash, priv_level) values {user_tuple}')
+			# 	return redirect(url_for('.admin')) 
 	else:
 		return render_template('admin.html', navurl=navURL, styles=styles, session=session, user_data=user_data, edit=edit) 
 
