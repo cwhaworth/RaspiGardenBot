@@ -559,6 +559,7 @@ def admin():
 				case "editUser":
 					edit['edit'] = True
 					edit['username'] = request.form.get('username')
+					print(edit)
 					return render_template('admin.html', navurl=navURL, styles=styles, session=session, user_data=user_data, edit=edit)
 				case "saveUser":
 					username = request.form.get('username')
