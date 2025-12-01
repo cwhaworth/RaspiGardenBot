@@ -594,12 +594,6 @@ def userSettings():
 	navURL = getNavURL()
 	styles = getStyles()
 	user_sql_resp = sqlSelectQuery('select id, username, password_hash, priv_level from users where username = ?', (session['user'],), fetchall=True)
-	for user in user_sql_resp:
-		user_data.append({
-			'username': user[1],
-			'password_hash': f'*******...{user[2][-5:]}',
-			'priv_level': user[3]
-		})
 	
 	if request.method == "POST":
 		print(request.form)
