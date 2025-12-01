@@ -551,15 +551,15 @@ def admin():
 		})
 	
 	if request.method == "POST":
-		print(request.form)
 		for key in request.form.keys():
 			match key:
-				case 'logout':
+				case "logout":
 					return logout()
+				case "userSettings":
+					return userSettings()
 				case "editUser":
 					edit['edit'] = True
 					edit['username'] = request.form.get('username')
-					print(edit)
 					return render_template('admin.html', navurl=navURL, styles=styles, session=session, user_data=user_data, edit=edit)
 				case "saveUser":
 					username = request.form.get('username')
@@ -585,6 +585,32 @@ def admin():
 		return redirect(url_for('.admin'))
 	else:
 		return render_template('admin.html', navurl=navURL, styles=styles, session=session, user_data=user_data, edit=edit) 
+
+@app.route("/userSettings", methods=['GET', 'POST'])
+def userSettings():
+	if 'user' not in session:
+		return redirect(url_for('.login'))
+
+	navURL = getNavURL()
+	styles = getStyles()
+	user_sql_resp = sqlSelectQuery('select id, username, password_hash, priv_level from users where username = ?', (session['user'],), fetchall=True)
+	for user in user_sql_resp:
+		user_data.append({
+			'username': user[1],
+			'password_hash': f'*******...{user[2][-5:]}',
+			'priv_level': user[3]
+		})
+	
+	if request.method == "POST":
+		print(request.form)
+		for key in request.form.keys():
+			match key:
+				case "logout":
+					return logout()
+				case "userSettings":
+					return redirect(url_for('.userSettings'))
+	else:
+		return render_template('user-settings.html', navurl=navURL, styles=styles, session=session)
 
 def getNavURL():
 	'''

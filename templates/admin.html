@@ -22,6 +22,9 @@
 					<div>
 						<input name="logout" type="submit" value="Logout">
 					</div>
+					<div>
+						<input name="userSettings" type="submit" value="User Settings">
+					</div>
 				</form>
 			</div>
 		</div>
@@ -62,12 +65,6 @@
 											<input class="col-2" type="text" name="username" value="{{user['username']}}" readonly>
 											<input class="col-3" type="text" name="password_hash" value="{{user['password_hash']}}" readonly>
 											{%if not edit['edit']%}
-											<!-- <div class="col-2" name="username">
-												{{user['username']}} 
-											</div>
-											<div class="col-3">
-												{{user['password_hash']}} 
-											</div> -->
 											<div class="col-2 text-end">
 												{{user['priv_level']}}
 											</div>
@@ -120,7 +117,7 @@
 									<option name="priv2">2</option>
 									<option name="priv3">3</option>
 									<option name="priv4">4</option>
-									<option name="priv5">5</option>
+									<option name="priv5" selected>5</option>
 								</select>
 								<input class="col-2" type="submit" name="addUser" placeholder="Username" value="Add User">
 							</form>
