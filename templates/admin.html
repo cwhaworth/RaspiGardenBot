@@ -77,18 +77,21 @@
 											{%elif edit['edit']%}
 												{%if user['username'] == edit['username']%}
 												<div class="col-2 text-end">
-													<select name="privLevel" value="{{user['priv_level']}}">
-														<option name="priv1" value="1">1</option>
-														<option name="priv2" value="2">2</option>
-														<option name="priv3" value="3">3</option>
-														<option name="priv4" value="4">4</option>
-														<option name="priv5" value="5">5</option>
+													<select name="privLevel" >
+														<option name="priv1" value="1" {{'selected' if user['priv_level'] == 1 else ''}}>1</option>
+														<option name="priv2" value="2" {{'selected' if user['priv_level'] == 2 else ''}}>2</option>
+														<option name="priv3" value="3" {{'selected' if user['priv_level'] == 3 else ''}}>3</option>
+														<option name="priv4" value="4" {{'selected' if user['priv_level'] == 4 else ''}}>4</option>
+														<option name="priv5" value="5" {{'selected' if user['priv_level'] == 5 else ''}}>5</option>
 													</select>
 												</div>
-												<div class="col-2">
+												<div class="col-1">
 													<input type="submit" name="saveUser" value="Save">
 												</div>
-												<div class="col-2">
+												<div class="col-1">
+													<input type="submit" name="cancel" value="Cancel">
+												</div>
+												<div class="col-1">
 													<input type="submit" name="delUser" value="Delete">
 												</div>
 												{%else%}
