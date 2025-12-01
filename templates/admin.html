@@ -68,9 +68,14 @@
 											<div class="col-2 text-end">
 												{{user['priv_level']}}
 											</div>
-											<div class="col-2">
-												<input type="submit" name="editUser" value="Edit">
-											</div>
+												{%if user['username'] != 'groot'}
+													<div class="col-2">
+														<input type="submit" name="editUser" value="Edit">
+													</div>
+												{%else%}
+													<div class="col-2">
+													</div>
+												{%endif%}
 											{%elif edit['edit']%}
 												{%if user['username'] == edit['username']%}
 												<div class="col-2 text-end">
