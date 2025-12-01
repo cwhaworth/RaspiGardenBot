@@ -549,7 +549,7 @@ def admin():
 	
 	if request.method == "POST":
 		for key in request.form.keys():
-			match key:
+			match str(key):
 				case 'logout':
 					return logout()
 				case "editUser":
