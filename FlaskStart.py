@@ -572,6 +572,8 @@ def admin():
 						user_tuple = (new_user, password_hash.decode('utf-8'), new_priv_level)
 						sqlModifyQuery(f'insert into users (username, password_hash, priv_level) values {user_tuple}')
 					return redirect(url_for('.admin')) 
+				case _:
+					return redirect(url_for('.admin'))
 			# if 'logout' in request.form.keys():
 			# 	return logout()
 			# elif key.startswith("editUser_"):
