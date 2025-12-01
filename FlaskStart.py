@@ -607,7 +607,7 @@ def userSettings():
 					oldPass = request.form.get('oldPass')
 					newPass = request.form.get('newPass')
 
-					if bcrypt.checkpw(oldPass, user_sql_resp[2].encode('utf-8')):
+					if bcrypt.checkpw(oldPass.encode('utf-8'), user_sql_resp[2].encode('utf-8')):
 						newPass_hash = make_hashbrowns(newPass)
 						user_tuple = (newPass_hash.decode('utf-8'), user_sql_resp[1])
 						sqlModifyQuery('update users set password_hash = ? where username = ?', user_tuple)
