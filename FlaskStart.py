@@ -593,7 +593,7 @@ def userSettings():
 
 	navURL = getNavURL()
 	styles = getStyles()
-	user_sql_resp = sqlSelectQuery('select id, username, password_hash, priv_level from users where username = ?', (session['user'],), fetchall=True)
+	user_sql_resp = sqlSelectQuery('select id, username, password_hash, priv_level from users where username = ?', (session['user'],))
 	
 	print(user_sql_resp)
 	if request.method == "POST":
