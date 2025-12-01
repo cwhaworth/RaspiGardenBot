@@ -557,7 +557,8 @@ def admin():
 				case 'logout':
 					return logout()
 				case "editUser":
-					edit = True
+					edit['edit'] = True
+					edit['username'] = request.form.get('username')
 					return render_template('admin.html', navurl=navURL, styles=styles, session=session, user_data=user_data, edit=edit)
 				case "saveUser":
 					username = request.form.get('username')
