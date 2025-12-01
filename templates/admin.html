@@ -61,7 +61,7 @@
 										<div class="row">
 											<input class="col-2" type="text" name="username" value="{{user['username']}}" disabled>
 											<input class="col-3" type="text" name="password_hash" value="{{user['password_hash']}}" disabled>
-											{%if not edit%}
+											{%if not edit['edit']%}
 											<!-- <div class="col-2" name="username">
 												{{user['username']}} 
 											</div>
