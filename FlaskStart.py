@@ -548,6 +548,7 @@ def admin():
 		})
 	
 	if request.method == "POST":
+		print(request.form)
 		for key in request.form.keys():
 			match key:
 				case 'logout':
