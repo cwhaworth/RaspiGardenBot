@@ -26,8 +26,8 @@ GPIO.setmode(GPIO.BCM)
 @app.route("/login", methods=['GET', 'POST'])
 def login():
 	if request.method == 'POST':
-		username = request.form['username']
-		password = request.form['password']
+		username = request.form.get('username')
+		password = request.form.get('password')
 
 		user = sqlSelectQuery('select id, username, password_hash, priv_level from users where username = ?',
 		(username,))
@@ -607,10 +607,7 @@ def userSettings():
 					oldPass = request.form.get('oldPass')
 					newPass = request.form.get('newPass')
 
-					oldPass_hash = make_hashbrowns(oldPass)
-
-					print(f"{oldPass_hash}\n{oldPass_hash.decode('utf-8')}\n{user_sql_resp[2]}\n{user_sql_resp[2].encode('utf-8')}")
-					if oldPass_hash == user_sql_resp[2].encode('utf-8'):
+					if bcrypt.checkpw(oldPass, user_sql_resp[2].encode('utf-8')):
 						newPass_hash = make_hashbrowns(newPass)
 						user_tuple = (newPass_hash.decode('utf-8'), user_sql_resp[1])
 						sqlModifyQuery('update users set password_hash = ? where username = ?', user_tuple)
