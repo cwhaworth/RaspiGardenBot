@@ -74,23 +74,32 @@
 											<div class="col-2">
 												<input type="submit" name="editUser" value="Edit">
 											</div>
-											{%elif edit['edit'] and user['username'] == edit['username']%}
-											<div class="col-2 text-end">
-												<select name="privLevel" value="{{user['priv_level']}}">
-													<option name="priv1" value="1">1</option>
-													<option name="priv2" value="2">2</option>
-													<option name="priv3" value="3">3</option>
-													<option name="priv4" value="4">4</option>
-													<option name="priv5" value="5">5</option>
-												</select>
-											</div>
-											<div class="col-2">
-												<input type="submit" name="saveUser" value="Save">
-											</div>
+											{%elif edit['edit']%}
+												{%if user['username'] == edit['username']%}
+												<div class="col-2 text-end">
+													<select name="privLevel" value="{{user['priv_level']}}">
+														<option name="priv1" value="1">1</option>
+														<option name="priv2" value="2">2</option>
+														<option name="priv3" value="3">3</option>
+														<option name="priv4" value="4">4</option>
+														<option name="priv5" value="5">5</option>
+													</select>
+												</div>
+												<div class="col-2">
+													<input type="submit" name="saveUser" value="Save">
+												</div>
+												<div class="col-2">
+													<input type="submit" name="delUser" value="Delete">
+												</div>
+												{%else%}
+												<div class="col-2">
+												</div>
+												<div class="col-2">
+												</div>
+												<div class="col-2">
+												</div>
+												{%endif%}
 											{%endif%}
-											<div class="col-2">
-												<input type="submit" name="delUser" value="Delete">
-											</div>
 										</div>
 									</form>
 								</li>
