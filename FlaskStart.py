@@ -558,7 +558,7 @@ def admin():
 				case "saveUser":
 					username = request.form.get('username')
 					new_priv = request.form.get(f'privLevel')
-					user_tuple = (int(new_priv), username)
+					user_tuple = (new_priv, username)
 					sqlModifyQuery('update users set priv_level = ? where username = ?', user_tuple)
 					return redirect(url_for('.admin'))
 				case "delUser":
