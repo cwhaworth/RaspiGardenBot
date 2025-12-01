@@ -570,7 +570,7 @@ def admin():
 				case "cancel":
 					return redirect(url_for('.admin'))
 				case "delUser":
-					sqlModifyQuery('delete from users where username = ?', request.form.get('username'))
+					sqlModifyQuery('delete from users where username = ?', (request.form.get('username'),))
 					return redirect(url_for('.admin'))
 				case "addUser":
 					new_user = request.form.get('username')
