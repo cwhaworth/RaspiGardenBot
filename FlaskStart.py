@@ -591,11 +591,11 @@ def userSettings():
 	if 'user' not in session:
 		return redirect(url_for('.login'))
 
-	print(session)
 	navURL = getNavURL()
 	styles = getStyles()
 	user_sql_resp = sqlSelectQuery('select id, username, password_hash, priv_level from users where username = ?', (session['user'],), fetchall=True)
 	
+	print(user_sql_resp)
 	if request.method == "POST":
 		print(request.form)
 		for key in request.form.keys():
