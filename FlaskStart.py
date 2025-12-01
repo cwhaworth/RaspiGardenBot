@@ -597,7 +597,6 @@ def userSettings():
 	
 	print(user_sql_resp)
 	if request.method == "POST":
-		print(request.form)
 		for key in request.form.keys():
 			match key:
 				case "logout":
@@ -610,6 +609,7 @@ def userSettings():
 
 					oldPass_hash = make_hashbrowns(oldPass)
 
+					print(oldPass_hash)
 					if oldPass_hash == user_sql_resp[2].encode('utf-8'):
 						newPass_hash = make_hashbrowns(newPass)
 						user_tuple = (newPass_hash.decode('utf-8'), user_sql_resp[1])
