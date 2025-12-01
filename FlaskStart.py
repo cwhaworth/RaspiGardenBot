@@ -549,8 +549,7 @@ def admin():
 	
 	if request.method == "POST":
 		for key in request.form.keys():
-			print(key)
-			match str(key):
+			match key:
 				case 'logout':
 					return logout()
 				case "editUser":
@@ -558,7 +557,7 @@ def admin():
 					return render_template('admin.html', navurl=navURL, styles=styles, session=session, user_data=user_data, edit=edit)
 				case "saveUser":
 					username = request.form.get('username')
-					new_priv = request.form.get(f'privLevel_{request.form.get("username")}')
+					new_priv = request.form.get(f'privLevel')
 					user_tuple = (int(new_priv), username)
 					sqlModifyQuery('update users set priv_level = ? where username = ?', user_tuple)
 					return redirect(url_for('.admin'))

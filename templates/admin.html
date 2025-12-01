@@ -70,12 +70,11 @@
 												{{user['priv_level']}}
 											</div>
 											<div class="col-2">
-												<!-- <input type="submit" name="editUser_{{user['username']}}" value="Edit"> -->
 												<input type="submit" name="editUser" value="Edit">
 											</div>
 											{%else%}
 											<div class="col-2 text-end">
-												<select name="privLevel_{{user['username']}}">
+												<select name="privLevel">
 													<option name="priv1">1</option>
 													<option name="priv2">2</option>
 													<option name="priv3">3</option>
@@ -84,12 +83,10 @@
 												</select>
 											</div>
 											<div class="col-2">
-												<!-- <input type="submit" name="saveUser_{{user['username']}}" value="Save"> -->
 												<input type="submit" name="saveUser" value="Save">
 											</div>
 											{%endif%}
 											<div class="col-2">
-												<!-- <input type="submit" name="delUser_{{user['username']}}" value="Delete"> -->
 												<input type="submit" name="delUser" value="Delete">
 											</div>
 										</div>
