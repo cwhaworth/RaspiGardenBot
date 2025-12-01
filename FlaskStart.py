@@ -543,7 +543,7 @@ def admin():
 	for user in user_sql_resp:
 		user_data.append({
 			'username': user[1],
-			'password_hash': f'**********{user[2][-5:]}',
+			'password_hash': f'*******...{user[2][-5:]}',
 			'priv_level': user[3]
 		})
 	
@@ -557,7 +557,7 @@ def admin():
 			elif key.startswith("saveUser_"):
 				username = request.form.get('username')
 				new_priv = request.form.get(f'privLevel_{request.form.get("username")}')
-				user_tuple = (new_priv, username)
+				user_tuple = (int(new_priv), username)
 				sqlModifyQuery('update users set priv_level = ? where username = ?', user_tuple)
 				return redirect(url_for('.admin'))
 			elif key.startswith("delUser_"):
