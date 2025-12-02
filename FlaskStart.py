@@ -68,10 +68,12 @@ def index():
 
 	if request.method == 'POST':
 		for key in request.form.keys():
-			if key == 'waterAll':
-				waterAll()
-			elif key == 'logout':
+			if key == 'logout':
 				return logout()
+			elif key == 'userSettings':
+				return userSettings()
+			elif key == 'waterAll':
+				waterAll()
 			elif key.startswith('waterNow_'):
 				cropName = key.split('_')[1]
 				waterNow(cropName)
@@ -417,7 +419,11 @@ def initialize():
 		for crop in crop_names:
 			crop_enabled_list.append(request.form.get(f'crop_enable_{crop}', False))
 		for key in request.form.keys():
-			if key.startswith('cropDel_'):
+			if key == 'logout':
+				return logout()
+			elif key == 'userSettings':
+				return userSettings()
+			elif key.startswith('cropDel_'):
 				#if sector has been deleted
 				del_crop_name = key.split('_')[1]
 				for i in range(len(crop_names)):
@@ -429,8 +435,6 @@ def initialize():
 					addButton = True
 
 				return render_template('initialize.html', navurl=navURL, styles=styles, data=tempData, addButton=addButton)
-			elif key == 'logout':
-				return logout()
 			elif key == 'cropAdd':
 				#if adding a new crop
 				counter = 0
@@ -509,21 +513,41 @@ def waterLog():
 
 	formButtons = True
 	if request.method == 'POST':
-		if 'logout' in request.form.keys():
-			return logout()
-		elif 'clear' in request.form.keys():
-			#clear 30 day log
-			sqlModifyQuery('delete from water_log')
-			return redirect(url_for('.waterLog'))
-		elif '60daylog' in request.form.keys():
-			#display 60 day log
-			formButtons = False
-			navURL = getNavURL()
-			styles = getStyles()
-			waterLog = sqlSelectQuery('select * from water_log_60', fetchall=True)
-			return render_template('water-log.html', navurl=navURL, styles=styles, waterLog=waterLog, formButtons=formButtons)
-		elif 'back' in request.form.keys():
-			return redirect(url_for('.waterLog'))
+		for key in request.form.keys():
+			match key:
+				case 'logout':
+					return logout()
+				case "userSettings":
+					return userSettings()
+				case 'clear':
+					#clear 30 day log
+					sqlModifyQuery('delete from water_log')
+					return redirect(url_for('.waterLog'))
+				case '60daylog':
+					#display 60 day log
+					formButtons = False
+					navURL = getNavURL()
+					styles = getStyles()
+					waterLog = sqlSelectQuery('select * from water_log_60', fetchall=True)
+					return render_template('water-log.html', navurl=navURL, styles=styles, waterLog=waterLog, formButtons=formButtons)
+				case 'back':
+					return redirect(url_for('.waterLog'))
+		return redirect(url_for('.waterLog'))
+		# if 'logout' in request.form.keys():
+		# 	return logout()
+		# elif 'clear' in request.form.keys():
+		# 	#clear 30 day log
+		# 	sqlModifyQuery('delete from water_log')
+		# 	return redirect(url_for('.waterLog'))
+		# elif '60daylog' in request.form.keys():
+		# 	#display 60 day log
+		# 	formButtons = False
+		# 	navURL = getNavURL()
+		# 	styles = getStyles()
+		# 	waterLog = sqlSelectQuery('select * from water_log_60', fetchall=True)
+		# 	return render_template('water-log.html', navurl=navURL, styles=styles, waterLog=waterLog, formButtons=formButtons)
+		# elif 'back' in request.form.keys():
+		# 	return redirect(url_for('.waterLog'))
 	else:
 		navURL = getNavURL()
 		styles = getStyles()
@@ -611,7 +635,6 @@ def userSettings():
 						newPass_hash = make_hashbrowns(newPass)
 						user_tuple = (newPass_hash.decode('utf-8'), user_sql_resp[1])
 						sqlModifyQuery('update users set password_hash = ? where username = ?', user_tuple)
-					
 
 		return redirect(url_for('.userSettings'))
 	else:
