@@ -353,8 +353,8 @@ def insertLogMessage(message):
 	sqlModifyQuery(f'insert into water_log_60 ("date", "time", message) values {log}')
 
 
-@app.route("/initialize", methods=['GET', 'POST'])
-def initialize():
+@app.route("/config", methods=['GET', 'POST'])
+def config():
 	'''
 	Initialize page HTTP handling.
 	GET - loads/reloads the page.
@@ -434,7 +434,7 @@ def initialize():
 				if len(tempData['crop_data']) < tempData['max_crops']:
 					addButton = True
 
-				return render_template('initialize.html', navurl=navURL, styles=styles, data=tempData, addButton=addButton)
+				return render_template('config.html', navurl=navURL, styles=styles, data=tempData, addButton=addButton)
 			elif key == 'cropAdd':
 				#if adding a new crop
 				counter = 0
@@ -449,8 +449,8 @@ def initialize():
 				if len(tempData['crop_data']) < tempData['max_crops']:
 					addButton = True
 
-				return render_template('initialize.html', navurl=navURL, styles=styles, data=tempData, addButton=addButton)
-			elif key == 'cropInit':
+				return render_template('config.html', navurl=navURL, styles=styles, data=tempData, addButton=addButton)
+			elif key == 'cropSave':
 				#if writing parameters
 				for key, value in tempData.items():
 					if key is not "crop_data":
@@ -486,16 +486,16 @@ def initialize():
 				if len(tempData['crop_data']) < tempData['max_crops']:
 					addButton = True
 
-				return redirect(url_for('.initialize'))
+				return redirect(url_for('.config'))
 
 		if len(data['crop_data']) < sectData['max_crops']:
 			#toggle to show 'add' button to end of sector list
 			addButton = True
-		return render_template('initialize.html', navurl=navURL, styles=styles, data=data, addButton=addButton)
+		return render_template('config.html', navurl=navURL, styles=styles, data=data, addButton=addButton)
 	else:
 		if len(data['crop_data']) < data['max_crops']:
 			addButton = True
-		return render_template('initialize.html', navurl=navURL, styles=styles, data=data, addButton=addButton)
+		return render_template('config.html', navurl=navURL, styles=styles, data=data, addButton=addButton)
 
 @app.route("/water-log", methods=['GET', 'POST'])
 def waterLog():
@@ -533,21 +533,6 @@ def waterLog():
 				case 'back':
 					return redirect(url_for('.waterLog'))
 		return redirect(url_for('.waterLog'))
-		# if 'logout' in request.form.keys():
-		# 	return logout()
-		# elif 'clear' in request.form.keys():
-		# 	#clear 30 day log
-		# 	sqlModifyQuery('delete from water_log')
-		# 	return redirect(url_for('.waterLog'))
-		# elif '60daylog' in request.form.keys():
-		# 	#display 60 day log
-		# 	formButtons = False
-		# 	navURL = getNavURL()
-		# 	styles = getStyles()
-		# 	waterLog = sqlSelectQuery('select * from water_log_60', fetchall=True)
-		# 	return render_template('water-log.html', navurl=navURL, styles=styles, waterLog=waterLog, formButtons=formButtons)
-		# elif 'back' in request.form.keys():
-		# 	return redirect(url_for('.waterLog'))
 	else:
 		navURL = getNavURL()
 		styles = getStyles()
@@ -645,7 +630,7 @@ def getNavURL():
 	Gets the links for each page on the navigation bar.
 	'''
 	navURL = {'index': url_for('.index'),
-		'init': url_for('.initialize'),
+		'config': url_for('.config'),
 		'waterLog': url_for('.waterLog'),
 		'admin': url_for('.admin')
 	}
