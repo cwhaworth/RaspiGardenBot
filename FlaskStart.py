@@ -104,8 +104,6 @@ def stop_scheduler():
     if scheduler and scheduler.running:
         scheduler.shutdown(wait=False)
 
-start_scheduler()
-
 @app.route("/login", methods=['GET', 'POST'])
 def login():
 	if request.method == 'POST':
@@ -770,5 +768,6 @@ def make_hashbrowns(password):
 		return None
 
 if __name__ == '__main__':
+	start_scheduler()
 	latitude, longitude = getCoordinates()
 	app.run(debug=False, use_reloader=False)
