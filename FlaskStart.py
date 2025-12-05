@@ -13,6 +13,7 @@ Water Log - Displays logs for data on what was watered, and when, as well as err
 import atexit, bcrypt, geocoder, json, os, re, requests, sqlite3, time
 import RPi.GPIO as GPIO
 from datetime import date, datetime
+from geopy.geocoders import Nominatim
 from gpiozero import CPUTemperature
 from flask import flash, Flask, jsonify, redirect, render_template, request, session, url_for
 
@@ -77,14 +78,16 @@ def get_system_temp():
 
 def getCoordinates():
 	global latitude, longitude 
+	geolocator = Nominatim( user_agent='app')
 
 	city = sqlSelectQuery("select val_string from system_params where param = ?", ("api_city",))[0]
 	state = sqlSelectQuery("select val_string from system_params where param = ?", ("api_state",))[0]
 	country = sqlSelectQuery("select val_string from system_params where param = ?", ("api_country",))[0]
-	location = geocoder.geonames(f'{city}, {state}, {country}')
+	
+	location = geolocator.geocode(f'{city}, {state}, {country}')
 	print(f'{location.latlng}')
-	latitude = location.latlng[0], 
-	longitude = location.latlng[1]
+	latitude = location.latitude, 
+	longitude = location.longitude
 
 def get_forecast():
 	url = (f'{weather_api_base}?latitude={latitude}&longitude={longitude}&'
