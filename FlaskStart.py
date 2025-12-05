@@ -61,13 +61,6 @@ def sqlModifyQuery(query, query_params = None):
 	conn.commit()
 	conn.close()
 
-def getCoordinates():
-	city = sqlSelectQuery("select val_string from system_params where param = ?", ("api_city",))[0]
-	state = sqlSelectQuery("select val_string from system_params where param = ?", ("api_state",))[0]
-	country = sqlSelectQuery("select val_string from system_params where param = ?", ("api_country",))[0]
-	location = geocoder.osm(f'{city}, {state}, {country}')
-	return location.latlng[0], location.latlng[1]
-
 def insertLogMessage(message):
 	log = (str(date.today()), str(datetime.now().time()), message)
 	sqlModifyQuery(f'insert into water_log ("date", "time", message) values {log}')
@@ -83,6 +76,13 @@ def get_system_temp():
 	
 	sqlModifyQuery(f'insert into system_temp ("date", "time", temp) values {temperature}')
 
+def getCoordinates():
+	city = sqlSelectQuery("select val_string from system_params where param = ?", ("api_city",))[0]
+	state = sqlSelectQuery("select val_string from system_params where param = ?", ("api_state",))[0]
+	country = sqlSelectQuery("select val_string from system_params where param = ?", ("api_country",))[0]
+	location = geocoder.osm(f'{city}, {state}, {country}')
+	return location.latlng[0], location.latlng[1]
+
 def get_forecast():
 	url = (f'{weather_api_base}?latitude={latitude}&longitude={longitude}&'
 		f'forecast_days=2&timezone=GMT-5&&wind_speed_unit=mph&temperature_unit=fahrenheit&precipitation_unit=inch&'
@@ -90,6 +90,7 @@ def get_forecast():
 		f'hourly=temperature_2m,precipitation_probability,precipitation,cloud_cover&'
 		f'daily=precipitation_probability_max')
 	response = requests.request('GET', url)
+	print(f'{response.status_code}\n{response.json()}')
 	return response.json()
 
 def start_scheduler():
