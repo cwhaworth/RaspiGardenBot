@@ -46,18 +46,18 @@
 				<tr class="row-cols-5">
 					<th class="col-1">Date</th>
 					<th class="col-1">Time</th>
-					<th class="col-2">Cloud Cover %</th>
-					<th class="col-1 text-center">Precipitation %</th>
-					<th class="col-1 text-center">Precipitation ({{data['weather']['units']['precipitation']}})</th>
-					<th class="col-1 text-center">Temperature ({{data['weather']['units']['temp']}})</th>
+					<th class="col-2 text-end">Cloud Cover %</th>
+					<th class="col-1 text-end">Precipitation %</th>
+					<th class="col-1 text-end">Precipitation ({{data['weather']['units']['precipitation']}})</th>
+					<th class="col-1 text-end">Temperature ({{data['weather']['units']['temp']}})</th>
 				</tr>
 				<tr>
 					<td>{{ data['weather']['current']['date'] }}</td>
 					<td>{{ data['weather']['current']['time'] }}</td>
-					<td>{{ data['weather']['current']['cloud_cover'] }}</td>
-					<td class="text-center">{{ data['weather']['current']['precipitation_probability_max'] }}</td>
-					<td class="text-center">{{ data['weather']['current']['precipitation'] }}</td>
-					<td class="text-center">{{ data['weather']['current']['temp'] }}</td>
+					<td class="text-end">{{ data['weather']['current']['cloud_cover'] }}</td>
+					<td class="text-end">{{ data['weather']['current']['precipitation_probability_max'] }}</td>
+					<td class="text-end">{{ data['weather']['current']['precipitation'] }}</td>
+					<td class="text-end">{{ data['weather']['current']['temp'] }}</td>
 				</tr>
 				{% for data in data['weather']['hourly'] %}
 				<tr>
