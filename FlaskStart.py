@@ -23,9 +23,6 @@ app.secret_key = os.urandom(24)
 dbPath = '/var/www/RaspiGardenBot/database/app_data.db'
 weather_api_base = 'https://api.open-meteo.com/v1/forecast'
 
-latitude = None
-longitude = None
-
 scheduler = None
 
 GPIO.setmode(GPIO.BCM)
@@ -76,8 +73,7 @@ def get_system_temp():
 	
 	sqlModifyQuery(f'insert into system_temp ("date", "time", temp) values {temperature}')
 
-def getCoordinates():
-	global latitude, longitude 
+def getCoordinates(): 
 	geolocator = Nominatim( user_agent='app')
 
 	city = sqlSelectQuery("select val_string from system_params where param = ?", ("api_city",))[0]
@@ -90,8 +86,8 @@ def getCoordinates():
 	longitude = location.longitude
 
 def get_forecast():
-	global latitude, longitude
-	
+	latitude, longitude = getCoordinates()
+
 	url = (f'{weather_api_base}?latitude={latitude}&longitude={longitude}&'
 		f'forecast_days=2&timezone=GMT-5&&wind_speed_unit=mph&temperature_unit=fahrenheit&precipitation_unit=inch&'
 		f'current=temperature_2m,precipitation,rain,showers,snowfall,cloud_cover&'
