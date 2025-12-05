@@ -174,7 +174,7 @@ def index():
 				'cloud_cover': f'{weather_resp["current_units"]["cloud_cover"]}',
 				'precipitation': f'{weather_resp["current_units"]["precipitation"][:2]}',
 				'precipitaion_probability_max': f'{weather_resp["daily_units"]["precipitation_probability_max"]}'
-			}
+			},
 			'current': {
 				'date': now.date(),
 				'time': now.time(),
