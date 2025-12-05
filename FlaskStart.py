@@ -206,7 +206,7 @@ def index():
 									f'{weather_resp["hourly_units"]["cloud_cover"]}'),
 					'precipitation_probability': (f'{weather_resp["hourly"]["precipitation_probability"][i]}'
 												f'{weather_resp["hourly_units"]["precipitation_probability"]}'),
-					'precipitation': (f'{weather_resp["hourly"]["precipitation"][i]}\s'
+					'precipitation': (f'{weather_resp["hourly"]["precipitation"][i]} '
 									f'{weather_resp["hourly_units"]["precipitation"][:2]}')
 				})
 
