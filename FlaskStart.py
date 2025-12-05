@@ -61,9 +61,9 @@ def sqlModifyQuery(query, query_params = None):
 	conn.commit()
 	conn.close()
 
-location = geocoder.osm(f'{sqlSelectQuery("select val_string from system_params where param = ?", ("api_city",))[0]},
-	{sqlSelectQuery("select val_string from system_params where param = ?", ("api_city",))[0]},
-	{sqlSelectQuery("select val_string from system_params where param = ?", ("api_city",))[0]}')
+location = geocoder.osm(f'{sqlSelectQuery("select val_string from system_params where param = ?", ("api_city",))[0]},'
+	f'{sqlSelectQuery("select val_string from system_params where param = ?", ("api_city",))[0]},'
+	f'{sqlSelectQuery("select val_string from system_params where param = ?", ("api_city",))[0]}')
 latitude = location.latlng[0]
 longitude = location.latlng[1]
 
@@ -181,7 +181,8 @@ def index():
 				'temp': f'{weather_resp["current"]["temperature_2m"]}{weather_resp["current_units"]["temperature_2m"]}',
 				'cloud_cover': f'{weather_resp["current"]["cloud_cover"]}{weather_resp["current_units"]["cloud_cover"]}',
 				'precipitation': f'{weather_resp["current"]["precipitation"]}{weather_resp["current_units"]["precipitation"][:2]}',
-				'precipitaion_probability_max': f'{weather_resp["daily"]["precipitation_probability_max"]}{weather_resp["daily_units"]["precipitation_probability_max"]}'
+				'precipitaion_probability_max': (f'{weather_resp["daily"]["precipitation_probability_max"]}'
+												f'{weather_resp["daily_units"]["precipitation_probability_max"]}')
 			},
 			'hourly': []
 			}
@@ -195,10 +196,14 @@ def index():
 				weather_temp['hourly'].append({
 					'date': t.date(),
 					'time': t.time(),
-					'temp': f'{weather_resp["hourly"]["temperature_2m"][i]}{weather_resp["hourly_units"]["temperature_2m"]}',
-					'cloud_cover': f'{weather_resp["hourly"]["cloud_cover"][i]}{weather_resp["hourly_units"]["cloud_cover"]}',
-					'precipitation_probability': f'{weather_resp["hourly"]["precipitation_probability"][i]}{weather_resp["hourly_units"]["precipitation_probability"]}',
-					'precipitation': f'{weather_resp["hourly"]["precipitation"][i]} {weather_resp["hourly_units"]["precipitation"][:2]}'
+					'temp': (f'{weather_resp["hourly"]["temperature_2m"][i]}'
+							f'{weather_resp["hourly_units"]["temperature_2m"]}'),
+					'cloud_cover': (f'{weather_resp["hourly"]["cloud_cover"][i]}'
+									f'{weather_resp["hourly_units"]["cloud_cover"]}'),
+					'precipitation_probability': (f'{weather_resp["hourly"]["precipitation_probability"][i]}'
+												f'{weather_resp["hourly_units"]["precipitation_probability"]}'),
+					'precipitation': (f'{weather_resp["hourly"]["precipitation"][i]}\s'
+									f'{weather_resp["hourly_units"]["precipitation"][:2]}')
 				})
 
 		data = {
