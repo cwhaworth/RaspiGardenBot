@@ -81,6 +81,7 @@ def getCoordinates():
 	state = sqlSelectQuery("select val_string from system_params where param = ?", ("api_state",))[0]
 	country = sqlSelectQuery("select val_string from system_params where param = ?", ("api_country",))[0]
 	location = geocoder.osm(f'{city}, {state}, {country}')
+	print(f'{location.latlng}')
 	return location.latlng[0], location.latlng[1]
 
 def get_forecast():
