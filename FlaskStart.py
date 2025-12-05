@@ -96,7 +96,7 @@ def get_forecast():
 		f'hourly=temperature_2m,precipitation_probability,precipitation,cloud_cover&'
 		f'daily=precipitation_probability_max')
 	response = requests.request('GET', url)
-	print(f'{response.status_code}\n{response.json()}')
+	print(f'{url}\n{response.status_code}\n{response.json()}')
 	return response.json()
 
 def start_scheduler():
