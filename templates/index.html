@@ -51,14 +51,16 @@
 					<th class="col-1 text-end">Precipitation ({{data['weather']['units']['precipitation']}})</th>
 					<th class="col-1 text-end">Temperature ({{data['weather']['units']['temp']}})</th>
 				</tr>
+				<tr><td><b>Current</b></td></tr>
 				<tr>
 					<td>{{ data['weather']['current']['date'] }}</td>
 					<td>{{ data['weather']['current']['time'] }}</td>
 					<td class="text-end">{{ data['weather']['current']['cloud_cover'] }}</td>
-					<td class="text-end">{{ data['weather']['current']['precipitation_probability_max'] }} (Today's Chance)</td>
+					<td class="text-end">{{ data['weather']['current']['precipitation_probability_max'] }}<br>(Today's Chance)</td>
 					<td class="text-end">{{ data['weather']['current']['precipitation'] }}</td>
 					<td class="text-end">{{ data['weather']['current']['temp'] }}</td>
 				</tr>
+				<tr><td><b>Forecast</b></td></tr>
 				{% for data in data['weather']['hourly'] %}
 				<tr>
 					<td>{{ data['date'] }}</td>
