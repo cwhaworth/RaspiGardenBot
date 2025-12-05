@@ -61,11 +61,12 @@ def sqlModifyQuery(query, query_params = None):
 	conn.commit()
 	conn.close()
 
-location = geocoder.osm(f'{sqlSelectQuery("select val_string from system_params where param = ?", ("api_city",))[0]},'
-	f'{sqlSelectQuery("select val_string from system_params where param = ?", ("api_city",))[0]},'
-	f'{sqlSelectQuery("select val_string from system_params where param = ?", ("api_city",))[0]}')
-latitude = location.latlng[0]
-longitude = location.latlng[1]
+def getCoordinates():
+	city = sqlSelectQuery("select val_string from system_params where param = ?", ("api_city",))[0]
+	state = sqlSelectQuery("select val_string from system_params where param = ?", ("api_state",))[0]
+	country = sqlSelectQuery("select val_string from system_params where param = ?", ("api_country",))[0]
+	location = geocoder.osm(f'{city}, {state}, {country}')
+	return location.latlng[0], location.latlng[1]
 
 def insertLogMessage(message):
 	log = (str(date.today()), str(datetime.now().time()), message)
@@ -769,4 +770,5 @@ def make_hashbrowns(password):
 		return None
 
 if __name__ == '__main__':
+	latitude, longitude = getCoordinates()
 	app.run(debug=False, use_reloader=False)
