@@ -81,9 +81,8 @@ def getCoordinates():
 	country = sqlSelectQuery("select val_string from system_params where param = ?", ("api_country",))[0]
 	
 	location = geolocator.geocode(f'{city}, {state}, {country}')
-	print(f'{location.latitude}, {location.longitude}')
-	latitude = location.latitude, 
-	longitude = location.longitude
+	
+	return location.latitude, location.longitude
 
 def get_forecast():
 	latitude, longitude = getCoordinates()
