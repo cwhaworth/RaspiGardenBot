@@ -98,7 +98,7 @@ def start_scheduler():
 
 	if scheduler is not None or not scheduler.running:
 		scheduler = BackgroundScheduler()
-		scheduler.add_task(get_system_temp, "cron", minute=0)
+		scheduler.add_job(get_system_temp, "cron", minute=0)
 
 		scheduler.start()
 		atexit.register(lambda: scheduler.shutdown())
