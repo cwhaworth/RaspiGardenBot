@@ -10,7 +10,7 @@ Initialize - allows user to initialize the parameters the irriagtion system oper
 Water Log - Displays logs for data on what was watered, and when, as well as errors.
 '''
 
-import bcrypt, json, os, re, sqlite3, time
+import atexit, bcrypt, geocoder, json, os, re, sqlite3, time
 import RPi.GPIO as GPIO
 from datetime import date, datetime
 from gpiozero import CPUTemperature
@@ -20,8 +20,90 @@ app = Flask(__name__)
 app.secret_key = os.urandom(24)
 
 dbPath = '/var/www/RaspiGardenBot/database/app_data.db'
+weather_api_base = 'https://api.open-meteo.com/v1/forecast'
+
+location = None
+latitude = None
+longitude = None
+
+scheduler = None
 
 GPIO.setmode(GPIO.BCM)
+
+def sqlSelectQuery(query, query_params = None, fetchall = False):
+	'''
+	Gets result of an SQL select query from the SQLite DB
+	'''
+	conn = sqlite3.connect(dbPath)
+	cur = conn.cursor()
+	if query_params is not None:
+		cur.execute(query, query_params)
+	else:
+		cur.execute(query)
+	result = None
+	if fetchall:
+		result = cur.fetchall()
+	else:
+		result = cur.fetchone()
+	conn.close()
+	return result
+
+def sqlModifyQuery(query, query_params = None):
+	'''
+	Modifyies or inserts a record into SQLite DB table
+	'''
+	conn = sqlite3.connect(dbPath)
+	cur = conn.cursor()
+	if query_params is not None:
+		cur.execute(query, query_params)
+	else:
+		cur.execute(query)
+	conn.commit()
+	conn.close()
+
+location = geocoder.osm(f'{sqlSelectQuery("select val_string from system_params where param = ?", ("api_city",))[0]},
+	{sqlSelectQuery("select val_string from system_params where param = ?", ("api_city",))[0]},
+	{sqlSelectQuery("select val_string from system_params where param = ?", ("api_city",))[0]}')
+latitude = location.latlng[0]
+longitude = location.latlng[1]
+
+def insertLogMessage(message):
+	log = (str(date.today()), str(datetime.now().time()), message)
+	sqlModifyQuery(f'insert into water_log ("date", "time", message) values {log}')
+	sqlModifyQuery(f'insert into water_log_60 ("date", "time", message) values {log}')
+
+def get_system_temp()
+	cpu = CPUTemperature()
+	now = datetime.now()
+
+	temp = round((cpu.temperature * 1.8) + 32, 1) #convert CPU temperature from celsius to fahrenheit
+	#Create JSON object for temperature at the timestamp this script was ran.
+	temperature = (now.strftime("%m/%d/%Y"), now.strftime("%H:%M:%S"), f'{temp} F')
+	
+	sqlModifyQuery(f'insert into system_temp ("date", "time", temp) values {temperature}')
+
+def get_forecast()
+	url = (f'{weather_api_base}?latitude={latitude}&longitude={longitude}&
+		forecast_days=2&timezone=GMT-5&&wind_speed_unit=mph&temperature_unit=fahrenheit&precipitation_unit=inch&
+		current=temperature_2m,precipitation,rain,showers,snowfall,cloud_cover&
+		hourly=temperature_2m,precipitation_probability,precipitation,cloud_cover&
+		daily=precipitation_probability_max')
+	response = requests.request('GET', url)
+	return response.json()
+
+def start_scheduler()
+	if scheduler is not None or not scheduler.running:
+		scheduler = BackgroundScheduler()
+		scheduler.add_task(get_system_temp, "cron", minute=0)
+
+		scheduler.start()
+		atexit.register(lambda: scheduler.shutdown())
+
+def stop_scheduler():
+    if scheduler and scheduler.running:
+        scheduler.shutdown(wait=False)
+
+start_scheduler()
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
@@ -85,6 +167,39 @@ def index():
 		now = datetime.now()
 		cpu = CPUTemperature()
 		temp = round((cpu.temperature * 1.8) + 32, 1) #display temperature in fahrenheit
+		weather_resp = get_forecast()
+		weather_temp = {
+			'units': {
+				'temp': f'{weather_resp["current_units"]["temperature_2m"]}',
+				'cloud_cover': f'{weather_resp["current_units"]["cloud_cover"]}',
+				'precipitation': f'{weather_resp["current_units"]["precipitation"][:2]}',
+				'precipitaion_probability_max': f'{weather_resp["daily_units"]["precipitation_probability_max"]}'
+			}
+			'current': {
+				'date': now.date(),
+				'time': now.time(),
+				'temp': f'{weather_resp["current"]["temperature_2m"]}{weather_resp["current_units"]["temperature_2m"]}',
+				'cloud_cover': f'{weather_resp["current"]["cloud_cover"]}{weather_resp["current_units"]["cloud_cover"]}',
+				'precipitation': f'{weather_resp["current"]["precipitation"]}{weather_resp["current_units"]["precipitation"][:2]}',
+				'precipitaion_probability_max': f'{weather_resp["daily"]["precipitation_probability_max"]}{weather_resp["daily_units"]["precipitation_probability_max"]}'
+			},
+			'hourly': []
+			}
+		weather_start_index = None
+
+		for i in range(0, len(weather_resp['hourly']['time'])):
+			t = datetime.strptime(weather_resp['hourly']['time'][i], "%Y-%m-%dT%H:%M")
+			if t >= now and len(weather_temp['hourly'] < 13):
+				if weather_start_index = None:
+					weather_start_index = i
+				weather_temp['hourly'].append({
+					'date': t.date(),
+					'time': t.time(),
+					'temp': f'{weather_resp["hourly"]["temperature_2m"][i]}{weather_resp["hourly_units"]["temperature_2m"]}',
+					'cloud_cover': f'{weather_resp["hourly"]["cloud_cover"][i]}{weather_resp["hourly_units"]["cloud_cover"]}',
+					'precipitation_probability': f'{weather_resp["hourly"]["precipitation_probability"][i]}{weather_resp["hourly_units"]["precipitation_probability"]}',
+					'precipitation': f'{weather_resp["hourly"]["precipitation"][i]} {weather_resp["hourly_units"]["precipitation"][:2]}'
+				})
 
 		data = {
 			'api_city': sqlSelectQuery('select val_string from system_params where param = ?', ('api_city',))[0],
@@ -94,7 +209,8 @@ def index():
 			'last_rain': sqlSelectQuery('select val_num from system_params where param = ?', ('last_rain',))[0],
 			'system_enable': bool(sqlSelectQuery('select val_bool from system_params where param = ?', ('system_enable',))[0]),
 			'cropData': sqlSelectQuery('select id, enabled, crop, pin, rain_inc from crops', fetchall=True),
-			'weather': sqlSelectQuery('select * from forecast', fetchall=True),
+			# 'weather': sqlSelectQuery('select * from forecast', fetchall=True),
+			'weather': weather_temp,
 			'sysData': sqlSelectQuery('select * from system_temp', fetchall=True),
 			'cpuTemp': {
 				'time': f'{now.strftime("%H:%M")}',
@@ -346,12 +462,6 @@ def waterNow(cropName):
 		# #write to log files
 		# setJsonData('water-log', log)
 		# setJsonData('water-log-60-day', log60)
-
-def insertLogMessage(message):
-	log = (str(date.today()), str(datetime.now().time()), message)
-	sqlModifyQuery(f'insert into water_log ("date", "time", message) values {log}')
-	sqlModifyQuery(f'insert into water_log_60 ("date", "time", message) values {log}')
-
 
 @app.route("/config", methods=['GET', 'POST'])
 def config():
@@ -645,37 +755,6 @@ def getStyles():
 
 	return styles
 
-def sqlSelectQuery(query, query_params = None, fetchall = False):
-	'''
-	Gets result of an SQL select query from the SQLite DB
-	'''
-	conn = sqlite3.connect(dbPath)
-	cur = conn.cursor()
-	if query_params is not None:
-		cur.execute(query, query_params)
-	else:
-		cur.execute(query)
-	result = None
-	if fetchall:
-		result = cur.fetchall()
-	else:
-		result = cur.fetchone()
-	conn.close()
-	return result
-
-def sqlModifyQuery(query, query_params = None):
-	'''
-	Modifyies or inserts a record into SQLite DB table
-	'''
-	conn = sqlite3.connect(dbPath)
-	cur = conn.cursor()
-	if query_params is not None:
-		cur.execute(query, query_params)
-	else:
-		cur.execute(query)
-	conn.commit()
-	conn.close()
-
 def make_hashbrowns(password):
 	bytes = password.encode('utf-8')
 	salt = bcrypt.gensalt()
@@ -687,4 +766,4 @@ def make_hashbrowns(password):
 		return None
 
 if __name__ == '__main__':
-	app.run(debug=True)
+	app.run(debug=False, use_reloader=False)
