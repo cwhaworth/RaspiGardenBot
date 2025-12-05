@@ -69,7 +69,7 @@ def get_system_temp():
 
 	temp = round((cpu.temperature * 1.8) + 32, 1) #convert CPU temperature from celsius to fahrenheit
 	#Create JSON object for temperature at the timestamp this script was ran.
-	temperature = (now.strftime("%m/%d/%Y"), now.strftime("%H:%M:%S"), f'{temp} F')
+	temperature = (now.strftime("%m/%d/%Y"), now.strftime("%H:%M:%S"), f'{temp}°F')
 	
 	sqlModifyQuery(f'insert into system_temp ("date", "time", temp) values {temperature}')
 
