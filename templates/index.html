@@ -51,9 +51,6 @@
 					<th class="col-1">Precipitation ({{data['weather']['units']['precipitation']}})</th>
 					<th class="col-1">Temperature ({{data['weather']['units']['temp']}})</th>
 				</tr>
-			</table>
-				<h2>Current</h2>
-			<table>
 				<tr>
 					<td>{{ data['weather']['current']['date'] }}</td>
 					<td>{{ data['weather']['current']['time'] }}</td>
@@ -62,9 +59,6 @@
 					<td class="text-center">{{ data['weather']['current']['precipitation'] }}</td>
 					<td class="text-center">{{ data['weather']['current']['temp'] }}</td>
 				</tr>
-			</table>
-				<h2>Forecast</h2>
-			<table>
 				{% for data in data['weather']['hourly'] %}
 				<tr>
 					<td>{{ data['date'] }}</td>
