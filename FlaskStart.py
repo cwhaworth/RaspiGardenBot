@@ -173,7 +173,9 @@ def index():
 		now = datetime.now()
 		cpu = CPUTemperature()
 		temp = round((cpu.temperature * 1.8) + 32, 1) #display temperature in fahrenheit
+		
 		weather_resp = get_forecast()
+
 		weather_temp = {
 			'units': {
 				'temp': f'{weather_resp["current_units"]["temperature_2m"]}',
@@ -187,12 +189,16 @@ def index():
 				'temp': f'{weather_resp["current"]["temperature_2m"]}{weather_resp["current_units"]["temperature_2m"]}',
 				'cloud_cover': f'{weather_resp["current"]["cloud_cover"]}{weather_resp["current_units"]["cloud_cover"]}',
 				'precipitation': f'{weather_resp["current"]["precipitation"]}{weather_resp["current_units"]["precipitation"][:2]}',
-				'precipitaion_probability_max': (f'{weather_resp["daily"]["precipitation_probability_max"]}'
-												f'{weather_resp["daily_units"]["precipitation_probability_max"]}')
+				
 			},
 			'hourly': []
 			}
-
+		for i in range(0, len(weather_resp['daily']['time'])):
+			t = datetime.strptime(weather_resp['hourly']['time'][i], "%Y-%m-%d")
+			if t.date() == now.date():
+				weather_temp['current']['precipitaion_probability_max'] = (f'{weather_resp["daily"]["precipitation_probability_max"]}'
+																			f'{weather_resp["daily_units"]["precipitation_probability_max"]}')
+				break
 		for i in range(0, len(weather_resp['hourly']['time'])):
 			t = datetime.strptime(weather_resp['hourly']['time'][i], "%Y-%m-%dT%H:%M")
 			if t >= now and len(weather_temp['hourly']) < 13:
