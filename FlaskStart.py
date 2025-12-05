@@ -194,9 +194,9 @@ def index():
 			'hourly': []
 			}
 		for i in range(0, len(weather_resp['daily']['time'])):
-			t = datetime.strptime(weather_resp['hourly']['time'][i], "%Y-%m-%d")
+			t = datetime.strptime(weather_resp['daily']['time'][i], "%Y-%m-%d")
 			if t.date() == now.date():
-				weather_temp['current']['precipitaion_probability_max'] = (f'{weather_resp["daily"]["precipitation_probability_max"]}'
+				weather_temp['current']['precipitaion_probability_max'] = (f'{weather_resp["daily"]["precipitation_probability_max"][i]}'
 																			f'{weather_resp["daily_units"]["precipitation_probability_max"]}')
 				break
 		for i in range(0, len(weather_resp['hourly']['time'])):
