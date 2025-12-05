@@ -72,7 +72,7 @@ def insertLogMessage(message):
 	sqlModifyQuery(f'insert into water_log ("date", "time", message) values {log}')
 	sqlModifyQuery(f'insert into water_log_60 ("date", "time", message) values {log}')
 
-def get_system_temp()
+def get_system_temp():
 	cpu = CPUTemperature()
 	now = datetime.now()
 
@@ -82,7 +82,7 @@ def get_system_temp()
 	
 	sqlModifyQuery(f'insert into system_temp ("date", "time", temp) values {temperature}')
 
-def get_forecast()
+def get_forecast():
 	url = (f'{weather_api_base}?latitude={latitude}&longitude={longitude}&'
 		f'forecast_days=2&timezone=GMT-5&&wind_speed_unit=mph&temperature_unit=fahrenheit&precipitation_unit=inch&'
 		f'current=temperature_2m,precipitation,rain,showers,snowfall,cloud_cover&'
@@ -91,7 +91,7 @@ def get_forecast()
 	response = requests.request('GET', url)
 	return response.json()
 
-def start_scheduler()
+def start_scheduler():
 	if scheduler is not None or not scheduler.running:
 		scheduler = BackgroundScheduler()
 		scheduler.add_task(get_system_temp, "cron", minute=0)
