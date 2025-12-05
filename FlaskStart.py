@@ -189,7 +189,7 @@ def index():
 				'temp': f'{weather_resp["current"]["temperature_2m"]}{weather_resp["current_units"]["temperature_2m"]}',
 				'cloud_cover': f'{weather_resp["current"]["cloud_cover"]}{weather_resp["current_units"]["cloud_cover"]}',
 				'precipitation': f'{weather_resp["current"]["precipitation"]}{weather_resp["current_units"]["precipitation"][:2]}',
-				'precipitaion_probability_max': ''
+				'precipitation_probability_max': ''
 				
 			},
 			'hourly': []
@@ -197,7 +197,7 @@ def index():
 		for i in range(0, len(weather_resp['daily']['time'])):
 			t = datetime.strptime(weather_resp['daily']['time'][i], "%Y-%m-%d")
 			if t.date() == now.date():
-				weather_temp['current']['precipitaion_probability_max'] = (f'{weather_resp["daily"]["precipitation_probability_max"][i]}'
+				weather_temp['current']['precipitation_probability_max'] = (f'{weather_resp["daily"]["precipitation_probability_max"][i]}'
 																			f'{weather_resp["daily_units"]["precipitation_probability_max"]}')
 				break
 		for i in range(0, len(weather_resp['hourly']['time'])):
