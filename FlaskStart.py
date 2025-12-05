@@ -76,12 +76,15 @@ def get_system_temp():
 	sqlModifyQuery(f'insert into system_temp ("date", "time", temp) values {temperature}')
 
 def getCoordinates():
+	global latitude, longitude 
+
 	city = sqlSelectQuery("select val_string from system_params where param = ?", ("api_city",))[0]
 	state = sqlSelectQuery("select val_string from system_params where param = ?", ("api_state",))[0]
 	country = sqlSelectQuery("select val_string from system_params where param = ?", ("api_country",))[0]
 	location = geocoder.osm(f'{city}, {state}, {country}')
 	print(f'{location.latlng}')
-	return location.latlng[0], location.latlng[1]
+	latitude = location.latlng[0], 
+	longitude = location.latlng[1]
 
 def get_forecast():
 	url = (f'{weather_api_base}?latitude={latitude}&longitude={longitude}&'
@@ -773,8 +776,6 @@ def make_hashbrowns(password):
 		return None
 
 if __name__ == '__main__':
-	global latitude, longitude 
-
 	start_scheduler()
-	latitude, longitude = getCoordinates()
+	getCoordinates()
 	app.run(debug=False, use_reloader=False)
