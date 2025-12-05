@@ -81,7 +81,7 @@ def getCoordinates():
 	city = sqlSelectQuery("select val_string from system_params where param = ?", ("api_city",))[0]
 	state = sqlSelectQuery("select val_string from system_params where param = ?", ("api_state",))[0]
 	country = sqlSelectQuery("select val_string from system_params where param = ?", ("api_country",))[0]
-	location = geocoder.osm(f'{city}, {state}, {country}')
+	location = geocoder.geonames(f'{city}, {state}, {country}')
 	print(f'{location.latlng}')
 	latitude = location.latlng[0], 
 	longitude = location.latlng[1]
