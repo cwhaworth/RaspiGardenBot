@@ -107,7 +107,7 @@ def stop_scheduler():
 	global scheduler
 
 	if scheduler and scheduler.running:
-    	scheduler.shutdown(wait=False)
+		scheduler.shutdown(wait=False)
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
