@@ -186,13 +186,11 @@ def index():
 			},
 			'hourly': []
 			}
-		weather_start_index = None
 
 		for i in range(0, len(weather_resp['hourly']['time'])):
 			t = datetime.strptime(weather_resp['hourly']['time'][i], "%Y-%m-%dT%H:%M")
 			if t >= now and len(weather_temp['hourly'] < 13):
-				if weather_start_index = None:
-					weather_start_index = i
+
 				weather_temp['hourly'].append({
 					'date': t.date(),
 					'time': t.time(),
