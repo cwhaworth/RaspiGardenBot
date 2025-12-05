@@ -98,7 +98,7 @@ def get_forecast():
 def start_scheduler():
 	global scheduler
 
-	if scheduler is not None or not scheduler.running:
+	if scheduler is None or not scheduler.running:
 		scheduler = BackgroundScheduler()
 		scheduler.add_job(get_system_temp, "cron", minute=0)
 
