@@ -10,7 +10,7 @@ Initialize - allows user to initialize the parameters the irriagtion system oper
 Water Log - Displays logs for data on what was watered, and when, as well as errors.
 '''
 
-import atexit, bcrypt, geocoder, json, os, re, sqlite3, time
+import atexit, bcrypt, geocoder, json, os, re, requests, sqlite3, time
 import RPi.GPIO as GPIO
 from datetime import date, datetime
 from gpiozero import CPUTemperature
