@@ -22,7 +22,6 @@ app.secret_key = os.urandom(24)
 dbPath = '/var/www/RaspiGardenBot/database/app_data.db'
 weather_api_base = 'https://api.open-meteo.com/v1/forecast'
 
-location = None
 latitude = None
 longitude = None
 
@@ -95,6 +94,8 @@ def get_forecast():
 	return response.json()
 
 def start_scheduler():
+	global scheduler
+
 	if scheduler is not None or not scheduler.running:
 		scheduler = BackgroundScheduler()
 		scheduler.add_task(get_system_temp, "cron", minute=0)
@@ -103,6 +104,8 @@ def start_scheduler():
 		atexit.register(lambda: scheduler.shutdown())
 
 def stop_scheduler():
+	global scheduler
+
     if scheduler and scheduler.running:
         scheduler.shutdown(wait=False)
 
@@ -771,5 +774,5 @@ def make_hashbrowns(password):
 
 if __name__ == '__main__':
 	start_scheduler()
-	latitude, longitude = getCoordinates()
+	global latitude, longitude = getCoordinates()
 	app.run(debug=False, use_reloader=False)
