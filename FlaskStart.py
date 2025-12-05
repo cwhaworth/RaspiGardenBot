@@ -182,8 +182,8 @@ def index():
 				'precipitaion_probability_max': f'{weather_resp["daily_units"]["precipitation_probability_max"]}'
 			},
 			'current': {
-				'date': now.date(),
-				'time': now.time(),
+				'date': f'{now.date()}',
+				'time': f'{now.time()}'[:-7],
 				'temp': f'{weather_resp["current"]["temperature_2m"]}{weather_resp["current_units"]["temperature_2m"]}',
 				'cloud_cover': f'{weather_resp["current"]["cloud_cover"]}{weather_resp["current_units"]["cloud_cover"]}',
 				'precipitation': f'{weather_resp["current"]["precipitation"]}{weather_resp["current_units"]["precipitation"][:2]}',
