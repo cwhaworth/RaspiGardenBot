@@ -90,6 +90,8 @@ def getCoordinates():
 	longitude = location.longitude
 
 def get_forecast():
+	global latitude, longitude
+	
 	url = (f'{weather_api_base}?latitude={latitude}&longitude={longitude}&'
 		f'forecast_days=2&timezone=GMT-5&&wind_speed_unit=mph&temperature_unit=fahrenheit&precipitation_unit=inch&'
 		f'current=temperature_2m,precipitation,rain,showers,snowfall,cloud_cover&'
