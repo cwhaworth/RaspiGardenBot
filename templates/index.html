@@ -40,7 +40,7 @@
 
 	<div class="container align-content-center row">
 		<div class="col">
-			<h3>Weather Report for {{data['api_city']}}, {{data['api_state']}}, {{data['api_country']}}</h3>
+			<h3>Weather Report for<br>{{data['api_city']}}, {{data['api_state']}}, {{data['api_country']}}</h3>
 			
 			<table>
 				<tr class="row-cols-5">
@@ -55,7 +55,7 @@
 					<td>{{ data['weather']['current']['date'] }}</td>
 					<td>{{ data['weather']['current']['time'] }}</td>
 					<td>{{ data['weather']['current']['cloud_cover'] }}</td>
-					<td class="text-center">{{ data['weather']['current']['precipitation_probability_max'] }} (Today's Chance)</td>
+					<td class="text-center">{{ data['weather']['current']['precipitation_probability_max'] }}</td>
 					<td class="text-center">{{ data['weather']['current']['precipitation'] }}</td>
 					<td class="text-center">{{ data['weather']['current']['temp'] }}</td>
 				</tr>
