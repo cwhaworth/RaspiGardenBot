@@ -83,11 +83,11 @@ def get_system_temp()
 	sqlModifyQuery(f'insert into system_temp ("date", "time", temp) values {temperature}')
 
 def get_forecast()
-	url = (f'{weather_api_base}?latitude={latitude}&longitude={longitude}&
-		forecast_days=2&timezone=GMT-5&&wind_speed_unit=mph&temperature_unit=fahrenheit&precipitation_unit=inch&
-		current=temperature_2m,precipitation,rain,showers,snowfall,cloud_cover&
-		hourly=temperature_2m,precipitation_probability,precipitation,cloud_cover&
-		daily=precipitation_probability_max')
+	url = (f'{weather_api_base}?latitude={latitude}&longitude={longitude}&'
+		f'forecast_days=2&timezone=GMT-5&&wind_speed_unit=mph&temperature_unit=fahrenheit&precipitation_unit=inch&'
+		f'current=temperature_2m,precipitation,rain,showers,snowfall,cloud_cover&'
+		f'hourly=temperature_2m,precipitation_probability,precipitation,cloud_cover&'
+		f'daily=precipitation_probability_max')
 	response = requests.request('GET', url)
 	return response.json()
 
