@@ -773,6 +773,8 @@ def make_hashbrowns(password):
 		return None
 
 if __name__ == '__main__':
+	global latitude, longitude 
+
 	start_scheduler()
-	global latitude, longitude = getCoordinates()
+	latitude, longitude = getCoordinates()
 	app.run(debug=False, use_reloader=False)
