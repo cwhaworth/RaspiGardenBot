@@ -100,7 +100,7 @@ def start_scheduler():
 	global scheduler
 
 	scheduler = BackgroundScheduler()
-	scheduler.add_job(get_system_temp, "cron", minute=0)
+	scheduler.add_job(get_system_temp, "cron", second='*')
 
 	scheduler.start()
 	atexit.register(scheduler.shutdown())
