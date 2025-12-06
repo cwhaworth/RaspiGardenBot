@@ -837,7 +837,6 @@ def init_jobs():
 		id="water_on_schedule",
 		func=water_on_schedule,  
 		trigger="cron", 
-		day='*',
 		# hour=sqlSelectQuery('select val_string from system_params where param = "water_schedule_hour"')[0], 
 		# minute='0',
 		hour='*',
