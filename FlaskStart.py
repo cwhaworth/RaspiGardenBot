@@ -823,7 +823,9 @@ def init_jobs():
 		func=get_system_temp,  
 		trigger="cron", 
 		hour='*', 
-		minute='0',
+		# minute='0',
+		minute='*',
+		second='0,10,20,30,40,50'
 		replace_existing=True)
 
 	scheduler.add_job(
