@@ -222,6 +222,8 @@ def water_on_schedule():
 	else:
 		update_last_rain(data["last_rain"] + 1)
 		insertLogMessage("An error occurred during watering operations.")
+	
+	print(f'Ran water_on_schedule() at {str(now)}')
 
 def get_system_temp():
 	cpu = CPUTemperature()
@@ -834,8 +836,10 @@ def init_jobs():
 		func=water_on_schedule,  
 		trigger="cron", 
 		day='*',
-		hour=sqlSelectQuery('select val_string from system_params where param = "water_schedule_hour"')[0], 
-		minute='0',
+		# hour=sqlSelectQuery('select val_string from system_params where param = "water_schedule_hour"')[0], 
+		# minute='0',
+		minute='*',
+		second='0',
 		replace_existing=True)
 
 if __name__ == '__main__':
