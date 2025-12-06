@@ -305,32 +305,11 @@ def waterAll():
 	Waits for 'delay-after' seconds before closing the solenoids to each sector watered.
 	Writes log when finished. 
 	'''
-	# sectData = getJsonData('watering-sectors')
-	# pump = sectData['pump-pin']
-	# solenoidEnable = sectData['sol-en-pin']
-	# solenoidOpen = sectData['sol-open-pin']
-	# solenoidClose = sectData['sol-close-pin']
-
 	system_enable = bool(sqlSelectQuery('select val_bool from system_params where param = ?', ('system_enable',))[0])
 
 	# if sectData['sysEnable'] == False:
 	if system_enable == False:
-		#If watering sytem is not enabled for watering
-		# log = getJsonData('water-log')
-		# log60 = getJsonData('water-log-60-day')
-		# newLog = createLogMessage('Did not perform water operation. Water system not enabled.')
-		# log['log'].append(newLog)
-		# log60['log'].append(newLog)
-
 		insertLogMessage("Did not perform water operation. Water system not enabled.")
-
-		# today = getToday()
-		# log = stripOldLog(log, today, 30)
-		# log60 = stripOldLog(log60, today, 60)
-
-		#write to log files
-		# setJsonData('water-log', log)
-		# setJsonData('water-log-60-day', log60)
 	else:
 		#pins
 		pump = sqlSelectQuery('select val_num from system_params where param = ?', ('pump_pin',))[0]
@@ -348,40 +327,27 @@ def waterAll():
 
 		#start watering
 		#setup pins for pump and solenoid controller power
-		GPIO.setup(pump, GPIO.OUT)
-		# GPIO.setup(solenoidEnable, GPIO.OUT)
-		# GPIO.setup(solenoidOpen, GPIO.OUT)
-		# GPIO.setup(solenoidClose, GPIO.OUT)
-		# solenoid = GPIO.PWM(solenoidEnable, 100) #pin, and Hz
-		GPIO.setup(valve_enable_pin, GPIO.OUT)
-		GPIO.setup(valve_open_pin, GPIO.OUT)
-		GPIO.setup(valve_close_pin, GPIO.OUT)
+		# GPIO.setup(pump, GPIO.OUT)
+		# GPIO.setup(valve_enable_pin, GPIO.OUT)
+		# GPIO.setup(valve_open_pin, GPIO.OUT)
+		# GPIO.setup(valve_close_pin, GPIO.OUT)
 		main_valve = GPIO.PWM(valve_enable_pin, 100) #pin, and Hz
 
 		#turn on pump
-		GPIO.output(pump, GPIO.HIGH)
+		# GPIO.output(pump, GPIO.HIGH)
 
 		#open solenoids
 		time.sleep(delay_before)
 		for crop in cropData:
 			if bool(crop[1]) == True:
-				GPIO.setup(crop[3], GPIO.OUT)
-				GPIO.output(crop[3], GPIO.HIGH)
+				# GPIO.setup(crop[3], GPIO.OUT)
+				# GPIO.output(crop[3], GPIO.HIGH)
+				continue
 		main_valve.start(100) #duty cycle
-		GPIO.output(valve_open_pin, GPIO.HIGH)
-		GPIO.output(valve_close_pin, GPIO.LOW)
+		# GPIO.output(valve_open_pin, GPIO.HIGH)
+		# GPIO.output(valve_close_pin, GPIO.LOW)
 
 		time.sleep(water_time)
-		# time.sleep(sectData['delay-before'])
-		# for sector in sectData['sector']:
-		# 	if sector['enabled'] == True:
-		# 		GPIO.setup(sector['pin'], GPIO.OUT)
-		# 		GPIO.output(sector['pin'], GPIO.HIGH)
-		# solenoid.start(100) #duty cycle
-		# GPIO.output(solenoidOpen, GPIO.HIGH)
-		# GPIO.output(solenoidClose, GPIO.LOW)
-
-		# time.sleep(sectData['water-time'])
 
 		'''
 		end watering
@@ -389,38 +355,18 @@ def waterAll():
 		2. wait for configured after water operation delay
 		3. clean up solenoid and relay output 
 		'''
-		GPIO.cleanup(pump)
+		# GPIO.cleanup(pump)
 		time.sleep(delay_after)
-		GPIO.cleanup(valve_enable_pin)
-		GPIO.cleanup(valve_open_pin)
-		GPIO.cleanup(valve_close_pin)
+		# GPIO.cleanup(valve_enable_pin)
+		# GPIO.cleanup(valve_open_pin)
+		# GPIO.cleanup(valve_close_pin)
 		for crop in cropData:
 			if bool(crop[1]) == True:
-				GPIO.cleanup(crop[3])
-		# time.sleep(sectData['delay-after'])
-		# GPIO.cleanup(solenoidEnable)
-		# GPIO.cleanup(solenoidOpen)
-		# GPIO.cleanup(solenoidClose)
-		# for sector in sectData['sector']:
-		# 	if sector['enabled'] == True:
-		# 		GPIO.cleanup(sector['pin'])
+				# GPIO.cleanup(crop[3])
+				continue
 
 		#generate logs
 		insertLogMessage('Watered all sectors by manual override.')
-
-		# log = getJsonData('water-log')
-		# log60 = getJsonData('water-log-60-day')
-		# newLog = createLogMessage('Watered all sectors by manual override.')
-		# log['log'].append(newLog)
-		# log60['log'].append(newLog)
-
-		# today = getToday()
-		# log = stripOldLog(log, today, 30)
-		# log60 = stripOldLog(log60, today, 60)
-
-		#write to log files
-		# setJsonData('water-log', log)
-		# setJsonData('water-log-60-day', log60)
 
 # def waterNow(sectID):
 def waterNow(cropName):
@@ -431,32 +377,10 @@ def waterNow(cropName):
 	Waits for 'delay-after' seconds before closing the solenoids to each sector watered.
 	Writes log when finished.
 	'''
-	# sectData = getJsonData('watering-sectors')
-	# pump = sectData['pump-pin']
-	# solenoidEnable = sectData['sol-en-pin']
-	# solenoidOpen = sectData['sol-open-pin']
-	# solenoidClose = sectData['sol-close-pin']
-
 	system_enable = bool(sqlSelectQuery('select val_bool from system_params where param = ?', ('system_enable',))[0])
 
-	# if sectData['sysEnable'] == False:
 	if system_enable == False:
-		#If watering sytem is not enabled for watering
-		# log = getJsonData('water-log')
-		# log60 = getJsonData('water-log-60-day')
-		# newLog = createLogMessage('Did not perform water operation. Water system not enabled.')
-		# log['log'].append(newLog)
-		# log60['log'].append(newLog)
-
 		insertLogMessage("Did not perform water operation. Water system not enabled.")
-
-		# today = getToday()
-		# log = stripOldLog(log, today, 30)
-		# log60 = stripOldLog(log60, today, 60)
-
-		#write to log files
-		# setJsonData('water-log', log)
-		# setJsonData('water-log-60-day', log60)
 	else:
 		#pins
 		pump = sqlSelectQuery('select val_num from system_params where param = ?', ('pump_pin',))[0]
@@ -472,41 +396,24 @@ def waterNow(cropName):
 		#crops 
 		cropData = sqlSelectQuery(f'select id, enabled, crop, pin, rain_inc from crops where crop = ?', (cropName,))
 
-		# #get selected sector
-		# sectorTemp = {}
-		# for sector in sectData['sector']:
-		# 	if sector['id'] == sectID:
-		# 		sectorTemp = sector
-		# 		break
-
 		#start watering
 		#setup pins for pump and solenoid controller power
-		GPIO.setup(pump, GPIO.OUT)
-		GPIO.setup(valve_enable_pin, GPIO.OUT)
-		GPIO.setup(valve_open_pin, GPIO.OUT)
-		GPIO.setup(valve_close_pin, GPIO.OUT)
-		main_valve = GPIO.PWM(valve_enable_pin, 100) #pin, and Hz
 		# GPIO.setup(pump, GPIO.OUT)
-		# GPIO.setup(solenoidEnable, GPIO.OUT)
-		# GPIO.setup(solenoidOpen, GPIO.OUT)
-		# GPIO.setup(solenoidClose, GPIO.OUT)
-		# solenoid = GPIO.PWM(solenoidEnable, 100) #pin, and Hz
+		# GPIO.setup(valve_enable_pin, GPIO.OUT)
+		# GPIO.setup(valve_open_pin, GPIO.OUT)
+		# GPIO.setup(valve_close_pin, GPIO.OUT)
+		main_valve = GPIO.PWM(valve_enable_pin, 100) #pin, and Hz
 
 		#turn on pump
-		GPIO.output(pump, GPIO.HIGH)
+		# GPIO.output(pump, GPIO.HIGH)
+
 		#open and power solenoid
 		time.sleep(delay_before)
-		GPIO.setup(cropData[3], GPIO.OUT)
-		GPIO.output(cropData[3], GPIO.LOW)
+		# GPIO.setup(cropData[3], GPIO.OUT)
+		# GPIO.output(cropData[3], GPIO.LOW)
 		main_valve.start(100) #duty cycle
-		GPIO.output(valve_open_pin, GPIO.HIGH)
-		GPIO.output(valve_close_pin, GPIO.LOW)
-		# time.sleep(sectData['delay-before'])
-		# GPIO.setup(sectorTemp['pin'], GPIO.OUT)
-		# GPIO.output(sectorTemp['pin'], GPIO.LOW)
-		# solenoid.start(100) #duty cycle
-		# GPIO.output(solenoidOpen, GPIO.HIGH)
-		# GPIO.output(solenoidClose, GPIO.LOW)
+		# GPIO.output(valve_open_pin, GPIO.HIGH)
+		# GPIO.output(valve_close_pin, GPIO.LOW)
 
 		time.sleep(water_time)
 
@@ -516,29 +423,15 @@ def waterNow(cropName):
 		2. wait for configured after water operation delay
 		3. clean up solenoid and relay output 
 		'''
-		GPIO.cleanup(pump)
+		# GPIO.cleanup(pump)
 		time.sleep(delay_after)
-		GPIO.cleanup(valve_enable_pin)
-		GPIO.cleanup(valve_open_pin)
-		GPIO.cleanup(valve_close_pin)
-		GPIO.cleanup(cropData[3])
+		# GPIO.cleanup(valve_enable_pin)
+		# GPIO.cleanup(valve_open_pin)
+		# GPIO.cleanup(valve_close_pin)
+		# GPIO.cleanup(cropData[3])
 
 		#generate logs
 		insertLogMessage(f'Watered sector "{cropName}" by manual override.')
-
-		# log = getJsonData('water-log')
-		# log60 = getJsonData('water-log-60-day')
-		# newLog = createLogMessage(f'Watered sector "{sectID}" by manual override.')
-		# log['log'].append(newLog)
-		# log60['log'].append(newLog)
-
-		# today = getToday()
-		# log = stripOldLog(log, today, 30)
-		# log60 = stripOldLog(log60, today, 60)
-
-		# #write to log files
-		# setJsonData('water-log', log)
-		# setJsonData('water-log-60-day', log60)
 
 @app.route("/")
 @app.route("/index", methods=['GET', 'POST'])
