@@ -76,6 +76,7 @@ def get_system_temp():
 	temperature = (now.strftime("%m/%d/%Y"), now.strftime("%H:%M:%S"), f'{temp}°F')
 	
 	sqlModifyQuery(f'insert into system_temp ("date", "time", temp) values {temperature}')
+	print("modified system temp table")
 
 def getCoordinates(): 
 	geolocator = Nominatim( user_agent='app')
@@ -99,7 +100,7 @@ def get_forecast():
 	response = requests.request('GET', url)
 	return response.json()
 
-def scheduler_add_job(job):
+def init_job(job, trigger):
 	scheduler.add_job(get_system_temp, "cron", second='*')
 
 	
@@ -781,5 +782,6 @@ def make_hashbrowns(password):
 
 if __name__ == '__main__':
 	getCoordinates()
-	scheduler.add_job(func=get_system_temp, id="system_temp", trigger="cron", second=10)
+	if not scheduler.get_job("system_temp")
+		scheduler.add_job(func=get_system_temp, id="system_temp", trigger="cron", second=10)
 	app.run(debug=False, use_reloader=False)
