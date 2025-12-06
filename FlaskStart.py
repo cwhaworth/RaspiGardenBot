@@ -122,10 +122,6 @@ def water_on_schedule():
 					'precipitation': f'{weather_resp["current"]["precipitation"]}{weather_resp["current_units"]["precipitation"][:2]}'
 				},
 				'hourly': []
-			},
-			'cpuTemp': {
-				'time': f'{now.strftime("%H:%M")}',
-				'temp': f'{temp} F'
 			}
 		}
 
