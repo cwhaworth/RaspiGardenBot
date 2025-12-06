@@ -67,17 +67,21 @@ insert into system_params(param, val_string, val_num, val_bool)
 values
 	("api_city", "Raleigh", null, null),
 	("api_country", "US", null, null),
+	("api_forecast_days", null, 2, null),
 	("api_state", "NC", null, null),
+	("api_timezone", "GMT-5", null, null),
+	("api_units", "Imperial", null, null),
 	("delay_after", null, 1, null),
 	("delay_before", null, 1, null),
 	("last_rain", null, 28, null),
 	("max_crops", null, 4, null),
 	("pump_pin", null, 27, null),
+	("system_enable", null, null, 0),
+	("use_api", null, null, 0),
 	("valve_close_pin", null, 16, null),
 	("valve_enable_pin", null, 13, null),
 	("valve_open_pin", null, 19, null),
-	("system_enable", null, null, 0),
-	("use_api", null, null, 0),
+	("water_schedule_hour", "11", null, null),
 	("water_time", null, 10, null);
 
 create trigger if not exists enforce_max_crops after insert on crops
