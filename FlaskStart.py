@@ -212,6 +212,7 @@ def water_on_schedule():
 		for crop in data['crop_data']:
 			if crop[4] <= data['last_rained'] and data['last_rain'] % crop[4] == 0 and crop[1]:
 				# GPIO.cleanup(crop[3])
+				continue
 
 		#if API not in use and 30 days have passed, reset last rained
 		if data['use_api'] == False and data['last_rain'] == 30:
