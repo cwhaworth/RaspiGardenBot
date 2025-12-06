@@ -922,7 +922,7 @@ def userSettings():
 		return render_template('user-settings.html', navurl=navURL, styles=styles, session=session)
 
 def init_jobs():
-	def check_job(job)
+	def check_job(job):
 		if scheduler.get_job(job_id=job):
 			scheduler.remove_job(job_id=job)
 		
