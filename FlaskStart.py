@@ -841,6 +841,7 @@ def init_jobs():
 		day='*',
 		# hour=sqlSelectQuery('select val_string from system_params where param = "water_schedule_hour"')[0], 
 		# minute='0',
+		hour='*',
 		minute='*',
 		second='0',
 		replace_existing=True)
