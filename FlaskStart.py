@@ -101,7 +101,7 @@ def get_forecast():
 	return response.json()
 
 def init_jobs():
-	if scheduler.get_job("get_system_temp")
+	if scheduler.get_job("get_system_temp"):
 		return
 
 	scheduler.add_job(
