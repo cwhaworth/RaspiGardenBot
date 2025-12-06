@@ -100,15 +100,19 @@ def get_forecast():
 	response = requests.request('GET', url)
 	return response.json()
 
-def init_job(job, trigger):
-	scheduler.add_job(get_system_temp, "cron", second='*')
+def init_jobs():
+	if scheduler.get_job("get_system_temp")
+		return
 
-	
+	scheduler.add_job(
+		id="get_system_temp",
+		func=get_system_temp,  
+		trigger="cron", 
+		minute='*', 
+		second='0,10,20,30,40,50',
+		replace_existing=True)
 
-def stop_scheduler():
-	global scheduler
-
-	scheduler.shutdown(wait=False)
+init_jobs()
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
@@ -781,9 +785,4 @@ def make_hashbrowns(password):
 		return None
 
 if __name__ == '__main__':
-	getCoordinates()
-	if not scheduler.get_job("system_temp"):
-		scheduler.add_job(func=get_system_temp, id="system_temp", trigger="cron", minute='*', second='10')
-		print(f'starting scheduler')
-	print(f'{scheduler.print_jobs()}')
 	app.run(debug=False, use_reloader=False)
