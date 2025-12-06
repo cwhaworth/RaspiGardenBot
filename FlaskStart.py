@@ -12,6 +12,7 @@ Water Log - Displays logs for data on what was watered, and when, as well as err
 
 import atexit, bcrypt, geopy, json, os, re, requests, sqlite3, time
 import RPi.GPIO as GPIO
+from apscheduler.schedulers.background import BackgroundScheduler
 from datetime import date, datetime
 from geopy.geocoders import Nominatim
 from gpiozero import CPUTemperature
@@ -23,7 +24,7 @@ app.secret_key = os.urandom(24)
 dbPath = '/var/www/RaspiGardenBot/database/app_data.db'
 weather_api_base = 'https://api.open-meteo.com/v1/forecast'
 
-scheduler = None
+scheduler = BackgroundScheduler()
 
 GPIO.setmode(GPIO.BCM)
 
@@ -98,18 +99,16 @@ def get_forecast():
 def start_scheduler():
 	global scheduler
 
-	if scheduler is None or not scheduler.running:
-		scheduler = BackgroundScheduler()
-		scheduler.add_job(get_system_temp, "cron", minute=0)
+	scheduler = BackgroundScheduler()
+	scheduler.add_job(get_system_temp, "cron", minute=0)
 
-		scheduler.start()
-		atexit.register(lambda: scheduler.shutdown())
+	scheduler.start()
+	atexit.register(scheduler.shutdown())
 
 def stop_scheduler():
 	global scheduler
 
-	if scheduler and scheduler.running:
-		scheduler.shutdown(wait=False)
+	scheduler.shutdown(wait=False)
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
