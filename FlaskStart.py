@@ -232,10 +232,11 @@ def get_system_temp():
 	if str(units).lower() == 'imperial':
 		temp = round((cpu.temperature * 1.8) + 32, 1) #convert CPU temperature from celsius to fahrenheit
 
-	#Create JSON object for temperature at the timestamp this script was ran.
+	#Create tuple for temperature at the timestamp this script was ran.
 	temperature = (now.strftime("%m/%d/%Y"), now.strftime("%H:%M:%S"), f'{temp}°F')
 	
 	sqlModifyQuery(f'insert into system_temp ("date", "time", temp) values {temperature}')
+	print(f'Checked system temp at {str(now)}')
 
 def getNavURL():
 	'''
@@ -825,7 +826,7 @@ def init_jobs():
 		hour='*', 
 		# minute='0',
 		minute='*',
-		second='0,10,20,30,40,50'
+		second='0,10,20,30,40,50',
 		replace_existing=True)
 
 	scheduler.add_job(
