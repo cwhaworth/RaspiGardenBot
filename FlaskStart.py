@@ -230,36 +230,46 @@ def water_on_schedule():
 def get_system_temp():
 	cpu = CPUTemperature()
 	now = datetime.now()
+	units = sqlSelectQuery("select val_string from system_params where param = ?", ("api_units",))[0]
 
-	temp = round((cpu.temperature * 1.8) + 32, 1) #convert CPU temperature from celsius to fahrenheit
+	temp = round(cpu.temperature, 1)
+	if str(units).lower() == 'imperial':
+		temp = round((cpu.temperature * 1.8) + 32, 1) #convert CPU temperature from celsius to fahrenheit
 
 	#Create JSON object for temperature at the timestamp this script was ran.
 	temperature = (now.strftime("%m/%d/%Y"), now.strftime("%H:%M:%S"), f'{temp}°F')
 	
 	sqlModifyQuery(f'insert into system_temp ("date", "time", temp) values {temperature}')
 
-def init_jobs():
-	if scheduler.get_job("get_system_temp") and scheduler.get_job("water_on_schedule"):
-		return
+def getNavURL():
+	'''
+	Gets the links for each page on the navigation bar.
+	'''
+	navURL = {'index': url_for('.index'),
+		'config': url_for('.config'),
+		'waterLog': url_for('.waterLog'),
+		'admin': url_for('.admin')
+	}
 
-	scheduler.add_job(
-		id="get_system_temp",
-		func=get_system_temp,  
-		trigger="cron", 
-		hour='*', 
-		minute='0',
-		replace_existing=True)
+	return navURL
 
-	scheduler.add_job(
-		id="water_on_schedule",
-		func=water_on_schedule,  
-		trigger="cron", 
-		day='*',
-		hour=sqlSelectQuery('select val_string from system_params where param = "water_schedule_hour"')[0], 
-		minute='0',
-		replace_existing=True)
+def getStyles():
+	'''
+	Gets the file for the CSS styles.
+	'''
+	styles = url_for('static', filename='bootstrap.css')
 
-init_jobs()
+	return styles
+
+def make_hashbrowns(password):
+	bytes = password.encode('utf-8')
+	salt = bcrypt.gensalt()
+	password_hash = bcrypt.hashpw(bytes, salt)
+
+	if bcrypt.checkpw(password.encode('utf-8'), password_hash):
+		return password_hash
+	else:
+		return None
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
@@ -911,35 +921,32 @@ def userSettings():
 	else:
 		return render_template('user-settings.html', navurl=navURL, styles=styles, session=session)
 
-def getNavURL():
-	'''
-	Gets the links for each page on the navigation bar.
-	'''
-	navURL = {'index': url_for('.index'),
-		'config': url_for('.config'),
-		'waterLog': url_for('.waterLog'),
-		'admin': url_for('.admin')
-	}
+def init_jobs():
+	def check_job(job)
+		if scheduler.get_job(job_id=job):
+			scheduler.remove_job(job_id=job)
+		
+	check_job("get_system_temp")
+	check_job("water_on_schedule")
 
-	return navURL
+	scheduler.add_job(
+		id="get_system_temp",
+		func=get_system_temp,  
+		trigger="cron", 
+		hour='*', 
+		minute='0',
+		replace_existing=True)
 
-def getStyles():
-	'''
-	Gets the file for the CSS styles.
-	'''
-	styles = url_for('static', filename='bootstrap.css')
+	scheduler.add_job(
+		id="water_on_schedule",
+		func=water_on_schedule,  
+		trigger="cron", 
+		day='*',
+		hour=sqlSelectQuery('select val_string from system_params where param = "water_schedule_hour"')[0], 
+		minute='0',
+		replace_existing=True)
 
-	return styles
-
-def make_hashbrowns(password):
-	bytes = password.encode('utf-8')
-	salt = bcrypt.gensalt()
-	password_hash = bcrypt.hashpw(bytes, salt)
-
-	if bcrypt.checkpw(password.encode('utf-8'), password_hash):
-		return password_hash
-	else:
-		return None
+init_jobs()
 
 if __name__ == '__main__':
 	app.run(debug=False, use_reloader=False)
