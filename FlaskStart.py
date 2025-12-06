@@ -846,4 +846,4 @@ def init_jobs():
 
 if __name__ == '__main__':
 	init_jobs()
-	app.run(debug=False, use_reloader=False)
+	app.run(debug=True, use_reloader=False)
