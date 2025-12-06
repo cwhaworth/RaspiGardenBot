@@ -92,7 +92,7 @@ def get_forecast():
 		f'forecast_days=2&timezone=GMT-5&&wind_speed_unit=mph&temperature_unit=fahrenheit&precipitation_unit=inch&'
 		f'current=temperature_2m,precipitation,rain,showers,snowfall,cloud_cover&'
 		f'hourly=temperature_2m,precipitation_probability,precipitation,cloud_cover&'
-		f'daily=precipitation_probability_max')
+		f'daily=precipitation_probability_max'21)
 	response = requests.request('GET', url)
 	return response.json()
 
@@ -578,7 +578,7 @@ def config():
 			elif key == 'cropSave':
 				#if writing parameters
 				for key, value in tempData.items():
-					if key is not "crop_data":
+					if key != "crop_data":
 						val = None
 						if isinstance(tempData[key], bool):
 							val = "val_bool"
