@@ -112,8 +112,8 @@
 						<div class="row">
 							<p class="col">Units: </p>
 							<select class="col" type="text" name="api_units">
-								<option value="Imperial" {% 'selected' if data['api_units'] == "Imperial" %}>Imperial</option>
-								<option value="Metric" {% 'selected' if data['api_units'] == "Metric" %}>Metric</option>
+								<option value="Imperial" {{ 'selected' if data['api_units'] == "Imperial" }}>Imperial</option>
+								<option value="Metric" {{ 'selected' if data['api_units'] == "Metric" }}>Metric</option>
 							</select>	
 						</div>
 					</div>
