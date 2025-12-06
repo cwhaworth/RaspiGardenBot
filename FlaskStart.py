@@ -784,4 +784,6 @@ if __name__ == '__main__':
 	getCoordinates()
 	if not scheduler.get_job("system_temp"):
 		scheduler.add_job(func=get_system_temp, id="system_temp", trigger="cron", minute='*', second='10')
+		print(f'starting scheduler')
+	print(f'{scheduler.get_job("system_temp")}')
 	app.run(debug=False, use_reloader=False)
