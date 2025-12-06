@@ -25,6 +25,8 @@ dbPath = '/var/www/RaspiGardenBot/database/app_data.db'
 weather_api_base = 'https://api.open-meteo.com/v1/forecast'
 
 scheduler = BackgroundScheduler()
+scheduler.start()
+atexit.register(lambda: scheduler.shutdown())
 
 GPIO.setmode(GPIO.BCM)
 
@@ -69,6 +71,7 @@ def get_system_temp():
 	now = datetime.now()
 
 	temp = round((cpu.temperature * 1.8) + 32, 1) #convert CPU temperature from celsius to fahrenheit
+
 	#Create JSON object for temperature at the timestamp this script was ran.
 	temperature = (now.strftime("%m/%d/%Y"), now.strftime("%H:%M:%S"), f'{temp}°F')
 	
@@ -96,14 +99,10 @@ def get_forecast():
 	response = requests.request('GET', url)
 	return response.json()
 
-def start_scheduler():
-	global scheduler
-
-	scheduler = BackgroundScheduler()
+def scheduler_add_job(job):
 	scheduler.add_job(get_system_temp, "cron", second='*')
 
-	scheduler.start()
-	atexit.register(scheduler.shutdown())
+	
 
 def stop_scheduler():
 	global scheduler
@@ -781,6 +780,6 @@ def make_hashbrowns(password):
 		return None
 
 if __name__ == '__main__':
-	start_scheduler()
 	getCoordinates()
+	scheduler.add_job(get_system_temp, id="system_temp", "cron", second=10)
 	app.run(debug=False, use_reloader=False)
