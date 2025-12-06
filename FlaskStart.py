@@ -833,19 +833,16 @@ def init_jobs():
 		second='0',
 		replace_existing=True)
 
-	try:
-		scheduler.add_job(
-			id="water_on_schedule",
-			func=water_on_schedule,  
-			trigger="cron", 
-			# hour=sqlSelectQuery('select val_string from system_params where param = "water_schedule_hour"')[0], 
-			# minute='0',
-			hour='*',
-			minute='*',
-			second='0',
-			replace_existing=True)
-	except Exception as e:
-		print('failed to schedule water_on_schedule()')
+	scheduler.add_job(
+		id="water_on_schedule",
+		func=water_on_schedule,  
+		trigger="cron", 
+		# hour=sqlSelectQuery('select val_string from system_params where param = "water_schedule_hour"')[0], 
+		# minute='0',
+		hour='*',
+		minute='*',
+		second='0',
+		replace_existing=True)
 
 if __name__ == '__main__':
 	init_jobs()
