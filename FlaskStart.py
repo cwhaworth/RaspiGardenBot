@@ -781,5 +781,5 @@ def make_hashbrowns(password):
 
 if __name__ == '__main__':
 	getCoordinates()
-	scheduler.add_job(get_system_temp, id="system_temp", "cron", second=10)
+	scheduler.add_job(func=get_system_temp, id="system_temp", trigger="cron", second=10)
 	app.run(debug=False, use_reloader=False)
