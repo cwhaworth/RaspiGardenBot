@@ -224,7 +224,7 @@ def water_on_schedule():
 		else:
 			update_last_rain(data["last_rain"] + 1)
 			insertLogMessage("An error occurred during watering operations.")
-	except exception as e:
+	except Exception as e:
 		print(f'Ran into an error while running water_on_schedule() at {str(now)}\ntraceback:\n{traceback.print_exc()}')
 
 def get_system_temp():
@@ -833,16 +833,19 @@ def init_jobs():
 		second='0',
 		replace_existing=True)
 
-	scheduler.add_job(
-		id="water_on_schedule",
-		func=water_on_schedule,  
-		trigger="cron", 
-		# hour=sqlSelectQuery('select val_string from system_params where param = "water_schedule_hour"')[0], 
-		# minute='0',
-		hour='*',
-		minute='*',
-		second='0',
-		replace_existing=True)
+	try:
+		scheduler.add_job(
+			id="water_on_schedule",
+			func=water_on_schedule,  
+			trigger="cron", 
+			# hour=sqlSelectQuery('select val_string from system_params where param = "water_schedule_hour"')[0], 
+			# minute='0',
+			hour='*',
+			minute='*',
+			second='0',
+			replace_existing=True)
+	except Exception as e:
+		print('failed to schedule water_on_schedule()')
 
 if __name__ == '__main__':
 	init_jobs()
