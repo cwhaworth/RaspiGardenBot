@@ -826,7 +826,7 @@ def init_jobs():
 		hour='*', 
 		# minute='0',
 		minute='*',
-		second='0,10,20,30,40,50',
+		second='0',
 		replace_existing=True)
 
 	scheduler.add_job(
