@@ -11,12 +11,14 @@ values
         ("Cactus", 22, 10, date('now'), time('now')),
         ("Tomato", 23, 1, date('now'), time('now'));
 
+/*
 insert into forecast ("date", "time", status, pop, temp)
 values
         ("2024-06-29", "00:00:00", "overcast clouds", 0, 88.6),
         ("2024-06-29", "03:00:00", "scattered clouds", 0, 82.7),
         ("2024-06-29", "06:00:00", "few clouds", 0, 73.9),
         ("2024-06-29", "09:00:00", "clear sky", 0, 72.1);
+*/
 
 insert into water_log ("date", "time", message)
 values

@@ -65,6 +65,7 @@
 					<td class="text-end">{{ data['weather']['current']['precipitation'] }}</td>
 					<td class="text-end">{{ data['weather']['current']['temp'] }}</td>
 				</tr>
+				<tr></tr>
 				<tr><td><b>Forecast</b></td></tr>
 				{% for data in data['weather']['hourly'] %}
 				<tr>
@@ -132,7 +133,7 @@
 		<table>
 			<tr class="row-cols-{{data['sysData']}}">
 				{% for temp in data['sysData'] %}
-				<th class="col-2">{{temp[1][:-5]}}<br>{{temp[2][:-3]}}</th>
+				<th class="col-1">{{temp[1][:-5]}}<br>{{temp[2][:-3]}}</th>
 				{% endfor %}
 				<th class="col-2">Current<br>{{data['cpuTemp'].time}}</th>
 			</tr>

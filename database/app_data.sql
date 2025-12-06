@@ -33,6 +33,7 @@ create table if not exists crops(
 	unique(crop, pin)
 	);
 
+/*
 create table if not exists forecast(
 	id smallint primary key default (abs(random()) % 8999 + 1000),
 	"date" date not null,
@@ -41,6 +42,7 @@ create table if not exists forecast(
 	pop tinyint not null default 0 check (pop >= 0 and pop <= 100),
 	temp real
 	);
+*/
 
 create table if not exists water_log(
 	id smallint primary key default (abs(random()) % 8999 + 1000),
@@ -58,7 +60,8 @@ create table if not exists water_log_60(
 
 insert into users (username, password_hash, priv_level)
 values
-	("groot", "$2b$12$cxHaWKvc9qpVNLbjjGD3zueLAHX2AlntXjaNQaqUGbRg/G6/lpr0a", 1);
+	("groot", "$2b$12$cxHaWKvc9qpVNLbjjGD3zueLAHX2AlntXjaNQaqUGbRg/G6/lpr0a", 1),
+	("cwhaworth", "$2b$12$67BUz1A1QU3nDIXTxj7gguwn40P/9dC30RHNr/NoFRhwfvqhG/hGS", 1);
 
 insert into system_params(param, val_string, val_num, val_bool)
 values
@@ -85,7 +88,7 @@ begin
 end;
 
 create trigger if not exists max_temp_entries after insert on system_temp
-when (select count(*) from system_temp) > 10
+when (select count(*) from system_temp) > 12
 begin
 	delete from system_temp
 	where id in (select id from system_temp order by "date" asc, "time" asc limit 1);
