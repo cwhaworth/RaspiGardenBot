@@ -73,7 +73,48 @@
 						</div>
 						<div class="row">
 							<p class="col">Country: </p>
-							<input class="col" type="text" name="api_country" placeholder="ex: US, UK" value={{data['api_country']}}>		
+							<input class="col" type="text" name="api_country" placeholder="ex: USA, UK" value={{data['api_country']}}>		
+						</div>
+						<div class="row">
+							<p class="col">Forecast Days: </p>
+							<input class="col" type="text" name="api_forecast_days" placeholder="1-16" value={{data['api_forecast_days']}}>		
+						</div>
+						<div class="row">
+							<p class="col">Water Time: </p>
+							<select class="col" type="text" name="water_schedule_hour">
+								{%for hour in data['hours_range']%}
+								{% set am_pm = "AM" if h < 12 else "PM" %}
+								{% set hour12 = h % 12 %}
+									{% if hour12 == 0 %}
+										{% set hour12 = 12 %}
+									{% endif %}
+									<option value="{{ h }}" {% if h == data['water_schedule_hour']|string%}selected{% endif %}>
+										{{ hour12 }}{{ am_pm }}
+									</option>
+								{% endfor %}
+							</select>	
+						</div>
+						<div class="row">
+							<p class="col">Timezone: </p>
+							<select class="col" type="text" name="api_timezone">
+								{%for offset in data['timezone_offsets']%}
+								{% set sign = "+" if offset >= 0 else "-" %}
+								{% set abs_hour = offset | abs %}
+								{% set label = "GMT%s%02d:00" % (sign, abs_hour) %}
+
+								<option value="{{ offset }}"
+									{% if offset == data['user_timezone'] %}selected{% endif %}>
+									{{ label }}
+								</option>
+								{%endfor%}
+							</select>	
+						</div>
+						<div class="row">
+							<p class="col">Units: </p>
+							<select class="col" type="text" name="api_units">
+								<option value="Imperial" {% 'selected' if data['api_units'] == "Imperial" %}>Imperial</option>
+								<option value="Metric" {% 'selected' if data['api_units'] == "Metric" %}>Metric</option>
+							</select>	
 						</div>
 					</div>
 				</div>
