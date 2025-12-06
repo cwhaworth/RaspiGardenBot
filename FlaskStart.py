@@ -254,7 +254,7 @@ def init_jobs():
 		id="water_on_schedule",
 		func=water_on_schedule,  
 		trigger="cron", 
-		day='*'
+		day='*',
 		hour='11', 
 		minute='0',
 		replace_existing=True)
