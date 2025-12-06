@@ -92,7 +92,7 @@ def get_forecast():
 		f'forecast_days=2&timezone=GMT-5&&wind_speed_unit=mph&temperature_unit=fahrenheit&precipitation_unit=inch&'
 		f'current=temperature_2m,precipitation,rain,showers,snowfall,cloud_cover&'
 		f'hourly=temperature_2m,precipitation_probability,precipitation,cloud_cover&'
-		f'daily=precipitation_probability_max'21)
+		f'daily=precipitation_probability_max')
 	response = requests.request('GET', url)
 	return response.json()
 
