@@ -838,7 +838,6 @@ def init_jobs():
 		minute='0',
 		replace_existing=True)
 
-init_jobs()
-
 if __name__ == '__main__':
+	init_jobs()
 	app.run(debug=False, use_reloader=False)
