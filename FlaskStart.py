@@ -101,7 +101,6 @@ def update_last_rain(increment):
 
 def water_on_schedule():
 	now = datetime.now()
-	print(f'Ran water_on_schedule() at {str(now)}')
 	try:
 		weather_resp = get_forecast(daily=False)
 		data = {
@@ -224,6 +223,7 @@ def water_on_schedule():
 		else:
 			update_last_rain(data["last_rain"] + 1)
 			insertLogMessage("An error occurred during watering operations.")
+		print(f'Ran water_on_schedule() at {str(now)}')
 	except Exception as e:
 		print(f'Ran into an error while running water_on_schedule() at {str(now)}\ntraceback:\n{traceback.print_exc()}')
 
@@ -828,8 +828,8 @@ def init_jobs():
 		func=get_system_temp,  
 		trigger="cron", 
 		hour='*', 
-		# minute='0',
-		minute='*',
+		minute='0',
+		# minute='*',
 		second='0',
 		replace_existing=True)
 
@@ -837,11 +837,11 @@ def init_jobs():
 		id="water_on_schedule",
 		func=water_on_schedule,  
 		trigger="cron", 
-		# hour=sqlSelectQuery('select val_string from system_params where param = "water_schedule_hour"')[0], 
-		# minute='0',
-		hour='*',
-		minute='*',
-		second='0',
+		hour=sqlSelectQuery('select val_string from system_params where param = "water_schedule_hour"')[0], 
+		minute='0',
+		# hour='*',
+		# minute='*',
+		# second='0',
 		replace_existing=True)
 
 init_jobs()
