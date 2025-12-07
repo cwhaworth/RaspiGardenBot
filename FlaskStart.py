@@ -129,7 +129,7 @@ def water_on_schedule():
 
 		for i in range(0, len(weather_resp['hourly']['time'])):
 			t = datetime.strptime(weather_resp['hourly']['time'][i], "%Y-%m-%dT%H:%M")
-			if t >= now and len(weather_temp['hourly']) < 25:
+			if t >= now and len(data['weather']['hourly']) < 25:
 
 				data['weather']['hourly'].append({
 					'date': t.date(),
