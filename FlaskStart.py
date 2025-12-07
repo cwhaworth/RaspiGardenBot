@@ -148,7 +148,7 @@ def water_on_schedule():
 		aboveFiddy = False
 		for hour in data['weather']['hourly']:
 			percentRain += int(hour['precipitation_probability'][:-1])
-			if hour['precipitation_probability'] > 50:
+			if int(hour['precipitation_probability'][:-1]) > 50:
 				aboveFiddy = True
 		if percentRain != 0 and len(data['weather']['hourly']) > 0:
 			avgPercentRain = percentRain / len(data['weather']['hourly'])
