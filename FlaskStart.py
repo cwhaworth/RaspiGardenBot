@@ -718,7 +718,7 @@ def waterLog():
 					formButtons = False
 					navURL = getNavURL()
 					styles = getStyles()
-					waterLog = sqlSelectQuery('select * from water_log_60', fetchall=True)
+					waterLog = sqlSelectQuery('select * from water_log_60 order by date desc, time desc', fetchall=True)
 					return render_template('water-log.html', navurl=navURL, styles=styles, waterLog=waterLog, formButtons=formButtons)
 				case 'back':
 					return redirect(url_for('.waterLog'))
@@ -726,7 +726,7 @@ def waterLog():
 	else:
 		navURL = getNavURL()
 		styles = getStyles()
-		waterLog = sqlSelectQuery('select * from water_log', fetchall=True)
+		waterLog = sqlSelectQuery('select * from water_log order by date desc, time desc', fetchall=True)
 		return render_template('water-log.html', navurl=navURL, styles=styles, waterLog=waterLog, formButtons=formButtons)
 
 @app.route("/admin", methods=['GET', 'POST'])

@@ -83,8 +83,8 @@
 							<p class="col">Water Time: </p>
 							<select class="col" type="text" name="water_schedule_hour">
 								{%for hour in data['hours_range']%}
-								{% set am_pm = "AM" if h < 12 else "PM" %}
-								{% set hour12 = h % 12 %}
+								{% set am_pm = "AM" if hour < 12 else "PM" %}
+								{% set hour12 = hour % 12 %}
 									{% if hour12 == 0 %}
 										{% set hour12 = 12 %}
 									{% endif %}
@@ -103,7 +103,7 @@
 								{% set label = "GMT%s%02d:00" % (sign, abs_hour) %}
 
 								<option value="{{ offset }}"
-									{% if offset == data['user_timezone'] %}selected{% endif %}>
+									{% if offset == data['api_timezone'] %}selected{% endif %}>
 									{{ label }}
 								</option>
 								{%endfor%}
