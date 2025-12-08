@@ -642,7 +642,7 @@ def config():
 			elif key == 'cropSave':
 				#if writing parameters
 				for key, value in tempData.items():
-					if (key != "crop_data" or key != 'api_timezone_trimmed' or \
+					if (key != "crop_data" or key != 'api_timezone_trimmed' or 
 						key != 'hours' or key != 'timezone_offsets'):
 						val = None
 						print(f'key: {key}, val: {val}')
