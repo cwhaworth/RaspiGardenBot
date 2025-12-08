@@ -556,7 +556,7 @@ def config():
 		'api_units' : sqlSelectQuery('select val_string from system_params where param = ?', ('api_units',))[0],
 		'delay_after' : sqlSelectQuery('select val_num from system_params where param = ?', ('delay_after',))[0],
 		'delay_before' : sqlSelectQuery('select val_num from system_params where param = ?', ('delay_before',))[0],
-		'hours': list(range(24)),
+		'hours': str(list(range(24))),
 		'max_crops' : sqlSelectQuery('select val_num from system_params where param = ?', ('max_crops',))[0],
 		'pump_pin' : sqlSelectQuery('select val_num from system_params where param = ?', ('pump_pin',))[0],
 		'system_enable' : bool(sqlSelectQuery('select val_bool from system_params where param = ?', ('system_enable',))[0]),

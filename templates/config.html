@@ -88,7 +88,7 @@
 									{% if hour12 == 0 %}
 										{% set hour12 = 12 %}
 									{% endif %}
-									<option value="{{ h }}" {% if h == data['water_schedule_hour']%}selected{% endif %}>
+									<option value="{{ hour }}" {% if h == data['water_schedule_hour']%}selected{% endif %}>
 										{{ hour12 }}{{ am_pm }}
 									</option>
 								{% endfor %}
@@ -100,7 +100,7 @@
 								{%for offset in data['timezone_offsets']%}
 								{% set sign = "+" if offset >= 0 else "-" %}
 								{% set abs_hour = offset | abs %}
-								{% set label = "GMT%s%02d:00" % (sign, abs_hour) %}
+								{% set label = "GMT%s%02d" % (sign, abs_hour) %}
 
 								<option value="{{ offset }}"
 									{% if offset == data['api_timezone'] %}selected{% endif %}>
