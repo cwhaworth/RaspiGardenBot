@@ -82,13 +82,14 @@
 						<div class="row">
 							<p class="col">Water Time: </p>
 							<select class="col" type="text" name="water_schedule_hour">
-								{%for hour in data['hours_range']%}
+								{%for hour in data['hours']%}
 								{% set am_pm = "AM" if hour < 12 else "PM" %}
 								{% set hour12 = hour % 12 %}
 									{% if hour12 == 0 %}
 										{% set hour12 = 12 %}
 									{% endif %}
-									<option value="{{ hour }}" {% if h == data['water_schedule_hour']%}selected{% endif %}>
+									<option value="{{ hour }}" 
+										{% if h == data['water_schedule_hour'] %}selected{% endif %}>
 										{{ hour12 }}{{ am_pm }}
 									</option>
 								{% endfor %}
@@ -103,7 +104,7 @@
 								{% set label = "GMT%s%02d" % (sign, abs_hour) %}
 
 								<option value="{{ offset }}"
-									{% if offset == data['api_timezone'] %}selected{% endif %}>
+									{% if offset == data['api_timezone_trimmed'] %}selected{% endif %}>
 									{{ label }}
 								</option>
 								{%endfor%}
