@@ -88,7 +88,7 @@
 									{% if hour12 == 0 %}
 										{% set hour12 = 12 %}
 									{% endif %}
-									<option value="{{ h }}" {% if h == data['water_schedule_hour']|string%}selected{% endif %}>
+									<option value="{{ h }}" {% if h == data['water_schedule_hour']%}selected{% endif %}>
 										{{ hour12 }}{{ am_pm }}
 									</option>
 								{% endfor %}
