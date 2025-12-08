@@ -595,7 +595,7 @@ def config():
 			'valve_enable_pin': int(request.form['valve_enable_pin']),
 			'valve_open_pin': int(request.form['valve_open_pin']),
 			'valve_close_pin': int(request.form['valve_close_pin']),
-			'water_schedule_hour': str(request.form['water_schedule_hour']),
+			'water_schedule_hour': str(request.form['water_schedule_hour'])[:-2],
 			'water_time': int(request.form['water_time']),
 			'crop_data': []
 		}
@@ -645,6 +645,7 @@ def config():
 					if key != "crop_data" or key != 'api_timezone_trimmed' or \
 						key != 'hours' or key != 'timezone_offsets':
 						val = None
+						print(f'key: {key}, val: {val}')
 						if isinstance(tempData[key], bool):
 							val = "val_bool"
 						elif isinstance(tempData[key], int):
