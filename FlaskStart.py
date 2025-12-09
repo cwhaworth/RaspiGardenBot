@@ -645,7 +645,7 @@ def config():
 					if (key != "crop_data" and key != 'api_timezone_trimmed' and 
 						key != 'hours' and key != 'timezone_offsets'):
 						val = None
-						print(f'key: {key}, val: {val}')
+						print(f'key: {key}, val: {value}')
 						if isinstance(tempData[key], bool):
 							val = "val_bool"
 						elif isinstance(tempData[key], int):
