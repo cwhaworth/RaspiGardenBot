@@ -78,21 +78,25 @@ def getCoordinates():
 	return location.latitude, location.longitude
 
 def get_forecast(current = True, hourly = True, daily = True):
-	latitude, longitude = getCoordinates()
-	forecast_days = sqlSelectQuery("select val_num from system_params where param = ?", ("api_forecast_days",))[0]
-	timezone = sqlSelectQuery("select val_string from system_params where param = ?", ("api_timezone",))[0]
-	units = sqlSelectQuery("select val_string from system_params where param = ?", ("api_units",))[0]
+	try:
+		latitude, longitude = getCoordinates()
+		forecast_days = sqlSelectQuery("select val_num from system_params where param = ?", ("api_forecast_days",))[0]
+		timezone = sqlSelectQuery("select val_string from system_params where param = ?", ("api_timezone",))[0]
+		units = sqlSelectQuery("select val_string from system_params where param = ?", ("api_units",))[0]
 
-	url = (f'{weather_api_base}?latitude={latitude}&longitude={longitude}&forecast_days={forecast_days}&timezone={timezone}')
-	if str(units).lower() == 'imperial':
-		url += f'&wind_speed_unit=mph&temperature_unit=fahrenheit&precipitation_unit=inch'
-	if current:
-		url += f'&current=temperature_2m,precipitation,rain,showers,snowfall,cloud_cover'
-	if hourly:
-		url += f'&hourly=temperature_2m,precipitation_probability,precipitation,cloud_cover'
-	if daily:
-		url += f'&daily=precipitation_probability_max'
-	response = requests.request('GET', url)
+		url = (f'{weather_api_base}?latitude={latitude}&longitude={longitude}&forecast_days={forecast_days}&timezone={timezone}')
+		if str(units).lower() == 'imperial':
+			url += f'&wind_speed_unit=mph&temperature_unit=fahrenheit&precipitation_unit=inch'
+		if current:
+			url += f'&current=temperature_2m,precipitation,rain,showers,snowfall,cloud_cover'
+		if hourly:
+			url += f'&hourly=temperature_2m,precipitation_probability,precipitation,cloud_cover'
+		if daily:
+			url += f'&daily=precipitation_probability_max'
+		response = requests.request('GET', url)
+	except Exception as e:
+		print(f'Ran into an error while gettig weather at {str(now)}\n{url}\ntraceback:\n{traceback.print_exc(e)}')
+
 	return response.json()
 
 def update_last_rain(increment):
@@ -225,7 +229,7 @@ def water_on_schedule():
 			insertLogMessage("An error occurred during watering operations.")
 		print(f'Ran water_on_schedule() at {str(now)}')
 	except Exception as e:
-		print(f'Ran into an error while running water_on_schedule() at {str(now)}\ntraceback:\n{traceback.print_exc()}')
+		print(f'Ran into an error while running water_on_schedule() at {str(now)}\ntraceback:\n{traceback.print_exc(e)}')
 
 def get_system_temp():
 	cpu = CPUTemperature()
