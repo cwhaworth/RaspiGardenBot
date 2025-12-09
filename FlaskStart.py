@@ -600,7 +600,7 @@ def config():
 			'max_crops': int(request.form['max_crops']),
 			'pump_pin': int(request.form['pump_pin']),
 			'system_enable': bool(request.form.get('system_enable', False)),
-			'timezone_offsets': timezones,
+			'timezones': timezones,
 			'use_api': bool(request.form.get('use_api', False)),
 			'valve_enable_pin': int(request.form['valve_enable_pin']),
 			'valve_open_pin': int(request.form['valve_open_pin']),
