@@ -595,7 +595,7 @@ def config():
 			'valve_enable_pin': int(request.form['valve_enable_pin']),
 			'valve_open_pin': int(request.form['valve_open_pin']),
 			'valve_close_pin': int(request.form['valve_close_pin']),
-			'water_schedule_hour': str(request.form['water_schedule_hour'])[:-2],
+			'water_schedule_hour': str(request.form['water_schedule_hour']),
 			'water_time': int(request.form['water_time']),
 			'crop_data': []
 		}
