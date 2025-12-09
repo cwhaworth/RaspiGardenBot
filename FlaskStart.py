@@ -581,7 +581,7 @@ def config():
 			'api_country': str(request.form['api_country']),
 			'api_forecast_days': int(request.form['api_forecast_days']),
 			'api_state': str(request.form['api_state']),
-			'api_timezone': f"GMT{str(request.form['api_timezone'])}",
+			'api_timezone': f"{str(request.form['api_timezone'])}",
 			'api_timezone_trimmed': str(request.form['api_timezone'])[-2:],
 			'api_units': str(request.form['api_units']),
 			'delay_before': int(request.form['delay_before']),
