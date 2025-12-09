@@ -98,14 +98,20 @@
 						<div class="row">
 							<p class="col">Timezone: </p>
 							<select class="col" type="text" name="api_timezone">
-								{%for offset in data['timezone_offsets']%}
-								{% set sign = "+" if offset >= 0 else "-" %}
-								{% set abs_hour = offset | abs %}
-								{% set label = "GMT%s%d" % (sign, abs_hour) %}
+								{%for timezone in data['timezones']%}
 
-								<option value="{{ label }}"
-									{% if offset == data['api_timezone_trimmed'] %}selected{% endif %}>
-									{{ label }}
+								<option value="{{ timezone }}"
+									{% if timezone == data['api_timezone'] %}selected{% endif %}>
+									{%if '%2F' in timezone %}
+										{{ timezone.split('%2F')[0] }}/
+										{% if '_' in timezone.split('%2F')[1]%}
+											{{timezone.split('%2F')[1].split('_')[0]}} {{timezone.split('%2F')[1].split('_')[1]}}
+										{% else %}
+											{{ timezone.split('%2F')[1] }}
+										{% endif %}
+									{% else %}
+										{{timezone}}
+									{% endif %}
 								</option>
 								{%endfor%}
 							</select>	

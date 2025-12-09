@@ -547,6 +547,16 @@ def config():
 	if 'user' not in session:
 		return redirect(url_for('login'))
 
+	timezones = [
+		"auto", "GMT+0", 
+		"America%2FAnchorage", "America%2FLos_Angeles", "America%2FDenver", "America%2FChicago", "America%2FNew_York", "America%2FSao_Paulo",
+		"Europe%2FLondon", "Europe%2FBerlin", "Europe%2FMoscow",
+		"Africa%2FCairo",
+		"Asia%2FBangkok", "Asia%2FSingapore", "Asia%2FTokyo",
+		"Australia%2FSydney",
+		"Pacific%2FAuckland"
+	]
+
 	#get stored parameters
 	data = {
 		'api_city' : sqlSelectQuery('select val_string from system_params where param = ?', ('api_city',))[0],
@@ -562,7 +572,7 @@ def config():
 		'max_crops' : sqlSelectQuery('select val_num from system_params where param = ?', ('max_crops',))[0],
 		'pump_pin' : sqlSelectQuery('select val_num from system_params where param = ?', ('pump_pin',))[0],
 		'system_enable' : bool(sqlSelectQuery('select val_bool from system_params where param = ?', ('system_enable',))[0]),
-		'timezone_offsets': list(range(-12,15)),
+		'timezones': timezones,
 		'use_api' : bool(sqlSelectQuery('select val_bool from system_params where param = ?', ('use_api',))[0]),
 		'valve_close_pin' : sqlSelectQuery('select val_num from system_params where param = ?', ('valve_close_pin',))[0],
 		'valve_enable_pin' : sqlSelectQuery('select val_num from system_params where param = ?', ('valve_enable_pin',))[0],
@@ -592,7 +602,7 @@ def config():
 			'max_crops': int(request.form['max_crops']),
 			'pump_pin': int(request.form['pump_pin']),
 			'system_enable': bool(request.form.get('system_enable', False)),
-			'timezone_offsets': list(range(-12,15)),
+			'timezone_offsets': timezones,
 			'use_api': bool(request.form.get('use_api', False)),
 			'valve_enable_pin': int(request.form['valve_enable_pin']),
 			'valve_open_pin': int(request.form['valve_open_pin']),
