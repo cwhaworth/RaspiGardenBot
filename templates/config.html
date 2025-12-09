@@ -103,7 +103,7 @@
 								{% set abs_hour = offset | abs %}
 								{% set label = "GMT%s%d" % (sign, abs_hour) %}
 
-								<option value="{{ offset }}"
+								<option value="{{ label }}"
 									{% if offset == data['api_timezone_trimmed'] %}selected{% endif %}>
 									{{ label }}
 								</option>
