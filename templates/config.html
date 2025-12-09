@@ -103,7 +103,7 @@
 								<option value="{{ timezone }}"
 									{% if timezone == data['api_timezone'] %}selected{% endif %}>
 									{%if '%2F' in timezone %}
-										{{ timezone.split('%2F')[0] }} /
+										{{ timezone.split('%2F')[0] }}&nbsp;/
 										{% if '_' in timezone.split('%2F')[1]%}
 											{{timezone.split('%2F')[1].split('_')[0]}} {{timezone.split('%2F')[1].split('_')[1]}}
 										{% else %}
