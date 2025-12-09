@@ -642,7 +642,8 @@ def config():
 			elif key == 'cropSave':
 				#if writing parameters
 				for key, value in tempData.items():
-					if key != "crop_data" or key != 'api_timezone_trimmed' or key != 'hours' or key != 'timezone_offsets':
+					if (str(key) != "crop_data" or str(key) != 'api_timezone_trimmed' or 
+						str(key) != 'hours' or str(key) != 'timezone_offsets'):
 						val = None
 						print(f'key: {key}, val: {val}')
 						if isinstance(tempData[key], bool):
@@ -651,8 +652,11 @@ def config():
 							val = "val_num"
 						elif isinstance(tempData[key], str):
 							val = "val_string"
-						param_tuple = (value, key)
-						sqlModifyQuery(f'update system_params set {val} = ? where param = ?', param_tuple)
+						try:
+							param_tuple = (value, key)
+							sqlModifyQuery(f'update system_params set {val} = ? where param = ?', param_tuple)
+						except:
+							continue
 
 				if crop_names:
 					crop_names_join = ','.join(crop_names)
