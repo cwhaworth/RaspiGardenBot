@@ -94,7 +94,7 @@ def get_forecast(current = True, hourly = True, daily = True):
 		url += f'&daily=precipitation_probability_max'
 	response = requests.request('GET', url)
 	
-	print(f'Ran into an error while gettig weather at {str(now)}\n{url}\ntraceback:\n{traceback.print_exc(e)}')
+	print(f'Ran into an error while gettig weather\n{url}\ntraceback:\n{traceback.print_exc(e)}')
 	return response.json()
 
 def update_last_rain(increment):
