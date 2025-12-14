@@ -65,6 +65,9 @@ def get_forecast(current = True, hourly = True, daily = True):
 		url += f'&daily=precipitation_probability_max'
 	response = requests.request('GET', url)
 
+	print(f'API URL:\n{url}')
+	return response.json()
+
 def water_on_schedule():
 	now = datetime.now()
 	try:
@@ -200,7 +203,7 @@ def water_on_schedule():
 			print("An error occurred during watering operations.")
 		print(f'Ran water_on_schedule() at {str(now)}')
 	except Exception as e:
-		print(f'Ran into an error while running water_on_schedule() at {str(now)}\ntraceback:\n{traceback.print_exc(e)}')
+		print(f'Ran into an error while running water_on_schedule() at {str(now)}\ntraceback:\n{traceback.print_exception(e)}')
 
 if __name__ == "__main__":
 	water_on_schedule()
