@@ -95,7 +95,7 @@ values
 	("api_country", "US", null, null),
 	("api_forecast_days", null, 2, null),
 	("api_state", "NC", null, null),
-	("api_timezone", "GMT-5", null, null),
+	("api_timezone", "auto", null, null),
 	("api_units", "Imperial", null, null),
 	("delay_after", null, 1, null),
 	("delay_before", null, 1, null),
