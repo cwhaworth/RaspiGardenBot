@@ -110,7 +110,7 @@ def water_on_schedule():
 			'last_rain': sqlSelectQuery('select val_num from system_params where param = ?', ('last_rain',))[0],
 			'pump_pin' : sqlSelectQuery('select val_num from system_params where param = ?', ('pump_pin',))[0],
 			'system_enable': bool(sqlSelectQuery('select val_bool from system_params where param = ?', ('system_enable',))[0]),
-			'cropData': sqlSelectQuery('select id, enabled, crop, pin, rain_inc from crops', fetchall=True),
+			'crop_data': sqlSelectQuery('select id, enabled, crop, pin, rain_inc from crops', fetchall=True),
 			'delay_after' : sqlSelectQuery('select val_num from system_params where param = ?', ('delay_after',))[0],
 			'delay_before' : sqlSelectQuery('select val_num from system_params where param = ?', ('delay_before',))[0],
 			'sysData': sqlSelectQuery('select * from system_temp', fetchall=True),
