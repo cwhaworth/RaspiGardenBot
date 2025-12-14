@@ -216,7 +216,7 @@ def water_on_schedule():
 			# GPIO.cleanup(valve_open_pin)
 			# GPIO.cleanup(valve_close_pin)
 			for crop in data['crop_data']:
-				if crop[4] <= data['last_rained'] and data['last_rain'] % crop[4] == 0 and crop[1]:
+				if crop[4] <= data['last_rain'] and data['last_rain'] % crop[4] == 0 and crop[1]:
 					# GPIO.cleanup(crop[3])
 					continue
 
