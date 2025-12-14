@@ -336,7 +336,7 @@ def waterAll():
 			#start watering
 			#setup pins for pump and solenoid controller power
 			# GPIO.setup(pump, GPIO.OUT)
-			# GPIO.setup(valve_enable_pin, GPIO.OUT)
+			GPIO.setup(valve_enable_pin, GPIO.OUT)
 			# GPIO.setup(valve_open_pin, GPIO.OUT)
 			# GPIO.setup(valve_close_pin, GPIO.OUT)
 			main_valve = GPIO.PWM(valve_enable_pin, 100) #pin, and Hz
@@ -365,7 +365,7 @@ def waterAll():
 			'''
 			# GPIO.cleanup(pump)
 			time.sleep(delay_after)
-			# GPIO.cleanup(valve_enable_pin)
+			GPIO.cleanup(valve_enable_pin)
 			# GPIO.cleanup(valve_open_pin)
 			# GPIO.cleanup(valve_close_pin)
 			for crop in cropData:
@@ -376,7 +376,7 @@ def waterAll():
 			#generate logs
 			insertLogMessage('Watered all sectors by manual override.')
 	except Exception as e:
-		print(f'Ran into an error while running waterAll() at {str(now)}\ntraceback:\n{traceback.print_exc(e)}')
+		print(f'Ran into an error while running waterAll()\ntraceback:\n{traceback.print_exc(e)}')
 
 # def waterNow(sectID):
 def waterNow(cropName):
