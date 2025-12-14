@@ -117,6 +117,7 @@ def water_on_schedule():
 			'valve_close_pin' : sqlSelectQuery('select val_num from system_params where param = ?', ('valve_close_pin',))[0],
 			'valve_enable_pin' : sqlSelectQuery('select val_num from system_params where param = ?', ('valve_enable_pin',))[0],
 			'valve_open_pin' : sqlSelectQuery('select val_num from system_params where param = ?', ('valve_open_pin',))[0],
+			'water_time' : sqlSelectQuery('select val_num from system_params where param = ?', ('water_time',))[0],
 			'weather': {
 				'units': {
 					'temp': f'{weather_resp["current_units"]["temperature_2m"]}',
