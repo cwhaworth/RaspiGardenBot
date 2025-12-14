@@ -145,7 +145,7 @@ def water_on_schedule():
 		#If system is enabled, and API data is not in use OR if it does not rain: 
 		#water crops based on interval
 		elif data['use_api'] == False or (not aboveFiddy and avgPercentRain < 4.16) or avgPercentRain <= 50:
-			update_last_rain(data["last_rain"] + 1)
+			# update_last_rain(data["last_rain"] + 1)
 			line = "Watered crops(s): "
 
 			pump = data['pump_pin']
