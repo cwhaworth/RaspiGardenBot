@@ -94,7 +94,7 @@ def get_forecast(current = True, hourly = True, daily = True):
 		url += f'&daily=precipitation_probability_max'
 	response = requests.request('GET', url)
 	
-	print(f'API URL:\n{url}')
+	# print(f'API URL:\n{url}')
 	return response.json()
 
 def update_last_rain(increment):
@@ -106,27 +106,33 @@ def water_on_schedule():
 	try:
 		weather_resp = get_forecast(daily=False)
 		data = {
-				'use_api': bool(sqlSelectQuery('select val_bool from system_params where param = ?', ('use_api',))[0]),
-				'last_rain': sqlSelectQuery('select val_num from system_params where param = ?', ('last_rain',))[0],
-				'system_enable': bool(sqlSelectQuery('select val_bool from system_params where param = ?', ('system_enable',))[0]),
-				'cropData': sqlSelectQuery('select id, enabled, crop, pin, rain_inc from crops', fetchall=True),
-				'sysData': sqlSelectQuery('select * from system_temp', fetchall=True),
-				'weather': {
-					'units': {
-						'temp': f'{weather_resp["current_units"]["temperature_2m"]}',
-						'cloud_cover': f'{weather_resp["current_units"]["cloud_cover"]}',
-						'precipitation': f'{weather_resp["current_units"]["precipitation"][:2]}'
-					},
-					'current': {
-						'date': f'{now.date()}',
-						'time': f'{now.time()}'[:-7],
-						'temp': f'{weather_resp["current"]["temperature_2m"]}{weather_resp["current_units"]["temperature_2m"]}',
-						'cloud_cover': f'{weather_resp["current"]["cloud_cover"]}{weather_resp["current_units"]["cloud_cover"]}',
-						'precipitation': f'{weather_resp["current"]["precipitation"]}{weather_resp["current_units"]["precipitation"][:2]}'
-					},
-					'hourly': []
-				}
+			'use_api': bool(sqlSelectQuery('select val_bool from system_params where param = ?', ('use_api',))[0]),
+			'last_rain': sqlSelectQuery('select val_num from system_params where param = ?', ('last_rain',))[0],
+			'pump_pin' : sqlSelectQuery('select val_num from system_params where param = ?', ('pump_pin',))[0],
+			'system_enable': bool(sqlSelectQuery('select val_bool from system_params where param = ?', ('system_enable',))[0]),
+			'cropData': sqlSelectQuery('select id, enabled, crop, pin, rain_inc from crops', fetchall=True),
+			'delay_after' : sqlSelectQuery('select val_num from system_params where param = ?', ('delay_after',))[0],
+			'delay_before' : sqlSelectQuery('select val_num from system_params where param = ?', ('delay_before',))[0],
+			'sysData': sqlSelectQuery('select * from system_temp', fetchall=True),
+			'valve_close_pin' : sqlSelectQuery('select val_num from system_params where param = ?', ('valve_close_pin',))[0],
+			'valve_enable_pin' : sqlSelectQuery('select val_num from system_params where param = ?', ('valve_enable_pin',))[0],
+			'valve_open_pin' : sqlSelectQuery('select val_num from system_params where param = ?', ('valve_open_pin',))[0],
+			'weather': {
+				'units': {
+					'temp': f'{weather_resp["current_units"]["temperature_2m"]}',
+					'cloud_cover': f'{weather_resp["current_units"]["cloud_cover"]}',
+					'precipitation': f'{weather_resp["current_units"]["precipitation"][:2]}'
+				},
+				'current': {
+					'date': f'{now.date()}',
+					'time': f'{now.time()}'[:-7],
+					'temp': f'{weather_resp["current"]["temperature_2m"]}{weather_resp["current_units"]["temperature_2m"]}',
+					'cloud_cover': f'{weather_resp["current"]["cloud_cover"]}{weather_resp["current_units"]["cloud_cover"]}',
+					'precipitation': f'{weather_resp["current"]["precipitation"]}{weather_resp["current_units"]["precipitation"][:2]}'
+				},
+				'hourly': []
 			}
+		}
 
 		for i in range(0, len(weather_resp['hourly']['time'])):
 			t = datetime.strptime(weather_resp['hourly']['time'][i], "%Y-%m-%dT%H:%M")
@@ -378,7 +384,6 @@ def waterAll():
 	except Exception as e:
 		print(f'Ran into an error while running waterAll()\ntraceback:\n{traceback.print_exc(e)}')
 
-# def waterNow(sectID):
 def waterNow(cropName):
 	'''
 	Function to water selected sector based on 'water-time' defined in the parameters.
