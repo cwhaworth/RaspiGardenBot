@@ -179,10 +179,10 @@ def water_on_schedule():
 			#start watering
 			#setup pins for pump and solenoid controller power
 			# GPIO.setup(pump, GPIO.OUT)
-			# GPIO.setup(valve_enable_pin, GPIO.OUT)
+			GPIO.setup(valve_enable_pin, GPIO.OUT)
 			# GPIO.setup(valve_open_pin, GPIO.OUT)
 			# GPIO.setup(valve_close_pin, GPIO.OUT)
-			# valve = GPIO.PWM(valve_enable_pin, 100) #pin, and Hz
+			valve = GPIO.PWM(valve_enable_pin, 100) #pin, and Hz
 
 			#turn on pump
 			# GPIO.output(pump, GPIO.HIGH)
@@ -205,7 +205,7 @@ def water_on_schedule():
 			'''
 			# GPIO.cleanup(pump)
 			time.sleep(data['delay_after'])
-			# GPIO.cleanup(valve_enable_pin)
+			GPIO.cleanup(valve_enable_pin)
 			# GPIO.cleanup(valve_open_pin)
 			# GPIO.cleanup(valve_close_pin)
 			for crop in data['crop_data']:
@@ -854,10 +854,10 @@ def init_jobs():
 		func=water_on_schedule,  
 		trigger="cron", 
 		hour=sqlSelectQuery('select val_string from system_params where param = "water_schedule_hour"')[0], 
-		minute='0',
-		# hour='*',
-		# minute='*',
-		# second='0',
+		# minute='0',
+		hour='*',
+		minute='*',
+		second='0',
 		replace_existing=True)
 
 init_jobs()
