@@ -666,7 +666,7 @@ def config():
 				for key, value in tempData.items():
 					if (key != "crop_data" and key != 'hours' and key != 'timezones'):
 						val = None
-						print(f'key: {key}, val: {value}')
+						# print(f'key: {key}, val: {value}')
 						if isinstance(tempData[key], bool):
 							val = "val_bool"
 						elif isinstance(tempData[key], int):
