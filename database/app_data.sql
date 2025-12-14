@@ -1,3 +1,6 @@
+/*
+Table Definitions
+*/
 create table if not exists users(
 	id int primary key default (abs(random()) % 89999 + 10000),
 	username text not null,
@@ -33,17 +36,6 @@ create table if not exists crops(
 	unique(crop, pin)
 	);
 
-/*
-create table if not exists forecast(
-	id smallint primary key default (abs(random()) % 8999 + 1000),
-	"date" date not null,
-	"time" time not null,
-	status text,
-	pop tinyint not null default 0 check (pop >= 0 and pop <= 100),
-	temp real
-	);
-*/
-
 create table if not exists water_log(
 	id smallint primary key default (abs(random()) % 8999 + 1000),
 	"date" date not null,
@@ -58,32 +50,9 @@ create table if not exists water_log_60(
         message text not null default "An error occured in script execution. This was logged from the database."
         );
 
-insert into users (username, password_hash, priv_level)
-values
-	("groot", "$2b$12$cxHaWKvc9qpVNLbjjGD3zueLAHX2AlntXjaNQaqUGbRg/G6/lpr0a", 1),
-	("cwhaworth", "$2b$12$67BUz1A1QU3nDIXTxj7gguwn40P/9dC30RHNr/NoFRhwfvqhG/hGS", 1);
-
-insert into system_params(param, val_string, val_num, val_bool)
-values
-	("api_city", "Raleigh", null, null),
-	("api_country", "US", null, null),
-	("api_forecast_days", null, 2, null),
-	("api_state", "NC", null, null),
-	("api_timezone", "GMT-5", null, null),
-	("api_units", "Imperial", null, null),
-	("delay_after", null, 1, null),
-	("delay_before", null, 1, null),
-	("last_rain", null, 28, null),
-	("max_crops", null, 4, null),
-	("pump_pin", null, 27, null),
-	("system_enable", null, null, 0),
-	("use_api", null, null, 0),
-	("valve_close_pin", null, 16, null),
-	("valve_enable_pin", null, 13, null),
-	("valve_open_pin", null, 19, null),
-	("water_schedule_hour", "11", null, null),
-	("water_time", null, 10, null);
-
+/*
+Trigger Definitions
+*/
 create trigger if not exists enforce_max_crops after insert on crops
 when (select count(*) from crops) > (select val_num from system_params where param = 'max_crops')
 begin
@@ -112,5 +81,39 @@ begin
         where id in (select id from water_log_60 order by "date" asc, "time" asc limit 1);
 end;
 
+/*
+Data Initialization
+*/
+insert into users (username, password_hash, priv_level)
+values
+	("groot", "$2b$12$cxHaWKvc9qpVNLbjjGD3zueLAHX2AlntXjaNQaqUGbRg/G6/lpr0a", 1),
+	("cwhaworth", "$2b$12$67BUz1A1QU3nDIXTxj7gguwn40P/9dC30RHNr/NoFRhwfvqhG/hGS", 1);
 
+insert into system_params(param, val_string, val_num, val_bool)
+values
+	("api_city", "Raleigh", null, null),
+	("api_country", "US", null, null),
+	("api_forecast_days", null, 2, null),
+	("api_state", "NC", null, null),
+	("api_timezone", "GMT-5", null, null),
+	("api_units", "Imperial", null, null),
+	("delay_after", null, 1, null),
+	("delay_before", null, 1, null),
+	("last_rain", null, 28, null),
+	("max_crops", null, 4, null),
+	("pump_pin", null, 27, null),
+	("system_enable", null, null, 0),
+	("use_api", null, null, 0),
+	("valve_close_pin", null, 16, null),
+	("valve_enable_pin", null, 13, null),
+	("valve_open_pin", null, 19, null),
+	("water_schedule_hour", "11", null, null),
+	("water_time", null, 10, null);
+
+insert into crops (crop, pin, rain_inc, "date", "time")
+values
+        ("Peppers", 17, 3, date('now'), time('now')),
+        ("Zuccini", 18, 1, date('now'), time('now')),
+        ("Cactus", 22, 10, date('now'), time('now')),
+        ("Tomato", 23, 1, date('now'), time('now'));
 
