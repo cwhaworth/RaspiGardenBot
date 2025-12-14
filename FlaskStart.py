@@ -387,61 +387,64 @@ def waterNow(cropName):
 	Waits for 'delay-after' seconds before closing the solenoids to each sector watered.
 	Writes log when finished.
 	'''
-	system_enable = bool(sqlSelectQuery('select val_bool from system_params where param = ?', ('system_enable',))[0])
+	try:
+		system_enable = bool(sqlSelectQuery('select val_bool from system_params where param = ?', ('system_enable',))[0])
 
-	if system_enable == False:
-		insertLogMessage("Did not perform water operation. Water system not enabled.")
-	else:
-		#pins
-		pump = sqlSelectQuery('select val_num from system_params where param = ?', ('pump_pin',))[0]
-		valve_enable_pin = sqlSelectQuery('select val_num from system_params where param = ?', ('valve_enable_pin',))[0]
-		valve_open_pin = sqlSelectQuery('select val_num from system_params where param = ?', ('valve_open_pin',))[0]
-		valve_close_pin = sqlSelectQuery('select val_num from system_params where param = ?', ('valve_close_pin',))[0]
+		if system_enable == False:
+			insertLogMessage("Did not perform water operation. Water system not enabled.")
+		else:
+			#pins
+			pump = sqlSelectQuery('select val_num from system_params where param = ?', ('pump_pin',))[0]
+			valve_enable_pin = sqlSelectQuery('select val_num from system_params where param = ?', ('valve_enable_pin',))[0]
+			valve_open_pin = sqlSelectQuery('select val_num from system_params where param = ?', ('valve_open_pin',))[0]
+			valve_close_pin = sqlSelectQuery('select val_num from system_params where param = ?', ('valve_close_pin',))[0]
 
-		#timers
-		delay_before = sqlSelectQuery('select val_num from system_params where param = ?', ('delay_before',))[0]
-		delay_after = sqlSelectQuery('select val_num from system_params where param = ?', ('delay_after',))[0]
-		water_time = sqlSelectQuery('select val_num from system_params where param = ?', ('water_time',))[0]		
+			#timers
+			delay_before = sqlSelectQuery('select val_num from system_params where param = ?', ('delay_before',))[0]
+			delay_after = sqlSelectQuery('select val_num from system_params where param = ?', ('delay_after',))[0]
+			water_time = sqlSelectQuery('select val_num from system_params where param = ?', ('water_time',))[0]		
 
-		#crops 
-		cropData = sqlSelectQuery(f'select id, enabled, crop, pin, rain_inc from crops where crop = ?', (cropName,))
+			#crops 
+			cropData = sqlSelectQuery(f'select id, enabled, crop, pin, rain_inc from crops where crop = ?', (cropName,))
 
-		#start watering
-		#setup pins for pump and solenoid controller power
-		# GPIO.setup(pump, GPIO.OUT)
-		# GPIO.setup(valve_enable_pin, GPIO.OUT)
-		# GPIO.setup(valve_open_pin, GPIO.OUT)
-		# GPIO.setup(valve_close_pin, GPIO.OUT)
-		main_valve = GPIO.PWM(valve_enable_pin, 100) #pin, and Hz
+			#start watering
+			#setup pins for pump and solenoid controller power
+			# GPIO.setup(pump, GPIO.OUT)
+			GPIO.setup(valve_enable_pin, GPIO.OUT)
+			# GPIO.setup(valve_open_pin, GPIO.OUT)
+			# GPIO.setup(valve_close_pin, GPIO.OUT)
+			main_valve = GPIO.PWM(valve_enable_pin, 100) #pin, and Hz
 
-		#turn on pump
-		# GPIO.output(pump, GPIO.HIGH)
+			#turn on pump
+			# GPIO.output(pump, GPIO.HIGH)
 
-		#open and power solenoid
-		time.sleep(delay_before)
-		# GPIO.setup(cropData[3], GPIO.OUT)
-		# GPIO.output(cropData[3], GPIO.LOW)
-		main_valve.start(100) #duty cycle
-		# GPIO.output(valve_open_pin, GPIO.HIGH)
-		# GPIO.output(valve_close_pin, GPIO.LOW)
+			#open and power solenoid
+			time.sleep(delay_before)
+			# GPIO.setup(cropData[3], GPIO.OUT)
+			# GPIO.output(cropData[3], GPIO.LOW)
+			main_valve.start(100) #duty cycle
+			# GPIO.output(valve_open_pin, GPIO.HIGH)
+			# GPIO.output(valve_close_pin, GPIO.LOW)
 
-		time.sleep(water_time)
+			time.sleep(water_time)
 
-		'''
-		end watering
-		1. clean up pump output
-		2. wait for configured after water operation delay
-		3. clean up solenoid and relay output 
-		'''
-		# GPIO.cleanup(pump)
-		time.sleep(delay_after)
-		# GPIO.cleanup(valve_enable_pin)
-		# GPIO.cleanup(valve_open_pin)
-		# GPIO.cleanup(valve_close_pin)
-		# GPIO.cleanup(cropData[3])
+			'''
+			end watering
+			1. clean up pump output
+			2. wait for configured after water operation delay
+			3. clean up solenoid and relay output 
+			'''
+			# GPIO.cleanup(pump)
+			time.sleep(delay_after)
+			GPIO.cleanup(valve_enable_pin)
+			# GPIO.cleanup(valve_open_pin)
+			# GPIO.cleanup(valve_close_pin)
+			# GPIO.cleanup(cropData[3])
 
-		#generate logs
-		insertLogMessage(f'Watered sector "{cropName}" by manual override.')
+			#generate logs
+			insertLogMessage(f'Watered sector "{cropName}" by manual override.')
+	except Exception as e:
+		print(f'Ran into an error while running waterNoe() for {cropName}\ntraceback:\n{traceback.print_exc(e)}')
 
 @app.route("/")
 @app.route("/index", methods=['GET', 'POST'])
