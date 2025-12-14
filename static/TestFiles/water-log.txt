@@ -1,5 +1,0 @@
-24/05/2021 19:38:09 -> water the plants, and perform other logical functions.
-24/05/2021 19:41:30 -> water the plants, and perform other logical functions.
-24/05/2021 20:18:24 -> water the plants, and perform other logical functions.
-24/05/2021 20:18:54 -> water the plants, and perform other logical functions.
-24/05/2021 20:32:02did not water because it rained today.
