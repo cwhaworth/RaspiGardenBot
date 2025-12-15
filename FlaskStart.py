@@ -268,7 +268,7 @@ def getStyles():
 	Gets the file for the CSS styles.
 	'''
 	# styles = url_for('static', filename='bootstrap.css')
-	styles = url_for('bootstrap/dist/css', filename='bootstrap.css')
+	styles = url_for('static', filename='bootstrap/dist/css/bootstrap.css')
 
 	return styles
 
