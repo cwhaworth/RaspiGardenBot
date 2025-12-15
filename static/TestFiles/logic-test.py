@@ -61,7 +61,8 @@ def get_forecast(current = True, hourly = True, daily = True):
 	if current:
 		url += f'&current=temperature_2m,precipitation,rain,showers,snowfall,cloud_cover'
 	if hourly:
-		url += f'&hourly=temperature_2m,precipitation_probability,precipitation,cloud_cover'
+		# url += f'&hourly=temperature_2m,precipitation_probability,precipitation,cloud_cover'
+		url += f'&hourly=precipitation_probability'
 	if daily:
 		url += f'&daily=precipitation_probability_max'
 	response = requests.request('GET', url)
@@ -119,6 +120,7 @@ def water_on_schedule():
 					'precipitation': (f'{weather_resp["hourly"]["precipitation"][i]} '
 									f'{weather_resp["hourly_units"]["precipitation"][:2]}')
 				})
+
 		percentRain = 0
 		avgPercentRain = 0
 		aboveFiddy = False
@@ -164,7 +166,7 @@ def water_on_schedule():
 
 			#turn on pump
 			# GPIO.output(pump, GPIO.HIGH)
-			time.sleep(data['delay_before'])
+			# time.sleep(data['delay_before'])
 			for crop in data["crop_data"]:
 				if crop[4] <= data["last_rain"] and data["last_rain"] % crop[4] == 0 and crop[1]:
 					# GPIO.setup(crop[3], GPIO.OUT)
@@ -173,7 +175,7 @@ def water_on_schedule():
 			# valve.start(100) #duty cycle
 			# GPIO.output(valve_open_pin, GPIO.HIGH)
 			# GPIO.output(valve_close_pin, GPIO.LOW)
-			time.sleep(data['water_time'])
+			# time.sleep(data['water_time'])
 
 			'''
 			end watering
@@ -182,7 +184,7 @@ def water_on_schedule():
 			3. clean up solenoid and relay output 
 			'''
 			# GPIO.cleanup(pump)
-			time.sleep(data['delay_after'])
+			# time.sleep(data['delay_after'])
 			# GPIO.cleanup(valve_enable_pin)
 			# GPIO.cleanup(valve_open_pin)
 			# GPIO.cleanup(valve_close_pin)
