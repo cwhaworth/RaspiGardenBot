@@ -23,7 +23,6 @@ app = Flask(__name__)
 app.secret_key = os.urandom(24)
 
 assets = Environment(app)
-assets.url = assets.static_url_path
 scss = Bundle(
     'scss/styles.scss',
     filters='pyscss',
