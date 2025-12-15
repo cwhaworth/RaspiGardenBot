@@ -26,7 +26,7 @@ assets = Environment(app)
 assets.url = assets.static_url_path
 scss = Bundle(
     'scss/styles.scss',
-    filters='libsass',
+    filters='pyscss',
     output='css/styes.css'
 )
 assets.register('scss_all', scss)
