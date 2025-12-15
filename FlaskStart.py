@@ -17,9 +17,18 @@ from datetime import date, datetime
 from geopy.geocoders import Nominatim
 from gpiozero import CPUTemperature
 from flask import flash, Flask, jsonify, redirect, render_template, request, session, url_for
+from flask_assets import Environment, Bundle
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
+
+assets = Environment(app)
+scss = Bundle(
+    'scss/styles.scss',
+    filters='libsass',
+    output='css/styes.css'
+)
+assets.register('scss_all', scss)
 
 dbPath = '/var/www/RaspiGardenBot/database/app_data.db'
 weather_api_base = 'https://api.open-meteo.com/v1/forecast'
@@ -268,7 +277,7 @@ def getStyles():
 	Gets the file for the CSS styles.
 	'''
 	# styles = url_for('static', filename='bootstrap.css')
-	styles = url_for('static', filename='bootstrap/dist/css/bootstrap.css')
+	styles = url_for('static', filename='css/styles.css')
 
 	return styles
 
