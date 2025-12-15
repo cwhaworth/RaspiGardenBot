@@ -74,6 +74,7 @@ def water_on_schedule():
 	now = datetime.now()
 	try:
 		weather_resp = get_forecast(daily=False)
+		print(json.dumps(weather_resp, indent=2))
 		data = {
 			'use_api': bool(sqlSelectQuery('select val_bool from system_params where param = ?', ('use_api',))[0]),
 			'last_rain': sqlSelectQuery('select val_num from system_params where param = ?', ('last_rain',))[0],
