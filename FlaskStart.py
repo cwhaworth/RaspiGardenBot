@@ -25,7 +25,7 @@ app.secret_key = os.urandom(24)
 assets = Environment(app)
 scss = Bundle(
     'scss/styles.scss',
-    filters='pyscss',
+    filters='libsass',
     output='css/styes.css'
 )
 assets.register('scss_all', scss)
