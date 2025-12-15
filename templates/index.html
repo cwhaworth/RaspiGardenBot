@@ -10,142 +10,144 @@
 	<title>RGB GUI - Home</title>
 </head>
 
-<body class="container align-self-center bg-primary">
-	<div class="container align-self-center text-center">
-		<div class="row">
-			<div class="col"></div>
-			<div class="col">
-				<h1>Raspi Garden Bot Web GUI</h1>
-			</div>
-			<div class="col">
-				<form method="POST">
-					<div>
-						<input class="align-self-end" name="logout" type="submit" value="Logout">
-					</div>
-					<div>
-						<input class="align-self-end" name="userSettings" type="submit" value="User Settings">
-					</div>
-				</form>
-			</div>
-		</div>
-		<nav>
-			<a href={{navurl['index']}}>Home</a>
-			<a href={{navurl['config']}}>Config</a>
-			<a href={{navurl['waterLog']}}>Water Log</a> 
-			{%if session['priv_level'] == 1%}
-			<a href={{navurl['admin']}}>Admin</a>
-			{%endif%}
-		</nav>
-	</div>
-
-	<div class="container align-content-center row">
-		<div class="col">
+<body class="container align-self-center">
+	<div class="bg-primary" name="main">
+		<div class="container align-self-center text-center">
 			<div class="row">
-				<h3 class="col">Weather Report for<br>{{data['api_city']}}, {{data['api_state']}}, {{data['api_country']}}</h3>
-				{%if data['use_api']%}
-				<p class="col text-end align-text-bottom">Last rained <b>{{data['last_rain']}}</b> days ago</p>
-				{%endif%}
+				<div class="col"></div>
+				<div class="col">
+					<h1>Raspi Garden Bot Web GUI</h1>
+				</div>
+				<div class="col">
+					<form method="POST">
+						<div>
+							<input class="align-self-end" name="logout" type="submit" value="Logout">
+						</div>
+						<div>
+							<input class="align-self-end" name="userSettings" type="submit" value="User Settings">
+						</div>
+					</form>
+				</div>
 			</div>
-			<table>
-				<tr class="row-cols-5">
-					<th class="col-1">Date</th>
-					<th class="col-1">Time</th>
-					<th class="col-2 text-end">Cloud Cover %</th>
-					<th class="col-1 text-end">Precipitation %</th>
-					<th class="col-1 text-end">Precipitation ({{data['weather']['units']['precipitation']}})</th>
-					<th class="col-1 text-end">Temperature ({{data['weather']['units']['temp']}})</th>
-				</tr>
-				<tr>
-					<td><b>Current</b></td>
-					<td></td>
-					<td></td>
-					<td class="text-end"><b>Today's Max Prob</b></td>
-				</tr>
-				<tr>
-					<td>{{ data['weather']['current']['date'] }}</td>
-					<td>{{ data['weather']['current']['time'] }}</td>
-					<td class="text-end">{{ data['weather']['current']['cloud_cover'] }}</td>
-					<td class="text-end">{{ data['weather']['current']['precipitation_probability_max'] }}</td>
-					<td class="text-end">{{ data['weather']['current']['precipitation'] }}</td>
-					<td class="text-end">{{ data['weather']['current']['temp'] }}</td>
-				</tr>
-				<tr></tr>
-				<tr><td><b>Forecast</b></td></tr>
-				{% for data in data['weather']['hourly'] %}
-				<tr>
-					<td>{{ data['date'] }}</td>
-					<td>{{ data['time'] }}</td>
-					<td class="text-end">{{ data['cloud_cover'] }}</td>
-					<td class="text-end">{{ data['precipitation_probability'] }}</td>
-					<td class="text-end">{{ data['precipitation'] }}</td>
-					<td class="text-end">{{ data['temp'] }}</td>
-				</tr>	
-				{% endfor %}
-			</table>
-			
+			<nav>
+				<a href={{navurl['index']}}>Home</a>
+				<a href={{navurl['config']}}>Config</a>
+				<a href={{navurl['waterLog']}}>Water Log</a> 
+				{%if session['priv_level'] == 1%}
+				<a href={{navurl['admin']}}>Admin</a>
+				{%endif%}
+			</nav>
 		</div>
 
-		<div class="col">
-			<h3>Crops</h3>
-			<table>
-				<tr class="row-cols-4">
-					<th class="col-1">Crop</th>
-					<th class="col-1">Pin</th>
-					<th class="col-1">Rain Inc.</th>
-					<th class="col-1">Override</th>
-				</tr>
-				{% for crop in data['cropData'] %}
-				<tr>
-					<td name="cropName">{{crop[2]}}</td>
-					<td name="cropPin">{{crop[3]}}</td>
-					<td name="cropInc">{{crop[4]}}</td>
-					<td>
-					<form method="POST">
-						{%if not data['system_enable'] or crop[1] == 0%}
-						<input style="width: 95.2333px;" name="waterNow_{{crop[2]}}" type="submit" value="Water Now" disabled>
-						{%else%}
-						<input style="width: 95.2333px;" name="waterNow_{{crop[2]}}" type="submit" value="Water Now">
-						{%endif%}
-					</form>
-					</td>
-				</tr>
-				{% endfor %}
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td>
+		<div class="container align-content-center row">
+			<div class="col">
+				<div class="row">
+					<h3 class="col">Weather Report for<br>{{data['api_city']}}, {{data['api_state']}}, {{data['api_country']}}</h3>
+					{%if data['use_api']%}
+					<p class="col text-end align-text-bottom">Last rained <b>{{data['last_rain']}}</b> days ago</p>
+					{%endif%}
+				</div>
+				<table>
+					<tr class="row-cols-5">
+						<th class="col-1">Date</th>
+						<th class="col-1">Time</th>
+						<th class="col-2 text-end">Cloud Cover %</th>
+						<th class="col-1 text-end">Precipitation %</th>
+						<th class="col-1 text-end">Precipitation ({{data['weather']['units']['precipitation']}})</th>
+						<th class="col-1 text-end">Temperature ({{data['weather']['units']['temp']}})</th>
+					</tr>
+					<tr>
+						<td><b>Current</b></td>
+						<td></td>
+						<td></td>
+						<td class="text-end"><b>Today's Max Prob</b></td>
+					</tr>
+					<tr>
+						<td>{{ data['weather']['current']['date'] }}</td>
+						<td>{{ data['weather']['current']['time'] }}</td>
+						<td class="text-end">{{ data['weather']['current']['cloud_cover'] }}</td>
+						<td class="text-end">{{ data['weather']['current']['precipitation_probability_max'] }}</td>
+						<td class="text-end">{{ data['weather']['current']['precipitation'] }}</td>
+						<td class="text-end">{{ data['weather']['current']['temp'] }}</td>
+					</tr>
+					<tr></tr>
+					<tr><td><b>Forecast</b></td></tr>
+					{% for data in data['weather']['hourly'] %}
+					<tr>
+						<td>{{ data['date'] }}</td>
+						<td>{{ data['time'] }}</td>
+						<td class="text-end">{{ data['cloud_cover'] }}</td>
+						<td class="text-end">{{ data['precipitation_probability'] }}</td>
+						<td class="text-end">{{ data['precipitation'] }}</td>
+						<td class="text-end">{{ data['temp'] }}</td>
+					</tr>	
+					{% endfor %}
+				</table>
+				
+			</div>
+
+			<div class="col">
+				<h3>Crops</h3>
+				<table>
+					<tr class="row-cols-4">
+						<th class="col-1">Crop</th>
+						<th class="col-1">Pin</th>
+						<th class="col-1">Rain Inc.</th>
+						<th class="col-1">Override</th>
+					</tr>
+					{% for crop in data['cropData'] %}
+					<tr>
+						<td name="cropName">{{crop[2]}}</td>
+						<td name="cropPin">{{crop[3]}}</td>
+						<td name="cropInc">{{crop[4]}}</td>
+						<td>
 						<form method="POST">
-							<div>
-								{%if not data['system_enable']%}
-								<input name="waterAll" type="submit" value="Water All" disabled>
-								{%else%}
-								<input name="waterAll" type="submit" value="Water All">
-								{%endif%}
-							</div>
+							{%if not data['system_enable'] or crop[1] == 0%}
+							<input style="width: 95.2333px;" name="waterNow_{{crop[2]}}" type="submit" value="Water Now" disabled>
+							{%else%}
+							<input style="width: 95.2333px;" name="waterNow_{{crop[2]}}" type="submit" value="Water Now">
+							{%endif%}
 						</form>
-					</td>
+						</td>
+					</tr>
+					{% endfor %}
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td>
+							<form method="POST">
+								<div>
+									{%if not data['system_enable']%}
+									<input name="waterAll" type="submit" value="Water All" disabled>
+									{%else%}
+									<input name="waterAll" type="submit" value="Water All">
+									{%endif%}
+								</div>
+							</form>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div name="sysData">
+			<h3>System Data</h3>
+			<h4>Temperature</h4>
+			<table>
+				<tr class="row-cols-{{data['sysData']}}">
+					{% for temp in data['sysData'] %}
+					<th class="col-1">{{temp[1][:-5]}}<br>{{temp[2][:-3]}}</th>
+					{% endfor %}
+					<th class="col-2">Current<br>{{data['cpuTemp'].time}}</th>
+				</tr>
+				<tr>
+					{% for temp in data['sysData'] %}
+					<td>{{temp[3]}}</td>
+					{% endfor %}
+					<td>{{data['cpuTemp'].temp}}</td>
 				</tr>
 			</table>
 		</div>
-	</div>
-	<div name="sysData">
-		<h3>System Data</h3>
-		<h4>Temperature</h4>
-		<table>
-			<tr class="row-cols-{{data['sysData']}}">
-				{% for temp in data['sysData'] %}
-				<th class="col-1">{{temp[1][:-5]}}<br>{{temp[2][:-3]}}</th>
-				{% endfor %}
-				<th class="col-2">Current<br>{{data['cpuTemp'].time}}</th>
-			</tr>
-			<tr>
-				{% for temp in data['sysData'] %}
-				<td>{{temp[3]}}</td>
-				{% endfor %}
-				<td>{{data['cpuTemp'].temp}}</td>
-			</tr>
-		</table>
 	</div>
 </body>
 </html>
