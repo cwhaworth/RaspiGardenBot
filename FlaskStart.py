@@ -167,9 +167,9 @@ def water_on_schedule():
 
 		#if it rains: reset last-rained, and write to log
 		elif (aboveFiddy and avgPercentRain >= 4.16) or avgPercentRain > 50:
-			insertLogMessage(f'Did not water plants due to expected rain in the next 24 hours.'
-							f'Any hour above 50%: {"Yes" if aboveFiddy else "No"},' 
-							f'Average Percent Chance: {avgPercentRain}%.')
+			insertLogMessage(f'Did not water plants due to expected rain in the next 24 hours. '
+							f'Any hour above 50%: {"Yes" if aboveFiddy else "No"}, ' 
+							f'Average Percent Chance: {round(avgPercentRain)}%.')
 			update_last_rain(0)
 
 		#If system is enabled, and API data is not in use OR if it does not rain: 
