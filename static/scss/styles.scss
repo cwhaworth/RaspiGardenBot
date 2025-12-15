@@ -1,8 +1,11 @@
+//Default Overrides
 
+//Import Bootstrap
+@import "../bootstrap/scss/bootstrap";
+
+//Custom Definitions
 $custom-colors:(
     "nav-color": $green-500,
 );
 
 $theme-colors: map-merge($theme-colors, $custom-colors);
-
-@import "../bootstrap/scss/bootstrap";
