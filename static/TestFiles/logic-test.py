@@ -55,7 +55,7 @@ def get_forecast(current = True, hourly = True, daily = True):
 	units = sqlSelectQuery("select val_string from system_params where param = ?", ("api_units",))[0]
 
 	# url = (f'{weather_api_base}?latitude={latitude}&longitude={longitude}&forecast_days={forecast_days}&timezone={timezone}')
-	url = (f'{weather_api_base}?latitude={latitude}&longitude={longitude}&start_date=2025-11-30&end_date=2025-11-30&timezone={timezone}')
+	url = (f'{weather_api_base}?latitude={latitude}&longitude={longitude}&start_date=2025-12-30&end_date=2025-11-30&timezone={timezone}')
 	if str(units).lower() == 'imperial':
 		url += f'&wind_speed_unit=mph&temperature_unit=fahrenheit&precipitation_unit=inch'
 	if current:
