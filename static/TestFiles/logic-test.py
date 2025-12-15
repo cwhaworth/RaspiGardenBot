@@ -74,7 +74,7 @@ def water_on_schedule():
 	now = datetime.now()
 	try:
 		weather_resp = get_forecast(daily=False)
-		print(json.dumps(weather_resp, indent=2))
+		# print(json.dumps(weather_resp, indent=2))
 		data = {
 			'use_api': bool(sqlSelectQuery('select val_bool from system_params where param = ?', ('use_api',))[0]),
 			'last_rain': sqlSelectQuery('select val_num from system_params where param = ?', ('last_rain',))[0],
@@ -107,8 +107,8 @@ def water_on_schedule():
 
 		for i in range(0, len(weather_resp['hourly']['time'])):
 			t = datetime.strptime(weather_resp['hourly']['time'][i], "%Y-%m-%dT%H:%M")
-			if t >= now and len(data['weather']['hourly']) < 25:
-
+			# if t >= now and len(data['weather']['hourly']) < 25:
+			if len(data['weather']['hourly']) < 25:
 				data['weather']['hourly'].append({
 					'date': t.date(),
 					'time': t.time(),
@@ -125,6 +125,7 @@ def water_on_schedule():
 		percentRain = 0
 		avgPercentRain = 0
 		aboveFiddy = False
+		# print(f'Data: {json.dumps(data["weather"]["hourly"])}')
 		for hour in data['weather']['hourly']:
 			print (f'precipitation %: {hour["precipitation_probability"][:-1]}')
 			percentRain += int(hour['precipitation_probability'][:-1])
