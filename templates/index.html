@@ -103,9 +103,10 @@
 						<td>
 						<form method="POST">
 							{%if not data['system_enable'] or crop[1] == 0%}
-							<input style="width: 95.2333px;" name="waterNow_{{crop[2]}}" type="submit" value="Water Now" disabled>
+							<!-- <input style="width: 95.2333px;" name="waterNow_{{crop[2]}}" type="submit" value="Water Now" disabled> -->
+							<input style="width: 112.033px;" name="waterNow_{{crop[2]}}" type="submit" value="Water Now" disabled>
 							{%else%}
-							<input style="width: 95.2333px;" name="waterNow_{{crop[2]}}" type="submit" value="Water Now">
+							<input style="width: 112.033px;" name="waterNow_{{crop[2]}}" type="submit" value="Water Now">
 							{%endif%}
 						</form>
 						</td>
