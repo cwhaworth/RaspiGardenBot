@@ -145,7 +145,7 @@ def water_on_schedule():
 			print(f'Did not water plants due to expected rain in the next 24 hours.'
 							f'Any hour above 50%: {"Yes" if aboveFiddy else "No"},' 
 							f'Average Percent Chance: {avgPercentRain}%.')
-			update_last_rain(0)
+			# update_last_rain(0)
 
 		#If system is enabled, and API data is not in use OR if it does not rain: 
 		#water crops based on interval
