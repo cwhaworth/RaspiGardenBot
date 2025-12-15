@@ -26,7 +26,7 @@ assets = Environment(app)
 scss = Bundle(
     'scss/styles.scss',
     filters='libsass',
-    output='css/styes.css'
+    output='css/styles.css'
 )
 assets.register('scss_all', scss)
 
