@@ -61,8 +61,8 @@ def get_forecast(current = True, hourly = True, daily = True):
 	if current:
 		url += f'&current=temperature_2m,precipitation,rain,showers,snowfall,cloud_cover'
 	if hourly:
-		# url += f'&hourly=temperature_2m,precipitation_probability,precipitation,cloud_cover'
-		url += f'&hourly=precipitation_probability'
+		url += f'&hourly=temperature_2m,precipitation_probability,precipitation,cloud_cover'
+		# url += f'&hourly=precipitation_probability'
 	if daily:
 		url += f'&daily=precipitation_probability_max'
 	response = requests.request('GET', url)
