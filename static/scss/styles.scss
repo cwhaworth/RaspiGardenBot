@@ -21,13 +21,14 @@ header form input:hover{
     text-decoration: none;
 };
 
-header nav:hover{
+header nav a:hover{
     color: orange;
     text-decoration: none;
 }
 
 //Index Content Styles
-[name="crops"] input{
+[name="crops"] form input{
     width: 95.2333px;
-    height: 20px;
+    height: 25px;
+    margin: 2px;
 }
