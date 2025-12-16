@@ -14,12 +14,12 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
 [name="header-form"] input{
     color: blue;
     text-decoration: underline;
-};
+}
 
 [name="header-form"] input:hover{
     color: orange;
     text-decoration: none;
-};
+}
 
 header nav a:hover{
     color: orange;
@@ -27,6 +27,10 @@ header nav a:hover{
 }
 
 //Index Content Styles
+[name="index"] div div table tr{
+    height: 30px;
+}
+
 [name="crops"] tr td form input{
     width: 95.2333px;
     height: 25px;
