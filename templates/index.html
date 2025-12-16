@@ -41,7 +41,7 @@
 
 		<div class="container align-content-center row" name="tables">
 			<div class="col">
-				<div class="row">
+				<div class="row bg-primary">
 					<h3 class="col">Weather Report for<br>{{data['api_city']}}, {{data['api_state']}}, {{data['api_country']}}</h3>
 					{%if data['use_api']%}
 					<p class="col text-end align-text-bottom">Last rained <b>{{data['last_rain']}}</b> days ago</p>
@@ -104,7 +104,7 @@
 
 			<div class="col">
 				<div class="row bg-primary">
-					<h3 class="col">Crops</h3>
+					<h3 class="col">Crops</br></h3>
 				</div>
 				<table class="table table-striped table-sm table-hover" name="crops">
 					<thead class="table-primary">
