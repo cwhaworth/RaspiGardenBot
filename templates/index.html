@@ -105,42 +105,46 @@
 			<div class="col">
 				<h3>Crops</h3>
 				<table class="table table-striped table-sm table-hover" name="crops">
-					<tr class="row-cols-4">
-						<th class="col-1">Crop</th>
-						<th class="col-1">Pin</th>
-						<th class="col-1">Rain Inc.</th>
-						<th class="col-1">Override</th>
-					</tr>
-					{% for crop in data['cropData'] %}
-					<tr>
-						<td name="cropName">{{crop[2]}}</td>
-						<td name="cropPin">{{crop[3]}}</td>
-						<td name="cropInc">{{crop[4]}}</td>
-						<td>
-						<form method="POST">
-							{%if not data['system_enable'] or crop[1] == 0%}
-							<input name="waterNow_{{crop[2]}}" type="submit" value="Water Now" disabled>
-							{%else%}
-							<input name="waterNow_{{crop[2]}}" type="submit" value="Water Now">
-							{%endif%}
-						</form>
-						</td>
-					</tr>
-					{% endfor %}
-					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td>
+					<thead class="table-primary">
+						<tr class="row-cols-4">
+							<th class="col-1">Crop</th>
+							<th class="col-1">Pin</th>
+							<th class="col-1">Rain Inc.</th>
+							<th class="col-1">Override</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for crop in data['cropData'] %}
+						<tr>
+							<td name="cropName">{{crop[2]}}</td>
+							<td name="cropPin">{{crop[3]}}</td>
+							<td name="cropInc">{{crop[4]}}</td>
+							<td>
 							<form method="POST">
-								{%if not data['system_enable']%}
-								<input name="waterAll" type="submit" value="Water All" disabled>
+								{%if not data['system_enable'] or crop[1] == 0%}
+								<input name="waterNow_{{crop[2]}}" type="submit" value="Water Now" disabled>
 								{%else%}
-								<input name="waterAll" type="submit" value="Water All">
+								<input name="waterNow_{{crop[2]}}" type="submit" value="Water Now">
 								{%endif%}
 							</form>
-						</td>
-					</tr>
+							</td>
+						</tr>
+						{% endfor %}
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>
+								<form method="POST">
+									{%if not data['system_enable']%}
+									<input name="waterAll" type="submit" value="Water All" disabled>
+									{%else%}
+									<input name="waterAll" type="submit" value="Water All">
+									{%endif%}
+								</form>
+							</td>
+						</tr>
+					</tbody>
 				</table>
 			</div>
 		</div>
