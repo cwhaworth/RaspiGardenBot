@@ -11,12 +11,12 @@ $custom-colors:(
 $theme-colors: map-merge($theme-colors, $custom-colors);
 
 //Header Styles
-header form input{
+[name="header-form"] input{
     color: blue;
     text-decoration: underline;
 };
 
-header form input:hover{
+[name="header-form"] input:hover{
     color: orange;
     text-decoration: none;
 };
@@ -27,7 +27,7 @@ header nav a:hover{
 }
 
 //Index Content Styles
-[name="crops"] form input{
+[name="crops"] tr td form input{
     width: 95.2333px;
     height: 25px;
     margin: 2px;
