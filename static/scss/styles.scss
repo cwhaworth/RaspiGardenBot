@@ -28,12 +28,12 @@ header nav a:hover{
 
 //Index Content Styles
 
-[name="tables"] table [class="no-stripe"]{
-    color: lightblue;
+[name="tables"] div table [class="no-stripe"]{
+    background-color: lightblue;
 }
 
-[name="tables"] table [class="no-stripe"]:hover{
-    color: lightblue;
+[name="tables"] div table [class="no-stripe"]:hover{
+    background-color: lightblue;
 }
 
 [name="crops"] tr td form input{
