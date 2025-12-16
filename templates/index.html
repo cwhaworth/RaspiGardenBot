@@ -20,11 +20,11 @@
 				</div>
 				<div class="col">
 					<form class="text-end me-5 pe-5" name="header-form" method="POST">
-						<div >
+						<div>
 							<input class="btn btn-sm mt-3 me-5" name="logout" type="submit" value="Logout">
 						</div>
 						<div>
-							<input class="btn btn-sm mt-2 me-5" name="userSettings" type="submit" value="User Settings">
+							<input class="btn btn-sm mt-1 me-5" name="userSettings" type="submit" value="User Settings">
 						</div>
 					</form>
 				</div>
@@ -88,7 +88,7 @@
 
 			<div class="col">
 				<h3>Crops</h3>
-				<table>
+				<table name="crops">
 					<tr class="row-cols-4">
 						<th class="col-1">Crop</th>
 						<th class="col-1">Pin</th>
@@ -101,7 +101,7 @@
 						<td name="cropPin">{{crop[3]}}</td>
 						<td name="cropInc">{{crop[4]}}</td>
 						<td>
-						<form name="crops" method="POST">
+						<form method="POST">
 							{%if not data['system_enable'] or crop[1] == 0%}
 							<input name="waterNow_{{crop[2]}}" type="submit" value="Water Now" disabled>
 							{%else%}
@@ -117,13 +117,11 @@
 						<td></td>
 						<td>
 							<form method="POST">
-								<div>
-									{%if not data['system_enable']%}
-									<input name="waterAll" type="submit" value="Water All" disabled>
-									{%else%}
-									<input name="waterAll" type="submit" value="Water All">
-									{%endif%}
-								</div>
+								{%if not data['system_enable']%}
+								<input name="waterAll" type="submit" value="Water All" disabled>
+								{%else%}
+								<input name="waterAll" type="submit" value="Water All">
+								{%endif%}
 							</form>
 						</td>
 					</tr>
