@@ -9,3 +9,25 @@ $custom-colors:(
 );
 
 $theme-colors: map-merge($theme-colors, $custom-colors);
+
+//Header Styles
+header form input{
+    color: blue;
+    text-decoration: underline;
+};
+
+header form input:hover{
+    color: orange;
+    text-decoration: none;
+};
+
+header nav:hover{
+    color: orange;
+    text-decoration: none;
+}
+
+//Index Content Styles
+[name="crops"] input{
+    width: 95.2333px;
+    height: 20px;
+}
