@@ -27,13 +27,13 @@ header nav a:hover{
 }
 
 //Index Content Styles
-[name="index"] [name="tables"] div table tr{
-    height: 27px;
-}
-
 [name="crops"] tr td form input{
     width: 95.2333px;
     height: 25px;
     margin: 2px;
-    font-size: 14px;
+    font-size: 15px;
+}
+
+[name="index"] [name="tables"] div table tr{
+    height: 27px;
 }
