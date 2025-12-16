@@ -27,8 +27,7 @@ header nav a:hover{
 }
 
 //Index Content Styles
-
-[name="tables"] div table [name="no-stripe"]{
+[name="tables"] div table thead [name="no-stripe"]{
     background-color: lightblue;
 }
 
