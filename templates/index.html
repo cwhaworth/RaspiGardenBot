@@ -47,50 +47,57 @@
 					<p class="col text-end align-text-bottom">Last rained <b>{{data['last_rain']}}</b> days ago</p>
 					{%endif%}
 				</div>
-				<table class="table table-striped table-sm table-hover">
-					<tr class="row-cols-5 no-stripe">
-						<th class="col-1">Date</th>
-						<th class="col-1">Time</th>
-						<th class="col-2 text-end">Cloud Cover %</th>
-						<th class="col-1 text-end">Precipitation %</th>
-						<th class="col-1 text-end">Precipitation ({{data['weather']['units']['precipitation']}})</th>
-						<th class="col-1 text-end">Temperature ({{data['weather']['units']['temp']}})</th>
-					</tr>
-					<tr class="no-stripe">
-						<td><b>Current</b></td>
-						<td></td>
-						<td></td>
-						<td class="text-end"><b>{{data['weather']['current']['date'][-5:].lstrip('-')}} Prob</b></td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr>
-						<td>{{ data['weather']['current']['date'] }}</td>
-						<td>{{ data['weather']['current']['time'] }}</td>
-						<td class="text-end">{{ data['weather']['current']['cloud_cover'] }}</td>
-						<td class="text-end">{{ data['weather']['current']['precipitation_probability_max'] }}</td>
-						<td class="text-end">{{ data['weather']['current']['precipitation'] }}</td>
-						<td class="text-end">{{ data['weather']['current']['temp'] }}</td>
-					</tr>
-					<tr></tr>
-					<tr class="no-stripe">
-						<td><b>Forecast</b></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-					{% for data in data['weather']['hourly'] %}
-					<tr>
-						<td>{{ data['date'] }}</td>
-						<td>{{ data['time'] }}</td>
-						<td class="text-end">{{ data['cloud_cover'] }}</td>
-						<td class="text-end">{{ data['precipitation_probability'] }}</td>
-						<td class="text-end">{{ data['precipitation'] }}</td>
-						<td class="text-end">{{ data['temp'] }}</td>
-					</tr>	
-					{% endfor %}
+				<table class="table table-sm">
+					<thead>
+						<tr class="row-cols-5" name="no-stripe">
+							<th class="col-1">Date</th>
+							<th class="col-1">Time</th>
+							<th class="col-2 text-end">Cloud Cover %</th>
+							<th class="col-1 text-end">Precipitation %</th>
+							<th class="col-1 text-end">Precipitation ({{data['weather']['units']['precipitation']}})</th>
+							<th class="col-1 text-end">Temperature ({{data['weather']['units']['temp']}})</th>
+						</tr>
+						<tr name="no-stripe">
+							<td><b>Current</b></td>
+							<td></td>
+							<td></td>
+							<td class="text-end"><b>{{data['weather']['current']['date'][-5:].lstrip('-')}} Prob</b></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</thead>
+					<tbody class="table table-striped table-hover">
+						<tr>
+							<td>{{ data['weather']['current']['date'] }}</td>
+							<td>{{ data['weather']['current']['time'] }}</td>
+							<td class="text-end">{{ data['weather']['current']['cloud_cover'] }}</td>
+							<td class="text-end">{{ data['weather']['current']['precipitation_probability_max'] }}</td>
+							<td class="text-end">{{ data['weather']['current']['precipitation'] }}</td>
+							<td class="text-end">{{ data['weather']['current']['temp'] }}</td>
+						</tr>
+					</tbody>
+					<thead>
+						<tr>
+							<td><b>Forecast</b></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</thead>
+					<tbody class="table table-striped table-hover">
+						{% for data in data['weather']['hourly'] %}
+						<tr>
+							<td>{{ data['date'] }}</td>
+							<td>{{ data['time'] }}</td>
+							<td class="text-end">{{ data['cloud_cover'] }}</td>
+							<td class="text-end">{{ data['precipitation_probability'] }}</td>
+							<td class="text-end">{{ data['precipitation'] }}</td>
+							<td class="text-end">{{ data['temp'] }}</td>
+						</tr>	
+						{% endfor %}
+					</tbody>
 				</table>
 				
 			</div>
