@@ -48,8 +48,8 @@
 					{%endif%}
 				</div>
 				<table class="table table-sm table-striped table-hover">
-					<thead>
-						<tr class="row-cols-5 bg-primary">
+					<thead class="bg-primary">
+						<tr class="row-cols-5">
 							<th class="col-1">Date</th>
 							<th class="col-1">Time</th>
 							<th class="col-2 text-end">Cloud Cover %</th>
@@ -57,7 +57,7 @@
 							<th class="col-1 text-end">Precipitation ({{data['weather']['units']['precipitation']}})</th>
 							<th class="col-1 text-end">Temperature ({{data['weather']['units']['temp']}})</th>
 						</tr>
-						<tr class="bg-primary">
+						<tr>
 							<td><b>Current</b></td>
 							<td></td>
 							<td></td>
@@ -76,8 +76,8 @@
 							<td class="text-end">{{ data['weather']['current']['temp'] }}</td>
 						</tr>
 					</tbody>
-					<thead>
-						<tr class="bg-primary">
+					<thead class="bg-primary">
+						<tr>
 							<td><b>Forecast</b></td>
 							<td></td>
 							<td></td>
