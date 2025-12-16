@@ -28,11 +28,11 @@ header nav a:hover{
 
 //Index Content Styles
 
-[name="tables"] div table [class="no-stripe"]{
+[name="tables"] div table tr.no-stripe{
     background-color: lightblue;
 }
 
-[name="tables"] div table [class="no-stripe"]:hover{
+[name="tables"] div table tr.no-stripe:hover{
     background-color: lightblue;
 }
 
