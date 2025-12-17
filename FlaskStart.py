@@ -539,7 +539,7 @@ def index():
 				},
 				'hourly': []
 			}
-
+			print(f'{json.dumps(data, indent = 2)}')
 			for i in range(0, len(weather_resp['daily']['time'])):
 				t = datetime.strptime(weather_resp['daily']['time'][i], "%Y-%m-%d")
 				if t.date() == now.date():
