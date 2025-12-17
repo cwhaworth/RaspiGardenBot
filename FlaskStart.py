@@ -528,7 +528,7 @@ def index():
 					
 				},
 				'hourly': []
-			},
+			}
 
 		for i in range(0, len(weather_resp['daily']['time'])):
 			t = datetime.strptime(weather_resp['daily']['time'][i], "%Y-%m-%d")
