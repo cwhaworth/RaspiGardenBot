@@ -375,7 +375,7 @@ def waterAll():
 			for crop in cropData:
 				if bool(crop[1]) == True:
 					GPIO.setup(crop[3], GPIO.OUT)
-					GPIO.output(crop[3], GPIO.HIGH)
+					GPIO.output(crop[3], GPIO.LOW)
 					continue
 			main_valve.start(100) #duty cycle
 			GPIO.output(valve_open_pin, GPIO.HIGH)
