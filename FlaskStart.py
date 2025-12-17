@@ -530,28 +530,28 @@ def index():
 				'hourly': []
 			}
 
-		for i in range(0, len(weather_resp['daily']['time'])):
-			t = datetime.strptime(weather_resp['daily']['time'][i], "%Y-%m-%d")
-			if t.date() == now.date():
-				data['weather']['current']['precipitation_probability_max'] = (f'{weather_resp["daily"]["precipitation_probability_max"][i]}'
-																			f'{weather_resp["daily_units"]["precipitation_probability_max"]}')
-				break
-		for i in range(0, len(weather_resp['hourly']['time'])):
-			t = datetime.strptime(weather_resp['hourly']['time'][i], "%Y-%m-%dT%H:%M")
-			if t >= now and len(data['weather']['hourly']) < 13:
+			for i in range(0, len(weather_resp['daily']['time'])):
+				t = datetime.strptime(weather_resp['daily']['time'][i], "%Y-%m-%d")
+				if t.date() == now.date():
+					data['weather']['current']['precipitation_probability_max'] = (f'{weather_resp["daily"]["precipitation_probability_max"][i]}'
+																				f'{weather_resp["daily_units"]["precipitation_probability_max"]}')
+					break
+			for i in range(0, len(weather_resp['hourly']['time'])):
+				t = datetime.strptime(weather_resp['hourly']['time'][i], "%Y-%m-%dT%H:%M")
+				if t >= now and len(data['weather']['hourly']) < 13:
 
-				data['weather']['hourly'].append({
-					'date': t.date(),
-					'time': t.time(),
-					'temp': (f'{weather_resp["hourly"]["temperature_2m"][i]}'
-							f'{weather_resp["hourly_units"]["temperature_2m"]}'),
-					'cloud_cover': (f'{weather_resp["hourly"]["cloud_cover"][i]}'
-									f'{weather_resp["hourly_units"]["cloud_cover"]}'),
-					'precipitation_probability': (f'{weather_resp["hourly"]["precipitation_probability"][i]}'
-												f'{weather_resp["hourly_units"]["precipitation_probability"]}'),
-					'precipitation': (f'{weather_resp["hourly"]["precipitation"][i]} '
-									f'{weather_resp["hourly_units"]["precipitation"][:2]}')
-				})
+					data['weather']['hourly'].append({
+						'date': t.date(),
+						'time': t.time(),
+						'temp': (f'{weather_resp["hourly"]["temperature_2m"][i]}'
+								f'{weather_resp["hourly_units"]["temperature_2m"]}'),
+						'cloud_cover': (f'{weather_resp["hourly"]["cloud_cover"][i]}'
+										f'{weather_resp["hourly_units"]["cloud_cover"]}'),
+						'precipitation_probability': (f'{weather_resp["hourly"]["precipitation_probability"][i]}'
+													f'{weather_resp["hourly_units"]["precipitation_probability"]}'),
+						'precipitation': (f'{weather_resp["hourly"]["precipitation"][i]} '
+										f'{weather_resp["hourly_units"]["precipitation"][:2]}')
+					})
 		except Exception as e:
 			print(f'Ran into an error while loading index HTML at {str(now)}\ntraceback:\n{traceback.print_exc(e)}')
 			data['weather'] = {
