@@ -503,6 +503,7 @@ def index():
 			'system_enable': bool(sqlSelectQuery('select val_bool from system_params where param = ?', ('system_enable',))[0]),
 			'cropData': sqlSelectQuery('select id, enabled, crop, pin, rain_inc from crops', fetchall=True),
 			'sysData': sqlSelectQuery('select * from system_temp', fetchall=True),
+			'weather': {}
 			'cpuTemp': {
 				'time': f'{now.strftime("%H:%M")}',
 				'temp': f'{temp} F'
