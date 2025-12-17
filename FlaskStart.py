@@ -83,7 +83,7 @@ def getCoordinates():
 		state = sqlSelectQuery("select val_string from system_params where param = ?", ("api_state",))[0]
 		country = sqlSelectQuery("select val_string from system_params where param = ?", ("api_country",))[0]
 		
-		location = geolocator.geocode(f'{city}, {state}, {country}')
+		location = geolocator.geocode(f'{city}, {state}, {country}', timeout=60)
 		
 		return location.latitude, location.longitude
 	except Exception as e:
