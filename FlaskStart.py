@@ -93,7 +93,7 @@ def getCoordinates():
 def get_forecast(current = True, hourly = True, daily = True):
 	try:
 		latitude, longitude = getCoordinates()
-		print(f'lat: {latitude}, long: {longitude}')
+		# print(f'lat: {latitude}, long: {longitude}')
 		forecast_days = sqlSelectQuery("select val_num from system_params where param = ?", ("api_forecast_days",))[0]
 		timezone = sqlSelectQuery("select val_string from system_params where param = ?", ("api_timezone",))[0]
 		units = sqlSelectQuery("select val_string from system_params where param = ?", ("api_units",))[0]
@@ -522,7 +522,7 @@ def index():
 
 		try:
 			weather_resp = get_forecast()
-			print(f'weather_resp:\n{json.dumps(weather_resp, indent = 2)}')
+			# print(f'weather_resp:\n{json.dumps(weather_resp, indent = 2)}')
 			data['weather'] = {
 				'units': {
 					'temp': f'{weather_resp["current_units"]["temperature_2m"]}',
