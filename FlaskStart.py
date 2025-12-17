@@ -511,7 +511,7 @@ def index():
 
 		try:
 			weather_resp = get_forecast()
-			'weather': {
+			data['weather']: {
 				'units': {
 					'temp': f'{weather_resp["current_units"]["temperature_2m"]}',
 					'cloud_cover': f'{weather_resp["current_units"]["cloud_cover"]}',
