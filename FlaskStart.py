@@ -494,8 +494,6 @@ def index():
 		cpu = CPUTemperature()
 		temp = round((cpu.temperature * 1.8) + 32, 1) #display temperature in fahrenheit
 		
-		weather_resp = get_forecast()
-
 		data = {
 			'api_city': sqlSelectQuery('select val_string from system_params where param = ?', ('api_city',))[0],
 			'api_state': sqlSelectQuery('select val_string from system_params where param = ?', ('api_state',))[0],
@@ -504,12 +502,21 @@ def index():
 			'last_rain': sqlSelectQuery('select val_num from system_params where param = ?', ('last_rain',))[0],
 			'system_enable': bool(sqlSelectQuery('select val_bool from system_params where param = ?', ('system_enable',))[0]),
 			'cropData': sqlSelectQuery('select id, enabled, crop, pin, rain_inc from crops', fetchall=True),
+			'sysData': sqlSelectQuery('select * from system_temp', fetchall=True),
+			'cpuTemp': {
+				'time': f'{now.strftime("%H:%M")}',
+				'temp': f'{temp} F'
+			}
+		}
+
+		try:
+			weather_resp = get_forecast()
 			'weather': {
 				'units': {
-				'temp': f'{weather_resp["current_units"]["temperature_2m"]}',
-				'cloud_cover': f'{weather_resp["current_units"]["cloud_cover"]}',
-				'precipitation': f'{weather_resp["current_units"]["precipitation"][:2]}',
-				'precipitaion_probability_max': f'{weather_resp["daily_units"]["precipitation_probability_max"]}'
+					'temp': f'{weather_resp["current_units"]["temperature_2m"]}',
+					'cloud_cover': f'{weather_resp["current_units"]["cloud_cover"]}',
+					'precipitation': f'{weather_resp["current_units"]["precipitation"][:2]}',
+					'precipitaion_probability_max': f'{weather_resp["daily_units"]["precipitation_probability_max"]}'
 				},
 				'current': {
 					'date': f'{now.date()}',
@@ -522,12 +529,7 @@ def index():
 				},
 				'hourly': []
 			},
-			'sysData': sqlSelectQuery('select * from system_temp', fetchall=True),
-			'cpuTemp': {
-				'time': f'{now.strftime("%H:%M")}',
-				'temp': f'{temp} F'
-			}
-		}
+
 		for i in range(0, len(weather_resp['daily']['time'])):
 			t = datetime.strptime(weather_resp['daily']['time'][i], "%Y-%m-%d")
 			if t.date() == now.date():
@@ -550,6 +552,33 @@ def index():
 					'precipitation': (f'{weather_resp["hourly"]["precipitation"][i]} '
 									f'{weather_resp["hourly_units"]["precipitation"][:2]}')
 				})
+		except Exception as e:
+			print(f'Ran into an error while loading index HTML at {str(now)}\ntraceback:\n{traceback.print_exc(e)}')
+			data['weather'] = {
+				'units': {
+					'temp': 'err',
+					'cloud_cover': 'err',
+					'precipitation': 'err',
+					'precipitaion_probability_max': 'err'
+				},
+				'current': {
+					'date': f'{now.date()}',
+					'time': f'{now.time()}'[:-7],
+					'temp': 'err',
+					'cloud_cover': 'err',
+					'precipitation': 'err',
+					'precipitation_probability_max': 'err'
+					
+				},
+				'hourly': [{
+					'date': f'{now.date()}',
+					'time': f'{now.time()}'[:-7],
+					'temp': 'err',
+					'cloud_cover': 'err',
+					'precipitation_probability': 'err',
+					'precipitation': 'err'
+				}] 
+			} 
 
 		return render_template('index.html', navurl=navURL, styles=styles, session=session, data=data)
 
