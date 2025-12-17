@@ -87,7 +87,7 @@ def getCoordinates():
 		
 		return location.latitude, location.longitude
 	except Exception as e:
-		print(f'Ran into an error while running get_forecast()\ntraceback:\n{traceback.print_exception(e)}')
+		print(f'Ran into an error while running getCoordinates()\ntraceback:\n{traceback.print_exception(e)}')
 		return None
 
 def get_forecast(current = True, hourly = True, daily = True):
