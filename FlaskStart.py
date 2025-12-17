@@ -243,7 +243,7 @@ def water_on_schedule():
 			insertLogMessage("An error occurred during watering operations.")
 		print(f'Ran water_on_schedule() at {str(now)}')
 	except Exception as e:
-		print(f'Ran into an error while running water_on_schedule() at {str(now)}\ntraceback:\n{traceback.print_exception()}')
+		print(f'Ran into an error while running water_on_schedule() at {str(now)}\ntraceback:\n{traceback.print_exception(e)}')
 
 def get_system_temp():
 	cpu = CPUTemperature()
@@ -553,7 +553,7 @@ def index():
 										f'{weather_resp["hourly_units"]["precipitation"][:2]}')
 					})
 		except Exception as e:
-			print(f'Ran into an error while loading index HTML at {str(now)}\ntraceback:\n{traceback.print_exception()}')
+			print(f'Ran into an error while loading index HTML at {str(now)}\ntraceback:\n{traceback.print_exception(e)}')
 			data['weather'] = {
 				'units': {
 					'temp': 'err',
