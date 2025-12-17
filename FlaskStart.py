@@ -382,7 +382,9 @@ def waterAll():
 			GPIO.output(valve_close_pin, GPIO.LOW)
 
 			time.sleep(water_time)
-
+			
+			GPIO.output(valve_open_pin, GPIO.LOW)
+			GPIO.output(valve_close_pin, GPIO.HIGH)
 			'''
 			end watering
 			1. clean up pump output
@@ -446,7 +448,7 @@ def waterNow(cropName):
 			#open and power solenoid
 			time.sleep(delay_before)
 			GPIO.setup(cropData[3], GPIO.OUT)
-			GPIO.output(cropData[3], GPIO.LOW)
+			GPIO.output(cropData[3], GPIO.HIGH)
 			main_valve.start(100) #duty cycle
 			GPIO.output(valve_open_pin, GPIO.HIGH)
 			GPIO.output(valve_close_pin, GPIO.LOW)
