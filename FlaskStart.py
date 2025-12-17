@@ -76,35 +76,44 @@ def insertLogMessage(message):
 	sqlModifyQuery(f'insert into water_log_60 ("date", "time", message) values {log}')
 
 def getCoordinates(): 
-	geolocator = Nominatim( user_agent='app')
+	try: 
+		geolocator = Nominatim( user_agent='app')
 
-	city = sqlSelectQuery("select val_string from system_params where param = ?", ("api_city",))[0]
-	state = sqlSelectQuery("select val_string from system_params where param = ?", ("api_state",))[0]
-	country = sqlSelectQuery("select val_string from system_params where param = ?", ("api_country",))[0]
-	
-	location = geolocator.geocode(f'{city}, {state}, {country}')
-	
-	return location.latitude, location.longitude
+		city = sqlSelectQuery("select val_string from system_params where param = ?", ("api_city",))[0]
+		state = sqlSelectQuery("select val_string from system_params where param = ?", ("api_state",))[0]
+		country = sqlSelectQuery("select val_string from system_params where param = ?", ("api_country",))[0]
+		
+		location = geolocator.geocode(f'{city}, {state}, {country}')
+		
+		return location.latitude, location.longitude
+	except Exception as e:
+		print(f'Ran into an error while running get_forecast() at {str(now)}\ntraceback:\n{traceback.print_exception(e)}')
+		return None
 
 def get_forecast(current = True, hourly = True, daily = True):
-	latitude, longitude = getCoordinates()
-	forecast_days = sqlSelectQuery("select val_num from system_params where param = ?", ("api_forecast_days",))[0]
-	timezone = sqlSelectQuery("select val_string from system_params where param = ?", ("api_timezone",))[0]
-	units = sqlSelectQuery("select val_string from system_params where param = ?", ("api_units",))[0]
+	try:
+		latitude, longitude = getCoordinates()
+		forecast_days = sqlSelectQuery("select val_num from system_params where param = ?", ("api_forecast_days",))[0]
+		timezone = sqlSelectQuery("select val_string from system_params where param = ?", ("api_timezone",))[0]
+		units = sqlSelectQuery("select val_string from system_params where param = ?", ("api_units",))[0]
 
-	url = (f'{weather_api_base}?latitude={latitude}&longitude={longitude}&forecast_days={forecast_days}&timezone={timezone}')
-	if str(units).lower() == 'imperial':
-		url += f'&wind_speed_unit=mph&temperature_unit=fahrenheit&precipitation_unit=inch'
-	if current:
-		url += f'&current=temperature_2m,precipitation,rain,showers,snowfall,cloud_cover'
-	if hourly:
-		url += f'&hourly=temperature_2m,precipitation_probability,precipitation,cloud_cover'
-	if daily:
-		url += f'&daily=precipitation_probability_max'
-	response = requests.request('GET', url)
-	
-	# print(f'API URL:\n{url}')
-	return response.json()
+		url = (f'{weather_api_base}?latitude={latitude}&longitude={longitude}&forecast_days={forecast_days}&timezone={timezone}')
+		if str(units).lower() == 'imperial':
+			url += f'&wind_speed_unit=mph&temperature_unit=fahrenheit&precipitation_unit=inch'
+		if current:
+			url += f'&current=temperature_2m,precipitation,rain,showers,snowfall,cloud_cover'
+		if hourly:
+			url += f'&hourly=temperature_2m,precipitation_probability,precipitation,cloud_cover'
+		if daily:
+			url += f'&daily=precipitation_probability_max'
+		response = requests.request('GET', url)
+		
+		# print(f'API URL:\n{url}')
+		return response.json()
+	except Exception as e:
+		print(f'Ran into an error while running get_forecast() at {str(now)}\ntraceback:\n{traceback.print_exception(e)}')
+		return None
+
 
 def update_last_rain(increment):
 	update_tuple = (increment, 'last_rain')
