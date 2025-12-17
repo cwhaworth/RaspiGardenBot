@@ -77,7 +77,7 @@ def insertLogMessage(message):
 
 def getCoordinates(): 
 	try: 
-		geolocator = Nominatim( user_agent='app')
+		geolocator = Nominatim( user_agent='raspi_gardenbot')
 
 		city = sqlSelectQuery("select val_string from system_params where param = ?", ("api_city",))[0]
 		state = sqlSelectQuery("select val_string from system_params where param = ?", ("api_state",))[0]
