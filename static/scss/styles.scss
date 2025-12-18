@@ -21,8 +21,12 @@ $custom-colors:(
 $theme-colors: map-merge($theme-colors, $custom-colors);
 
 //Header Styles
+header div div h1{
+    color: $textprimary;
+}
+
 [name="header-form"] input{
-    color: $hyperlink;
+    color: $textsecondary;
     text-decoration: underline;
 }
 
@@ -41,6 +45,14 @@ header nav a:hover{
 }
 
 //Index Content Styles
+[name="tables"] div {
+    background-color: $tertiary;
+}
+
+[name="tables"] div table tbody {
+    background-color: $tertiary;
+}
+
 [name="crops"] tr td form input{
     width: 95.2333px;
     height: 28px;
