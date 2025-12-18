@@ -50,6 +50,10 @@ header nav a:hover{
     color: $textprimary;
 }
 
+[name="last-rain"]{
+    color: $textsecondary;
+}
+
 [name="tables"] div table tbody {
     background-color: $tertiary;
 }

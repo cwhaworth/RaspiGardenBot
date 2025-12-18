@@ -44,7 +44,7 @@
 				<div class="row bg-primary">
 					<h3 class="col">Weather Report for<br>{{data['api_city']}}, {{data['api_state']}}, {{data['api_country']}}</h3>
 					{%if data['use_api']%}
-					<p class="col text-end align-text-bottom">Last rained <b>{{data['last_rain']}}</b> days ago</p>
+					<p class="col text-end align-text-bottom" name="last-rain">Last rained <b>{{data['last_rain']}}</b> days ago</p>
 					{%endif%}
 				</div>
 				<table class="table table-sm table-striped table-hover">
