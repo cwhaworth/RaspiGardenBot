@@ -1,40 +1,46 @@
 //Default Overrides
+$primary: #009b72;
+$secondary: #255957;
 
 //Import Bootstrap
 @import "../bootstrap/scss/bootstrap";
 
+$hyperlink: #97db4f;
+$tertiary: #deb986;
+$textprimary: #ffc800;
+$textsecondary: #ef9cda;
+
 //Custom Definitions
 $custom-colors:(
-    "nav-color": $green-500,
+    "hyperlink": $hyperlink,
+    "tertiary": $tertiary,
+    "textprimary": $textprimary,
+    "textsecondary": $textsecondary
 );
 
 $theme-colors: map-merge($theme-colors, $custom-colors);
 
 //Header Styles
 [name="header-form"] input{
-    color: blue;
+    color: $hyperlink;
     text-decoration: underline;
 }
 
 [name="header-form"] input:hover{
-    color: orange;
+    color: $hyperlink;
     text-decoration: none;
 }
 
+header nav a{
+    color: $hyperlink;
+}
+
 header nav a:hover{
-    color: orange;
+    color: $hyperlink;
     text-decoration: none;
 }
 
 //Index Content Styles
-[name="tables"] div table thead [name="no-stripe"]{
-    background-color: green;
-}
-
-[name="tables"] div table [name="no-stripe"]:hover{
-    background-color: green;
-}
-
 [name="crops"] tr td form input{
     width: 95.2333px;
     height: 28px;
