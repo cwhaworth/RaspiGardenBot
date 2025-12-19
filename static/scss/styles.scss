@@ -1,24 +1,35 @@
 //Default Overrides
 $primary: #292E31;
 $secondary: #244D0D;
+$tertiary: #BC6913;
+$quaternery: #A02D07;
+$quinary: #F4D58D;
+$textprimary: #E1E2E0;
+$textsecondary: #8D8D8D;
+
+.table-striped{
+    --bs-table-striped-bg: $quinary;
+}
 
 //Import Bootstrap
 @import "../bootstrap/scss/bootstrap";
 
-$hyperlink: #E1E2E0;
-$tertiary: #BC6913;
-$quaternery: #A02D07;
-$quinary: #F4D58D;
+
 
 //Custom Definitions
 $custom-colors:(
-    "hyperlink": $hyperlink,
+    "textprimary": $textprimary,
     "tertiary": $tertiary,
     "quaternery": $quaternery,
     "quinary": $quinary
 );
 
 $theme-colors: map-merge($theme-colors, $custom-colors);
+
+//General Styles
+h3 {
+    color: $textprimary;
+}
 
 //Body Styles
 body {
@@ -31,25 +42,25 @@ body {
 
 //Header Styles
 header div div h1{
-    color: $hyperlink;
+    color: $textprimary;
 }
 
 [name="header-form"] input{
-    color: $hyperlink;
+    color: $textprimary;
     text-decoration: underline;
 }
 
 [name="header-form"] input:hover{
-    color: $hyperlink;
+    color: $textprimary;
     text-decoration: none;
 }
 
 header nav a{
-    color: $hyperlink;
+    color: $textprimary;
 }
 
 header nav a:hover{
-    color: $hyperlink;
+    color: $textprimary;
     text-decoration: none;
 }
 
@@ -64,7 +75,7 @@ header nav a:hover{
 }
 
 [name="tables"] div table tbody {
-    background-color: $tertiary;
+    : $tertiary;
 }
 
 [name="crops"] tr td form input{
