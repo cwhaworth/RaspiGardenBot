@@ -63,6 +63,13 @@ a:hover{
 //Tables
 .table-quaternery {
     --bs-table-bg: rgba(160, 45, 7, 0.75);
+}
+
+.table-quaternery tr th{
+    color: $textprimary;
+}
+
+.table-quaternery tr td{
     color: $textprimary;
 }
 

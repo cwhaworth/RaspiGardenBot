@@ -516,7 +516,11 @@ def index():
 			'last_rain': sqlSelectQuery('select val_num from system_params where param = ?', ('last_rain',))[0],
 			'system_enable': bool(sqlSelectQuery('select val_bool from system_params where param = ?', ('system_enable',))[0]),
 			'cropData': sqlSelectQuery('select id, enabled, crop, pin, rain_inc from crops', fetchall=True),
-			'sysData': sqlSelectQuery('select * from system_temp', fetchall=True),
+			# 'sysData': sqlSelectQuery('select * from system_temp', fetchall=True),
+			'sysData': {
+				'timestamp': [],
+				'temp': []
+			},
 			'weather': {},
 			'cpuTemp': {
 				'time': f'{now.strftime("%H:%M")}',
@@ -595,6 +599,15 @@ def index():
 					'precipitation': 'err'
 				}] 
 			} 
+
+		try:
+			sysData_temp = sqlSelectQuery('select * from system_temp', fetchall=True)
+
+			for temp in sysData:
+				data['sysData']['timestamp'].append(f'{temp[1]} {temp[2]}')
+				data['sysData']['temp'].append(int(temp[3][:-2]))
+		except Exception as e:
+			print(f'Ran into an error while loading index HTML at {str(now)}\ntraceback:\n{traceback.print_exception(e)}')
 
 		return render_template('index.html', navurl=navURL, styles=styles, session=session, data=data)
 

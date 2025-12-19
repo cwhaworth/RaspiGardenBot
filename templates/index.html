@@ -151,10 +151,10 @@
 				</table>
 			</div>
 		</div>
-		<div name="sysData">
+		<div>
 			<h3>System Data</h3>
 			<h4>Temperature</h4>
-			<table>
+			<!-- <table>
 				<tr class="row-cols-{{data['sysData']}}">
 					{% for temp in data['sysData'] %}
 					<th class="col-1">{{temp[1][:-5]}}<br>{{temp[2][:-3]}}</th>
@@ -167,10 +167,59 @@
 					{% endfor %}
 					<td>{{data['cpuTemp'].temp}}</td>
 				</tr>
-			</table>
+			</table> -->
+			<canvas id="tempChart" width="800" height="400"></canvas>
 		</div>
 
 		<footer></footer>
 	</div>
+	    <script>
+        const ctx = document.getElementById('tempChart').getContext('2d');
+
+        const data = {
+            labels: {{ data['sysData']['timestamp']|tojson }},
+            datasets: [{
+                label: 'System Temperature (°F)',
+                data: {{ data['sysData']['temp']|tojson }},
+                borderColor: 'rgb(34, 139, 34)',
+                backgroundColor: 'rgba(34, 139, 34, 0.2)',
+                fill: true,
+                tension: 0.4
+            }]
+        };
+
+        const config = {
+            type: 'line',
+            data: data,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top'
+                    },
+                    title: {
+                        display: true,
+                        text: 'System Temperature Over Time'
+                    }
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Timestamp'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Temperature (°C)'
+                        }
+                    }
+                }
+            }
+        };
+
+        const tempChart = new Chart(ctx, config);
+    </script>
 </body>
 </html>
