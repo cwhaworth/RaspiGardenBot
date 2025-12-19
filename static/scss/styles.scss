@@ -7,14 +7,12 @@ $quinary: #F4D58D;
 $textprimary: #E1E2E0;
 $textsecondary: #8D8D8D;
 
-.table-striped{
-    --bs-table-striped-bg: $quinary;
-}
-
 //Import Bootstrap
 @import "../bootstrap/scss/bootstrap";
 
-
+.table-striped{
+    --bs-table-striped-bg: $quinary;
+}
 
 //Custom Definitions
 $custom-colors:(
