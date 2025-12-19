@@ -1,12 +1,12 @@
 //Default Overrides
-$primary: #009b72;
-$secondary: #255957;
+$primary: #15651D;
+$secondary: #3B960D;
 
 //Import Bootstrap
 @import "../bootstrap/scss/bootstrap";
 
-$hyperlink: #97db4f;
-$tertiary: #deb986;
+$hyperlink: #E1E2E0;
+$tertiary: #FCCE04;
 $textprimary: #ffc800;
 $textsecondary: #ef9cda;
 
@@ -56,11 +56,11 @@ header nav a:hover{
 //Index Content Styles
 [name="tables"] div {
     background-color: $tertiary;
-    color: $textprimary;
+    // color: $textprimary;
 }
 
 [name="last-rain"]{
-    color: $textsecondary;
+    // color: $textsecondary;
 }
 
 [name="tables"] div table tbody {
