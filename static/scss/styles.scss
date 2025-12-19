@@ -24,6 +24,16 @@ $custom-colors:(
 
 $theme-colors: map-merge($theme-colors, $custom-colors);
 
+//Body Styles
+body {
+    background-image: url("../images/background.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    font-family:Arial, sans-serif;
+}
+
 //General Styles
 //Headers
 h1{
@@ -35,7 +45,7 @@ h3 {
 
 //Hyperlinks
 a{
-    $mx: 5px;
+    $mx: 7px;
     color: $textprimary;
     margin-left: $mx;
     margin-right: $mx;
@@ -51,14 +61,7 @@ a:hover{
     background-color: $tertiary;
 }
 
-//Body Styles
-body {
-    background-image: url("../images/background.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
-}
+
 
 //Header Styles
 // header div div h1{
