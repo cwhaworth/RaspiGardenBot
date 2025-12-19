@@ -605,7 +605,7 @@ def index():
 
 			for temp in sysData_temp:
 				data['sysData']['timestamp'].append(f'{temp[1]} {temp[2]}')
-				data['sysData']['temp'].append(int(temp[3][:-2]))
+				data['sysData']['temp'].append(float(temp[3][:-2]))
 		except Exception as e:
 			print(f'Ran into an error while loading index HTML at {str(now)}\ntraceback:\n{traceback.print_exception(e)}')
 
