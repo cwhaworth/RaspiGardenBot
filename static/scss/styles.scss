@@ -88,6 +88,7 @@ a:hover{
 }
 
 //Index Content Styles
+//Tables
 [name="tables"] div {
     background-color: rgba(160, 45, 7, 0.5);
 }
@@ -104,4 +105,13 @@ a:hover{
     height: 28px;
     margin: 2px;
     font-size: 16px;
+}
+
+//Charts
+#tempChart {
+    max-height: 150px;
+    // --line-color: rgba(160, 45, 7, 0.5);
+    --line-color: $quaternery;
+    // --fill-color: rgba(34, 139, 34, 0.2);
+    --fill-color: rgba(188, 105, 19, 0.2);
 }
