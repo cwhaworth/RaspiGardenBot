@@ -10,9 +10,9 @@ $textsecondary: #8D8D8D;
 //Import Bootstrap
 @import "../bootstrap/scss/bootstrap";
 
-// .table-striped{
-//     --bs-table-striped-bg: $quinary;
-// }
+.table-striped{
+    --bs-table-striped-bg: $quinary;
+}
 
 //Custom Definitions
 $custom-colors:(
@@ -84,7 +84,7 @@ a:hover{
 
 //Index Content Styles
 [name="tables"] div {
-    background-color: rgb(160, 45, 7, 0.75);
+    background-color: rgba(160, 45, 7, 0.75);
     // color: $textprimary;
 }
 
