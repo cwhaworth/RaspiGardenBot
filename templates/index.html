@@ -177,8 +177,7 @@
 	
 	<script>
         const ctx = document.getElementById('tempChart').getContext('2d');
-
-		const styles = getComputedStyle(canvas);
+		const styles = getComputedStyle(ctx);
         const data = {
             labels: {{ data['sysData']['timestamp']|tojson }},
             datasets: [{
