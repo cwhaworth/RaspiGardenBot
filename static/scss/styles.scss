@@ -35,8 +35,10 @@ h3 {
 
 //Hyperlinks
 a{
+    $mx: 10px;
     color: $textprimary;
-    margin: auto;
+    margin-left: $mx;
+    margin-right: $mx;
 }
 
 a:hover{
