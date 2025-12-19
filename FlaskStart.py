@@ -603,7 +603,7 @@ def index():
 		try:
 			sysData_temp = sqlSelectQuery('select * from system_temp', fetchall=True)
 
-			for temp in sysData:
+			for temp in sysData_temp:
 				data['sysData']['timestamp'].append(f'{temp[1]} {temp[2]}')
 				data['sysData']['temp'].append(int(temp[3][:-2]))
 		except Exception as e:
