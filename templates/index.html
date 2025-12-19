@@ -67,13 +67,13 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr class="row">
-							<td class="col-2">{{ data['weather']['current']['date'] }}</td>
-							<td class="col-1">{{ data['weather']['current']['time'] }}</td>
-							<td class="col-2 text-end">{{ data['weather']['current']['cloud_cover'] }}</td>
-							<td class="col-1 text-end">{{ data['weather']['current']['precipitation_probability_max'] }}</td>
-							<td class="col-1 text-end">{{ data['weather']['current']['precipitation'] }}</td>
-							<td class="col-1 text-end">{{ data['weather']['current']['temp'] }}</td>
+						<tr>
+							<td>{{ data['weather']['current']['date'] }}</td>
+							<td>{{ data['weather']['current']['time'] }}</td>
+							<td class="text-end">{{ data['weather']['current']['cloud_cover'] }}</td>
+							<td class="text-end">{{ data['weather']['current']['precipitation_probability_max'] }}</td>
+							<td class="text-end">{{ data['weather']['current']['precipitation'] }}</td>
+							<td class="text-end">{{ data['weather']['current']['temp'] }}</td>
 						</tr>
 					</tbody>
 					<thead class="table-primary">
@@ -88,13 +88,13 @@
 					</thead>
 					<tbody>
 						{% for data in data['weather']['hourly'] %}
-						<tr class="row">
-							<td class="col-2">{{ data['date'] }}</td>
-							<td class="col-1">{{ data['time'] }}</td>
-							<td class="col-2 text-end">{{ data['cloud_cover'] }}</td>
-							<td class="col-1 text-end">{{ data['precipitation_probability'] }}</td>
-							<td class="col-1 text-end">{{ data['precipitation'] }}</td>
-							<td class="col-1 text-end">{{ data['temp'] }}</td>
+						<tr>
+							<td>{{ data['date'] }}</td>
+							<td>{{ data['time'] }}</td>
+							<td class="text-end">{{ data['cloud_cover'] }}</td>
+							<td class="text-end">{{ data['precipitation_probability'] }}</td>
+							<td class="text-end">{{ data['precipitation'] }}</td>
+							<td class="text-end">{{ data['temp'] }}</td>
 						</tr>	
 						{% endfor %}
 					</tbody>
