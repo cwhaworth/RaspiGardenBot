@@ -20,7 +20,7 @@ body{
 
 .switch {
 	position: relative;
-	float: right;
+	/* float: right; */
 	display: inline-block;
 	width: 30px;
 	height: 24px;
