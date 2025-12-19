@@ -7,9 +7,6 @@ $quinary: #F4D58D;
 $textprimary: #E1E2E0;
 $textsecondary: #8D8D8D;
 
-//Import Bootstrap
-@import "../bootstrap/scss/bootstrap";
-
 .table-striped{
     --bs-table-striped-bg: $quinary;
 }
@@ -23,6 +20,9 @@ $custom-colors:(
 );
 
 $theme-colors: map-merge($theme-colors, $custom-colors);
+
+//Import Bootstrap
+@import "../bootstrap/scss/bootstrap";
 
 //Body Styles
 body {
