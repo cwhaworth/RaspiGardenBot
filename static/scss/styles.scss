@@ -59,13 +59,9 @@ a:hover{
     background-color: $textprimary;
 }
 
-.table-header{
-    background-color: $tertiary;
-}
-
 //Tables
 .table-quaternery {
-    background-color: $quaternery;
+    --bs-table-bg: #A02D07;
 }
 
 //Header Styles
