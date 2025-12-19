@@ -10,8 +10,10 @@ $textsecondary: #8D8D8D;
 //Import Bootstrap
 @import "../bootstrap/scss/bootstrap";
 
+//Bootstrap Class Overrides
 .table-striped {
     --bs-table-striped-bg: #F4D58D;
+    --bs-table-hover-bg: #f5e4bd;
 }
 
 //Custom Definitions
@@ -84,7 +86,7 @@ a:hover{
 
 //Index Content Styles
 [name="tables"] div {
-    background-color: rgba(160, 45, 7, 0.75);
+    background-color: rgba(160, 45, 7, 0.5);
     // color: $textprimary;
 }
 
