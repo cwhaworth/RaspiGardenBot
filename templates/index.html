@@ -169,7 +169,7 @@
 					<td>{{data['cpuTemp'].temp}}</td>
 				</tr>
 			</table> -->
-			<canvas id="tempChart" width="800" height="400"></canvas>
+			<canvas id="tempChart"></canvas>
 		</div>
 
 		<footer></footer>
@@ -182,7 +182,7 @@
         const data = {
             labels: {{ data['sysData']['timestamp']|tojson }},
             datasets: [{
-                label: 'System Temperature (°F)',
+                // label: 'System Temperature (°F)',
                 data: {{ data['sysData']['temp']|tojson }},
                 // borderColor: 'rgb(34, 139, 34)',
 				borderColor: styles.getPropertyValue('--line-color'),
@@ -203,7 +203,7 @@
                         position: 'top'
                     },
                     title: {
-                        display: true,
+                        display: false,
                         text: 'System Temperature Over Time'
                     }
                 },
@@ -216,8 +216,8 @@
                     },
                     y: {
                         title: {
-                            display: true,
-                            text: 'Temperature (°C)'
+                            display: false,
+                            text: 'Temperature'
                         }
                     }
                 }

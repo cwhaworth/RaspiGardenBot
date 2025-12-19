@@ -109,7 +109,12 @@ a:hover{
 
 //Charts
 #tempChart {
-    max-height: 150px;
+    $mx: 10px;
+
+    height: 250px;
+    max-width: 800px;
+    margin-left: $mx;
+    margin-right: $mx; 
     // --line-color: rgba(160, 45, 7, 0.5);
     --line-color: $quaternery;
     // --fill-color: rgba(34, 139, 34, 0.2);
