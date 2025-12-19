@@ -63,13 +63,12 @@ a:hover{
     background-color: $tertiary;
 }
 
-
+//Tables
+.table-quaternery {
+    background-color: $quaternery;
+}
 
 //Header Styles
-// header div div h1{
-//     color: $textprimary;
-// }
-
 [name="header-form"] input{
     color: $textprimary;
     text-decoration: underline;
@@ -80,14 +79,9 @@ a:hover{
     text-decoration: none;
 }
 
-// header nav {
-//     align-self: center;
-// }
-
 //Index Content Styles
 [name="tables"] div {
     background-color: rgba(160, 45, 7, 0.5);
-    // color: $textprimary;
 }
 
 [name="last-rain"]{
