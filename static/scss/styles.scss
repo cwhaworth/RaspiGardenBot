@@ -5,7 +5,8 @@ $tertiary: #BC6913;
 $quaternery: #A02D07;
 $quinary: #F4D58D;
 $textprimary: #E1E2E0;
-$textsecondary: #8D8D8D;
+// $textsecondary: #8D8D8D;
+$textsecondary: $quinary;
 
 //Import Bootstrap
 @import "../bootstrap/scss/bootstrap";
@@ -56,12 +57,13 @@ a{
 a:hover{
     color: $textsecondary;
     text-decoration: none;
-    background-color: $textprimary;
+    // background-color: $textprimary;
 }
 
 //Tables
 .table-quaternery {
-    --bs-table-bg: #A02D07;
+    --bs-table-bg: rgba(160, 45, 7, 0.75);
+    color: $textprimary;
 }
 
 //Header Styles
