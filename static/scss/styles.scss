@@ -112,11 +112,12 @@ a:hover{
     $mx: 10px;
 
     height: 250px;
-    max-width: 800px;
+    max-width: 1000px;
     margin-left: $mx;
     margin-right: $mx; 
     // --line-color: rgba(160, 45, 7, 0.5);
     --line-color: $quaternery;
     // --fill-color: rgba(34, 139, 34, 0.2);
-    --fill-color: rgba(188, 105, 19, 0.2);
+    --fill-color: rgba(160, 45, 7, 0.2);
+    color: $textprimary;
 }
