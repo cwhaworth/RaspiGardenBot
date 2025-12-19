@@ -25,11 +25,24 @@ $custom-colors:(
 $theme-colors: map-merge($theme-colors, $custom-colors);
 
 //General Styles
+//Headers
 h1{
     color: $textprimary;
 }
 h3 {
     color: $textprimary;
+}
+
+//Hyperlinks
+a{
+    color: $textprimary;
+    margin: auto;
+}
+
+a:hover{
+    color: $textsecondary;
+    text-decoration: none;
+    background-color: $textprimary;
 }
 
 .table-header{
@@ -60,15 +73,9 @@ body {
     text-decoration: none;
 }
 
-header nav a{
-    color: $textprimary;
-}
-
-header nav a:hover{
-    color: $textsecondary;
-    text-decoration: none;
-    background-color: $textprimary;
-}
+// header nav {
+//     align-self: center;
+// }
 
 //Index Content Styles
 [name="tables"] div {

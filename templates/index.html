@@ -12,7 +12,7 @@
 
 <body class="container align-self-center align-content-center">
 	<div class="min-vh-100 bg-primary bg-opacity-75" name="index">
-		<header class="container align-self-center align-content-center mt-3 bg-secondary">
+		<header class="container align-self-center mt-3 bg-secondary">
 			<div class="row">
 				<div class="col"></div>
 				<div class="col text-center">
@@ -29,14 +29,16 @@
 					</form>
 				</div>
 			</div>
-			<nav class="text-center bg-primary w-25">
-				<a href={{navurl['index']}}>Home</a>
-				<a href={{navurl['config']}}>Config</a>
-				<a href={{navurl['waterLog']}}>Water Log</a> 
-				{%if session['priv_level'] == 1%}
-				<a href={{navurl['admin']}}>Admin</a>
-				{%endif%}
-			</nav>
+			<div class="row text-center">
+				<nav class="text-center bg-primary w-25">
+					<a href={{navurl['index']}}>Home</a>
+					<a href={{navurl['config']}}>Config</a>
+					<a href={{navurl['waterLog']}}>Water Log</a> 
+					{%if session['priv_level'] == 1%}
+					<a href={{navurl['admin']}}>Admin</a>
+					{%endif%}
+				</nav>
+			</div>
 		</header>
 
 		<div class="container align-content-center row" name="tables">
