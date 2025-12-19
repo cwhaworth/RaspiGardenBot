@@ -25,8 +25,15 @@ $custom-colors:(
 $theme-colors: map-merge($theme-colors, $custom-colors);
 
 //General Styles
+h1{
+    color: $textprimary;
+}
 h3 {
     color: $textprimary;
+}
+
+.table-header{
+    background-color: $tertiary;
 }
 
 //Body Styles
@@ -39,9 +46,9 @@ body {
 }
 
 //Header Styles
-header div div h1{
-    color: $textprimary;
-}
+// header div div h1{
+//     color: $textprimary;
+// }
 
 [name="header-form"] input{
     color: $textprimary;
@@ -64,7 +71,7 @@ header nav a:hover{
 
 //Index Content Styles
 [name="tables"] div {
-    background-color: $tertiary;
+    background-color: $quaternery;
     // color: $textprimary;
 }
 
