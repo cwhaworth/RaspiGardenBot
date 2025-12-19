@@ -20,6 +20,15 @@ $custom-colors:(
 
 $theme-colors: map-merge($theme-colors, $custom-colors);
 
+//Body Styles
+body {
+    background-image: url("../images/background.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: fixed;
+}
+
 //Header Styles
 header div div h1{
     color: $textprimary;
