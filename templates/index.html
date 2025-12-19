@@ -182,7 +182,7 @@
         const data = {
             labels: {{ data['sysData']['timestamp']|tojson }},
             datasets: [{
-                label: 'System Temperature (°F)',
+                // label: 'System Temperature (°F)',
                 data: {{ data['sysData']['temp']|tojson }},
                 // borderColor: 'rgb(34, 139, 34)',
 				borderColor: styles.getPropertyValue('--line-color'),
@@ -199,25 +199,33 @@
             options: {
                 responsive: true,
                 plugins: {
-                    legend: {
-                        position: 'top'
-                    },
-                    title: {
-                        display: false,
-                        text: 'System Temperature Over Time'
-                    }
+                    // legend: {
+                    //     position: 'top'
+                    // },
+                    // title: {
+                    //     display: false,
+                    //     text: 'System Temperature Over Time'
+                    // }
                 },
                 scales: {
                     x: {
+						ticks: {
+							color: '#E1E2E0'
+						}
                         title: {
                             display: true,
-                            text: 'Timestamp'
+                            text: 'Timestamp',
+							color: '#E1E2E0'
                         }
                     },
                     y: {
+						ticks: {
+							color: '#E1E2E0'
+						}
                         title: {
                             display: true,
-                            text: 'Temperature'
+                            text: 'Temperature',
+							color: '#E1E2E0'
                         }
                     }
                 }
