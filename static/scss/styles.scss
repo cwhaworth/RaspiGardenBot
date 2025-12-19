@@ -14,8 +14,8 @@ $quinary: #F4D58D;
 $custom-colors:(
     "hyperlink": $hyperlink,
     "tertiary": $tertiary,
-    "textprimary": $textprimary,
-    "textsecondary": $textsecondary
+    "quaternery": $quaternery,
+    "quinary": $quinary
 );
 
 $theme-colors: map-merge($theme-colors, $custom-colors);
