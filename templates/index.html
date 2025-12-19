@@ -182,7 +182,7 @@
         const data = {
             labels: {{ data['sysData']['timestamp']|tojson }},
             datasets: [{
-                // label: 'System Temperature (°F)',
+                label: 'System Temperature (°F)',
                 data: {{ data['sysData']['temp']|tojson }},
                 // borderColor: 'rgb(34, 139, 34)',
 				borderColor: styles.getPropertyValue('--line-color'),
@@ -216,7 +216,7 @@
                     },
                     y: {
                         title: {
-                            display: false,
+                            display: true,
                             text: 'Temperature'
                         }
                     }
