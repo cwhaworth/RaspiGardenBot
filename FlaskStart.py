@@ -561,8 +561,8 @@ def index():
 				if t >= now and len(data['weather']['hourly']) < 13:
 
 					data['weather']['hourly'].append({
-						'date': t.date(),
-						'time': t.time(),
+						'date': f'{t.date()}',
+						'time': f'{t.time()}',
 						'temp': (f'{weather_resp["hourly"]["temperature_2m"][i]}'
 								f'{weather_resp["hourly_units"]["temperature_2m"]}'),
 						'cloud_cover': (f'{weather_resp["hourly"]["cloud_cover"][i]}'
