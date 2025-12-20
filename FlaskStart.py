@@ -548,7 +548,7 @@ def index():
 					
 				},
 				# 'hourly': []
-				hourly: {}
+				'hourly': {}
 			}
 			# print(f'{json.dumps(data, indent = 2)}')
 			for i in range(0, len(weather_resp['daily']['time'])):
@@ -578,7 +578,7 @@ def index():
 					data['weather']['hourly']['cloud_cover'].append(weather_resp["hourly"]["cloud_cover"][i]),
 					data['weather']['hourly']['precipitation_probability'].append(weather_resp["hourly"]["precipitation_probability"][i]),
 					data['weather']['hourly']['precipitation'].append(weather_resp["hourly"]["precipitation"][i])
-					
+
 		except Exception as e:
 			print(f'Ran into an error while loading index HTML at {str(now)}\ntraceback:\n{traceback.print_exception(e)}')
 			data['weather'] = {
