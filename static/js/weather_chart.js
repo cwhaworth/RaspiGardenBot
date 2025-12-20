@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const config = {
-        type: 'bar',
+        type: 'line',
         data: data,
         options: {
             responsive: true,
