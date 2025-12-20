@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const canvas = document.getElementById('weatherChart');
     const styles = getComputedStyle(canvas);
     const data = {
-        labels: window.weather.hourly.date.map((d, i) => `${d}\n${window.weather.hourly.time[i]}`),
+        labels: window.weather.hourly.time,
         datasets: [{
             // label: 'System Temperature (°F)',
             data: window.weather.hourly.temp,
