@@ -1,12 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
     const ctx = document.getElementById('weatherChart').getContext('2d');
-    if (!ctx || !window.sysData) return;
+    if (!ctx || !window.weather) return;
 
     const canvas = document.getElementById('weatherChart');
     const styles = getComputedStyle(canvas);
     const data = {
-        labels: `${window.weather.hourly.date}
-        ${window.weather.hourly.time}`,
+        labels: window.weather.hourly.date.map((d, i) => `${d}\n${window.weather.hourly.time[i]}`),
         datasets: [{
             // label: 'System Temperature (°F)',
             data: window.weather.hourly.temp,
