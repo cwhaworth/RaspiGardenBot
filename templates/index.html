@@ -152,24 +152,14 @@
 				</table>
 			</div>
 		</div>
-		<div class="ms-4">
-			<h3>System Data</h3>
-			<h4>Temperature</h4>
-			<!-- <table>
-				<tr class="row-cols-{{data['sysData']}}">
-					{% for temp in data['sysData'] %}
-					<th class="col-1">{{temp[1][:-5]}}<br>{{temp[2][:-3]}}</th>
-					{% endfor %}
-					<th class="col-2">Current<br>{{data['cpuTemp'].time}}</th>
-				</tr>
-				<tr>
-					{% for temp in data['sysData'] %}
-					<td>{{temp[3]}}</td>
-					{% endfor %}
-					<td>{{data['cpuTemp'].temp}}</td>
-				</tr>
-			</table> -->
-			<canvas id="tempChart"></canvas>
+		<div class="ms-4 border border-2 rounded">
+			<div class="row bg-secondary bg-opacity-75">
+				<h3>System Data</h3>
+				<h4>Temperature</h4>
+			</div>
+			<div class="row">
+				<canvas id="tempChart"></canvas>
+			</div>
 		</div>
 
 		<footer></footer>

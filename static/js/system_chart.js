@@ -35,6 +35,9 @@ document.addEventListener("DOMContentLoaded", () => {
             },
             scales: {
                 x: {
+                    grid:{
+                        color: rgba(225, 226, 224, .75)
+                    },
                     ticks: {
                         color: '#E1E2E0'
                     },
@@ -45,6 +48,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                 },
                 y: {
+                    grid:{
+                        color: rgba(225, 226, 224, .75)
+                    },
                     ticks: {
                         color: '#E1E2E0'
                     },
