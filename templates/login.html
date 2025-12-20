@@ -11,7 +11,7 @@
 </head>
 
 <body class="container align-self-center align-content-center">
-    <div class="container w-100 align-self-center text-center" style="margin-top: 25%;">
+    <div class="container w-100 align-self-center text-center bg-primary bg-opacity-75" style="margin-top: 25%;">
         <div>
             <h1>Raspi Garden Bot Web GUI</h1>
         </div>
@@ -20,7 +20,7 @@
             {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
                     {% for category, msg in messages %}
-                        <div class="flash">{{ msg }}</div>
+                        <div class="flash flash-error">{{ msg }}</div>
                     {% endfor %}
                 {% endif %}
             {% endwith %}

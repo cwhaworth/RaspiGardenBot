@@ -68,6 +68,15 @@ a:hover{
     // background-color: $textprimary;
 }
 
+//Flash
+.flash {
+    color: $textprimary
+}
+
+.flash-error {
+    color: $danger;
+}
+
 //Tables
 .table-quaternery {
     --bs-table-bg: rgba(160, 45, 7, 0.75);

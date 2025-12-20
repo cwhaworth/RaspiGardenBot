@@ -524,7 +524,7 @@ def index():
 			'weather': {},
 			'cpuTemp': {
 				'time': f'{now.strftime("%H:%M")}',
-				'temp': f'{temp} F'
+				'temp': f'{temp}°F'
 			}
 		}
 
@@ -565,7 +565,7 @@ def index():
 					break
 			for i in range(0, len(weather_resp['hourly']['time'])):
 				t = datetime.strptime(weather_resp['hourly']['time'][i], "%Y-%m-%dT%H:%M")
-				if t >= now and len(data['weather']['hourly']['time']) < 13:
+				if t >= now and len(data['weather']['hourly']['time']) < 25:
 
 					# data['weather']['hourly'].append({
 					# 	'date': f'{t.date()}',
