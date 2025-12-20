@@ -175,65 +175,16 @@
 		<footer></footer>
 	</div>
 	
+	<!-- Data bridge -->
 	<script>
-        const ctx = document.getElementById('tempChart').getContext('2d');
-		const canvas = document.getElementById('tempChart');
-		const styles = getComputedStyle(canvas);
-        const data = {
-            labels: {{ data['sysData']['timestamp']|tojson }},
-            datasets: [{
-                // label: 'System Temperature (°F)',
-                data: {{ data['sysData']['temp']|tojson }},
-                // borderColor: 'rgb(34, 139, 34)',
-				borderColor: styles.getPropertyValue('--line-color'),
-                // backgroundColor: 'rgba(34, 139, 34, 0.2)',
-				backgroundColor: styles.getPropertyValue('--fill-color'),
-                fill: true,
-                tension: 0.4
-            }]
-        };
-
-        const config = {
-            type: 'line',
-            data: data,
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-						display: false,
-                        position: 'top'
-                    },
-                    title: {
-                        display: false,
-                        text: 'System Temperature Over Time'
-                    }
-                },
-                scales: {
-                    x: {
-						ticks: {
-							color: '#E1E2E0'
-						},
-                        title: {
-                            display: true,
-                            text: 'Timestamp',
-							color: '#E1E2E0'
-                        }
-                    },
-                    y: {
-						ticks: {
-							color: '#E1E2E0'
-						},
-                        title: {
-                            display: true,
-                            text: 'Temperature',
-							color: '#E1E2E0'
-                        }
-                    }
-                }
-            }
-        };
-
-        const tempChart = new Chart(ctx, config);
+	    window.sysData = {
+	        timestamp: {{ data['sysData']['timestamp']|tojson }},
+	        temps: {{ data['sysData']['temperature']|tojson }}
+	    };
+	</script>
+	<script src="{{url_for('static', filename='js/system_chart.js')}}"></script>
+	<script>
+        
     </script>
 </body>
 </html>
