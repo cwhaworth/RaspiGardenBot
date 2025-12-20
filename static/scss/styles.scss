@@ -101,6 +101,14 @@ a:hover{
     text-decoration: none;
 }
 
+//Login Content Styles
+//Divs
+.login-form {
+    max-width: 400px;
+    min-height: 400px;
+    background-color: rgba(41, 46, 49, .9);
+}
+
 //Index Content Styles
 //Divs
 [name="sysCharts"]{
