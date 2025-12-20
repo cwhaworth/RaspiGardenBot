@@ -14,26 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
             backgroundColor: 'rgba(34, 139, 34, 0.2)',
             // backgroundColor: styles.getPropertyValue('--fill-color'),
             fill: false,
-            tension: 0.4
-        },
-        {
-            label: 'Cloud Cover',
-            data: window.weather.hourly.cloud_cover,
-            borderColor: 'rgb(34, 139, 34)',
-            // borderColor: styles.getPropertyValue('--line-color'),
-            backgroundColor: 'rgba(34, 139, 34, 0.2)',
-            // backgroundColor: styles.getPropertyValue('--fill-color'),
-            fill: false,
-            tension: 0.4
-        },
-        {
-            label: 'Precipitation %',
-            data: window.weather.hourly.precipitation_probability,
-            borderColor: 'rgb(34, 139, 34)',
-            // borderColor: styles.getPropertyValue('--line-color'),
-            backgroundColor: 'rgba(34, 139, 34, 0.2)',
-            // backgroundColor: styles.getPropertyValue('--fill-color'),
-            fill: false,
+            yAxisID: 'yTemp',
             tension: 0.4
         },
         {
@@ -44,9 +25,31 @@ document.addEventListener("DOMContentLoaded", () => {
             // backgroundColor: 'rgba(34, 139, 34, 0.2)',
             // backgroundColor: styles.getPropertyValue('--fill-color'),
             fill: false,
+            yAxisID: 'yPrecip',
             tension: 0.4
         },
-        ]
+        {
+            label: 'Cloud Cover',
+            data: window.weather.hourly.cloud_cover,
+            borderColor: 'rgb(34, 139, 34)',
+            // borderColor: styles.getPropertyValue('--line-color'),
+            backgroundColor: 'rgba(34, 139, 34, 0.2)',
+            // backgroundColor: styles.getPropertyValue('--fill-color'),
+            fill: false,
+            yAxisID: 'yPercent',
+            tension: 0.4
+        },
+        {
+            label: 'Precipitation %',
+            data: window.weather.hourly.precipitation_probability,
+            borderColor: 'rgb(34, 139, 34)',
+            // borderColor: styles.getPropertyValue('--line-color'),
+            backgroundColor: 'rgba(34, 139, 34, 0.2)',
+            // backgroundColor: styles.getPropertyValue('--fill-color'),
+            fill: false,
+            yAxisID: 'yPercent',
+            tension: 0.4
+        }]
     };
 
     const config = {
@@ -94,9 +97,24 @@ document.addEventListener("DOMContentLoaded", () => {
                         color: '#E1E2E0'
                     }
                 },
+                yPrecip: {
+                    type: 'linear',
+                    position: 'left',
+                    grid:{
+                        drawOnChartArea: false
+                    },
+                    ticks: {
+                        color: '#E1E2E0'
+                    },
+                    title: {
+                        display: true,
+                        text: 'Precipitation (In)',
+                        color: '#E1E2E0'
+                    }
+                },
                 yPercent: {
                     type: 'linear',
-                    position: 'right',
+                    position: 'left',
                     grid:{
                         drawOnChartArea: false
                     },
