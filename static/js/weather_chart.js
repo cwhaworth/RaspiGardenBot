@@ -9,10 +9,10 @@ document.addEventListener("DOMContentLoaded", () => {
         datasets: [{
             label: 'Temperature (°F)',
             data: window.weather.hourly.temp,
-            borderColor: 'rgb(34, 139, 34)',
-            // borderColor: styles.getPropertyValue('--line-color'),
+            // borderColor: 'rgb(34, 139, 34)',
+            borderColor: styles.getPropertyValue('--temperature-color'),
             // backgroundColor: 'rgba(34, 139, 34, 0.2)',
-            // backgroundColor: styles.getPropertyValue('--fill-color'),
+            backgroundColor: styles.getPropertyValue('--temperature-color'),
             fill: false,
             yAxisID: 'yTemp',
             tension: 0.4
@@ -20,10 +20,10 @@ document.addEventListener("DOMContentLoaded", () => {
         {
             label: 'Precipitation (In.)',
             data: window.weather.hourly.precipitation,
-            borderColor: 'rgb(34, 139, 34)',
-            // borderColor: styles.getPropertyValue('--line-color'),
-            // backgroundColor: 'rgba(34, 139, 34, 0.2)',
-            // backgroundColor: styles.getPropertyValue('--fill-color'),
+            // borderColor: 'rgba(9, 149, 214, 0.2)',
+            borderColor: styles.getPropertyValue('--precipitation-color'),
+            // backgroundColor: 'rgba(9, 149, 214, 0.2)',
+            backgroundColor: styles.getPropertyValue('--precipitation-color'),
             fill: false,
             yAxisID: 'yPrecip',
             tension: 0.4
@@ -31,10 +31,10 @@ document.addEventListener("DOMContentLoaded", () => {
         {
             label: 'Cloud Cover',
             data: window.weather.hourly.cloud_cover,
-            borderColor: 'rgb(34, 139, 34)',
-            // borderColor: styles.getPropertyValue('--line-color'),
-            // backgroundColor: 'rgba(34, 139, 34, 0.2)',
-            // backgroundColor: styles.getPropertyValue('--fill-color'),
+            // borderColor: 'rgba(170, 173, 170, 1)',
+            borderColor: styles.getPropertyValue('--cloud-cover-color'),
+            // backgroundColor: 'rgba(170, 173, 170, 1)',
+            backgroundColor: styles.getPropertyValue('--cloud-cover-color'),
             fill: false,
             yAxisID: 'yPercent',
             tension: 0.4
@@ -42,10 +42,10 @@ document.addEventListener("DOMContentLoaded", () => {
         {
             label: 'Precipitation %',
             data: window.weather.hourly.precipitation_probability,
-            borderColor: 'rgb(34, 139, 34)',
-            // borderColor: styles.getPropertyValue('--line-color'),
-            // backgroundColor: 'rgba(34, 139, 34, 0.2)',
-            // backgroundColor: styles.getPropertyValue('--fill-color'),
+            // borderColor: 'rgba(9, 149, 214, 0.2)',
+            borderColor: styles.getPropertyValue('--precipitation-color'),
+            // backgroundColor: 'rgba(9, 149, 214, 0.2)',
+            backgroundColor: styles.getPropertyValue('--precipitation-color'),
             fill: false,
             yAxisID: 'yPercent',
             tension: 0.4
@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     },
                     title: {
                         display: true,
-                        text: 'Inch',
+                        text: 'Temperature (°F)',
                         color: '#E1E2E0'
                     }
                 },

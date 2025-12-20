@@ -118,7 +118,7 @@ a:hover{
 }
 
 //Charts
-.weather-chart-container{
+[name="tables"] .weather-chart-container{
     $mx: 10px;
     min-height: 400px;
     max-height: 600px;
@@ -142,8 +142,9 @@ a:hover{
 }
 
 #weatherChart {
-    --line-color: #{$quinary};
-    --fill-color: rgba(244, 213, 141, 0.5);
+    --temperature-color: rgba(190, 2, 58, 0.959);
+    --precipitation-color: rgba(9, 149, 214, 0.959);
+    --cloud-cover-color: rgba(170, 173, 170, 1);
     color: $textprimary;
     // background-color: transparent;
 }
