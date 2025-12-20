@@ -579,7 +579,8 @@ def index():
 					# 	'precipitation': (f'{weather_resp["hourly"]["precipitation"][i]} '
 					# 					f'{weather_resp["hourly_units"]["precipitation"][:2]}')
 					# })
-					data['weather']['hourly']['time'].append(weather_resp["hourly"]['time'][i]),
+					js_time = t.strftime('%d-%m %H:%M')
+					data['weather']['hourly']['time'].append(js_time),
 					data['weather']['hourly']['temp'].append(weather_resp["hourly"]["temperature_2m"][i]),
 					data['weather']['hourly']['cloud_cover'].append(weather_resp["hourly"]["cloud_cover"][i]),
 					data['weather']['hourly']['precipitation_probability'].append(weather_resp["hourly"]["precipitation_probability"][i]),

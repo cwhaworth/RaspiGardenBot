@@ -60,8 +60,8 @@ document.addEventListener("DOMContentLoaded", () => {
             maintainAspectRatio: false,
             plugins: {
                 legend: {
-                    display: false,
-                    position: 'top'
+                    display: true,
+                    position: 'bottom left'
                 },
                 title: {
                     display: false,
