@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const data = {
         labels: window.weather.hourly.time,
         datasets: [{
-            // label: 'System Temperature (°F)',
+            label: 'Temperature (°F)',
             data: window.weather.hourly.temp,
             borderColor: 'rgb(34, 139, 34)',
             // borderColor: styles.getPropertyValue('--line-color'),
@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
             tension: 0.4
         },
         {
-            // label: 'System Temperature (°F)',
+            label: 'Cloud Cover',
             data: window.weather.hourly.cloud_cover,
             borderColor: 'rgb(34, 139, 34)',
             // borderColor: styles.getPropertyValue('--line-color'),
@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
             tension: 0.4
         },
         {
-            // label: 'System Temperature (°F)',
+            label: 'Precipitation %',
             data: window.weather.hourly.precipitation_probability,
             borderColor: 'rgb(34, 139, 34)',
             // borderColor: styles.getPropertyValue('--line-color'),
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
             tension: 0.4
         },
         {
-            // label: 'System Temperature (°F)',
+            label: 'Precipitation (In.)',
             data: window.weather.hourly.precipitation,
             borderColor: 'rgb(34, 139, 34)',
             // borderColor: styles.getPropertyValue('--line-color'),
