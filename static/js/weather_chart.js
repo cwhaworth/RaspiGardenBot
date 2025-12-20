@@ -89,12 +89,12 @@ document.addEventListener("DOMContentLoaded", () => {
                         color: 'rgba(225, 226, 224, .75)'
                     },
                     ticks: {
-                        color: '#E1E2E0'
+                        color: styles.getPropertyValue('--temperature-color')
                     },
                     title: {
                         display: true,
                         text: 'Temperature (°F)',
-                        color: '#E1E2E0'
+                        color: styles.getPropertyValue('--temperature-color')
                     }
                 },
                 yPrecip: {
@@ -104,17 +104,19 @@ document.addEventListener("DOMContentLoaded", () => {
                         drawOnChartArea: false
                     },
                     ticks: {
-                        color: '#E1E2E0'
+                        color: styles.getPropertyValue('--precipitation-color')
                     },
                     title: {
                         display: true,
                         text: 'Precipitation (In)',
-                        color: '#E1E2E0'
+                        color: styles.getPropertyValue('--precipitation-color')
                     }
                 },
                 yPercent: {
                     type: 'linear',
                     position: 'left',
+                    min: 0,
+                    max: 100,
                     grid:{
                         drawOnChartArea: false
                     },

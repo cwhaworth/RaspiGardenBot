@@ -565,7 +565,7 @@ def index():
 					break
 			for i in range(0, len(weather_resp['hourly']['time'])):
 				t = datetime.strptime(weather_resp['hourly']['time'][i], "%Y-%m-%dT%H:%M")
-				if t >= now and len(data['weather']['hourly']) < 13:
+				if t >= now and len(data['weather']['hourly']['time']) < 13:
 
 					# data['weather']['hourly'].append({
 					# 	'date': f'{t.date()}',
@@ -579,7 +579,7 @@ def index():
 					# 	'precipitation': (f'{weather_resp["hourly"]["precipitation"][i]} '
 					# 					f'{weather_resp["hourly_units"]["precipitation"][:2]}')
 					# })
-					js_time = t.strftime('%d-%m %H:%M')
+					js_time = t.strftime('%d/%m %H:%M')
 					data['weather']['hourly']['time'].append(js_time),
 					data['weather']['hourly']['temp'].append(weather_resp["hourly"]["temperature_2m"][i]),
 					data['weather']['hourly']['cloud_cover'].append(weather_resp["hourly"]["cloud_cover"][i]),
