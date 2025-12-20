@@ -100,6 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 yPrecip: {
                     type: 'linear',
                     position: 'left',
+                    min: 0,
                     grid:{
                         drawOnChartArea: false
                     },
