@@ -179,7 +179,7 @@
 	<script>
 	    window.sysData = {
 	        timestamp: {{ data['sysData']['timestamp']|tojson }},
-	        temp: {{ data['sysData']['temperature']|tojson }}
+	        temp: {{ data['sysData']['temp']|tojson }}
 	    };
 	</script>
 	<script src="{{url_for('static', filename='js/system_chart.js')}}"></script>
