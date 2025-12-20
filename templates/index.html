@@ -101,8 +101,12 @@
 						</tr>	
 						{% endfor %}
 					</tbody>
+					
+				</table>
+				<div class="weather-chart-container">
 					<canvas id="weatherChart"></canvas>
-				</table>			
+				</div>
+							
 			</div>
 
 			<div class="col mt-3 mb-3 border border-2 rounded">
@@ -159,7 +163,7 @@
 					<h3>System Data</h3>
 					<h4>Temperature, Current: {{data['cpuTemp']['time'], data['cpuTemp']['temp']}}</h4>
 				</div>	
-				<div class="chart-container">
+				<div class="system-chart-container">
 					<canvas id="tempChart"></canvas>
 				</div>
 			</div>
