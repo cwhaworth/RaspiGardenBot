@@ -93,6 +93,11 @@ a:hover{
 }
 
 //Index Content Styles
+//Divs
+[name="sysCharts"]{
+    max-width: 1290px;
+}
+
 //Tables
 [name="tables"] div {
     background-color: rgba(160, 45, 7, 0.5);
