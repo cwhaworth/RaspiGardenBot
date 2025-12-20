@@ -106,8 +106,12 @@ a:hover{
 .login-form {
     max-width: 600px;
     min-height: 400px;
-    padding-top: 40px;
+    padding-top: 100px;
     background-color: rgba(41, 46, 49, .9);
+}
+
+.login-form div {
+    max-width: 100px;
 }
 
 //Index Content Styles
