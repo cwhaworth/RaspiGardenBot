@@ -101,6 +101,7 @@
 						</tr>	
 						{% endfor %}
 					</tbody>
+					<canvas id="weatherChart"></canvas>
 				</table>			
 			</div>
 
@@ -156,14 +157,13 @@
 			<div class="ms-4 border border-2 rounded bg-quaternery">
 				<div class="row bg-secondary bg-opacity-75">
 					<h3>System Data</h3>
-					<h4>Temperature</h4>
+					<h4>Temperature, Current: {{data['cpuTemp']['time'], data['cpuTemp']['temp']}}</h4>
 				</div>	
 				<div class="chart-container">
 					<canvas id="tempChart"></canvas>
 				</div>
 			</div>
 		</div>
-
 		<footer></footer>
 	</div>
 	
@@ -173,7 +173,12 @@
 	        timestamp: {{ data['sysData']['timestamp']|tojson }},
 	        temp: {{ data['sysData']['temp']|tojson }}
 	    };
+		window.weather = {
+			units: {{ data['weather']['units']|tojson}},
+			hourly: {{ data['weather']['hourly']|tojson }}
+		};
 	</script>
+	<script src="{{url_for('static', filename='js/weather_chart.js')}}"></script>
 	<script src="{{url_for('static', filename='js/system_chart.js')}}"></script>
 	<script>
         
