@@ -79,7 +79,9 @@ document.addEventListener("DOMContentLoaded", () => {
                         color: '#E1E2E0'
                     }
                 },
-                y: {
+                yTemp: {
+                    type: 'linear',
+                    position: 'left',
                     grid:{
                         color: 'rgba(225, 226, 224, .75)'
                     },
@@ -88,7 +90,22 @@ document.addEventListener("DOMContentLoaded", () => {
                     },
                     title: {
                         display: true,
-                        text: 'Temperature',
+                        text: 'Inch',
+                        color: '#E1E2E0'
+                    }
+                },
+                yPercent: {
+                    type: 'linear',
+                    position: 'right',
+                    grid:{
+                        drawOnChartArea: false
+                    },
+                    ticks: {
+                        color: '#E1E2E0'
+                    },
+                    title: {
+                        display: true,
+                        text: '% Chance',
                         color: '#E1E2E0'
                     }
                 }
