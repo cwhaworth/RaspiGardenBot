@@ -111,7 +111,10 @@ a:hover{
 }
 
 .login-form div {
+    $px: 50%;
     max-width: 350px;
+    padding-left: $px;
+    padding-right: $px;
 }
 
 //Index Content Styles
