@@ -158,12 +158,13 @@ a:hover{
     background-color: transparent;
 }
 
-[name="tables"] .weather-chart-container{
+[name="tables"] .weather-container .weather-chart-container{
     $mx: 10px;
     height: 400px;
     width: 1000px;
     margin-left: 10px;
     margin-right: 30px; 
+    background-color: transparent;
 }
 
 #tempChart {
