@@ -90,9 +90,9 @@ document.addEventListener("DOMContentLoaded", () => {
                         text: 'Timestamp',
                         color: '#E1E2E0'
                     }
-                }
+                },
                 y: {
-                    display: false;
+                    display: false
                 }
             }
         }
