@@ -43,9 +43,9 @@ document.addEventListener("DOMContentLoaded", () => {
             label: 'Precipitation %',
             data: window.weather.hourly.precipitation_probability,
             // borderColor: 'rgba(9, 149, 214, 0.2)',
-            borderColor: styles.getPropertyValue('--precipitation-color'),
+            borderColor: styles.getPropertyValue('--precipitation-percent-color'),
             // backgroundColor: 'rgba(9, 149, 214, 0.2)',
-            backgroundColor: styles.getPropertyValue('--precipitation-color'),
+            backgroundColor: styles.getPropertyValue('--precipitation-percent-color'),
             fill: false,
             yAxisID: 'yPercent',
             tension: 0.4
@@ -61,7 +61,8 @@ document.addEventListener("DOMContentLoaded", () => {
             plugins: {
                 legend: {
                     display: true,
-                    position: 'bottom left'
+                    position: 'bottom',
+                    align: 'start'
                 },
                 title: {
                     display: false,
@@ -74,7 +75,8 @@ document.addEventListener("DOMContentLoaded", () => {
                         color: 'rgba(225, 226, 224, .75)'
                     },
                     ticks: {
-                        color: '#E1E2E0'
+                        color: '#E1E2E0',
+                        autoSkip: false
                     },
                     title: {
                         display: true,

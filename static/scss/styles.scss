@@ -152,8 +152,7 @@ a:hover{
 
 [name="tables"] .weather-chart-container{
     $mx: 10px;
-    min-height: 400px;
-    max-height: 600px;
+    height: 500px;
     width: 800px;
     margin-left: 10px;
     margin-right: 30px; 
@@ -167,8 +166,12 @@ a:hover{
 }
 
 #weatherChart {
+    width: 100%;
+    height: 100%;
+    display: block;
     --temperature-color: rgba(223, 147, 6, 0.959);
     --precipitation-color: rgba(9, 149, 214, 0.959);
+    --precipitation-percent-color: rgba(139, 9, 214, 0.959);
     --cloud-cover-color: rgba(170, 173, 170, 1);
     color: $textprimary;
     // background-color: transparent;
