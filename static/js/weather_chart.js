@@ -109,8 +109,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const yAxisChart = new Chart(yCtx, {
             type: 'line',
             data: {
-                labels: window.weather.hourly.time,
-                datasets: dataset,
+                labels: [],
+                datasets: []
             },
             options: {
                 responsive: false,
