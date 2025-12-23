@@ -62,7 +62,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 legend: {
                     display: true,
                     position: 'bottom',
-                    align: 'start'
+                    align: 'start',
+                    color: '#E1E2E0'
                 },
                 title: {
                     display: false,
