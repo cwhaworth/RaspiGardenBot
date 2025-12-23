@@ -116,10 +116,6 @@ a:hover{
     max-width: 1272px;
 }
 
-.weather-table-container{
-    max-width: 600px;
-}
-
 //Tables
 [name="tables"] div {
     background-color: rgba(160, 45, 7, 0.5);
@@ -176,4 +172,8 @@ a:hover{
     --cloud-cover-color: rgba(170, 173, 170, 1);
     color: $textprimary;
     // background-color: transparent;
+}
+
+.weather-table-container{
+    max-width: 600px;
 }
