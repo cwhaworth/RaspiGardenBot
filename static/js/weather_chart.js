@@ -137,7 +137,9 @@ document.addEventListener("DOMContentLoaded", () => {
                         position: 'bottom',
                         align: 'start',
                         labels: {
-                            color: '#E1E2E0'
+                            color: '#E1E2E0',
+                            boxWidth: 12,
+                            padding: 8
                         }
                     },
                 scales: {
