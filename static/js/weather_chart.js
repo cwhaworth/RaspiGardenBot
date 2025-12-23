@@ -9,9 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const dataset = [{
             label: 'Temperature (°F)',
             data: window.weather.hourly.temp,
-            // borderColor: 'rgb(34, 139, 34)',
             borderColor: styles.getPropertyValue('--temperature-color'),
-            // backgroundColor: 'rgba(34, 139, 34, 0.2)',
             backgroundColor: styles.getPropertyValue('--temperature-color'),
             fill: false,
             yAxisID: 'yTemp',
@@ -20,9 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
         {
             label: 'Precipitation (In.)',
             data: window.weather.hourly.precipitation,
-            // borderColor: 'rgba(9, 149, 214, 0.2)',
             borderColor: styles.getPropertyValue('--precipitation-color'),
-            // backgroundColor: 'rgba(9, 149, 214, 0.2)',
             backgroundColor: styles.getPropertyValue('--precipitation-color'),
             fill: false,
             yAxisID: 'yPrecip',
@@ -31,9 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
         {
             label: 'Cloud Cover',
             data: window.weather.hourly.cloud_cover,
-            // borderColor: 'rgba(170, 173, 170, 1)',
             borderColor: styles.getPropertyValue('--cloud-cover-color'),
-            // backgroundColor: 'rgba(170, 173, 170, 1)',
             backgroundColor: styles.getPropertyValue('--cloud-cover-color'),
             fill: false,
             yAxisID: 'yPercent',
@@ -42,9 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
         {
             label: 'Precipitation %',
             data: window.weather.hourly.precipitation_probability,
-            // borderColor: 'rgba(9, 149, 214, 0.2)',
             borderColor: styles.getPropertyValue('--precipitation-percent-color'),
-            // backgroundColor: 'rgba(9, 149, 214, 0.2)',
             backgroundColor: styles.getPropertyValue('--precipitation-percent-color'),
             fill: false,
             yAxisID: 'yPercent',
@@ -99,6 +91,15 @@ document.addEventListener("DOMContentLoaded", () => {
                     grid:{
                         color: 'rgba(225, 226, 224, .75)'
                     },
+                },
+                yTemp: {
+                    display: false
+                },
+                yPrecip: {
+                    display: false
+                },
+                yPercent: {
+                    display: false
                 }
             }
         }
