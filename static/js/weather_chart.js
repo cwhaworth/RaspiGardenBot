@@ -6,9 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const canvas = document.getElementById('weatherChart');
     const styles = getComputedStyle(canvas);
 
-    const data = {
-        labels: window.weather.hourly.time,
-        datasets: [{
+    const dataset = [{
             label: 'Temperature (°F)',
             data: window.weather.hourly.temp,
             // borderColor: 'rgb(34, 139, 34)',
@@ -50,8 +48,12 @@ document.addEventListener("DOMContentLoaded", () => {
             backgroundColor: styles.getPropertyValue('--precipitation-percent-color'),
             fill: false,
             yAxisID: 'yPercent',
-            tension: 0.4
+            tension: 0.4,
         }]
+
+    const data = {
+        labels: window.weather.hourly.time,
+        datasets: dataset
     };
 
     const config = {
@@ -89,6 +91,9 @@ document.addEventListener("DOMContentLoaded", () => {
                         color: '#E1E2E0'
                     }
                 }
+                y: {
+                    display: false;
+                }
             }
         }
     };
@@ -97,7 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
             type: 'line',
             data: {
                 labels: window.weather.hourly.time,
-                datasets: []
+                datasets: dataset
             },
             options: {
                 responsive: false,
