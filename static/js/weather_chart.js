@@ -84,9 +84,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                 },
                 y: {
-                    display: false, 
+                    display: true, 
                     labels: {
-                        display: false
+                        display: false,
+                        color: 'rgba(225, 226, 224, 0)'
                     },
                     grid:{
                         color: 'rgba(225, 226, 224, .75)',
@@ -126,8 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 scales: {
                     x: { display: false },
                     yTemp: {
-                        type: 'linear',
-                        position: 'left',
+                        display: true,
                         grid:{
                             color: 'rgba(225, 226, 224, .75)'
                         },
