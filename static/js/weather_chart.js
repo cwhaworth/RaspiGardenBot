@@ -63,7 +63,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     display: true,
                     position: 'bottom',
                     align: 'start',
-                    color: '#E1E2E0'
+                    labels: {
+                        color: '#E1E2E0'
+                    }
                 },
                 title: {
                     display: false,
