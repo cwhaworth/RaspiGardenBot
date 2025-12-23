@@ -92,10 +92,13 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                 },
                 y: {
-                    display: false, 
+                    display: true, 
                     labels: {
                         display: false
-                    }
+                    },
+                    grid:{
+                        color: 'rgba(225, 226, 224, .75)'
+                    },
                 }
             }
         }
@@ -105,7 +108,8 @@ document.addEventListener("DOMContentLoaded", () => {
             type: 'line',
             data: {
                 labels: window.weather.hourly.time,
-                datasets: dataset
+                datasets: dataset,
+                display: false
             },
             options: {
                 responsive: false,
