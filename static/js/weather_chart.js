@@ -92,7 +92,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                 },
                 y: {
-                    display: false
+                    display: false, 
+                    labels: {
+                        display: false
+                    }
                 }
             }
         }
