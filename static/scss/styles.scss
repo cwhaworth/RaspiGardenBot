@@ -136,21 +136,28 @@ a:hover{
 }
 
 //Charts
-[name="tables"] .weather-chart-container{
-    $mx: 10px;
-    min-height: 400px;
-    max-height: 600px;
-    max-width: 1290px;
-    margin-left: 10px;
-    margin-right: 30px; 
-    background-color: transparent;
+.side-scroll-container{
+    overflow-x: auto;
+    overflow-y: hidden;
+    width: 100%;
 }
+
 .system-chart-container{
     $mx: 10px;
     height: 175px;
     max-width: 1290px;
     margin-left: 10px;
     margin-right: 30px; 
+}
+
+[name="tables"] .weather-chart-container{
+    $mx: 10px;
+    min-height: 400px;
+    max-height: 600px;
+    width: 1600px;
+    margin-left: 10px;
+    margin-right: 30px; 
+    background-color: transparent;
 }
 
 #tempChart {
