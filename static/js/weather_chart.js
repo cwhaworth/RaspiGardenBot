@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
             data: window.weather.hourly.temp,
             borderColor: styles.getPropertyValue('--temperature-color'),
             backgroundColor: styles.getPropertyValue('--temperature-color'),
-            fill: false,
+            fill: true,
             yAxisID: 'yTemp',
             tension: 0.4
         },
@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
             data: window.weather.hourly.precipitation,
             borderColor: styles.getPropertyValue('--precipitation-color'),
             backgroundColor: styles.getPropertyValue('--precipitation-color'),
-            fill: false,
+            fill: true,
             yAxisID: 'yPrecip',
             tension: 0.4
         },
@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
             data: window.weather.hourly.cloud_cover,
             borderColor: styles.getPropertyValue('--cloud-cover-color'),
             backgroundColor: styles.getPropertyValue('--cloud-cover-color'),
-            fill: false,
+            fill: true,
             yAxisID: 'yPercent',
             tension: 0.4
         },
@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
             data: window.weather.hourly.precipitation_probability,
             borderColor: styles.getPropertyValue('--precipitation-percent-color'),
             backgroundColor: styles.getPropertyValue('--precipitation-percent-color'),
-            fill: false,
+            fill: true,
             yAxisID: 'yPercent',
             tension: 0.4,
         }]
@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const config = {
-        type: 'bar',
+        type: 'line',
         data: data,
         options: {
             responsive: true,
@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                 },
                 y: {
-                    display: true, 
+                    display: false, 
                     labels: {
                         display: false,
                         color: 'rgba(225, 226, 224, 0)'
@@ -111,8 +111,24 @@ document.addEventListener("DOMContentLoaded", () => {
             type: 'line',
             data: {
                 labels: [],
-                datasets: []
-            },
+                datasets: [
+                {
+                    label: dataset[0].label, 
+                    backgroundColor: styles.getPropertyValue('--temperature-color')
+                },
+                {
+                    label: dataset[1].label, 
+                    backgroundColor: styles.getPropertyValue('--precipitation-color')
+                },
+                {    
+                    label: dataset[2].label, 
+                    backgroundColor: styles.getPropertyValue('--cloud-cover-color')
+                },
+                {
+                    label: dataset[3].label, 
+                    backgroundColor: styles.getPropertyValue('--precipitation-percent-color')
+                },
+            ]},
             options: {
                 responsive: false,
                 plugins: { 
