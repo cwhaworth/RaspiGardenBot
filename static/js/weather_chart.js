@@ -134,8 +134,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 plugins: { 
                     legend: {
                         display: true,
-                        position: 'bottom',
-                        align: 'start',
+                        position: 'left',
+                        // align: 'bottom',
                         labels: {
                             color: '#E1E2E0',
                             boxWidth: 12,
