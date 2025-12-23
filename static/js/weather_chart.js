@@ -1,9 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
+    const yCtx = document.getElementById('yAxisChart').getContext('2d');
     const ctx = document.getElementById('weatherChart').getContext('2d');
     if (!ctx || !window.weather) return;
 
     const canvas = document.getElementById('weatherChart');
     const styles = getComputedStyle(canvas);
+
     const data = {
         labels: window.weather.hourly.time,
         datasets: [{
@@ -60,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
             maintainAspectRatio: false,
             plugins: {
                 legend: {
-                    display: true,
+                    display: false,
                     position: 'bottom',
                     align: 'start',
                     labels: {
@@ -86,58 +88,81 @@ document.addEventListener("DOMContentLoaded", () => {
                         text: 'Timestamp',
                         color: '#E1E2E0'
                     }
-                },
-                yTemp: {
-                    type: 'linear',
-                    position: 'left',
-                    grid:{
-                        color: 'rgba(225, 226, 224, .75)'
-                    },
-                    ticks: {
-                        color: styles.getPropertyValue('--temperature-color')
-                    },
-                    title: {
-                        display: true,
-                        text: 'Temperature (°F)',
-                        color: styles.getPropertyValue('--temperature-color')
-                    }
-                },
-                yPrecip: {
-                    type: 'linear',
-                    position: 'left',
-                    min: 0,
-                    grid:{
-                        drawOnChartArea: false
-                    },
-                    ticks: {
-                        color: styles.getPropertyValue('--precipitation-color')
-                    },
-                    title: {
-                        display: true,
-                        text: 'Precipitation (In)',
-                        color: styles.getPropertyValue('--precipitation-color')
-                    }
-                },
-                yPercent: {
-                    type: 'linear',
-                    position: 'left',
-                    min: 0,
-                    max: 100,
-                    grid:{
-                        drawOnChartArea: false
-                    },
-                    ticks: {
-                        color: '#E1E2E0'
-                    },
-                    title: {
-                        display: true,
-                        text: '% Chance',
-                        color: '#E1E2E0'
-                    }
                 }
             }
         }
     };
 
+    const yAxisChart = new Chart(yCtx, {
+            type: 'line',
+            data: {
+                labels: window.weather.hourly.time,
+                datasets: []
+            },
+            options: {
+                responsive: false,
+                plugins: { 
+                    legend: {
+                        display: true,
+                        position: 'bottom',
+                        align: 'start',
+                        labels: {
+                            color: '#E1E2E0'
+                        }
+                    },
+                scales: {
+                    x: { display: false },
+                    yTemp: {
+                        type: 'linear',
+                        position: 'left',
+                        grid:{
+                            color: 'rgba(225, 226, 224, .75)'
+                        },
+                        ticks: {
+                            color: styles.getPropertyValue('--temperature-color')
+                        },
+                        title: {
+                            display: true,
+                            text: 'Temperature (°F)',
+                            color: styles.getPropertyValue('--temperature-color')
+                        }
+                    },
+                    yPrecip: {
+                        type: 'linear',
+                        position: 'left',
+                        min: 0,
+                        grid:{
+                            drawOnChartArea: false
+                        },
+                        ticks: {
+                            color: styles.getPropertyValue('--precipitation-color')
+                        },
+                        title: {
+                            display: true,
+                            text: 'Precipitation (In)',
+                            color: styles.getPropertyValue('--precipitation-color')
+                        }
+                    },
+                    yPercent: {
+                        type: 'linear',
+                        position: 'left',
+                        min: 0,
+                        max: 100,
+                        grid:{
+                            drawOnChartArea: false
+                        },
+                        ticks: {
+                            color: '#E1E2E0'
+                        },
+                        title: {
+                            display: true,
+                            text: '% Chance',
+                            color: '#E1E2E0'
+                        }
+                    }
+                }
+            }
+        }
+    });
     const tempChart = new Chart(ctx, config);
 });
