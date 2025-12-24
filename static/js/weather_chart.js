@@ -115,7 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const yAxisChart = new Chart(yCtx, {
-            type: 'line',
+            type: 'bar',
             data: {
                 labels: [],
                 datasets: [
