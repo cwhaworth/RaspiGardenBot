@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const yCtx = document.getElementById('yAxisChart').getContext('2d');
     const ctx = document.getElementById('weatherChart').getContext('2d');
     const yLegend = document.getElementById('yAxisLegend');
-    if (!ctx || !window.weather) return;
+    if (!ctx || ! yCtx || !yLegend || !window.weather) return;
 
     const canvas = document.getElementById('weatherChart');
     const styles = getComputedStyle(canvas);
@@ -45,10 +45,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }]
 
     const legendItems = [
-        // {label: 'Temperature (°F)', color: styles.getPropertyValue('--temperature-color')},
-        // {label: 'Precipitation (In.)', color: styles.getPropertyValue('--precipitation-color')},
-        // {label: 'Cloud Cover', color: styles.getPropertyValue('--cloud-cover-color')},
-        // {label: 'Precipitation %', color: styles.getPropertyValue('--precipitation-percent-color')}
             {
                 label: dataset[0].label, 
                 color: styles.getPropertyValue('--temperature-color')
@@ -158,6 +154,7 @@ document.addEventListener("DOMContentLoaded", () => {
             ]},
             options: {
                 responsive: false,
+                maintainAspectRatio: false,
                 plugins: { 
                     legend: {
                         display: false,
@@ -168,6 +165,8 @@ document.addEventListener("DOMContentLoaded", () => {
                         type: 'linear',
                         position: 'left',
                         display: true,
+                        min: 0,
+                        max: 110,
                         grid:{
                             color: 'rgba(225, 226, 224, .75)'
                         },
@@ -184,6 +183,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         type: 'linear',
                         position: 'left',
                         min: 0,
+                        max: 15,
                         grid:{
                             drawOnChartArea: false
                         },
