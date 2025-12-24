@@ -7,12 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const canvas = document.getElementById('weatherChart');
     const styles = getComputedStyle(canvas);
 
-    const legendItems = [
-        {label: 'Temperature (°F)', color: styles.getPropertyValue('--temperature-color')},
-        {label: 'Precipitation (In.)', color: styles.getPropertyValue('--precipitation-color')},
-        {label: 'Cloud Cover', color: styles.getPropertyValue('--cloud-cover-color')},
-        {label: 'Precipitation %', color: styles.getPropertyValue('--precipitation-percent-color')}
-    ];
     const dataset = [{
             label: 'Temperature (°F)',
             data: window.weather.hourly.temp,
@@ -50,6 +44,28 @@ document.addEventListener("DOMContentLoaded", () => {
             tension: 0.4,
         }]
 
+    const legendItems = [
+        // {label: 'Temperature (°F)', color: styles.getPropertyValue('--temperature-color')},
+        // {label: 'Precipitation (In.)', color: styles.getPropertyValue('--precipitation-color')},
+        // {label: 'Cloud Cover', color: styles.getPropertyValue('--cloud-cover-color')},
+        // {label: 'Precipitation %', color: styles.getPropertyValue('--precipitation-percent-color')}
+            {
+                label: dataset[0].label, 
+                backgroundColor: styles.getPropertyValue('--temperature-color')
+            },
+            {
+                label: dataset[1].label, 
+                backgroundColor: styles.getPropertyValue('--precipitation-color')
+            },
+            {    
+                label: dataset[2].label, 
+                backgroundColor: styles.getPropertyValue('--cloud-cover-color')
+            },
+            {
+                label: dataset[3].label, 
+                backgroundColor: styles.getPropertyValue('--precipitation-percent-color')
+            }
+    ];
     const data = {
         labels: window.weather.hourly.time,
         datasets: dataset
@@ -134,19 +150,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 {
                     label: dataset[3].label, 
                     backgroundColor: styles.getPropertyValue('--precipitation-percent-color')
-                },
+                }
             ]},
             options: {
                 responsive: false,
                 plugins: { 
                     legend: {
                         display: false,
-                        position: 'left',
-                        labels: {
-                            color: '#E1E2E0',
-                            boxWidth: 12,
-                            padding: 8
-                        }
                     },
                 scales: {
                     x: { display: false },
