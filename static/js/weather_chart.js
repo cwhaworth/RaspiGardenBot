@@ -157,7 +157,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             ]},
             options: {
-                responsive: false,
+                responsive: true,
                 maintainAspectRatio: false,
                 plugins: { 
                     legend: {
