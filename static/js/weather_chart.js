@@ -129,27 +129,31 @@ document.addEventListener("DOMContentLoaded", () => {
     const yAxisChart = new Chart(yCtx, {
             type: 'bar',
             data: {
-                labels: [],
+                labels: [''],
                 datasets: [
                 {
                     label: dataset[0].label, 
                     backgroundColor: styles.getPropertyValue('--temperature-color'),
                     yAxisID: 'yTemp',
+                    data: [null]
                 },
                 {
                     label: dataset[1].label, 
                     backgroundColor: styles.getPropertyValue('--precipitation-color'),
                     yAxisID: 'yPrecip',
+                    data: [null]
                 },
                 {    
                     label: dataset[2].label, 
                     backgroundColor: styles.getPropertyValue('--cloud-cover-color'),
                     yAxisID: 'yPercent',
+                    data: [null]
                 },
                 {
                     label: dataset[3].label, 
                     backgroundColor: styles.getPropertyValue('--precipitation-percent-color'),
                     yAxisID: 'yPercent',
+                    data: [null]
                 }
             ]},
             options: {
