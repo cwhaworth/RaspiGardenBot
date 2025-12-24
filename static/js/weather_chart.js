@@ -170,7 +170,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         },
                         // ticks: {
                             // color: styles.getPropertyValue('--temperature-color')
-                        },
+                        // },
                         title: {
                             display: true,
                             text: 'Temperature (°F)',
@@ -186,7 +186,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         },
                         // ticks: {
                             // color: styles.getPropertyValue('--precipitation-color')
-                        },
+                        // },
                         title: {
                             display: true,
                             text: 'Precipitation (In)',
@@ -203,7 +203,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         },
                         // ticks: {
                             // color: '#E1E2E0'
-                        },
+                        // },
                         title: {
                             display: true,
                             text: '% Chance',
