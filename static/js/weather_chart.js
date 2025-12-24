@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const yCtx = document.getElementById('yAxisChart').getContext('2d');
     const ctx = document.getElementById('weatherChart').getContext('2d');
-    const yLegend = document.getElementById('yAxisLegend').getContext('2d');
+    const yLegend = document.getElementById('yAxisLegend');
     if (!ctx || !window.weather) return;
 
     const canvas = document.getElementById('weatherChart');
