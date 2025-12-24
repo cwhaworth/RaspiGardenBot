@@ -1,11 +1,18 @@
 document.addEventListener("DOMContentLoaded", () => {
     const yCtx = document.getElementById('yAxisChart').getContext('2d');
     const ctx = document.getElementById('weatherChart').getContext('2d');
+    const yLegend = document.getElementById('yAxisLegend').getContext('2d');
     if (!ctx || !window.weather) return;
 
     const canvas = document.getElementById('weatherChart');
     const styles = getComputedStyle(canvas);
 
+    const legendItems = [
+        {label: 'Temperature (°F)', color: styles.getPropertyValue('--temperature-color')},
+        {label: 'Precipitation (In.)', color: styles.getPropertyValue('--precipitation-color')},
+        {label: 'Cloud Cover', color: styles.getPropertyValue('--cloud-cover-color')},
+        {label: 'Precipitation %', color: styles.getPropertyValue('--precipitation-percent-color')}
+    ];
     const dataset = [{
             label: 'Temperature (°F)',
             data: window.weather.hourly.temp,
@@ -133,9 +140,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 responsive: false,
                 plugins: { 
                     legend: {
-                        display: true,
-                        position: 'bottom',
-                        align: 'start',
+                        display: false,
+                        position: 'left',
                         labels: {
                             color: '#E1E2E0',
                             boxWidth: 12,
@@ -195,5 +201,11 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
     });
+    legend.innerHTML = legendItems.map(item => `
+    <div style="display:flex;align-items:center;margin-bottom:6px;">
+        <span style="width:12px;height:12px;background:${item.color};display:inline-block;margin-right:6px;"></span>
+        <span style="color:#E1E2E0;font-size:12px;">${item.label}</span>
+    </div>
+    `).join('');
     const tempChart = new Chart(ctx, config);
 });
