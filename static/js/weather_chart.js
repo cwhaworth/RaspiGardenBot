@@ -129,7 +129,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const yAxisChart = new Chart(yCtx, {
             type: 'bar',
             data: {
-                labels: window.weather.hourly.time,
+                labels: [''],
                 datasets: [
                 {
                     label: dataset[0].label, 
