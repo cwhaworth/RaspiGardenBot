@@ -135,25 +135,29 @@ document.addEventListener("DOMContentLoaded", () => {
                     label: dataset[0].label, 
                     backgroundColor: styles.getPropertyValue('--temperature-color'),
                     yAxisID: 'yTemp',
-                    data: window.weather.hourly.temp
+                    data: window.weather.hourly.temp, 
+                    display: false
                 },
                 {
                     label: dataset[1].label, 
                     backgroundColor: styles.getPropertyValue('--precipitation-color'),
                     yAxisID: 'yPrecip',
-                    data: window.weather.hourly.precipitation
+                    data: window.weather.hourly.precipitation, 
+                    display: false
                 },
                 {    
                     label: dataset[2].label, 
                     backgroundColor: styles.getPropertyValue('--cloud-cover-color'),
                     yAxisID: 'yPercent',
-                    data: window.weather.hourly.cloud_cover
+                    data: window.weather.hourly.cloud_cover, 
+                    display: false
                 },
                 {
                     label: dataset[3].label, 
                     backgroundColor: styles.getPropertyValue('--precipitation-percent-color'),
                     yAxisID: 'yPercent',
-                    data: window.weather.hourly.precipitation_probability
+                    data: window.weather.hourly.precipitation_probability, 
+                    display: false
                 }
             ]},
             options: {
