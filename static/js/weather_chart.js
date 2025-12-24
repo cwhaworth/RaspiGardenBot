@@ -164,7 +164,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     yTemp: {
                         type: 'linear',
                         position: 'left',
-                        display: true,
+                        min: 0,
+                        max: 110,
                         grid:{
                             color: 'rgba(225, 226, 224, .75)'
                         },
@@ -181,6 +182,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         type: 'linear',
                         position: 'left',
                         min: 0,
+                        max: 15,
                         grid:{
                             drawOnChartArea: false
                         },
