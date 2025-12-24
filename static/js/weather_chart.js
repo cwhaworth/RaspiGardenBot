@@ -179,6 +179,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         min: 0,
                         max: 110,
                         grid:{
+                            drawOnChartArea: false,
                             color: 'rgba(225, 226, 224, .75)'
                         },
                         // ticks: {
