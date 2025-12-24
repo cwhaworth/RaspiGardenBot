@@ -51,19 +51,19 @@ document.addEventListener("DOMContentLoaded", () => {
         // {label: 'Precipitation %', color: styles.getPropertyValue('--precipitation-percent-color')}
             {
                 label: dataset[0].label, 
-                backgroundColor: styles.getPropertyValue('--temperature-color')
+                color: styles.getPropertyValue('--temperature-color')
             },
             {
                 label: dataset[1].label, 
-                backgroundColor: styles.getPropertyValue('--precipitation-color')
+                color: styles.getPropertyValue('--precipitation-color')
             },
             {    
                 label: dataset[2].label, 
-                backgroundColor: styles.getPropertyValue('--cloud-cover-color')
+                color: styles.getPropertyValue('--cloud-cover-color')
             },
             {
                 label: dataset[3].label, 
-                backgroundColor: styles.getPropertyValue('--precipitation-percent-color')
+                color: styles.getPropertyValue('--precipitation-percent-color')
             }
     ];
     const data = {
@@ -137,19 +137,23 @@ document.addEventListener("DOMContentLoaded", () => {
                 datasets: [
                 {
                     label: dataset[0].label, 
-                    backgroundColor: styles.getPropertyValue('--temperature-color')
+                    backgroundColor: styles.getPropertyValue('--temperature-color'),
+                    yAxisID: 'yTemp',
                 },
                 {
                     label: dataset[1].label, 
-                    backgroundColor: styles.getPropertyValue('--precipitation-color')
+                    backgroundColor: styles.getPropertyValue('--precipitation-color'),
+                    yAxisID: 'yPrecip',
                 },
                 {    
                     label: dataset[2].label, 
-                    backgroundColor: styles.getPropertyValue('--cloud-cover-color')
+                    backgroundColor: styles.getPropertyValue('--cloud-cover-color'),
+                    yAxisID: 'yPercent',
                 },
                 {
                     label: dataset[3].label, 
-                    backgroundColor: styles.getPropertyValue('--precipitation-percent-color')
+                    backgroundColor: styles.getPropertyValue('--precipitation-percent-color'),
+                    yAxisID: 'yPercent',
                 }
             ]},
             options: {
