@@ -103,22 +103,21 @@ document.addEventListener("DOMContentLoaded", () => {
                         color: '#E1E2E0'
                     }
                 },
-                yTemp: {
+                yPercent: {
                     type: 'linear',
                     position: 'left',
                     min: 0,
-                    max: 120,
+                    max: 100,
                     grid:{
-                        drawOnChartArea: false,
-                        color: 'rgba(225, 226, 224, .75)'
+                        drawOnChartArea: false
                     },
                     ticks: {
-                        color: styles.getPropertyValue('--temperature-color')
+                        color: '#E1E2E0'
                     },
                     title: {
                         display: true,
-                        text: 'Temperature (°F)',
-                        color: styles.getPropertyValue('--temperature-color')
+                        text: '% Chance',
+                        color: '#E1E2E0'
                     }
                 },
                 yPrecip: {
@@ -138,23 +137,25 @@ document.addEventListener("DOMContentLoaded", () => {
                             color: styles.getPropertyValue('--precipitation-color')
                         }
                     },
-                yPercent: {
+                yTemp: {
                     type: 'linear',
                     position: 'left',
                     min: 0,
-                    max: 100,
+                    max: 120,
                     grid:{
-                        drawOnChartArea: false
+                        drawOnChartArea: false,
+                        color: 'rgba(225, 226, 224, .75)'
                     },
                     ticks: {
-                        color: '#E1E2E0'
+                        color: styles.getPropertyValue('--temperature-color')
                     },
                     title: {
                         display: true,
-                        text: '% Chance',
-                        color: '#E1E2E0'
+                        text: 'Temperature (°F)',
+                        color: styles.getPropertyValue('--temperature-color')
                     }
                 }
+                
             }
         }
     };
