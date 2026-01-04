@@ -50,9 +50,9 @@
 							<div class="row">
 								<p class="col">Enable System: </p>
 								{%if data['system_enable']%}
-								<input class="col" type="checkbox" name="system_enable" value="True" checked></br>
+								<input class="col form-check-input" type="checkbox" role="switch" name="system_enable" value="True" checked></br>
 								{%else%}
-								<input class="col" type="checkbox" name="system_enable" value="False"></br>
+								<input class="col form-check-input" type="checkbox" role="switch" name="system_enable" value="False"></br>
 								{%endif%}
 							</div>
 						</div>
@@ -61,9 +61,9 @@
 							<div class="row">
 								<p class="col">Use Weather API: </p>
 								{%if data['use_api']%}
-								<input class="col"  type="checkbox" name="use_api" value="True" checked></br>
+								<input class="col form-check-input" type="checkbox" role="switch" name="use_api" value="True" checked></br>
 								{%else%}
-								<input class="col"  type="checkbox" name="use_api" value="False"></br>
+								<input class="col form-check-input" type="checkbox" role="switch" name="use_api" value="False"></br>
 								{%endif%}
 							</div>
 							<div class="row">
@@ -133,35 +133,35 @@
 							<h3>System Parameters:</h3>
 							<div class="row">
 								<p class="col">Pump Pin: </p>
-								<input class="col" type="text" class="initForm" name="pump_pin" placeholder="GPIO Pin #" value={{data['pump_pin']}}></br>
+								<input class="col" type="text" name="pump_pin" placeholder="GPIO Pin #" value={{data['pump_pin']}}></br>
 							</div>
 							<div class="row">
 								<p class="col">Valve Enable Pin: </p>
-								<input class="col" type="text" class="initForm" name="valve_enable_pin" placeholder="GPIO Pin #" value={{data['valve_enable_pin']}}></br>
+								<input class="col" type="text" name="valve_enable_pin" placeholder="GPIO Pin #" value={{data['valve_enable_pin']}}></br>
 							</div>
 							<div class="row">
 								<p class="col">Valve Open Pin: </p>
-								<input class="col" type="text" class="initForm" name="valve_open_pin" placeholder="GPIO Pin #" value={{data['valve_open_pin']}}></br>
+								<input class="col" type="text" name="valve_open_pin" placeholder="GPIO Pin #" value={{data['valve_open_pin']}}></br>
 							</div>
 							<div class="row">
 								<p class="col">Valve Close Pin: </p>
-								<input class="col" type="text" class="initForm" name="valve_close_pin" placeholder="GPIO Pin #" value={{data['valve_close_pin']}}></br>
+								<input class="col" type="text" name="valve_close_pin" placeholder="GPIO Pin #" value={{data['valve_close_pin']}}></br>
 							</div>
 							<div class="row">
 								<p class="col">Delay Before (Seconds): </p>
-								<input class="col" type="text" class="initForm" name="delay_before" placeholder="Seconds" value={{data['delay_before']}}></br>
+								<input class="col" type="text" name="delay_before" placeholder="Seconds" value={{data['delay_before']}}></br>
 							</div>
 							<div class="row">
 								<p class="col">Delay After (Seconds): </p>
-								<input class="col" type="text" class="initForm" name="delay_after" placeholder="Seconds" value={{data['delay_after']}}></br>
+								<input class="col" type="text" name="delay_after" placeholder="Seconds" value={{data['delay_after']}}></br>
 							</div>
 							<div class="row">
 								<p class="col">Water Time (Seconds): </p>
-								<input class="col" type="text" class="initForm" name="water_time" placeholder="Seconds" value={{data['water_time']}}></br>
+								<input class="col" type="text" name="water_time" placeholder="Seconds" value={{data['water_time']}}></br>
 							</div>
 							<div class="row">
 								<p class="col">Max Crops: </p>
-								<input class="col" type="text" class="initForm" name="max_crops" placeholder="# of Relays" value={{data['max_crops']}}>	
+								<input class="col" type="text" name="max_crops" placeholder="# of Relays" value={{data['max_crops']}}>	
 							</div>	
 						</div>
 					</div></br>
@@ -173,38 +173,38 @@
 						<h4>{{crop[2]}}</h4>
 						<div class="row">
 							<p class="col">Name: </p>
-							<input class="col" type="text" class="initForm" name="crop_name" placeholder="Sector ID" value={{crop[2]}}></br>
+							<input class="col" type="text" name="crop_name" placeholder="Sector ID" value={{crop[2]}}></br>
 						</div>
 						<div class="row">
 							<p class="col">Pin: </p>
-							<input class="col" type="text" class="initForm" name="crop_pin" placeholder="GPIO Pin #" value={{crop[3]}}></br>
+							<input class="col" type="text" name="crop_pin" placeholder="GPIO Pin #" value={{crop[3]}}></br>
 						</div>
 						<div class="row">
 							<p class="col">Incriment: </p>
-							<input class="col" type="text" class="initForm" name="crop_rain_inc" placeholder="Rain Incriment" value={{crop[4]}}></br>
+							<input class="col" type="text" name="crop_rain_inc" placeholder="Rain Incriment" value={{crop[4]}}></br>
 						</div>
 						<div class="row">
 							<p class="col">Enabled: </p>
 							{%if crop[1]%}
-							<input class="col" type="checkbox" class="initForm" name="crop_enable_{{crop[2]}}" value="True" checked>
+							<input class="col form-check-input" type="checkbox" role="switch" name="crop_enable_{{crop[2]}}" value="True" checked>
 							{%else%}
-							<input class="col" type="checkbox" class="initForm" name="crop_enable_{{crop[2]}}" value="False">
+							<input class="col form-check-input" type="checkbox" role="switch" name="crop_enable_{{crop[2]}}" value="False">
 							{%endif%}
 						</div>
 						<div class="row">
 							<p class="col"></p>
-							<input class="col" type="submit" class="initForm" id="btnDelete" name="cropDel_{{crop[2]}}" value="Delete">
+							<input class="col" type="submit" id="btnDelete" name="cropDel_{{crop[2]}}" value="Delete">
 						</div>
 					</div>
 					{%endfor%}
 					</br>
 					{%if addButton == True%}
 					<div name="initEnd">
-						</br></br><input type="submit" class="mainForm" id="btnAdd" name="cropAdd" value="Add New">
+						</br></br><input type="submit" id="btnAdd" name="cropAdd" value="Add New">
 					</div>
 					{%endif%}
 				</div>
-				</br></br><input type="submit" class="mainForm" id="btnInit" name="cropSave" value="Save">
+				</br></br><input type="submit" id="btnInit" name="cropSave" value="Save">
 			</form>
 		</div>
 	</div>
