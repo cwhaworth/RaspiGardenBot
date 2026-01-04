@@ -190,41 +190,41 @@ document.addEventListener("DOMContentLoaded", () => {
                             text: 'Temperature (°F)',
                             color: styles.getPropertyValue('--temperature-color')
                         }
-                    },
-                    yPrecip: {
-                        type: 'linear',
-                        position: 'left',
-                        min: 0,
-                        max: 15,
-                        grid:{
-                            drawOnChartArea: false
-                        },
-                        // ticks: {
-                            // color: styles.getPropertyValue('--precipitation-color')
-                        // },
-                        title: {
-                            display: true,
-                            text: 'Precipitation (In)',
-                            color: styles.getPropertyValue('--precipitation-color')
-                        }
-                    },
-                    yPercent: {
-                        type: 'linear',
-                        position: 'left',
-                        min: 0,
-                        max: 100,
-                        grid:{
-                            drawOnChartArea: false
-                        },
-                        // ticks: {
-                            // color: '#E1E2E0'
-                        // },
-                        title: {
-                            display: true,
-                            text: '% Chance',
-                            color: '#E1E2E0'
-                        }
-                    }
+                    }//,
+                    // yPrecip: {
+                    //     type: 'linear',
+                    //     position: 'left',
+                    //     min: 0,
+                    //     max: 15,
+                    //     grid:{
+                    //         drawOnChartArea: false
+                    //     },
+                    //     // ticks: {
+                    //         // color: styles.getPropertyValue('--precipitation-color')
+                    //     // },
+                    //     title: {
+                    //         display: true,
+                    //         text: 'Precipitation (In)',
+                    //         color: styles.getPropertyValue('--precipitation-color')
+                    //     }
+                    // },
+                    // yPercent: {
+                    //     type: 'linear',
+                    //     position: 'left',
+                    //     min: 0,
+                    //     max: 100,
+                    //     grid:{
+                    //         drawOnChartArea: false
+                    //     },
+                    //     // ticks: {
+                    //         // color: '#E1E2E0'
+                    //     // },
+                    //     title: {
+                    //         display: true,
+                    //         text: '% Chance',
+                    //         color: '#E1E2E0'
+                    //     }
+                    // }
                 }
             }
         }
