@@ -138,31 +138,31 @@ document.addEventListener("DOMContentLoaded", () => {
                     // data: window.weather.hourly.temp,
                     data: [null], 
                     display: false
-                },
-                {
-                    label: dataset[1].label, 
-                    backgroundColor: styles.getPropertyValue('--precipitation-color'),
-                    yAxisID: 'yPrecip',
-                    // data: window.weather.hourly.precipitation,
-                    data: [null], 
-                    display: false
-                },
-                {    
-                    label: dataset[2].label, 
-                    backgroundColor: styles.getPropertyValue('--cloud-cover-color'),
-                    yAxisID: 'yPercent',
-                    // data: window.weather.hourly.cloud_cover,
-                    data: [null], 
-                    display: false
-                },
-                {
-                    label: dataset[3].label, 
-                    backgroundColor: styles.getPropertyValue('--precipitation-percent-color'),
-                    yAxisID: 'yPercent',
-                    // data: window.weather.hourly.precipitation_probability,
-                    data: [null], 
-                    display: false
-                }
+                }//,
+                // {
+                //     label: dataset[1].label, 
+                //     backgroundColor: styles.getPropertyValue('--precipitation-color'),
+                //     yAxisID: 'yPrecip',
+                //     // data: window.weather.hourly.precipitation,
+                //     data: [null], 
+                //     display: false
+                // },
+                // {    
+                //     label: dataset[2].label, 
+                //     backgroundColor: styles.getPropertyValue('--cloud-cover-color'),
+                //     yAxisID: 'yPercent',
+                //     // data: window.weather.hourly.cloud_cover,
+                //     data: [null], 
+                //     display: false
+                // },
+                // {
+                //     label: dataset[3].label, 
+                //     backgroundColor: styles.getPropertyValue('--precipitation-percent-color'),
+                //     yAxisID: 'yPercent',
+                //     // data: window.weather.hourly.precipitation_probability,
+                //     data: [null], 
+                //     display: false
+                // }
             ]},
             options: {
                 responsive: true,
