@@ -1,8 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const yCtx = document.getElementById('yAxisChart').getContext('2d');
+    // const yCtx = document.getElementById('yAxisChart').getContext('2d');
     const ctx = document.getElementById('weatherChart').getContext('2d');
-    const yLegend = document.getElementById('yAxisLegend');
-    if (!ctx || ! yCtx || !yLegend || !window.weather) return;
+    // const yLegend = document.getElementById('yAxisLegend');
+    // if (!ctx || ! yCtx || !yLegend || !window.weather) return;
+    if (!ctx) return;
 
     const canvas = document.getElementById('weatherChart');
     const styles = getComputedStyle(canvas);
@@ -102,140 +103,154 @@ document.addEventListener("DOMContentLoaded", () => {
                         color: '#E1E2E0'
                     }
                 },
-                y: {
-                    display: false, 
-                    labels: {
-                        display: false,
-                        color: 'rgba(225, 226, 224, 0)'
-                    },
-                    grid:{
-                        color: 'rgba(225, 226, 224, .75)',
-                        display: true
-                    },
-                },
-                yTemp: {
-                    display: false
-                },
                 yPrecip: {
-                    display: false
-                },
+                        type: 'linear',
+                        position: 'left',
+                        min: 0,
+                        max: 15,
+                        grid:{
+                            drawOnChartArea: false
+                        },
+                        // ticks: {
+                            // color: styles.getPropertyValue('--precipitation-color')
+                        // },
+                        title: {
+                            display: true,
+                            text: 'Precipitation (In)',
+                            color: styles.getPropertyValue('--precipitation-color')
+                        }
+                    },
                 yPercent: {
-                    display: false
+                    type: 'linear',
+                    position: 'left',
+                    min: 0,
+                    max: 100,
+                    grid:{
+                        drawOnChartArea: false
+                    },
+                    // ticks: {
+                        // color: '#E1E2E0'
+                    // },
+                    title: {
+                        display: true,
+                        text: '% Chance',
+                        color: '#E1E2E0'
+                    }
                 }
             }
         }
     };
 
-    const yAxisChart = new Chart(yCtx, {
-            type: 'bar',
-            data: {
-                labels: [''],
-                datasets: [
-                {
-                    label: dataset[0].label, 
-                    backgroundColor: styles.getPropertyValue('--temperature-color'),
-                    yAxisID: 'yTemp',
-                    // data: window.weather.hourly.temp,
-                    data: [null], 
-                    display: false
-                }//,
-                // {
-                //     label: dataset[1].label, 
-                //     backgroundColor: styles.getPropertyValue('--precipitation-color'),
-                //     yAxisID: 'yPrecip',
-                //     // data: window.weather.hourly.precipitation,
-                //     data: [null], 
-                //     display: false
-                // },
-                // {    
-                //     label: dataset[2].label, 
-                //     backgroundColor: styles.getPropertyValue('--cloud-cover-color'),
-                //     yAxisID: 'yPercent',
-                //     // data: window.weather.hourly.cloud_cover,
-                //     data: [null], 
-                //     display: false
-                // },
-                // {
-                //     label: dataset[3].label, 
-                //     backgroundColor: styles.getPropertyValue('--precipitation-percent-color'),
-                //     yAxisID: 'yPercent',
-                //     // data: window.weather.hourly.precipitation_probability,
-                //     data: [null], 
-                //     display: false
-                // }
-            ]},
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: { 
-                    legend: {
-                        display: false,
-                    },
-                scales: {
-                    x: { display: false },
-                    yTemp: {
-                        type: 'linear',
-                        position: 'left',
-                        min: 0,
-                        max: 110,
-                        grid:{
-                            drawOnChartArea: false,
-                            color: 'rgba(225, 226, 224, .75)'
-                        },
-                        // ticks: {
-                            // color: styles.getPropertyValue('--temperature-color')
-                        // },
-                        title: {
-                            display: true,
-                            text: 'Temperature (°F)',
-                            color: styles.getPropertyValue('--temperature-color')
-                        }
-                    }//,
-                    // yPrecip: {
-                    //     type: 'linear',
-                    //     position: 'left',
-                    //     min: 0,
-                    //     max: 15,
-                    //     grid:{
-                    //         drawOnChartArea: false
-                    //     },
-                    //     // ticks: {
-                    //         // color: styles.getPropertyValue('--precipitation-color')
-                    //     // },
-                    //     title: {
-                    //         display: true,
-                    //         text: 'Precipitation (In)',
-                    //         color: styles.getPropertyValue('--precipitation-color')
-                    //     }
-                    // },
-                    // yPercent: {
-                    //     type: 'linear',
-                    //     position: 'left',
-                    //     min: 0,
-                    //     max: 100,
-                    //     grid:{
-                    //         drawOnChartArea: false
-                    //     },
-                    //     // ticks: {
-                    //         // color: '#E1E2E0'
-                    //     // },
-                    //     title: {
-                    //         display: true,
-                    //         text: '% Chance',
-                    //         color: '#E1E2E0'
-                    //     }
-                    // }
-                }
-            }
-        }
-    });
+    // const yAxisChart = new Chart(yCtx, {
+    //         type: 'bar',
+    //         data: {
+    //             labels: [''],
+    //             datasets: [
+    //             {
+    //                 label: dataset[0].label, 
+    //                 backgroundColor: styles.getPropertyValue('--temperature-color'),
+    //                 yAxisID: 'yTemp',
+    //                 // data: window.weather.hourly.temp,
+    //                 data: [null], 
+    //                 display: false
+    //             }//,
+    //             // {
+    //             //     label: dataset[1].label, 
+    //             //     backgroundColor: styles.getPropertyValue('--precipitation-color'),
+    //             //     yAxisID: 'yPrecip',
+    //             //     // data: window.weather.hourly.precipitation,
+    //             //     data: [null], 
+    //             //     display: false
+    //             // },
+    //             // {    
+    //             //     label: dataset[2].label, 
+    //             //     backgroundColor: styles.getPropertyValue('--cloud-cover-color'),
+    //             //     yAxisID: 'yPercent',
+    //             //     // data: window.weather.hourly.cloud_cover,
+    //             //     data: [null], 
+    //             //     display: false
+    //             // },
+    //             // {
+    //             //     label: dataset[3].label, 
+    //             //     backgroundColor: styles.getPropertyValue('--precipitation-percent-color'),
+    //             //     yAxisID: 'yPercent',
+    //             //     // data: window.weather.hourly.precipitation_probability,
+    //             //     data: [null], 
+    //             //     display: false
+    //             // }
+    //         ]},
+    //         options: {
+    //             responsive: true,
+    //             maintainAspectRatio: false,
+    //             plugins: { 
+    //                 legend: {
+    //                     display: false,
+    //                 },
+    //             scales: {
+    //                 x: { display: false },
+    //                 yTemp: {
+    //                     type: 'linear',
+    //                     position: 'left',
+    //                     min: 0,
+    //                     max: 110,
+    //                     grid:{
+    //                         drawOnChartArea: false,
+    //                         color: 'rgba(225, 226, 224, .75)'
+    //                     },
+    //                     // ticks: {
+    //                         // color: styles.getPropertyValue('--temperature-color')
+    //                     // },
+    //                     title: {
+    //                         display: true,
+    //                         text: 'Temperature (°F)',
+    //                         color: styles.getPropertyValue('--temperature-color')
+    //                     }
+    //                 },
+    //                 yPrecip: {
+    //                     type: 'linear',
+    //                     position: 'left',
+    //                     min: 0,
+    //                     max: 15,
+    //                     grid:{
+    //                         drawOnChartArea: false
+    //                     },
+    //                     // ticks: {
+    //                         // color: styles.getPropertyValue('--precipitation-color')
+    //                     // },
+    //                     title: {
+    //                         display: true,
+    //                         text: 'Precipitation (In)',
+    //                         color: styles.getPropertyValue('--precipitation-color')
+    //                     }
+    //                 },
+    //                 yPercent: {
+    //                     type: 'linear',
+    //                     position: 'left',
+    //                     min: 0,
+    //                     max: 100,
+    //                     grid:{
+    //                         drawOnChartArea: false
+    //                     },
+    //                     // ticks: {
+    //                         // color: '#E1E2E0'
+    //                     // },
+    //                     title: {
+    //                         display: true,
+    //                         text: '% Chance',
+    //                         color: '#E1E2E0'
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     }
+    // });
 
-    yLegend.innerHTML = legendItems.map(item => `
-    <div style="display:flex;align-items:center;margin-bottom:6px;">
-        <span style="width:12px;height:12px;background:${item.color};display:inline-block;margin-right:6px;"></span>
-        <span style="color:#E1E2E0;font-size:12px;">${item.label}</span>
-    </div>
-    `).join('');
+    // yLegend.innerHTML = legendItems.map(item => `
+    // <div style="display:flex;align-items:center;margin-bottom:6px;">
+    //     <span style="width:12px;height:12px;background:${item.color};display:inline-block;margin-right:6px;"></span>
+    //     <span style="color:#E1E2E0;font-size:12px;">${item.label}</span>
+    // </div>
+    // `).join('');
 
     const tempChart = new Chart(ctx, config);
 });
