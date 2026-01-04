@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         autoSkip: false
                     },
                     title: {
-                        display: true,
+                        display: false,
                         text: 'Timestamp',
                         color: '#E1E2E0'
                     }
