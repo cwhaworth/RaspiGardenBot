@@ -103,6 +103,24 @@ document.addEventListener("DOMContentLoaded", () => {
                         color: '#E1E2E0'
                     }
                 },
+                yTemp: {
+                    type: 'linear',
+                    position: 'left',
+                    min: 0,
+                    max: 110,
+                    grid:{
+                        drawOnChartArea: false,
+                        color: 'rgba(225, 226, 224, .75)'
+                    },
+                    ticks: {
+                        color: styles.getPropertyValue('--temperature-color')
+                    },
+                    title: {
+                        display: true,
+                        text: 'Temperature (°F)',
+                        color: styles.getPropertyValue('--temperature-color')
+                    }
+                },
                 yPrecip: {
                         type: 'linear',
                         position: 'left',
@@ -111,9 +129,9 @@ document.addEventListener("DOMContentLoaded", () => {
                         grid:{
                             drawOnChartArea: false
                         },
-                        // ticks: {
-                            // color: styles.getPropertyValue('--precipitation-color')
-                        // },
+                        ticks: {
+                            color: styles.getPropertyValue('--precipitation-color')
+                        },
                         title: {
                             display: true,
                             text: 'Precipitation (In)',
@@ -128,9 +146,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     grid:{
                         drawOnChartArea: false
                     },
-                    // ticks: {
-                        // color: '#E1E2E0'
-                    // },
+                    ticks: {
+                        color: '#E1E2E0'
+                    },
                     title: {
                         display: true,
                         text: '% Chance',
