@@ -47,8 +47,8 @@
 					<div class="col">
 						<div class="row">
 							<h3>Irrigation System Initialization</h3>
-							<div class="row">
-								<p class="col">Enable System: </p>
+							<div class="row form-check form-switch">
+								<label class="col">Enable System: </label>
 								{%if data['system_enable']%}
 								<input class="col form-check-input" type="checkbox" role="switch" name="system_enable" value="True" checked></br>
 								{%else%}
@@ -58,8 +58,8 @@
 						</div>
 						<div class="row">
 							<h3>Weather API Parameters:</h3>
-							<div class="row">
-								<p class="col">Use Weather API: </p>
+							<div class="row form-check form-switch">
+								<label class="col">Use Weather API: </label>
 								{%if data['use_api']%}
 								<input class="col form-check-input" type="checkbox" role="switch" name="use_api" value="True" checked></br>
 								{%else%}
@@ -67,23 +67,23 @@
 								{%endif%}
 							</div>
 							<div class="row">
-								<p class="col">City: </p>
+								<label class="col">City: </label>
 								<input class="col" type="text" name="api_city" placeholder="city name" value={{data['api_city']}}></br>
 							</div>
 							<div class="row">
-								<p class="col">State: </p>
+								<label class="col">State: </label>
 								<input class="col" type="text" name="api_state" placeholder="ex: NC, AZ" value={{data['api_state']}}></br>
 							</div>
 							<div class="row">
-								<p class="col">Country: </p>
+								<label class="col">Country: </label>
 								<input class="col" type="text" name="api_country" placeholder="ex: USA, UK" value={{data['api_country']}}>		
 							</div>
 							<div class="row">
-								<p class="col">Forecast Days: </p>
+								<label class="col">Forecast Days: </label>
 								<input class="col" type="text" name="api_forecast_days" placeholder="1-16" value={{data['api_forecast_days']}}>		
 							</div>
 							<div class="row">
-								<p class="col">Water Time: </p>
+								<label class="col">Water Time: </label>
 								<select class="col" type="text" name="water_schedule_hour">
 									{%for hour in data['hours']%}
 									{% set am_pm = "am" if hour < 12 else "pm" %}
@@ -99,7 +99,7 @@
 								</select>	
 							</div>
 							<div class="row">
-								<p class="col">Timezone: </p>
+								<label class="col">Timezone: </label>
 								<select class="col" type="text" name="api_timezone">
 									{%for timezone in data['timezones']%}
 
@@ -120,7 +120,7 @@
 								</select>	
 							</div>
 							<div class="row">
-								<p class="col">Units: </p>
+								<label class="col">Units: </label>
 								<select class="col" type="text" name="api_units">
 									<option value="Imperial" {{ 'selected' if data['api_units'] == "Imperial" }}>Imperial</option>
 									<option value="Metric" {{ 'selected' if data['api_units'] == "Metric" }}>Metric</option>
@@ -132,35 +132,35 @@
 						<div class="row">
 							<h3>System Parameters:</h3>
 							<div class="row">
-								<p class="col">Pump Pin: </p>
+								<label class="col">Pump Pin: </label>
 								<input class="col" type="text" name="pump_pin" placeholder="GPIO Pin #" value={{data['pump_pin']}}></br>
 							</div>
 							<div class="row">
-								<p class="col">Valve Enable Pin: </p>
+								<label class="col">Valve Enable Pin: </label>
 								<input class="col" type="text" name="valve_enable_pin" placeholder="GPIO Pin #" value={{data['valve_enable_pin']}}></br>
 							</div>
 							<div class="row">
-								<p class="col">Valve Open Pin: </p>
+								<label class="col">Valve Open Pin: </label>
 								<input class="col" type="text" name="valve_open_pin" placeholder="GPIO Pin #" value={{data['valve_open_pin']}}></br>
 							</div>
 							<div class="row">
-								<p class="col">Valve Close Pin: </p>
+								<label class="col">Valve Close Pin: </label>
 								<input class="col" type="text" name="valve_close_pin" placeholder="GPIO Pin #" value={{data['valve_close_pin']}}></br>
 							</div>
 							<div class="row">
-								<p class="col">Delay Before (Seconds): </p>
+								<label class="col">Delay Before (Seconds): </label>
 								<input class="col" type="text" name="delay_before" placeholder="Seconds" value={{data['delay_before']}}></br>
 							</div>
 							<div class="row">
-								<p class="col">Delay After (Seconds): </p>
+								<label class="col">Delay After (Seconds): </label>
 								<input class="col" type="text" name="delay_after" placeholder="Seconds" value={{data['delay_after']}}></br>
 							</div>
 							<div class="row">
-								<p class="col">Water Time (Seconds): </p>
+								<label class="col">Water Time (Seconds): </label>
 								<input class="col" type="text" name="water_time" placeholder="Seconds" value={{data['water_time']}}></br>
 							</div>
 							<div class="row">
-								<p class="col">Max Crops: </p>
+								<label class="col">Max Crops: </label>
 								<input class="col" type="text" name="max_crops" placeholder="# of Relays" value={{data['max_crops']}}>	
 							</div>	
 						</div>
@@ -172,19 +172,19 @@
 					<div class="col">
 						<h4>{{crop[2]}}</h4>
 						<div class="row">
-							<p class="col">Name: </p>
+							<label class="col">Name: </label>
 							<input class="col" type="text" name="crop_name" placeholder="Sector ID" value={{crop[2]}}></br>
 						</div>
 						<div class="row">
-							<p class="col">Pin: </p>
+							<label class="col">Pin: </label>
 							<input class="col" type="text" name="crop_pin" placeholder="GPIO Pin #" value={{crop[3]}}></br>
 						</div>
 						<div class="row">
-							<p class="col">Incriment: </p>
+							<label class="col">Incriment: </label>
 							<input class="col" type="text" name="crop_rain_inc" placeholder="Rain Incriment" value={{crop[4]}}></br>
 						</div>
-						<div class="row">
-							<p class="col">Enabled: </p>
+						<div class="row form-check form-switch">
+							<label class="col">Enabled: </label>
 							{%if crop[1]%}
 							<input class="col form-check-input" type="checkbox" role="switch" name="crop_enable_{{crop[2]}}" value="True" checked>
 							{%else%}
@@ -192,7 +192,7 @@
 							{%endif%}
 						</div>
 						<div class="row">
-							<p class="col"></p>
+							<label class="col"></label>
 							<input class="col" type="submit" id="btnDelete" name="cropDel_{{crop[2]}}" value="Delete">
 						</div>
 					</div>

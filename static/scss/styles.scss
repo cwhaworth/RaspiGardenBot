@@ -54,7 +54,7 @@ h4 {
     color: $textprimary;
 }
 
-//Hyperlinks
+//Text
 a{
     $mx: 7px;
     color: $textprimary;
@@ -68,7 +68,10 @@ a:hover{
     // background-color: $textprimary;
 }
 
-//Flash
+label {
+    color: $textprimary;
+}
+
 .flash {
     color: $textprimary
 }
