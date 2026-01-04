@@ -160,7 +160,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     yLegend.innerHTML = legendItems.map(item => `
-    <div style="display:flex;align-items:center;margin-bottom:6px;">
+    <div style="display:inline;align-items:center;margin-bottom:6px;">
         <span style="width:12px;height:12px;background:${item.color};display:inline-block;margin-right:6px;"></span>
         <span style="color:#E1E2E0;font-size:12px;">${item.label}</span>
     </div>
