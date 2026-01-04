@@ -58,12 +58,12 @@
 						</div>
 						<div class="row">
 							<h3>Weather API Parameters:</h3>
-							<div class="row form-check form-switch">
-								<label class="col form-check-label">Use Weather API: </label>
+							<div class="row form-check form-switch form-check-reverse">
+								<label class="col form-check-label" for="use_api">Use Weather API: </label>
 								{%if data['use_api']%}
-								<input class="col form-check-input" type="checkbox" role="switch" name="use_api" value="True" checked></br>
+								<input class="col form-check-input" type="checkbox" role="switch" id="use_api" name="use_api" value="True" checked></br>
 								{%else%}
-								<input class="col form-check-input" type="checkbox" role="switch" name="use_api" value="False"></br>
+								<input class="col form-check-input" type="checkbox" role="switch" id="use_api" name="use_api" value="False"></br>
 								{%endif%}
 							</div>
 							<div class="row">
@@ -183,12 +183,12 @@
 							<label class="col">Incriment: </label>
 							<input class="col" type="text" name="crop_rain_inc" placeholder="Rain Incriment" value={{crop[4]}}></br>
 						</div>
-						<div class="row form-check form-switch">
-							<label class="col form-check-label">Enabled: </label>
+						<div class="row form-check form-switch form-check-reverse">
+							<label class="col form-check-label" for="crop_enable_{{crop[2]}}">Enabled: </label>
 							{%if crop[1]%}
-							<input class="col form-check-input" type="checkbox" role="switch" name="crop_enable_{{crop[2]}}" value="True" checked>
+							<input class="col form-check-input" type="checkbox" role="switch" id="crop_enable_{{crop[2]}}" name="crop_enable_{{crop[2]}}" value="True" checked>
 							{%else%}
-							<input class="col form-check-input" type="checkbox" role="switch" name="crop_enable_{{crop[2]}}" value="False">
+							<input class="col form-check-input" type="checkbox" role="switch" id="crop_enable_{{crop[2]}}" name="crop_enable_{{crop[2]}}" value="False">
 							{%endif%}
 						</div>
 						<div class="row">
