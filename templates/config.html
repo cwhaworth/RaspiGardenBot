@@ -173,47 +173,49 @@
 					</div></br>
 
 				
-				<div class="row row-cols-3 row-gap-2 column-gap-2 border border-2 rounded" name="input-group">
+				<div class="row border border-2 rounded" name="input-group">
 					<div class="row bg-secondary bg-opacity-75">
 						<h3>Crops:</h3>
 					</div>
-					{%for crop in data['crop_data']%}
-					<div class="col row-gap-1 border border-2 rounded" name="crop">
-						<div class="row">
-							<h4>{{crop[2]}}</h4>
+					<div class="row row-cols-3 row-gap-2 column-gap-2">
+						{%for crop in data['crop_data']%}
+						<div class="col row-gap-1 border border-2 rounded" name="crop">
+							<div class="row">
+								<h4>{{crop[2]}}</h4>
+							</div>
+							<div class="row">
+								<label class="col">Name: </label>
+								<input class="col" type="text" name="crop_name" placeholder="Sector ID" value={{crop[2]}}></br>
+							</div>
+							<div class="row">
+								<label class="col">Pin: </label>
+								<input class="col" type="text" name="crop_pin" placeholder="GPIO Pin #" value={{crop[3]}}></br>
+							</div>
+							<div class="row">
+								<label class="col">Incriment: </label>
+								<input class="col" type="text" name="crop_rain_inc" placeholder="Rain Incriment" value={{crop[4]}}></br>
+							</div>
+							<div class="row form-check form-switch form-check-reverse text-start">
+								<label class="col form-check-label" for="crop_enable_{{crop[2]}}">Enabled: </label>
+								{%if crop[1]%}
+								<input class="col form-check-input" type="checkbox" role="switch" id="crop_enable_{{crop[2]}}" name="crop_enable_{{crop[2]}}" value="True" checked>
+								{%else%}
+								<input class="col form-check-input" type="checkbox" role="switch" id="crop_enable_{{crop[2]}}" name="crop_enable_{{crop[2]}}" value="False">
+								{%endif%}
+							</div>
+							<div class="row">
+								<label class="col"></label>
+								<input class="col" type="submit" id="btnDelete" name="cropDel_{{crop[2]}}" value="Delete">
+							</div>
 						</div>
-						<div class="row">
-							<label class="col">Name: </label>
-							<input class="col" type="text" name="crop_name" placeholder="Sector ID" value={{crop[2]}}></br>
+						{%endfor%}
+						</br>
+						{%if addButton == True%}
+						<div name="initEnd">
+							</br></br><input type="submit" id="btnAdd" name="cropAdd" value="Add New">
 						</div>
-						<div class="row">
-							<label class="col">Pin: </label>
-							<input class="col" type="text" name="crop_pin" placeholder="GPIO Pin #" value={{crop[3]}}></br>
-						</div>
-						<div class="row">
-							<label class="col">Incriment: </label>
-							<input class="col" type="text" name="crop_rain_inc" placeholder="Rain Incriment" value={{crop[4]}}></br>
-						</div>
-						<div class="row form-check form-switch form-check-reverse text-start">
-							<label class="col form-check-label" for="crop_enable_{{crop[2]}}">Enabled: </label>
-							{%if crop[1]%}
-							<input class="col form-check-input" type="checkbox" role="switch" id="crop_enable_{{crop[2]}}" name="crop_enable_{{crop[2]}}" value="True" checked>
-							{%else%}
-							<input class="col form-check-input" type="checkbox" role="switch" id="crop_enable_{{crop[2]}}" name="crop_enable_{{crop[2]}}" value="False">
-							{%endif%}
-						</div>
-						<div class="row">
-							<label class="col"></label>
-							<input class="col" type="submit" id="btnDelete" name="cropDel_{{crop[2]}}" value="Delete">
-						</div>
+						{%endif%}
 					</div>
-					{%endfor%}
-					</br>
-					{%if addButton == True%}
-					<div name="initEnd">
-						</br></br><input type="submit" id="btnAdd" name="cropAdd" value="Add New">
-					</div>
-					{%endif%}
 				</div>
 				</br></br><input type="submit" id="btnInit" name="cropSave" value="Save">
 			</form>
