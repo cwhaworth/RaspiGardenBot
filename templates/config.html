@@ -44,9 +44,11 @@
 		<div>
 			<form method="POST">
 				<div class="row">
-					<div class="col">
+					<div class="col border border-2 rounded">
 						<div class="row">
-							<h3>Irrigation System Initialization</h3>
+							<div class="row bg-secondary bg-opacity-75">
+								<h3>Irrigation System Initialization</h3>
+							</div>>
 							<div class="row form-check form-switch form-check-reverse text-start">
 								<label class="col form-check-label" for="system_enable">Enable System: </label>
 								{%if data['system_enable']%}
@@ -57,7 +59,9 @@
 							</div>
 						</div>
 						<div class="row row-gap-1">
-							<h3>Weather API Parameters:</h3>
+							<div class="row bg-secondary bg-opacity-75">
+								<h3>Weather API Parameters:</h3>
+							</div>
 							<div class="row form-check form-switch form-check-reverse text-start">
 								<label class="col form-check-label" for="use_api">Use Weather API: </label>
 								{%if data['use_api']%}
@@ -169,7 +173,7 @@
 				<h3>Crops:</h3><br>
 				<div class="row row-cols-3">
 					{%for crop in data['crop_data']%}
-					<div class="col">
+					<div class="col row-gap-1">
 						<h4>{{crop[2]}}</h4>
 						<div class="row">
 							<label class="col">Name: </label>
