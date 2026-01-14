@@ -17,15 +17,15 @@ document.addEventListener("DOMContentLoaded", () => {
             yAxisID: 'yTemp',
             tension: 0.4
         },
-        {
-            label: 'Precipitation (In.)',
-            data: window.weather.hourly.precipitation,
-            borderColor: styles.getPropertyValue('--precipitation-color'),
-            backgroundColor: styles.getPropertyValue('--precipitation-color'),
-            fill: true,
-            yAxisID: 'yPrecip',
-            tension: 0.4
-        },
+        // {
+        //     label: 'Precipitation (In.)',
+        //     data: window.weather.hourly.precipitation,
+        //     borderColor: styles.getPropertyValue('--precipitation-color'),
+        //     backgroundColor: styles.getPropertyValue('--precipitation-color'),
+        //     fill: true,
+        //     yAxisID: 'yPrecip',
+        //     tension: 0.4
+        // },
         {
             label: 'Cloud Cover',
             data: window.weather.hourly.cloud_cover,
@@ -120,23 +120,23 @@ document.addEventListener("DOMContentLoaded", () => {
                         color: '#E1E2E0'
                     }
                 },
-                yPrecip: {
-                        type: 'linear',
-                        position: 'left',
-                        min: 0,
-                        max: 20,
-                        grid:{
-                            drawOnChartArea: false
-                        },
-                        ticks: {
-                            color: styles.getPropertyValue('--precipitation-color')
-                        },
-                        title: {
-                            display: true,
-                            text: 'Precipitation (In)',
-                            color: styles.getPropertyValue('--precipitation-color')
-                        }
-                    },
+                // yPrecip: {
+                //         type: 'linear',
+                //         position: 'left',
+                //         min: 0,
+                //         max: 20,
+                //         grid:{
+                //             drawOnChartArea: false
+                //         },
+                //         ticks: {
+                //             color: styles.getPropertyValue('--precipitation-color')
+                //         },
+                //         title: {
+                //             display: true,
+                //             text: 'Precipitation (In)',
+                //             color: styles.getPropertyValue('--precipitation-color')
+                //         }
+                //     },
                 yTemp: {
                     type: 'linear',
                     position: 'left',
