@@ -58,7 +58,7 @@
 						</div>
 						<div class="row">
 							<h3>Weather API Parameters:</h3>
-							<div class="row form-check form-switch form-check-reverse">
+							<div class="row form-check form-switch form-check-reverse text-start">
 								<label class="col form-check-label" for="use_api">Use Weather API: </label>
 								{%if data['use_api']%}
 								<input class="col form-check-input" type="checkbox" role="switch" id="use_api" name="use_api" value="True" checked></br>
@@ -183,7 +183,7 @@
 							<label class="col">Incriment: </label>
 							<input class="col" type="text" name="crop_rain_inc" placeholder="Rain Incriment" value={{crop[4]}}></br>
 						</div>
-						<div class="row form-check form-switch form-check-reverse">
+						<div class="row form-check form-switch form-check-reverse text-start">
 							<label class="col form-check-label" for="crop_enable_{{crop[2]}}">Enabled: </label>
 							{%if crop[1]%}
 							<input class="col form-check-input" type="checkbox" role="switch" id="crop_enable_{{crop[2]}}" name="crop_enable_{{crop[2]}}" value="True" checked>
