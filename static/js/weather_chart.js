@@ -50,16 +50,18 @@ document.addEventListener("DOMContentLoaded", () => {
                 label: dataset[0].label, 
                 color: styles.getPropertyValue('--temperature-color')
             },
-            {
-                label: dataset[1].label, 
-                color: styles.getPropertyValue('--precipitation-color')
-            },
+            // {
+            //     label: dataset[1].label, 
+            //     color: styles.getPropertyValue('--precipitation-color')
+            // },
             {    
-                label: dataset[2].label, 
+                // label: dataset[2].label,
+                label: dataset[1].label, 
                 color: styles.getPropertyValue('--cloud-cover-color')
             },
             {
-                label: dataset[3].label, 
+                // label: dataset[3].label, 
+                label: dataset[2].label, 
                 color: styles.getPropertyValue('--precipitation-percent-color')
             }
     ];
