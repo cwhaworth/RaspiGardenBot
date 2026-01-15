@@ -45,7 +45,7 @@
 			<form method="POST">
 				<div class="row-gap-2">
 					<div class="row column-gap-2">
-						<div class="col ms-4 border border-2 rounded" name="input-group">
+						<div class="col ms-4 pb-2 border border-2 rounded" name="input-group">
 							<div class="row">
 								<div class="row ms-1 bg-secondary bg-opacity-75">
 									<h3>Irrigation System Initialization</h3>
@@ -140,35 +140,35 @@
 								</div>
 								<div class="row">
 									<label class="col">Pump Pin: </label>
-									<input class="col" type="text" name="pump_pin" placeholder="GPIO Pin #" value={{data['pump_pin']}}></br>
+									<input class="col-3 text-end" type="text" name="pump_pin" placeholder="GPIO Pin #" value={{data['pump_pin']}}>
 								</div>
 								<div class="row">
 									<label class="col">Valve Enable Pin: </label>
-									<input class="col" type="text" name="valve_enable_pin" placeholder="GPIO Pin #" value={{data['valve_enable_pin']}}></br>
+									<input class="col-3 text-end" type="text" name="valve_enable_pin" placeholder="GPIO Pin #" value={{data['valve_enable_pin']}}>
 								</div>
 								<div class="row">
 									<label class="col">Valve Open Pin: </label>
-									<input class="col" type="text" name="valve_open_pin" placeholder="GPIO Pin #" value={{data['valve_open_pin']}}></br>
+									<input class="col-3 text-end" type="text" name="valve_open_pin" placeholder="GPIO Pin #" value={{data['valve_open_pin']}}>
 								</div>
 								<div class="row">
 									<label class="col">Valve Close Pin: </label>
-									<input class="col" type="text" name="valve_close_pin" placeholder="GPIO Pin #" value={{data['valve_close_pin']}}></br>
+									<input class="col-3 text-end" type="text" name="valve_close_pin" placeholder="GPIO Pin #" value={{data['valve_close_pin']}}>
 								</div>
 								<div class="row">
 									<label class="col">Delay Before (Seconds): </label>
-									<input class="col" type="text" name="delay_before" placeholder="Seconds" value={{data['delay_before']}}></br>
+									<input class="col-3 text-end" type="text" name="delay_before" placeholder="Seconds" value={{data['delay_before']}}>
 								</div>
 								<div class="row">
 									<label class="col">Delay After (Seconds): </label>
-									<input class="col" type="text" name="delay_after" placeholder="Seconds" value={{data['delay_after']}}></br>
+									<input class="col-3 text-end" type="text" name="delay_after" placeholder="Seconds" value={{data['delay_after']}}>
 								</div>
 								<div class="row">
 									<label class="col">Water Time (Seconds): </label>
-									<input class="col" type="text" name="water_time" placeholder="Seconds" value={{data['water_time']}}></br>
+									<input class="col-3 text-end" type="text" name="water_time" placeholder="Seconds" value={{data['water_time']}}>
 								</div>
 								<div class="row">
 									<label class="col">Max Crops: </label>
-									<input class="col" type="text" name="max_crops" placeholder="# of Relays" value={{data['max_crops']}}>	
+									<input class="col-3 text-end" type="text" name="max_crops" placeholder="# of Relays" value={{data['max_crops']}}>	
 								</div>	
 							</div>
 						</div></br>
