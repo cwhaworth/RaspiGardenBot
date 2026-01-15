@@ -77,19 +77,19 @@
 								</div>
 								<div class="row">
 									<label class="col">State: </label>
-									<input class="col-sm" type="text" name="api_state" placeholder="ex: NC, AZ" value={{data['api_state']}}></br>
+									<input class="col-3" type="text" name="api_state" placeholder="ex: NC, AZ" value={{data['api_state']}}></br>
 								</div>
 								<div class="row">
 									<label class="col">Country: </label>
-									<input class="col-sm" type="text" name="api_country" placeholder="ex: USA, UK" value={{data['api_country']}}>		
+									<input class="col-3" type="text" name="api_country" placeholder="ex: USA, UK" value={{data['api_country']}}>		
 								</div>
 								<div class="row">
 									<label class="col">Forecast Days: </label>
-									<input class="col-sm" type="text" name="api_forecast_days" placeholder="1-16" value={{data['api_forecast_days']}}>		
+									<input class="col-3" type="text" name="api_forecast_days" placeholder="1-16" value={{data['api_forecast_days']}}>		
 								</div>
 								<div class="row">
 									<label class="col">Water Time: </label>
-									<select class="col-sm" type="text" name="water_schedule_hour">
+									<select class="col-3" type="text" name="water_schedule_hour">
 										{%for hour in data['hours']%}
 										{% set am_pm = "am" if hour < 12 else "pm" %}
 										{% set hour12 = hour % 12 %}
@@ -105,7 +105,7 @@
 								</div>
 								<div class="row">
 									<label class="col">Timezone: </label>
-									<select class="col-sm" type="text" name="api_timezone">
+									<select class="col-3" type="text" name="api_timezone">
 										{%for timezone in data['timezones']%}
 
 										<option value="{{ timezone }}"
@@ -126,7 +126,7 @@
 								</div>
 								<div class="row">
 									<label class="col">Units: </label>
-									<select class="col-sm" type="text" name="api_units">
+									<select class="col-3" type="text" name="api_units">
 										<option value="Imperial" {{ 'selected' if data['api_units'] == "Imperial" }}>Imperial</option>
 										<option value="Metric" {{ 'selected' if data['api_units'] == "Metric" }}>Metric</option>
 									</select>	
