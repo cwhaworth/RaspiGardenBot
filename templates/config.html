@@ -50,12 +50,12 @@
 								<div class="row ms-1 bg-secondary bg-opacity-75">
 									<h3>Irrigation System Initialization</h3>
 								</div>
-								<div class="row ps-4 pe-4 form-check form-switch form-check-reverse text-start">
-									<label class="col  form-check-label" for="system_enable">Enable System:</label>
+								<div class="row form-check form-switch form-check-reverse text-start">
+									<label class="col ps-4 form-check-label" for="system_enable">Enable System:</label>
 									{%if data['system_enable']%}
-									<input class="col  form-check-input" type="checkbox" role="switch" id="system_enable" name="system_enable" value="True" checked>
+									<input class="col pe-4 form-check-input" type="checkbox" role="switch" id="system_enable" name="system_enable" value="True" checked>
 									{%else%}
-									<input class="col  form-check-input" type="checkbox" role="switch" id="system_enable" name="system_enable" value="False">
+									<input class="col pe-4 form-check-input" type="checkbox" role="switch" id="system_enable" name="system_enable" value="False">
 									{%endif%}
 								</div>
 							</div>
@@ -176,26 +176,26 @@
 					
 					<div class="row mx-3 my-2 border border-2 rounded" name="input-group">
 
-						<div class="row ms-3 bg-secondary bg-opacity-75">
+						<div class="row ms-2 mb-2 bg-secondary bg-opacity-75">
 							<h3>Crops:</h3>
 						</div>
 						<div class="row row-cols-3 row-gap-2 column-gap-2">
 							{%for crop in data['crop_data']%}
 							<div class="col-3 ms-2 mb-2 border border-2 rounded" name="crop">
-								<div class="row mb-1">
+								<div class="row mb-1 bg-secondary bg-opacity-75">
 									<h4>{{crop[2]}}</h4>
 								</div>
 								<div class="row mb-1">
 									<label class="col">Name: </label>
-									<input class="col-4 text-end" type="text" name="crop_name" placeholder="Sector ID" value={{crop[2]}}></br>
+									<input class="col-4 text-end" type="text" name="crop_name" placeholder="Crop Name" value={{crop[2]}}>
 								</div>
 								<div class="row mb-1">
 									<label class="col">Pin: </label>
-									<input class="col-4 text-end" type="text" name="crop_pin" placeholder="GPIO Pin #" value={{crop[3]}}></br>
+									<input class="col-4 text-end" type="text" name="crop_pin" placeholder="GPIO Pin #" value={{crop[3]}}>
 								</div>
 								<div class="row mb-1">
 									<label class="col">Incriment: </label>
-									<input class="col-4 text-end" type="text" name="crop_rain_inc" placeholder="Rain Incriment" value={{crop[4]}}></br>
+									<input class="col-4 text-end" type="text" name="crop_rain_inc" placeholder="Rain Incriment" value={{crop[4]}}>
 								</div>
 								<div class="row me-2 mb-1 form-check form-switch form-check-reverse text-start">
 									<label class="col form-check-label" for="crop_enable_{{crop[2]}}">Enabled: </label>

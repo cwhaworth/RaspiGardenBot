@@ -213,4 +213,11 @@ label {
 
 [name="crop"]{
     background-color: rgba(244, 213, 141, 0.5);
+    min-width: 250px;
+}
+
+[name="crop"]:hover{
+    background-color: rgba(152, 133, 87, 0.5);
+    min-width: 260px;
+	box-shadow: 3px 1px 3px 1px rgb(0 0 0 / 20%);
 }
