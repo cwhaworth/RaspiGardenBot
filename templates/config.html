@@ -182,32 +182,32 @@
 						<div class="row row-cols-3 row-gap-2 column-gap-2">
 							{%for crop in data['crop_data']%}
 							<div class="col-3 border border-2 rounded" name="crop">
-								<div class="row">
+								<div class="row mb-1">
 									<h4>{{crop[2]}}</h4>
 								</div>
-								<div class="row">
+								<div class="row mb-1">
 									<label class="col">Name: </label>
 									<input class="col-4 text-end" type="text" name="crop_name" placeholder="Sector ID" value={{crop[2]}}></br>
 								</div>
-								<div class="row">
+								<div class="row mb-1">
 									<label class="col">Pin: </label>
 									<input class="col-4 text-end" type="text" name="crop_pin" placeholder="GPIO Pin #" value={{crop[3]}}></br>
 								</div>
-								<div class="row">
+								<div class="row mb-1">
 									<label class="col">Incriment: </label>
 									<input class="col-4 text-end" type="text" name="crop_rain_inc" placeholder="Rain Incriment" value={{crop[4]}}></br>
 								</div>
-								<div class="row form-check form-switch form-check-reverse text-start">
+								<div class="row mb-1 form-check form-switch form-check-reverse text-start">
 									<label class="col form-check-label" for="crop_enable_{{crop[2]}}">Enabled: </label>
 									{%if crop[1]%}
-									<input class="col me-2 form-check-input" type="checkbox" role="switch" id="crop_enable_{{crop[2]}}" name="crop_enable_{{crop[2]}}" value="True" checked>
+									<input class="col me-1 form-check-input" type="checkbox" role="switch" id="crop_enable_{{crop[2]}}" name="crop_enable_{{crop[2]}}" value="True" checked>
 									{%else%}
-									<input class="col me-2 form-check-input" type="checkbox" role="switch" id="crop_enable_{{crop[2]}}" name="crop_enable_{{crop[2]}}" value="False">
+									<input class="col me-1 form-check-input" type="checkbox" role="switch" id="crop_enable_{{crop[2]}}" name="crop_enable_{{crop[2]}}" value="False">
 									{%endif%}
 								</div>
-								<div class="row me-2 mb-2">
+								<div class="row me-1 mb-2">
 									<label class="col"></label>
-									<input class="col-3" type="submit" id="btnDelete" name="cropDel_{{crop[2]}}" value="Delete">
+									<input class="col-4" type="submit" id="btnDelete" name="cropDel_{{crop[2]}}" value="Delete">
 								</div>
 							</div>
 							{%endfor%}
