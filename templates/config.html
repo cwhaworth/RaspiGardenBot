@@ -197,12 +197,12 @@
 									<label class="col">Incriment: </label>
 									<input class="col-4 text-end" type="text" name="crop_rain_inc" placeholder="Rain Incriment" value={{crop[4]}}></br>
 								</div>
-								<div class="row mb-1 form-check form-switch form-check-reverse text-start">
+								<div class="row me-1 mb-1 form-check form-switch form-check-reverse text-start">
 									<label class="col form-check-label" for="crop_enable_{{crop[2]}}">Enabled: </label>
 									{%if crop[1]%}
-									<input class="col me-1 form-check-input" type="checkbox" role="switch" id="crop_enable_{{crop[2]}}" name="crop_enable_{{crop[2]}}" value="True" checked>
+									<input class="col form-check-input" type="checkbox" role="switch" id="crop_enable_{{crop[2]}}" name="crop_enable_{{crop[2]}}" value="True" checked>
 									{%else%}
-									<input class="col me-1 form-check-input" type="checkbox" role="switch" id="crop_enable_{{crop[2]}}" name="crop_enable_{{crop[2]}}" value="False">
+									<input class="col form-check-input" type="checkbox" role="switch" id="crop_enable_{{crop[2]}}" name="crop_enable_{{crop[2]}}" value="False">
 									{%endif%}
 								</div>
 								<div class="row me-1 mb-2">
