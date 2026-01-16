@@ -216,8 +216,6 @@ div[name="crop"] {
     min-width: 250px;
 }
 
-div[name="crop"]:hover {
-    background-color: rgba(152, 133, 87, 0.5);
-    min-width: 260px;
-	box-shadow: 3px 1px 3px 1px rgb(0 0 0 / 20%);
+input[role="switch"]:checked{
+    color: $quinary;
 }
