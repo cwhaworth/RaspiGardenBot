@@ -779,6 +779,8 @@ def config():
 				if len(tempData['crop_data']) < tempData['max_crops']:
 					addButton = True
 
+				# Need to add code to restart water schedule scheduler with new time
+
 				return redirect(url_for('.config'))
 
 		if len(data['crop_data']) < sectData['max_crops']:
@@ -940,11 +942,11 @@ def init_jobs():
 		id="water_on_schedule",
 		func=water_on_schedule,  
 		trigger="cron", 
-		hour=sqlSelectQuery('select val_string from system_params where param = "water_schedule_hour"')[0], 
-		minute='0',
-		# hour='*',
-		# minute='*',
-		# second='0',
+		# hour=sqlSelectQuery('select val_string from system_params where param = "water_schedule_hour"')[0], 
+		# minute='0',
+		hour='*',
+		minute='*',
+		second='0',
 		replace_existing=True)
 
 init_jobs()
