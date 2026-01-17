@@ -65,8 +65,8 @@
 									<li>								
 										<form method="POST">
 											<div class="row ms-2 mb-2">
-												<input class="col-2 ms-2" type="text" name="username" value="{{user['username']}}" readonly>
-												<input class="col-3" type="text" name="password_hash" value="{{user['password_hash']}}" readonly>
+												<input class="col-2 ms-2" type="text" name="username" value="{{user['username']}}" height="30px" readonly>
+												<input class="col-3" type="text" name="password_hash" value="{{user['password_hash']}}" height="30px">
 												{%if not edit['edit']%}
 												<div class="col-2 text-end">
 													<p>{{user['priv_level']}}</p>
