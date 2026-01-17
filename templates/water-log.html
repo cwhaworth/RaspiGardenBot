@@ -41,29 +41,29 @@
 			</div>
 		</header>
 
-		<div class="mx-2 my-2 row-gap-2" name="waterLog">
-			<div class="row">
+		<div name="waterLog">
+			<div class="row ms-2 mb-2">
 				<h3>Water Log</h3>
 			</div>
 			{%if formButtons%}
-			<div class="row">
+			<div class="row ms-2 mb-2">
 				<form method="POST">
 					<input name= "clear" type="submit" value="Clear Log">
 				</form>
 			</div>
-			<div class="row">
+			<div class="row ms-2 mb-2">
 				<form method="POST">
 					<input name="60daylog" type="submit" value="View 60 Day Log">
 				</form>
 			</div>
 			{%else%}
-			<div class="row">
+			<div class="row ms-2 mb-2">
 				<form method="POST">
 					<input name="back" type="submit" value="Back">
 				</form>
 			</div>
 			{%endif%}
-			<div class="row">
+			<div class="row ms-2 me-2">
 				<ul class="list-group list-group-flush">
 					{%for line in waterLog%}
 					<li class="list-group-item">{{line[1]}} {{line[2]}} {{line[3]}}</li>
