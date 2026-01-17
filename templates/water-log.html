@@ -41,25 +41,35 @@
 			</div>
 		</header>
 
-		<div name="waterLog">
-			<h3>Water Log</h3>
+		<div class="mx-2 my-2 row-gap-2" name="waterLog">
+			<div class="row">
+				<h3>Water Log</h3>
+			</div>
 			{%if formButtons%}
-			<form method="POST">
-				<input name= "clear" type="submit" value="Clear Log">
-			</form>
-			<form method="POST">
-				<input name="60daylog" type="submit" value="View 60 Day Log">
-			</form>
+			<div class="row">
+				<form method="POST">
+					<input name= "clear" type="submit" value="Clear Log">
+				</form>
+			</div>
+			<div class="row">
+				<form method="POST">
+					<input name="60daylog" type="submit" value="View 60 Day Log">
+				</form>
+			</div>
 			{%else%}
-			<form method="POST">
-				<input name="back" type="submit" value="Back">
-			</form>
+			<div class="row">
+				<form method="POST">
+					<input name="back" type="submit" value="Back">
+				</form>
+			</div>
 			{%endif%}
-			<ul class="list-group list-group-flush">
-				{%for line in waterLog%}
-				<li class="list-group-item">{{line[1]}} {{line[2]}} {{line[3]}}</li>
-				{%endfor%}
-			</ul>
+			<div class="row">
+				<ul class="list-group list-group-flush">
+					{%for line in waterLog%}
+					<li class="list-group-item">{{line[1]}} {{line[2]}} {{line[3]}}</li>
+					{%endfor%}
+				</ul>
+			</div>
 		</div>
 	</div>
 </body>
