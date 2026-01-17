@@ -784,7 +784,7 @@ def config():
 					    id='water_on_schedule',
     					trigger='cron',
     					hour=sqlSelectQuery('select val_string from system_params where param = "water_schedule_hour"')[0], 
-						minute='0',
+						minute='0'
 				)
 
 				return redirect(url_for('.config'))
