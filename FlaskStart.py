@@ -781,7 +781,7 @@ def config():
 
 				# Need to add code to restart water schedule scheduler with new time
 				scheduler.reschedule_job(
-					    id='water_on_schedule',
+					    job_id='water_on_schedule',
     					trigger='cron',
     					hour=sqlSelectQuery('select val_string from system_params where param = "water_schedule_hour"')[0], 
 						minute='0'
