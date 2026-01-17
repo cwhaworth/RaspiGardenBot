@@ -10,127 +10,131 @@
 	<title>RGB GUI - Home</title>
 </head>
 
-<body class="container align-self-center">
-	<div class="container align-self-center text-center">
-		<div class="row">
-			<div class="col"></div>
-			<div class="col">
-				<h1>Raspi Garden Bot Web GUI</h1>
-			</div>
-			<div class="col">
-				<form method="POST">
-					<div>
-						<input name="logout" type="submit" value="Logout">
-					</div>
-					<div>
-						<input name="userSettings" type="submit" value="User Settings">
-					</div>
-				</form>
-			</div>
-		</div>
-		<nav>
-			<a href={{navurl['index']}}>Home</a>
-			<a href={{navurl['config']}}>Config</a>
-			<a href={{navurl['waterLog']}}>Water Log</a> 
-			{%if session['priv_level'] == 1%}
-			<a href={{navurl['admin']}}>Admin</a>
-			{%endif%}
-		</nav>
-	</div>
-
-	<div>
-		<form method="POST">
+<body class="container align-self-center align-content-center">
+	<div class="min-vh-100 bg-primary bg-opacity-75" name="index">
+		<header class="container align-self-center mt-3 bg-secondary bg-opacity-75">
 			<div class="row">
+				<div class="col"></div>
+				<div class="col text-center">
+					<h1>Raspi Garden Bot Web GUI</h1>
+				</div>
 				<div class="col">
-					<div class="row">
-						<h3>Admin Settings</h3>
-						<div class="row">
-							<h4 class="col">User Accounts:</h4>
-							<div class="row">
-								<div class="col-2">
-									Username 
-								</div>
-								<div class="col-3">
-									Password Hash 
-								</div>
-								<div class="col-2 text-end">
-									Privilage Level
-								</div>
-							</div>
-							<ul>
-								{%for user in user_data%}
-								<li class="list-group-item">								
-									<form method="POST">
-										<div class="row">
-											<input class="col-2" type="text" name="username" value="{{user['username']}}" readonly>
-											<input class="col-3" type="text" name="password_hash" value="{{user['password_hash']}}" readonly>
-											{%if not edit['edit']%}
-											<div class="col-2 text-end">
-												{{user['priv_level']}}
-											</div>
-												{%if user['username'] != 'groot'%}
-													<div class="col-2">
-														<input type="submit" name="editUser" value="Edit">
-													</div>
-												{%else%}
-													<div class="col-2">
-													</div>
-												{%endif%}
-											{%elif edit['edit']%}
-												{%if user['username'] == edit['username']%}
-												<div class="col-2 text-end">
-													<select name="privLevel" >
-														<option name="priv1" value="1" {{'selected' if user['priv_level'] == 1 else ''}}>1</option>
-														<option name="priv2" value="2" {{'selected' if user['priv_level'] == 2 else ''}}>2</option>
-														<option name="priv3" value="3" {{'selected' if user['priv_level'] == 3 else ''}}>3</option>
-														<option name="priv4" value="4" {{'selected' if user['priv_level'] == 4 else ''}}>4</option>
-														<option name="priv5" value="5" {{'selected' if user['priv_level'] == 5 else ''}}>5</option>
-													</select>
-												</div>
-												<div class="col-1">
-													<input type="submit" name="saveUser" value="Save">
-												</div>
-												<div class="col-1">
-													<input type="submit" name="cancel" value="Cancel">
-												</div>
-												<div class="col-1">
-													<input type="submit" name="delUser" value="Delete">
-												</div>
-												{%else%}
-												<div class="col-2">
-												</div>
-												<div class="col-2">
-												</div>
-												<div class="col-2">
-												</div>
-												{%endif%}
-											{%endif%}
-										</div>
-									</form>
-								</li>
-								{%endfor%}
-							</ul>
-						</div>	
+					<form class="text-end me-5 pe-5" name="header-form" method="POST">
+						<div>
+							<input class="btn btn-sm mt-3 me-5" name="logout" type="submit" value="Logout">
+						</div>
+						<div>
+							<input class="btn btn-sm mt-1 me-5" name="userSettings" type="submit" value="User Settings">
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="row mb-3 justify-content-center">
+				<nav class="text-center bg-primary w-25">
+					<a href={{navurl['index']}}>Home</a>
+					<a href={{navurl['config']}}>Config</a>
+					<a href={{navurl['waterLog']}}>Water Log</a> 
+					{%if session['priv_level'] == 1%}
+					<a href={{navurl['admin']}}>Admin</a>
+					{%endif%}
+				</nav>
+			</div>
+		</header>
 
-						<!--Add User-->
+		<div>
+			<form method="POST">
+				<div class="row">
+					<div class="col">
 						<div class="row">
-							<form method="POST">
-								<input class="col-2" type="text" name="username" placeholder="Username">
-								<input class="col-3" type="password" name="password" placeholder="Password">
-								<select class="col-2" name="priv_level">
-									<option name="priv1">1</option>
-									<option name="priv2">2</option>
-									<option name="priv3">3</option>
-									<option name="priv4">4</option>
-									<option name="priv5" selected>5</option>
-								</select>
-								<input class="col-2" type="submit" name="addUser" placeholder="Username" value="Add User">
-							</form>
+							<h3>Admin Settings</h3>
+							<div class="row">
+								<h4 class="col">User Accounts:</h4>
+								<div class="row">
+									<div class="col-2">
+										Username 
+									</div>
+									<div class="col-3">
+										Password Hash 
+									</div>
+									<div class="col-2 text-end">
+										Privilage Level
+									</div>
+								</div>
+								<ul>
+									{%for user in user_data%}
+									<li class="list-group-item">								
+										<form method="POST">
+											<div class="row">
+												<input class="col-2" type="text" name="username" value="{{user['username']}}" readonly>
+												<input class="col-3" type="text" name="password_hash" value="{{user['password_hash']}}" readonly>
+												{%if not edit['edit']%}
+												<div class="col-2 text-end">
+													{{user['priv_level']}}
+												</div>
+													{%if user['username'] != 'groot'%}
+														<div class="col-2">
+															<input type="submit" name="editUser" value="Edit">
+														</div>
+													{%else%}
+														<div class="col-2">
+														</div>
+													{%endif%}
+												{%elif edit['edit']%}
+													{%if user['username'] == edit['username']%}
+													<div class="col-2 text-end">
+														<select name="privLevel" >
+															<option name="priv1" value="1" {{'selected' if user['priv_level'] == 1 else ''}}>1</option>
+															<option name="priv2" value="2" {{'selected' if user['priv_level'] == 2 else ''}}>2</option>
+															<option name="priv3" value="3" {{'selected' if user['priv_level'] == 3 else ''}}>3</option>
+															<option name="priv4" value="4" {{'selected' if user['priv_level'] == 4 else ''}}>4</option>
+															<option name="priv5" value="5" {{'selected' if user['priv_level'] == 5 else ''}}>5</option>
+														</select>
+													</div>
+													<div class="col-1">
+														<input type="submit" name="saveUser" value="Save">
+													</div>
+													<div class="col-1">
+														<input type="submit" name="cancel" value="Cancel">
+													</div>
+													<div class="col-1">
+														<input type="submit" name="delUser" value="Delete">
+													</div>
+													{%else%}
+													<div class="col-2">
+													</div>
+													<div class="col-2">
+													</div>
+													<div class="col-2">
+													</div>
+													{%endif%}
+												{%endif%}
+											</div>
+										</form>
+									</li>
+									{%endfor%}
+								</ul>
+							</div>	
+
+							<!--Add User-->
+							<div class="row">
+								<form method="POST">
+									<input class="col-2" type="text" name="username" placeholder="Username">
+									<input class="col-3" type="password" name="password" placeholder="Password">
+									<select class="col-2" name="priv_level">
+										<option name="priv1">1</option>
+										<option name="priv2">2</option>
+										<option name="priv3">3</option>
+										<option name="priv4">4</option>
+										<option name="priv5" selected>5</option>
+									</select>
+									<input class="col-2" type="submit" name="addUser" placeholder="Username" value="Add User">
+								</form>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-		</form>
+			</form>
+		</div>
 	</div>
 </body>
 </html>
