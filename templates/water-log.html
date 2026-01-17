@@ -10,53 +10,57 @@
 	<title>RGB GUI - Home</title>
 </head>
 
-<body class="container align-self-center">
-	<div class="container align-self-center text-center">
-		<div class="row">
-			<div class="col"></div>
-			<div class="col">
-				<h1>Raspi Garden Bot Web GUI</h1>
+<body class="container align-self-center align-content-center">
+	<div class="min-vh-100 bg-primary bg-opacity-75" name="index">
+		<header class="container align-self-center mt-3 bg-secondary bg-opacity-75">
+			<div class="row">
+				<div class="col"></div>
+				<div class="col text-center">
+					<h1>Raspi Garden Bot Web GUI</h1>
+				</div>
+				<div class="col">
+					<form class="text-end me-5 pe-5" name="header-form" method="POST">
+						<div>
+							<input class="btn btn-sm mt-3 me-5" name="logout" type="submit" value="Logout">
+						</div>
+						<div>
+							<input class="btn btn-sm mt-1 me-5" name="userSettings" type="submit" value="User Settings">
+						</div>
+					</form>
+				</div>
 			</div>
-			<div class="col">
-				<form method="POST">
-					<div>
-						<input name="logout" type="submit" value="Logout">
-					</div>
-					<div>
-						<input name="userSettings" type="submit" value="User Settings">
-					</div>
-				</form>
+			<div class="row mb-3 justify-content-center">
+				<nav class="text-center bg-primary w-25">
+					<a href={{navurl['index']}}>Home</a>
+					<a href={{navurl['config']}}>Config</a>
+					<a href={{navurl['waterLog']}}>Water Log</a> 
+					{%if session['priv_level'] == 1%}
+					<a href={{navurl['admin']}}>Admin</a>
+					{%endif%}
+				</nav>
 			</div>
-		</div>
-		<nav>
-			<a href={{navurl['index']}}>Home</a>
-			<a href={{navurl['config']}}>Config</a>
-			<a href={{navurl['waterLog']}}>Water Log</a> 
-			{%if session['priv_level'] == 1%}
-			<a href={{navurl['admin']}}>Admin</a>
-			{%endif%}
-		</nav>
-	</div>
+		</header>
 
-	<div name="waterLog">
-		<h3>Water Log</h3>
-		{%if formButtons%}
-		<form method="POST">
-			<input name= "clear" type="submit" value="Clear Log">
-		</form>
-		<form method="POST">
-			<input name="60daylog" type="submit" value="View 60 Day Log">
-		</form>
-		{%else%}
-		<form method="POST">
-			<input name="back" type="submit" value="Back">
-		</form>
-		{%endif%}
-		<ul class="list-group list-group-flush">
-			{%for line in waterLog%}
-			<li class="list-group-item">{{line[1]}} {{line[2]}} {{line[3]}}</li>
-			{%endfor%}
-		</ul>
+		<div name="waterLog">
+			<h3>Water Log</h3>
+			{%if formButtons%}
+			<form method="POST">
+				<input name= "clear" type="submit" value="Clear Log">
+			</form>
+			<form method="POST">
+				<input name="60daylog" type="submit" value="View 60 Day Log">
+			</form>
+			{%else%}
+			<form method="POST">
+				<input name="back" type="submit" value="Back">
+			</form>
+			{%endif%}
+			<ul class="list-group list-group-flush">
+				{%for line in waterLog%}
+				<li class="list-group-item">{{line[1]}} {{line[2]}} {{line[3]}}</li>
+				{%endfor%}
+			</ul>
+		</div>
 	</div>
 </body>
 </html>
