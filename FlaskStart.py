@@ -779,7 +779,6 @@ def config():
 				if len(tempData['crop_data']) < tempData['max_crops']:
 					addButton = True
 
-				# Need to add code to restart water schedule scheduler with new time
 				scheduler.reschedule_job(
 					    job_id='water_on_schedule',
     					trigger='cron',
