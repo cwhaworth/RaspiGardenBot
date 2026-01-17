@@ -46,10 +46,10 @@
 				<div class="row">
 					<div class="col">
 						<div class="row">
-							<h3>Admin Settings</h3>
+							<h3 class="ms-2">Admin Settings</h3>
 							<div class="row">
-								<h4 class="col">User Accounts:</h4>
-								<div class="row">
+								<h4 class="col ms-2">User Accounts:</h4>
+								<div class="row ms-2">
 									<div class="col-2">
 										<p>Username</p> 
 									</div>
@@ -63,8 +63,8 @@
 								<ul>
 									{%for user in user_data%}
 									<li class="list-group-item">								
-										<form class="row-gap-2" method="POST">
-											<div class="row">
+										<form method="POST">
+											<div class="row ms-2 mb-2">
 												<input class="col-2" type="text" name="username" value="{{user['username']}}" readonly>
 												<input class="col-3" type="text" name="password_hash" value="{{user['password_hash']}}" readonly>
 												{%if not edit['edit']%}
