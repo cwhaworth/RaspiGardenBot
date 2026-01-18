@@ -8,8 +8,22 @@ $textprimary: #E1E2E0;
 // $textsecondary: #8D8D8D;
 $textsecondary: $quinary;
 
-//Import Bootstrap
-@import "../bootstrap/scss/bootstrap";
+//Import Bootstrap Core
+@import "../bootstrap/scss/functions";
+@import "../bootstrap/scss/variables";
+@import "../bootstrap/scss/maps";
+@import "../bootstrap/scss/mixins";
+
+//Bootstrap components
+@import "../bootstrap/scss/root";
+@import "../bootstrap/scss/reboot";
+@import "../bootstrap/scss/type";
+@import "../bootstrap/scss/containers";
+@import "../bootstrap/scss/grid";
+@import "../bootstrap/scss/forms";
+@import "../bootstrap/scss/tables";
+@import "../bootstrap/scss/utilities";
+@import "../bootstrap/scss/utilities/api";
 
 //Bootstrap Class Overrides
 .table-striped {
