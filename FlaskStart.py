@@ -30,7 +30,8 @@ scss = Bundle(
 )
 assets.register('scss_all', scss)
 
-dbPath = '/var/www/RaspiGardenBot/database/app_data.db'
+# dbPath = '/var/www/RaspiGardenBot/database/app_data.db'
+dbPath = url_for('static', filename='database/app_data.db')
 weather_api_base = 'https://api.open-meteo.com/v1/forecast'
 
 scheduler = BackgroundScheduler()
@@ -71,11 +72,17 @@ def sqlModifyQuery(query, query_params = None):
 	conn.close()
 
 def insertLogMessage(message):
+	'''
+	Inserts the same log message into 30 day log and read-only 60 day log
+	'''
 	log = (str(date.today()), str(datetime.now().time()), message)
 	sqlModifyQuery(f'insert into water_log ("date", "time", message) values {log}')
 	sqlModifyQuery(f'insert into water_log_60 ("date", "time", message) values {log}')
 
 def getCoordinates(): 
+	'''
+	Gets latitude and longitude of the location configured on the system
+	'''
 	try: 
 		geolocator = Nominatim( user_agent='raspi_gardenbot')
 
@@ -91,6 +98,9 @@ def getCoordinates():
 		return None
 
 def get_forecast(current = True, hourly = True, daily = True):
+	'''
+	Sends GET request to Open Meteo to get the forcast.
+	'''
 	try:
 		latitude, longitude = getCoordinates()
 		# print(f'lat: {latitude}, long: {longitude}')
@@ -117,12 +127,20 @@ def get_forecast(current = True, hourly = True, daily = True):
 
 
 def update_last_rain(increment):
+	'''
+	Updates how long its been since the last rain in DB
+	'''
 	update_tuple = (increment, 'last_rain')
 	sqlModifyQuery(f'update system_params set val_num = ? where param = ?', update_tuple)
 
 def water_on_schedule():
+	'''
+	Function to water crops on configured schedule.
+	Contains logic to handle if API is used or simple rotation based on crop rain increment.
+	'''
 	now = datetime.now()
 	try:
+		#Get forecast, and retreive values from DB
 		weather_resp = get_forecast(daily=False)
 		data = {
 			'use_api': bool(sqlSelectQuery('select val_bool from system_params where param = ?', ('use_api',))[0]),
@@ -154,6 +172,8 @@ def water_on_schedule():
 			}
 		}
 
+		#Adds relevant forecast datapoints to 'data'.
+		#Adds next 24 hour predictions
 		for i in range(0, len(weather_resp['hourly']['time'])):
 			t = datetime.strptime(weather_resp['hourly']['time'][i], "%Y-%m-%dT%H:%M")
 			if t >= now and len(data['weather']['hourly']) < 25:
@@ -170,9 +190,19 @@ def water_on_schedule():
 					'precipitation': (f'{weather_resp["hourly"]["precipitation"][i]} '
 									f'{weather_resp["hourly_units"]["precipitation"][:2]}')
 				})
+
+		#Setting variables for logic to determine if system will water crops
 		percentRain = 0
 		avgPercentRain = 0
 		aboveFiddy = False
+		
+		'''
+		Gets average percent chance over the next 24 hours
+		If any percent chance is above 50%, set 'aboveFiddy' to 'true'
+
+		100 / 24 = 4.16 <<<<<< this is the average percent chance value if 
+		there's only 1 hour with 100% chance.
+		'''
 		for hour in data['weather']['hourly']:
 			percentRain += int(hour['precipitation_probability'][:-1])
 			if int(hour['precipitation_probability'][:-1]) > 50:
@@ -256,6 +286,9 @@ def water_on_schedule():
 		print(f'Ran into an error while running water_on_schedule() at {str(now)}\ntraceback:\n{traceback.print_exception(e)}')
 
 def get_system_temp():
+	'''
+	Gets current CPU temp
+	'''
 	cpu = CPUTemperature()
 	now = datetime.now()
 	units = sqlSelectQuery("select val_string from system_params where param = ?", ("api_units",))[0]
@@ -292,6 +325,9 @@ def getStyles():
 	return styles
 
 def make_hashbrowns(password):
+	'''
+	Hashes provided password when new user is created
+	'''
 	bytes = password.encode('utf-8')
 	salt = bcrypt.gensalt()
 	password_hash = bcrypt.hashpw(bytes, salt)
@@ -303,6 +339,9 @@ def make_hashbrowns(password):
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
+	'''
+	User login
+	'''
 	if request.method == 'POST':
 		username = request.form.get('username')
 		password = request.form.get('password')
@@ -327,6 +366,9 @@ def login():
 		return render_template('login.html', styles=styles)
 
 def logout():
+	'''
+	Logs out user and ends current session.
+	'''
 	session.pop('user', None)
 	flash('You have been logged out.', 'info')
 	return redirect(url_for('.login'))
@@ -489,6 +531,7 @@ def index():
 		return redirect(url_for('.login'))
 
 	if request.method == 'POST':
+		#Switches for POST call
 		for key in request.form.keys():
 			if key == 'logout':
 				return logout()
@@ -497,11 +540,13 @@ def index():
 			elif key == 'waterAll':
 				waterAll()
 			elif key.startswith('waterNow_'):
+				#Water individual crop
 				cropName = key.split('_')[1]
 				waterNow(cropName)
 
 		return redirect(url_for('.index'))
 	else:
+		#Set vars for page GET request
 		navURL = getNavURL()
 		styles = getStyles()
 		now = datetime.now()
@@ -529,6 +574,7 @@ def index():
 		}
 
 		try:
+			#Get weather data and set values for 'data'
 			weather_resp = get_forecast()
 			# print(f'weather_resp:\n{json.dumps(weather_resp, indent = 2)}')
 			data['weather'] = {
@@ -557,28 +603,19 @@ def index():
 				}
 			}
 			# print(f'{json.dumps(data, indent = 2)}')
+
+			# Gets max % chance of rain for the day
 			for i in range(0, len(weather_resp['daily']['time'])):
 				t = datetime.strptime(weather_resp['daily']['time'][i], "%Y-%m-%d")
 				if t.date() == now.date():
 					data['weather']['current']['precipitation_probability_max'] = (f'{weather_resp["daily"]["precipitation_probability_max"][i]}'
 																				f'{weather_resp["daily_units"]["precipitation_probability_max"]}')
 					break
+
+			#Add datasets for Weather graph
 			for i in range(0, len(weather_resp['hourly']['time'])):
 				t = datetime.strptime(weather_resp['hourly']['time'][i], "%Y-%m-%dT%H:%M")
 				if t >= now and len(data['weather']['hourly']['time']) < 25:
-
-					# data['weather']['hourly'].append({
-					# 	'date': f'{t.date()}',
-					# 	'time': f'{t.time()}',
-					# 	'temp': (f'{weather_resp["hourly"]["temperature_2m"][i]}'
-					# 			f'{weather_resp["hourly_units"]["temperature_2m"]}'),
-					# 	'cloud_cover': (f'{weather_resp["hourly"]["cloud_cover"][i]}'
-					# 					f'{weather_resp["hourly_units"]["cloud_cover"]}'),
-					# 	'precipitation_probability': (f'{weather_resp["hourly"]["precipitation_probability"][i]}'
-					# 								f'{weather_resp["hourly_units"]["precipitation_probability"]}'),
-					# 	'precipitation': (f'{weather_resp["hourly"]["precipitation"][i]} '
-					# 					f'{weather_resp["hourly_units"]["precipitation"][:2]}')
-					# })
 					js_time = t.strftime('%d/%m %H:%M')
 					data['weather']['hourly']['time'].append(js_time),
 					data['weather']['hourly']['temp'].append(weather_resp["hourly"]["temperature_2m"][i]),
@@ -614,6 +651,7 @@ def index():
 				}] 
 			} 
 
+		#Get system temperature data
 		try:
 			sysData_temp = sqlSelectQuery('select * from system_temp', fetchall=True)
 
@@ -841,6 +879,14 @@ def waterLog():
 
 @app.route("/admin", methods=['GET', 'POST'])
 def admin():
+	'''
+	Admin page handling.
+	GET - loads/reloads the page.
+	POST - depending on which button was pressed:
+	* Edit - redirects page and allows editing of user
+	* Add User - adds a new user with the provided username and password.
+		Password Hash will be stored.
+	'''
 	if 'user' not in session:
 		return redirect(url_for('.login'))
 
@@ -848,6 +894,7 @@ def admin():
 		'edit': False,
 		'username': ''
 		}
+	#Set vars for page request
 	navURL = getNavURL()
 	styles = getStyles()
 	user_sql_resp = sqlSelectQuery('select id, username, password_hash, priv_level from users', fetchall=True)
@@ -867,21 +914,26 @@ def admin():
 				case "userSettings":
 					return userSettings()
 				case "editUser":
+					#Returns page with specified user's fields enabled
 					edit['edit'] = True
 					edit['username'] = request.form.get('username')
 					return render_template('admin.html', navurl=navURL, styles=styles, session=session, user_data=user_data, edit=edit)
 				case "saveUser":
+					#Only in edit user mode. Saves changes to user.
 					username = request.form.get('username')
 					new_priv = request.form.get(f'privLevel')
 					user_tuple = (new_priv, username)
 					sqlModifyQuery('update users set priv_level = ? where username = ?', user_tuple)
 					return redirect(url_for('.admin'))
 				case "cancel":
+					#Only in edit user mode. Cancels changes to user.
 					return redirect(url_for('.admin'))
 				case "delUser":
+					#Only in edit user mode. Deletes user.
 					sqlModifyQuery('delete from users where username = ?', (request.form.get('username'),))
 					return redirect(url_for('.admin'))
 				case "addUser":
+					#Adds new user
 					new_user = request.form.get('username')
 					new_password = request.form.get('password')
 					new_priv_level = request.form.get('priv_level')
@@ -897,6 +949,13 @@ def admin():
 
 @app.route("/userSettings", methods=['GET', 'POST'])
 def userSettings():
+	'''
+	User Settings page handling.
+	GET - loads/reloads the page.
+	POST - depending on which button was pressed:
+	* Change Password - Changes the password of the current user.
+		Password Hash will be stored.
+	'''
 	if 'user' not in session:
 		return redirect(url_for('.login'))
 
@@ -926,6 +985,12 @@ def userSettings():
 		return render_template('user-settings.html', navurl=navURL, styles=styles, session=session)
 
 def init_jobs():
+	'''
+	Initializes tasks to be ran on a schedule for the app.
+	Tasks:
+	* get_system_temp: gets system temp data every hour.
+	* water_on_schedule: waters crops at the configured time. Uses DB value.
+	'''
 	def check_job(job):
 		if scheduler.get_job(job_id=job):
 			scheduler.remove_job(job_id=job)
