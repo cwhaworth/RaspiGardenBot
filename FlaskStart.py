@@ -1019,8 +1019,9 @@ def init_jobs():
 		# second='0',
 		replace_existing=True)
 
-init_jobs()
+
 
 if __name__ == '__main__':
 	app.run(debug=False, use_reloader=False)
 	dbPath = url_for('static', filename='database/app_data.db')
+	init_jobs()
