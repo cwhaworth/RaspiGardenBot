@@ -86,8 +86,7 @@ Data Initialization
 */
 insert into users (username, password_hash, priv_level)
 values
-	("groot", "$2b$12$cxHaWKvc9qpVNLbjjGD3zueLAHX2AlntXjaNQaqUGbRg/G6/lpr0a", 1),
-	("cwhaworth", "$2b$12$67BUz1A1QU3nDIXTxj7gguwn40P/9dC30RHNr/NoFRhwfvqhG/hGS", 1);
+	("groot", "$2b$12$cxHaWKvc9qpVNLbjjGD3zueLAHX2AlntXjaNQaqUGbRg/G6/lpr0a", 1);
 
 insert into system_params(param, val_string, val_num, val_bool)
 values
