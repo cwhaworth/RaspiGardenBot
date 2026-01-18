@@ -249,8 +249,8 @@ def water_on_schedule():
 					GPIO.output(crop[3], GPIO.LOW)
 					line += f"\"{crop[2]}\", "
 			valve.start(100) #duty cycle
-			GPIO.output(valve_open_pin, GPIO.HIGH)
-			GPIO.output(valve_close_pin, GPIO.LOW)
+			GPIO.output(valve_open_pin, GPIO.LOW)
+			GPIO.output(valve_close_pin, GPIO.HIGH)
 			time.sleep(data['water_time'])
 
 			'''
@@ -420,8 +420,8 @@ def waterAll():
 					GPIO.output(crop[3], GPIO.LOW)
 					continue
 			main_valve.start(100) #duty cycle
-			GPIO.output(valve_open_pin, GPIO.HIGH)
-			GPIO.output(valve_close_pin, GPIO.LOW)
+			GPIO.output(valve_open_pin, GPIO.LOW)
+			GPIO.output(valve_close_pin, GPIO.HIGH)
 
 			time.sleep(water_time)
 			
@@ -492,8 +492,8 @@ def waterNow(cropName):
 			GPIO.setup(cropData[3], GPIO.OUT)
 			GPIO.output(cropData[3], GPIO.LOW)
 			main_valve.start(100) #duty cycle
-			GPIO.output(valve_open_pin, GPIO.HIGH)
-			GPIO.output(valve_close_pin, GPIO.LOW)
+			GPIO.output(valve_open_pin, GPIO.LOW)
+			GPIO.output(valve_close_pin, GPIO.HIGH)
 
 			time.sleep(water_time)
 
