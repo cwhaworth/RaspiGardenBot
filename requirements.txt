@@ -16,7 +16,7 @@ itsdangerous==2.2.0
 Jinja2==3.1.6
 lgpio==0.2.2.0
 MarkupSafe==3.0.3
-ratelim==0.1.6
+ratelim>=0.1.6
 requests==2.32.5
 RPi.GPIO==0.7.1
 six==1.17.0
