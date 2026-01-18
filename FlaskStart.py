@@ -30,8 +30,8 @@ scss = Bundle(
 )
 assets.register('scss_all', scss)
 
-dbPath = '/var/www/RaspiGardenBot/database/app_data.db'
-# dbPath = 'app/database/app_data.db'
+# dbPath = '/var/www/RaspiGardenBot/database/app_data.db'
+dbPath = 'database/app_data.db'
 weather_api_base = 'https://api.open-meteo.com/v1/forecast'
 
 scheduler = BackgroundScheduler()
