@@ -27,8 +27,5 @@ EXPOSE 5000
 ENV FLASK_APP=FlaskApp.py
 ENV FLASK_ENV=production
 
-# Build SCSS into CSS at build time
-RUN flask assets build
-
 # Start the app
 CMD ["python", "FlaskApp.py"]
