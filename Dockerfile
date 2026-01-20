@@ -20,6 +20,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy application code
 COPY . .
 
+# Build SCSS into CSS at build time
+RUN flask assets build
+
 # Expose Flask port
 EXPOSE 5000
 
