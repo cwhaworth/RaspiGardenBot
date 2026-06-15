@@ -29,6 +29,9 @@ scss = Bundle(
     output='css/styles.css'
 )
 assets.register('scss_all', scss)
+# Force SCSS compile on startup
+with app.app_context():
+    scss.build(force=True)
 
 # dbPath = '/var/www/RaspiGardenBot/database/app_data.db'
 dbPath = 'database/app_data.db'

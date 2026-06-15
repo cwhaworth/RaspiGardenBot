@@ -19,6 +19,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy application code
 COPY . .
+RUN mkdir -p /app/static/css
 
 # Expose Flask port
 EXPOSE 5000
@@ -26,6 +27,8 @@ EXPOSE 5000
 # Environment variables for Flask
 ENV FLASK_APP=FlaskApp.py
 ENV FLASK_ENV=production
+ENV ASSETS_DEBUG=False
+ENV ASSETS_AUTO_BUILD=True
 
 # Start the app
 CMD ["python", "FlaskApp.py"]
