@@ -19,6 +19,9 @@ from gpiozero import CPUTemperature
 from flask import flash, Flask, jsonify, redirect, render_template, request, session, url_for
 from flask_assets import Environment, Bundle
 
+__version__ = '0.5.1'
+__build__ = '2026-06-14'
+
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
 
