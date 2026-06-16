@@ -19,8 +19,8 @@ from gpiozero import CPUTemperature
 from flask import flash, Flask, jsonify, redirect, render_template, request, session, url_for
 from flask_assets import Environment, Bundle
 
-__version__ = '0.5.1'
-__build__ = '2026-06-14'
+__version__ = '0.5.2'
+__build__ = '2026-06-15'
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
@@ -234,17 +234,21 @@ def water_on_schedule():
 			line = "Watered crops(s): "
 
 			pump = data['pump_pin']
+			'''
 			valve_enable_pin = data['valve_enable_pin']
 			valve_open_pin = data['valve_open_pin']
 			valve_close_pin = data['valve_close_pin']
+			'''
 
 			#start watering
 			#setup pins for pump and solenoid controller power
 			GPIO.setup(pump, GPIO.OUT)
+			'''
 			GPIO.setup(valve_enable_pin, GPIO.OUT)
 			GPIO.setup(valve_open_pin, GPIO.OUT)
 			GPIO.setup(valve_close_pin, GPIO.OUT)
 			valve = GPIO.PWM(valve_enable_pin, 100) #pin, and Hz
+			'''
 
 			#turn on pump
 			GPIO.output(pump, GPIO.HIGH)
@@ -254,9 +258,11 @@ def water_on_schedule():
 					GPIO.setup(crop[3], GPIO.OUT)
 					GPIO.output(crop[3], GPIO.LOW)
 					line += f"\"{crop[2]}\", "
+			'''
 			valve.start(100) #duty cycle
 			GPIO.output(valve_open_pin, GPIO.LOW)
 			GPIO.output(valve_close_pin, GPIO.HIGH)
+			'''
 			time.sleep(data['water_time'])
 
 			'''
@@ -267,9 +273,11 @@ def water_on_schedule():
 			'''
 			GPIO.cleanup(pump)
 			time.sleep(data['delay_after'])
+			'''
 			GPIO.cleanup(valve_enable_pin)
 			GPIO.cleanup(valve_open_pin)
 			GPIO.cleanup(valve_close_pin)
+			'''
 			for crop in data['crop_data']:
 				if crop[4] <= data['last_rain'] and data['last_rain'] % crop[4] == 0 and crop[1]:
 					GPIO.cleanup(crop[3])
@@ -395,9 +403,11 @@ def waterAll():
 		else:
 			#pins
 			pump = sqlSelectQuery('select val_num from system_params where param = ?', ('pump_pin',))[0]
+			'''
 			valve_enable_pin = sqlSelectQuery('select val_num from system_params where param = ?', ('valve_enable_pin',))[0]
 			valve_open_pin = sqlSelectQuery('select val_num from system_params where param = ?', ('valve_open_pin',))[0]
 			valve_close_pin = sqlSelectQuery('select val_num from system_params where param = ?', ('valve_close_pin',))[0]
+			'''
 
 			#timers
 			delay_before = sqlSelectQuery('select val_num from system_params where param = ?', ('delay_before',))[0]
@@ -410,10 +420,12 @@ def waterAll():
 			#start watering
 			#setup pins for pump and solenoid controller power
 			GPIO.setup(pump, GPIO.OUT)
+			'''
 			GPIO.setup(valve_enable_pin, GPIO.OUT)
 			GPIO.setup(valve_open_pin, GPIO.OUT)
 			GPIO.setup(valve_close_pin, GPIO.OUT)
 			main_valve = GPIO.PWM(valve_enable_pin, 100) #pin, and Hz
+			'''
 
 			#turn on pump
 			GPIO.output(pump, GPIO.HIGH)
@@ -425,9 +437,11 @@ def waterAll():
 					GPIO.setup(crop[3], GPIO.OUT)
 					GPIO.output(crop[3], GPIO.LOW)
 					continue
+			'''
 			main_valve.start(100) #duty cycle
 			GPIO.output(valve_open_pin, GPIO.LOW)
 			GPIO.output(valve_close_pin, GPIO.HIGH)
+			'''
 
 			time.sleep(water_time)
 			
@@ -441,9 +455,11 @@ def waterAll():
 			'''
 			GPIO.cleanup(pump)
 			time.sleep(delay_after)
+			'''
 			GPIO.cleanup(valve_enable_pin)
 			GPIO.cleanup(valve_open_pin)
 			GPIO.cleanup(valve_close_pin)
+			'''
 			for crop in cropData:
 				if bool(crop[1]) == True:
 					GPIO.cleanup(crop[3])
@@ -470,9 +486,11 @@ def waterNow(cropName):
 		else:
 			#pins
 			pump = sqlSelectQuery('select val_num from system_params where param = ?', ('pump_pin',))[0]
+			'''
 			valve_enable_pin = sqlSelectQuery('select val_num from system_params where param = ?', ('valve_enable_pin',))[0]
 			valve_open_pin = sqlSelectQuery('select val_num from system_params where param = ?', ('valve_open_pin',))[0]
 			valve_close_pin = sqlSelectQuery('select val_num from system_params where param = ?', ('valve_close_pin',))[0]
+			'''
 
 			#timers
 			delay_before = sqlSelectQuery('select val_num from system_params where param = ?', ('delay_before',))[0]
@@ -485,10 +503,12 @@ def waterNow(cropName):
 			#start watering
 			#setup pins for pump and solenoid controller power
 			GPIO.setup(pump, GPIO.OUT)
+			'''
 			GPIO.setup(valve_enable_pin, GPIO.OUT)
 			GPIO.setup(valve_open_pin, GPIO.OUT)
 			GPIO.setup(valve_close_pin, GPIO.OUT)
 			main_valve = GPIO.PWM(valve_enable_pin, 100) #pin, and Hz
+			'''
 
 			#turn on pump
 			GPIO.output(pump, GPIO.HIGH)
@@ -497,14 +517,13 @@ def waterNow(cropName):
 			time.sleep(delay_before)
 			GPIO.setup(cropData[3], GPIO.OUT)
 			GPIO.output(cropData[3], GPIO.LOW)
+			'''
 			main_valve.start(100) #duty cycle
 			GPIO.output(valve_open_pin, GPIO.LOW)
 			GPIO.output(valve_close_pin, GPIO.HIGH)
-
+			'''
 			time.sleep(water_time)
 
-			# GPIO.output(valve_open_pin, GPIO.LOW)
-			# GPIO.output(valve_close_pin, GPIO.HIGH)
 			'''
 			end watering
 			1. clean up pump output
@@ -513,9 +532,11 @@ def waterNow(cropName):
 			'''
 			GPIO.cleanup(pump)
 			time.sleep(delay_after)
+			'''
 			GPIO.cleanup(valve_enable_pin)
 			GPIO.cleanup(valve_open_pin)
 			GPIO.cleanup(valve_close_pin)
+			'''
 			GPIO.cleanup(cropData[3])
 
 			#generate logs
