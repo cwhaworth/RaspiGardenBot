@@ -750,7 +750,7 @@ def config():
 						if crop[1] not in crop_names_join:
 							sqlModifyQuery(f'delete from crops where crop = ?', (crop[1],))
 				for i in range(len(crop_names)):
-					GPIO.setup(crop_pins[i], GPIO.OUT, initial=GPIO.HIGH)
+					GPIO.setup(int(crop_pins[i]), GPIO.OUT, initial=GPIO.HIGH)
 					if sqlSelectQuery('select count(*) from crops where crop = ?', (crop_names[i],))[0] == 0:
 						insert_crop = (crop_enabled_list[i], crop_names[i], crop_pins[i], crop_rain_incs[i], str(date.today()), str(datetime.now().time().strftime('%H:%M:%S')))
 						sqlModifyQuery(f'insert into crops (enabled, crop, pin, rain_inc, "date", "time") values {insert_crop}')
