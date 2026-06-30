@@ -1026,7 +1026,6 @@ def init_pins():
 	#setup pins for pump and solenoid controller power
 	GPIO.setup(pump, GPIO.OUT, initial=GPIO.HIGH)
 	for crop in cropData:
-		cp.append(crop[3])
 		GPIO.setup(crop[3], GPIO.OUT, initial=GPIO.HIGH)
 		continue
 
