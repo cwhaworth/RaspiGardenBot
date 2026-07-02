@@ -19,8 +19,7 @@ from gpiozero import CPUTemperature
 from flask import flash, Flask, jsonify, redirect, render_template, request, session, url_for
 from flask_assets import Environment, Bundle
 
-__version__ = '0.5.3'
-__build__ = '2026-06-30'
+__version__ = '0.26.7.2-1'
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
@@ -200,38 +199,41 @@ def water_on_schedule():
 				})
 
 		#Setting variables for logic to determine if system will water crops
-		percentRain = 0
-		avgPercentRain = 0
-		aboveFiddy = False
-		
+		percentRain = 1
+		# avgPercentRain = 0
+		# aboveFiddy = False
+
 		'''
 		Gets average percent chance over the next 24 hours
-		If any percent chance is above 50%, set 'aboveFiddy' to 'true'
-
-		100 / 24 = 4.16 <<<<<< this is the average percent chance value if 
-		there's only 1 hour with 100% chance.
+		
+		percentRain = 1 - (1-p1)*(1-p2)*(1-p3)*(1-p4)...*(1-p24)
 		'''
 		for hour in data['weather']['hourly']:
-			percentRain += int(hour['precipitation_probability'][:-1])
-			if int(hour['precipitation_probability'][:-1]) > 50:
-				aboveFiddy = True
-		if percentRain != 0 and len(data['weather']['hourly']) > 0:
-			avgPercentRain = percentRain / len(data['weather']['hourly'])
+			# percentRain += int(hour['precipitation_probability'][:-1])
+			percentRain *= (1 - (int(hour['precipitation_probability'][:-1]) * 0.01))
+			# if int(hour['precipitation_probability'][:-1]) > 50:
+			# 	aboveFiddy = True
+		percentRain = (1 - percentRain) * 100
+
+		# if percentRain != 0 and len(data['weather']['hourly']) > 0:
+		# 	avgPercentRain = percentRain / len(data['weather']['hourly'])
 
 		#perform, and log actions
 		if data['system_enable'] == False:
 			insertLogMessage("Did not water plants. Water system not enabled.")
 
 		#if it rains: reset last-rained, and write to log
-		elif (aboveFiddy and avgPercentRain >= 4.16) or avgPercentRain > 50:
+		# elif (aboveFiddy and avgPercentRain >= 4.16) or avgPercentRain > 50:
+		elif percentRain > 50:
 			insertLogMessage(f'Did not water plants due to expected rain in the next 24 hours. '
 							f'Any hour above 50%: {"Yes" if aboveFiddy else "No"}, ' 
-							f'Average Percent Chance: {round(avgPercentRain)}%.')
+							f'Day\'s % Chance: {round(percentRain)}%.')
 			update_last_rain(0)
 
 		#If system is enabled, and API data is not in use OR if it does not rain: 
 		#water crops based on interval
-		elif data['use_api'] == False or (not aboveFiddy and avgPercentRain < 4.16) or avgPercentRain <= 50:
+		# elif data['use_api'] == False or (not aboveFiddy and avgPercentRain < 4.16) or percentRain <= 50:
+		elif percentRain <= 50:
 			update_last_rain(data["last_rain"] + 1)
 			line = "Watered crops(s): "
 
