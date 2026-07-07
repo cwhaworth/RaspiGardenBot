@@ -19,7 +19,7 @@ from gpiozero import CPUTemperature
 from flask import flash, Flask, jsonify, redirect, render_template, request, session, url_for
 from flask_assets import Environment, Bundle
 
-__version__ = '0.26.7.2-1'
+__version__ = '0.26.7.6-1'
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
@@ -35,7 +35,6 @@ assets.register('scss_all', scss)
 with app.app_context():
     scss.build(force=True)
 
-# dbPath = '/var/www/RaspiGardenBot/database/app_data.db'
 dbPath = 'database/app_data.db'
 weather_api_base = 'https://api.open-meteo.com/v1/forecast'
 
@@ -82,7 +81,7 @@ def insertLogMessage(message):
 	'''
 	Inserts the same log message into 30 day log and read-only 60 day log
 	'''
-	log = (str(date.today()), str(datetime.now().time()), message)
+	log = (str(date.today()), str(datetime.now().time())[:-7], message)
 	sqlModifyQuery(f'insert into water_log ("date", "time", message) values {log}')
 	sqlModifyQuery(f'insert into water_log_60 ("date", "time", message) values {log}')
 
@@ -108,9 +107,9 @@ def get_forecast(current = True, hourly = True, daily = True):
 	'''
 	Sends GET request to Open Meteo to get the forcast.
 	'''
+	response = None
 	try:
 		latitude, longitude = getCoordinates()
-		# print(f'lat: {latitude}, long: {longitude}')
 		forecast_days = sqlSelectQuery("select val_num from system_params where param = ?", ("api_forecast_days",))[0]
 		timezone = sqlSelectQuery("select val_string from system_params where param = ?", ("api_timezone",))[0]
 		units = sqlSelectQuery("select val_string from system_params where param = ?", ("api_units",))[0]
@@ -126,10 +125,15 @@ def get_forecast(current = True, hourly = True, daily = True):
 			url += f'&daily=precipitation_probability_max'
 		response = requests.request('GET', url)
 		
-		# print(f'API URL:\n{url}')
+		print(f'API URL: {url}\n'
+			  f'status code: {response.status_code}\n'
+			  f'response:\n{response.json()}')
 		return response.json()
 	except Exception as e:
-		print(f'Ran into an error while running get_forecast()\ntraceback:\n{traceback.print_exception(e)}')
+		print(f'Ran into an error while running get_forecast()\n'
+			  f'traceback:\n{traceback.print_exception(e)}\n\n'
+			  f'status_code: {response.status_code}\n'
+			  f'response:\n{response.json()}')
 		return None
 
 
@@ -146,6 +150,7 @@ def water_on_schedule():
 	Contains logic to handle if API is used or simple rotation based on crop rain increment.
 	'''
 	now = datetime.now()
+	percentRain = None
 	try:
 		#Get forecast, and retreive values from DB
 		weather_resp = get_forecast(daily=False)
@@ -162,7 +167,10 @@ def water_on_schedule():
 			'valve_enable_pin' : sqlSelectQuery('select val_num from system_params where param = ?', ('valve_enable_pin',))[0],
 			'valve_open_pin' : sqlSelectQuery('select val_num from system_params where param = ?', ('valve_open_pin',))[0],
 			'water_time' : sqlSelectQuery('select val_num from system_params where param = ?', ('water_time',))[0],
-			'weather': {
+			'weather': {}
+		}
+		if 'current_units' in weather_resp.keys() and 'current' in weather_resp.keys():
+			data['weather'] = {
 				'units': {
 					'temp': f'{weather_resp["current_units"]["temperature_2m"]}',
 					'cloud_cover': f'{weather_resp["current_units"]["cloud_cover"]}',
@@ -177,63 +185,50 @@ def water_on_schedule():
 				},
 				'hourly': []
 			}
-		}
 
-		#Adds relevant forecast datapoints to 'data'.
-		#Adds next 24 hour predictions
-		for i in range(0, len(weather_resp['hourly']['time'])):
-			t = datetime.strptime(weather_resp['hourly']['time'][i], "%Y-%m-%dT%H:%M")
-			if t >= now and len(data['weather']['hourly']) < 25:
+			#Adds relevant forecast datapoints to 'data'.
+			#Adds next 24 hour predictions
+			for i in range(0, len(weather_resp['hourly']['time'])):
+				t = datetime.strptime(weather_resp['hourly']['time'][i], "%Y-%m-%dT%H:%M")
+				if t >= now and len(data['weather']['hourly']) < 25:
 
-				data['weather']['hourly'].append({
-					'date': t.date(),
-					'time': t.time(),
-					'temp': (f'{weather_resp["hourly"]["temperature_2m"][i]}'
-							f'{weather_resp["hourly_units"]["temperature_2m"]}'),
-					'cloud_cover': (f'{weather_resp["hourly"]["cloud_cover"][i]}'
-									f'{weather_resp["hourly_units"]["cloud_cover"]}'),
-					'precipitation_probability': (f'{weather_resp["hourly"]["precipitation_probability"][i]}'
-												f'{weather_resp["hourly_units"]["precipitation_probability"]}'),
-					'precipitation': (f'{weather_resp["hourly"]["precipitation"][i]} '
-									f'{weather_resp["hourly_units"]["precipitation"][:2]}')
-				})
+					data['weather']['hourly'].append({
+						'date': t.date(),
+						'time': t.time(),
+						'temp': (f'{weather_resp["hourly"]["temperature_2m"][i]}'
+								f'{weather_resp["hourly_units"]["temperature_2m"]}'),
+						'cloud_cover': (f'{weather_resp["hourly"]["cloud_cover"][i]}'
+										f'{weather_resp["hourly_units"]["cloud_cover"]}'),
+						'precipitation_probability': (f'{weather_resp["hourly"]["precipitation_probability"][i]}'
+													f'{weather_resp["hourly_units"]["precipitation_probability"]}'),
+						'precipitation': (f'{weather_resp["hourly"]["precipitation"][i]} '
+										f'{weather_resp["hourly_units"]["precipitation"][:2]}')
+					})
 
-		#Setting variables for logic to determine if system will water crops
-		percentRain = 1
-		# avgPercentRain = 0
-		# aboveFiddy = False
+			#Setting variables for logic to determine if system will water crops
+			percentRain = 1
 
-		'''
-		Gets average percent chance over the next 24 hours
-		
-		percentRain = 1 - (1-p1)*(1-p2)*(1-p3)*(1-p4)...*(1-p24)
-		'''
-		for hour in data['weather']['hourly']:
-			# percentRain += int(hour['precipitation_probability'][:-1])
-			percentRain *= (1 - (int(hour['precipitation_probability'][:-1]) * 0.01))
-			# if int(hour['precipitation_probability'][:-1]) > 50:
-			# 	aboveFiddy = True
-		percentRain = (1 - percentRain) * 100
-
-		# if percentRain != 0 and len(data['weather']['hourly']) > 0:
-		# 	avgPercentRain = percentRain / len(data['weather']['hourly'])
+			'''
+			Gets average percent chance over the next 24 hours
+			
+			percentRain = 1 - (1-p1)*(1-p2)*(1-p3)*(1-p4)...*(1-p24)
+			'''
+			for hour in data['weather']['hourly']:
+				percentRain *= (1 - (int(hour['precipitation_probability'][:-1]) * 0.01))
+			percentRain = (1 - percentRain) * 100
 
 		#perform, and log actions
 		if data['system_enable'] == False:
 			insertLogMessage("Did not water plants. Water system not enabled.")
 
-		#if it rains: reset last-rained, and write to log
-		# elif (aboveFiddy and avgPercentRain >= 4.16) or avgPercentRain > 50:
-		elif percentRain > 50:
+		elif percentRain and percentRain > 50:
 			insertLogMessage(f'Did not water plants due to expected rain in the next 24 hours. '
-							f'Any hour above 50%: {"Yes" if aboveFiddy else "No"}, ' 
 							f'Day\'s % Chance: {round(percentRain)}%.')
 			update_last_rain(0)
 
 		#If system is enabled, and API data is not in use OR if it does not rain: 
 		#water crops based on interval
-		# elif data['use_api'] == False or (not aboveFiddy and avgPercentRain < 4.16) or percentRain <= 50:
-		elif percentRain <= 50:
+		elif not data['use_api'] or not percentRain or (percentRain and percentRain <= 50):
 			update_last_rain(data["last_rain"] + 1)
 			line = "Watered crops(s): "
 
@@ -243,6 +238,7 @@ def water_on_schedule():
 			#turn on pump
 			GPIO.output(pump, GPIO.LOW)
 			time.sleep(data['delay_before'])
+			#open crop solenoids
 			for crop in data["crop_data"]:
 				if crop[4] <= data["last_rain"] and data["last_rain"] % crop[4] == 0 and crop[1]:
 					GPIO.output(crop[3], GPIO.LOW)
@@ -263,7 +259,7 @@ def water_on_schedule():
 					continue
 
 			#if API not in use and 30 days have passed, reset last rained
-			if data['use_api'] == False and data['last_rain'] == 30:
+			if not data['use_api'] and data['last_rain'] == 30:
 				update_last_rain(0)
 
 			#prepare to write log message to 30 day, and 60 day log files
@@ -349,8 +345,8 @@ def login():
 				flash('Login successful!', 'success')
 				return redirect(url_for('.index'))
 			else:
-		                flash('Incorrect password.', 'danger')
-               			return redirect(url_for('.login'))
+				flash('Incorrect password.', 'danger')
+				return redirect(url_for('.login'))
 		else:
 			flash('User not found.', 'danger')
 			return redirect(url_for('.login'))
