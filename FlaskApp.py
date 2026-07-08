@@ -20,7 +20,7 @@ from geopy.geocoders import Nominatim
 from gpiozero import CPUTemperature
 
 
-__version__ = '0.26.7.8-1'
+__version__ = '0.26.7.8-2'
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
@@ -82,7 +82,7 @@ def getNow():
 	'''
 	Standardized date/time format for docker output logging
 	'''
-	return str(f'{date.today()}, {datetime.now().time()[:-7]}')
+	return f'{str(date.today())}, {str(datetime.now().time()[:-7])}'
 
 def insertLogMessage(message):
 	'''
