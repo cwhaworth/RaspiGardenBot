@@ -14,12 +14,13 @@ import atexit, bcrypt, geopy, json, os, re, requests, sqlite3, time, traceback
 import RPi.GPIO as GPIO
 from apscheduler.schedulers.background import BackgroundScheduler
 from datetime import date, datetime
-from geopy.geocoders import Nominatim
-from gpiozero import CPUTemperature
 from flask import flash, Flask, jsonify, redirect, render_template, request, session, url_for
 from flask_assets import Environment, Bundle
+from geopy.geocoders import Nominatim
+from gpiozero import CPUTemperature
 
-__version__ = '0.26.7.6-1'
+
+__version__ = '0.26.7.8-1'
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
@@ -77,6 +78,12 @@ def sqlModifyQuery(query, query_params = None):
 	conn.commit()
 	conn.close()
 
+def getNow():
+	'''
+	Standardized date/time format for docker output logging
+	'''
+	return str(f'{date.today()}, {datetime.now().time()[:-7]}')
+
 def insertLogMessage(message):
 	'''
 	Inserts the same log message into 30 day log and read-only 60 day log
@@ -85,22 +92,22 @@ def insertLogMessage(message):
 	sqlModifyQuery(f'insert into water_log ("date", "time", message) values {log}')
 	sqlModifyQuery(f'insert into water_log_60 ("date", "time", message) values {log}')
 
-def getCoordinates(): 
+def getCoordinates():
 	'''
 	Gets latitude and longitude of the location configured on the system
 	'''
-	try: 
+	try:
 		geolocator = Nominatim( user_agent='raspi_gardenbot')
 
 		city = sqlSelectQuery("select val_string from system_params where param = ?", ("api_city",))[0]
 		state = sqlSelectQuery("select val_string from system_params where param = ?", ("api_state",))[0]
 		country = sqlSelectQuery("select val_string from system_params where param = ?", ("api_country",))[0]
-		
+
 		location = geolocator.geocode(f'{city}, {state}, {country}', timeout=60)
-		
+
 		return location.latitude, location.longitude
 	except Exception as e:
-		print(f'Ran into an error while running getCoordinates()\ntraceback:\n{traceback.print_exception(e)}')
+		print(f'{getNow()} Ran into an error while running getCoordinates()\ntraceback:\n{traceback.print_exception(e)}')
 		return None
 
 def get_forecast(current = True, hourly = True, daily = True):
@@ -108,6 +115,7 @@ def get_forecast(current = True, hourly = True, daily = True):
 	Sends GET request to Open Meteo to get the forcast.
 	'''
 	response = None
+
 	try:
 		latitude, longitude = getCoordinates()
 		forecast_days = sqlSelectQuery("select val_num from system_params where param = ?", ("api_forecast_days",))[0]
@@ -125,17 +133,18 @@ def get_forecast(current = True, hourly = True, daily = True):
 			url += f'&daily=precipitation_probability_max'
 		response = requests.request('GET', url)
 		
-		print(f'API URL: {url}\n'
+		print(f'{getNow()} '
+			  f'API URL: {url}\n'
 			  f'status code: {response.status_code}\n'
-			  f'response:\n{response.json()}')
+			  f'response:\n{json.dumps(response.json(), indent=2)}')
 		return response.json()
 	except Exception as e:
-		print(f'Ran into an error while running get_forecast()\n'
+		print(f'{getNow()} '
+			  f'Ran into an error while running get_forecast()\n'
 			  f'traceback:\n{traceback.print_exception(e)}\n\n'
 			  f'status_code: {response.status_code}\n'
-			  f'response:\n{response.json()}')
+			  f'response:\n{json.dumps(response.json(), indent=2)}')
 		return None
-
 
 def update_last_rain(increment):
 	'''
@@ -242,7 +251,7 @@ def water_on_schedule():
 			for crop in data["crop_data"]:
 				if crop[4] <= data["last_rain"] and data["last_rain"] % crop[4] == 0 and crop[1]:
 					GPIO.output(crop[3], GPIO.LOW)
-					line += f"\"{crop[2]}\", "
+					line = f"{line}{crop[2]}, "
 			time.sleep(data['water_time'])
 
 			'''
@@ -263,16 +272,20 @@ def water_on_schedule():
 				update_last_rain(0)
 
 			#prepare to write log message to 30 day, and 60 day log files
-			line = line[ : -2]
+			line = f"{line[ : -2]}."
+			if percentRain:
+				line = f"{line} Day\'s % Chance: {percentRain}%"
+			elif not percentRain and data['use_api']:
+				line = f"{line} Watered based on rain increment due to API failure.'"
 			insertLogMessage(line)
 
 		#if get forecast operation returned erroneous
 		else:
 			update_last_rain(data["last_rain"] + 1)
 			insertLogMessage("An error occurred during watering operations.")
-		print(f'Ran water_on_schedule() at {str(now)}')
+		print(f'{getNow()} Ran water_on_schedule()')
 	except Exception as e:
-		print(f'Ran into an error while running water_on_schedule() at {str(now)}\ntraceback:\n{traceback.print_exception(e)}')
+		print(f'{getNow()} Ran into an error while running water_on_schedule()\ntraceback:\n{traceback.print_exception(e)}')
 
 def get_system_temp():
 	'''
@@ -281,16 +294,21 @@ def get_system_temp():
 	cpu = CPUTemperature()
 	now = datetime.now()
 	units = sqlSelectQuery("select val_string from system_params where param = ?", ("api_units",))[0]
+	temperature = None
 
 	temp = round(cpu.temperature, 1)
 	if str(units).lower() == 'imperial':
 		temp = round((cpu.temperature * 1.8) + 32, 1) #convert CPU temperature from celsius to fahrenheit
+		#Create tuple for temperature at the timestamp this script was ran.
+		temperature = (now.strftime("%m/%d/%Y"), now.strftime("%H:%M:%S"), f'{temp}°F')
+	else:
+		temperature = (now.strftime("%m/%d/%Y"), now.strftime("%H:%M:%S"), f'{temp}°C')
 
-	#Create tuple for temperature at the timestamp this script was ran.
-	temperature = (now.strftime("%m/%d/%Y"), now.strftime("%H:%M:%S"), f'{temp}°F')
-	
-	sqlModifyQuery(f'insert into system_temp ("date", "time", temp) values {temperature}')
-	print(f'Checked system temp at {str(now)}')
+	try:
+		sqlModifyQuery(f'insert into system_temp ("date", "time", temp) values {temperature}')
+		print(f'{getNow()} System check. Temp: {temperature[2]}')
+	except Exception as e:
+		print(f'{getNow()} Ran into an error while running get_system_temp()\ntraceback:\n{traceback.print_exception(e)}')
 
 def getNavURL():
 	'''
@@ -413,7 +431,7 @@ def waterAll():
 			#generate logs
 			insertLogMessage('Watered all sectors by manual override.')
 	except Exception as e:
-		print(f'Ran into an error while running waterAll()\ntraceback:\n{traceback.print_exc(e)}')
+		print(f'{getNow()} Ran into an error while running waterAll()\ntraceback:\n{traceback.print_exc(e)}')
 
 def waterNow(cropName):
 	'''
@@ -460,7 +478,7 @@ def waterNow(cropName):
 			#generate logs
 			insertLogMessage(f'Watered sector "{cropName}" by manual override.')
 	except Exception as e:
-		print(f'Ran into an error while running waterNoe() for {cropName}\ntraceback:\n{traceback.print_exc(e)}')
+		print(f'{getNow()} Ran into an error while running waterNow() for {cropName}\ntraceback:\n{traceback.print_exc(e)}')
 
 @app.route("/")
 @app.route("/index", methods=['GET', 'POST'])
@@ -569,7 +587,7 @@ def index():
 					data['weather']['hourly']['precipitation'].append(weather_resp["hourly"]["precipitation"][i])
 
 		except Exception as e:
-			print(f'Ran into an error while loading index HTML at {str(now)}\ntraceback:\n{traceback.print_exception(e)}')
+			print(f'Ran into an error while loading index HTML at {str(getNow())}\ntraceback:\n{traceback.print_exception(e)}')
 			data['weather'] = {
 				'units': {
 					'temp': 'err',
@@ -604,7 +622,7 @@ def index():
 				data['sysData']['timestamp'].append(f'{temp[1][:-5]}\n{temp[2][:-3]}')
 				data['sysData']['temp'].append(float(temp[3][:-2]))
 		except Exception as e:
-			print(f'Ran into an error while loading index HTML at {str(now)}\ntraceback:\n{traceback.print_exception(e)}')
+			print(f'{getNow()} Ran into an error while loading index HTML.\ntraceback:\n{traceback.print_exception(e)}')
 
 		return render_template('index.html', navurl=navURL, styles=styles, session=session, data=data)
 
