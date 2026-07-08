@@ -20,7 +20,7 @@ from geopy.geocoders import Nominatim
 from gpiozero import CPUTemperature
 
 
-__version__ = '0.26.7.8-3'
+__version__ = '0.26.7.8-4'
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
@@ -136,7 +136,7 @@ def get_forecast(current = True, hourly = True, daily = True):
 		print(f'{getNow()} '
 			  f'API URL: {url}\n'
 			  f'status code: {response.status_code}\n'
-			  f'response:\n{json.dumps(response.json(), indent=2)}')
+			  f'response:\n{response.json()}')
 		return response.json()
 	except Exception as e:
 		print(f'{getNow()} '
