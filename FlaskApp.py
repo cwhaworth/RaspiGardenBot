@@ -20,8 +20,8 @@ from geopy.geocoders import Nominatim
 from gpiozero import CPUTemperature
 
 
-__version__ = '0.26.7.8-4'
-
+__app_version__ = '0.26.7.11-1'
+__web_version__ = '0.26.7.11-1'
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
 
@@ -82,7 +82,7 @@ def getNow():
 	'''
 	Standardized date/time format for docker output logging
 	'''
-	return f'{str(date.today())}, {str(datetime.now().time())[:-7]}'
+	return f'{str(date.today())}, {str(datetime.now().time())[:-4]}'
 
 def insertLogMessage(message):
 	'''
@@ -276,7 +276,7 @@ def water_on_schedule():
 			if percentRain:
 				line = f"{line} Day\'s % Chance: {percentRain}%"
 			elif not percentRain and data['use_api']:
-				line = f"{line} Watered based on rain increment due to API failure.'"
+				line = f"{line} Watered based on rain increment due to API failure."
 			insertLogMessage(line)
 
 		#if get forecast operation returned erroneous
